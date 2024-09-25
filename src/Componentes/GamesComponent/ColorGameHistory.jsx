@@ -1,6 +1,38 @@
-import React from "react"; 
+import React, { useEffect, useState } from "react";
+import { ColorGameAllResult } from "../../Controllers/User/GamesController";
+import swal from "sweetalert";
 
-export default function ColorGameHistory({ gameHistory }) {
+export default function ColorGameHistory({ gameType, refreshHistory }) {
+  const [gameHistory, setGameHistory] = useState([]);
+  const getGameHistory = async (gameType) => {
+    try {
+      const response = await ColorGameAllResult(gameType);
+      if (response.status) {
+        setGameHistory(response.data);
+      } else {
+        window.location.reload();
+      }
+    } catch (error) {
+      swal({
+        title: "Error!",
+        text: "Something Went Wrong",
+        icon: "error",
+        buttons: {
+          confirm: "OK",
+        },
+        dangerMode: true,
+      }).then((willRedirect) => {
+        if (willRedirect) {
+          window.location.reload();
+        }
+      });
+    }
+  };
+
+  useEffect(() => {
+    getGameHistory(gameType);
+  }, [gameType,refreshHistory]);
+
   return (
     <div>
       <div className="relative overflow-x-auto  z-0">

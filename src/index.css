@@ -160,7 +160,7 @@
   width: 33%;
   background-color: #dffff8;
   box-shadow:  5px 5px 5px 0px #cbd5e0;
-  border: 0.5px solid rgb(229, 253, 255);
+  /* border: 0.5px solid rgb(229, 253, 255); */
 }
 
 .color-game-quantity button{ 

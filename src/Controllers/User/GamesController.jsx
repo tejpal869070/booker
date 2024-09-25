@@ -108,7 +108,7 @@ export const ColorGameAllResult = async (id) => {
 };
 
 export const MyColorGameHistory = async (id) => {
-  console.log(id)
+  console.log(id);
   try {
     let page = 1;
     const data = await EncodeString({ mobile, id, page });
@@ -117,6 +117,41 @@ export const MyColorGameHistory = async (id) => {
     };
     const response = await axios.post(
       `${API.colorGameUrl}user/get-bet-record`,
+      postData
+    );
+    const decodedData = await DecodeString(response.data);
+    return decodedData;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const AddNewColorGameBet = async (formData) => {
+  const select = formData.select;
+  const color = formData.color;
+  const period = formData.period;
+  const method = formData.method;
+  const game_type = formData.game_type;
+  const id = formData.id;
+  const total_amount = formData.total_amount;
+  const bonuscheck = false;
+  try {
+    const data = await EncodeString({
+      select,
+      color,
+      period,
+      method,
+      game_type,
+      id,
+      total_amount,
+      mobile,
+      bonuscheck,
+    });
+    const postData = {
+      data: data,
+    };
+    const response = await axios.post(
+      `${API.colorGameUrl}user/add-bet-details`,
       postData
     );
     const decodedData = await DecodeString(response.data);

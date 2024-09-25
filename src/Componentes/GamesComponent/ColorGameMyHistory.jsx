@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { FaCircle } from "react-icons/fa";
 import { MyColorGameHistory } from "../../Controllers/User/GamesController";
 import { Loading1 } from "../Loading1";
 import swal from "sweetalert";
@@ -7,8 +6,7 @@ import swal from "sweetalert";
 export default function ColorGameMyHistory({ gameType }) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  console.log("asdifgsaduifgysdua", data);
+ 
 
   const fetchHistory = async (gameType) => {
     try {
@@ -54,17 +52,20 @@ export default function ColorGameMyHistory({ gameType }) {
               <th scope="col" className="px-6 py-3">
                 Period
               </th>
-              <th scope="col" className="px-6 py-3">
-                Betting Amount
+              <th scope="col" className="px-4 py-3">
+                AMOUNT
               </th>
               <th scope="col" className="px-6 py-3">
                 Type
               </th>
               <th scope="col" className="px-6 py-3">
-                Choosen 
+                Choosen
               </th>
               <th scope="col" className="px-6 py-3">
                 result
+              </th>
+              <th scope="col" className="px-6 py-3">
+                P/L
               </th>
             </tr>
           </thead>
@@ -72,19 +73,44 @@ export default function ColorGameMyHistory({ gameType }) {
             {data.map((item, index) => (
               <tr
                 key={index}
-                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                className={`  border-b-2 border-gray-300 dark:bg-gray-800 dark:border-gray-700 ${
+                  item.type === "Color"
+                    ? item.value === item.open_color
+                      ? `bg-[#95ff95]`
+                      : "bg-[#ff7171]"
+                    : item.value === item.number
+                    ? `bg-[#95ff95]`
+                    : "bg-[#ff7171]"
+                }`}
               >
                 <th
                   scope="row"
-                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
                   {item.Period}
                 </th>
-                <td className="px-6 py-4">{item.price}</td>
-                <td className="px-6 py-4">{item.type}</td>
-                <td className="px-6 py-4">{item.value}</td>
-                <td className="px-6 py-4">
-                  {item.type === "Color" ? item.open_color : item.type ==="Number" ? item.number : ""}
+                <td className="px-4 py-2  ">{item.price}</td>
+                <td className="px-6 py-2">{item.type}</td>
+                <td className="px-6 py-2">{item.value}</td>
+                <td className="px-6 py-2">
+                  {item.type === "Color"
+                    ? item.open_color
+                    : item.type === "Number"
+                    ? item.number
+                    : ""}
+                </td>
+                <td className="px-6 py-2">
+                  {item.type === "Color"
+                    ? item.value === item.open_color
+                      ? item.if_open_zero
+                      : item.value !== "Voilet"
+                      ? item.open_color === item.value
+                        ? item.winning_amount
+                        : item.number === 3 || item.number === 5
+                        ? item.if_open_zero
+                        : -item.price
+                      : -item.price
+                    : item.value === item.number ? item.winning_amount : item.price}
                 </td>
               </tr>
             ))}
@@ -94,3 +120,11 @@ export default function ColorGameMyHistory({ gameType }) {
     </div>
   );
 }
+
+// {item.type === "Color"
+// ? item.value === item.open_color
+// ? `+${item.winning_amount}`
+// : -item.price
+// : item.value === item.number
+// ? +item.winning_amount
+// : -item.price}

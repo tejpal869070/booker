@@ -1,27 +1,45 @@
 import React, { useState, useEffect } from "react";
 
-export default function Timer({ gameEndTime, refresh }) {
+export default function Timer({ currentGameData, refresh, countdownFunction }) {
   const [minLeft, setMinLeft] = useState("00");
   const [secLeft, setSecLeft] = useState("00");
 
   useEffect(() => {
+    const calculateTimeLeft = (timeLeft) => {
+      const seconds = Math.floor((timeLeft / 1000) % 60);
+      const minutes = Math.floor((timeLeft / (1000 * 60)) % 60);
+      return {
+        minutes: String(minutes).padStart(2, "0"),
+        seconds: String(seconds).padStart(2, "0"),
+      };
+    };
+
+    // loop-----------------------------------------
     const intervalId = setInterval(() => {
       const currentTime = new Date();
-      const endTime = new Date(gameEndTime);
+      const endTime = new Date(currentGameData.end_date);
       const timeLeft = endTime - currentTime;
-      if (timeLeft > 0) {
-        const seconds = Math.floor((timeLeft / 1000) % 60);
-        const minutes = Math.floor((timeLeft / (1000 * 60)) % 60);
-        const formattedMinutes = String(minutes).padStart(2, "0");
-        const formattedSeconds = String(seconds).padStart(2, "0");
-        setMinLeft(formattedMinutes);
-        setSecLeft(formattedSeconds);
-      } else {
+
+      if (timeLeft <= 0) {
+        // game end not trigger refresh function to get new current game data
         refresh();
+        setMinLeft("00");
+        setSecLeft("00");
+        clearInterval(intervalId); // Clear the interval on game end
+      } else {
+        const countdownLimit = Number(currentGameData.coundown) * 1000;
+        if (timeLeft < countdownLimit) {
+          // countdown start here
+          countdownFunction();
+        }
+        const { minutes, seconds } = calculateTimeLeft(timeLeft);
+        setMinLeft(minutes);
+        setSecLeft(seconds);
       }
     }, 1000);
+
     return () => clearInterval(intervalId);
-  }, [gameEndTime]);
+  }, [currentGameData]);
 
   return (
     <div className="mt-2  ">

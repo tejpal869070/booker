@@ -1,7 +1,62 @@
 import React, { useState } from "react";
+import { AddNewColorGameBet } from "../../Controllers/User/GamesController";
+import { ToastContainer, toast } from "react-toastify";
 
-const ColorGamePopup = ({ isOpen, onClose }) => {
+const ColorGamePopup = ({ isOpen, onClose, popupData, currentGameData }) => {
   const [quantity, setQuantity] = useState(1);
+  const [amount, setAmount] = useState(10);
+  const [selectedAmount, setSelectedAmount] = useState(0);
+  const [loading, setLoading] = useState(false);
+
+  const formData = {
+    select: popupData
+      ? popupData.number
+        ? popupData.number
+        : popupData.color_name
+      : "",
+    color: popupData ? (popupData.color_code ? popupData.color_code : "") : "",
+    period: currentGameData ? currentGameData.period : "",
+    method: popupData ? (popupData.number ? "Number" : "Color") : "",
+    game_type: popupData ? popupData.game_type : "",
+    id: popupData ? popupData.id : "",
+    total_amount: quantity * amount,
+  };
+
+  const amounts = [
+    { id: 1, price: 10 },
+    { id: 2, price: 100 },
+    { id: 3, price: 1000 },
+    { id: 4, price: 10000 },
+  ];
+
+  const handleBet = async () => {
+    setLoading(true);
+    try {
+      const response = await AddNewColorGameBet(formData);
+      if (response.status) {
+        toast.success("Bet placed successfully", {
+          position: "top-center",
+        });
+      } else {
+        toast.error("Somthing Went Wrong !", {
+          position: "top-center",
+        });
+      }
+    } catch (error) {
+      if (error.response.status === 302) {
+        const decodederror = atob(error.response.data);
+        toast.error(JSON.parse(decodederror).massage, {
+          position: "top-center",
+        });
+      } else {
+        toast.error("Server Error !", {
+          position: "top-center",
+        });
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   if (!isOpen) return null;
   return (
@@ -9,17 +64,31 @@ const ColorGamePopup = ({ isOpen, onClose }) => {
       <div className="bg-white dark:bg-[#bbbbbb] p-6 rounded-lg   shadow-lg relative">
         <h2 className="text-xl font-bold mb-2 text-center">Color Game </h2>
         <p className="text-center    py-1  font-bold bg-[#ffe487] px-12 rounded-lg">
-          Selected 5
+          Selected{" "}
+          {popupData
+            ? popupData.number
+              ? popupData.number
+              : popupData.color_name
+            : ""}
         </p>
 
         {/* Balance */}
-        <div className="flex justify-between gap-10 color-game-amount mt-6 items-center">
+        <div className="flex justify-between gap-10 color-game-amount mt-6 items-center ">
           <p className="font-semibold">Balance</p>
           <div className="flex gap-2">
-            <button>1</button>
-            <button>10</button>
-            <button>100</button>
-            <button>1000</button>
+            {amounts.map((item, index) => (
+              <button
+                className={`${
+                  selectedAmount === index ? "border-black border-2" : ""
+                }`}
+                onClick={() => {
+                  setSelectedAmount(index);
+                  setAmount(item.price);
+                }}
+              >
+                {item.price}
+              </button>
+            ))}
           </div>
         </div>
 
@@ -50,6 +119,11 @@ const ColorGamePopup = ({ isOpen, onClose }) => {
           </div>
         </div>
 
+        {/* total bet money */}
+        <p className="mt-4 font-semibold italic">
+          Total Bet Money : Rs {amount * quantity}
+        </p>
+
         {/* buttons */}
         <div className="flex   justify-around mt-10">
           <button className="relative" onClick={onClose}>
@@ -58,14 +132,15 @@ const ColorGamePopup = ({ isOpen, onClose }) => {
               Close
             </span>
           </button>
-          <button className="relative">
+          <button className="relative" onClick={handleBet}>
             <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-black"></span>
             <span className="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900">
-              Place Bet
+              {loading ? "Processing..." : "Place Bid"}
             </span>
           </button>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
