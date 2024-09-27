@@ -66,14 +66,14 @@ export default function Login() {
 
   return (
     <div
-      className="min-h-screen  bg-fixed  bg-no-repeat bg-cover bg-black     py-6 flex flex-col justify-center sm:py-12"
+      className="min-h-screen  bg-fixed  bg-no-repeat bg-cover bg-black     py-6 flex flex-col justify-center px-2 lg:px-0"
       style={{
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${bg1})`,
       }}
     >
       <div className="relative py-3   sm:max-w-xl sm:mx-auto">
-        <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-sky-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
-        <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
+        <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-sky-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6  rounded-3xl"></div>
+        <div className="relative px-4 py-10 bg-white shadow-lg  rounded-3xl sm:p-20">
           <div className="max-w-md mx-auto">
             <div>
               <h1 className="text-2xl font-semibold">Login</h1>

@@ -16,6 +16,7 @@ import {
 import swal from "sweetalert";
 import { Loading1 } from "../Loading1";
 import FlipCountdown from "@rumess/react-flip-countdown";
+import { GetUserDetails } from "../../Controllers/User/UserController";
 
 export default function ColorGame({ gameType }) {
   const [selectedHistoryTab, setSelectedHistoryTab] = useState(1);
@@ -26,16 +27,19 @@ export default function ColorGame({ gameType }) {
   const [currentGameLoading, setCurrentGameLoading] = useState();
   const [currentGameData, setCurrentGameData] = useState();
   const [isCountDown, setIsCountDown] = useState(false);
-
   const [popupData, setPopupData] = useState();
-
   const [refreshHistory, setRefreshHis] = useState(true);
+  const [user, setUser] = useState();
+  const [userLoading, setUserLoading] = useState(true);
 
   const openPopup = (item) => {
     setIsPopupOpen(true);
     setPopupData(item);
   };
-  const closePopup = () => setIsPopupOpen(false);
+  const closePopup = () => {
+    setIsPopupOpen(false);
+    userDataGet();
+  };
 
   // color game colors and number api
   useEffect(() => {
@@ -112,7 +116,19 @@ export default function ColorGame({ gameType }) {
     setIsPopupOpen(false);
   };
 
-  if (loading || currentGameLoading) {
+  const userDataGet = async () => {
+    const response = await GetUserDetails();
+    if (response !== null) {
+      setUser(response[0]);
+      setUserLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    userDataGet();
+  }, []);
+
+  if (loading || currentGameLoading || userLoading) {
     return (
       <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-50 z-[9999]">
         <Loading1 />
@@ -122,14 +138,19 @@ export default function ColorGame({ gameType }) {
 
   return (
     <div>
-      <Link
-        className="cursor-pointer   "
-        to={{ pathname: "", search: "?game=color-game" }}
-      >
-        <IoHome size={24} className="" />
-      </Link>
+      <div className="flex justify-between items-center px-2">
+        <Link
+          className="cursor-pointer   "
+          to={{ pathname: "", search: "?game=color-game" }}
+        >
+          <IoHome size={24} className="" />
+        </Link>
+        <p className="font-medium text-medium pr-4">
+          Balance : ₹ {user && user.color_wallet_balnace}
+        </p>
+      </div>
       <div
-        className="flex bg-no-repeat bg-cover px-4 justify-between w-full border-b-2 border-gray pb-2"
+        className="flex bg-no-repeat bg-cover px-2 md:px-4 justify-between w-full border-b-2 border-gray pb-2"
         style={{ backgroundImage: `url(${bg1})` }}
       >
         <div className="py-2">
@@ -149,13 +170,13 @@ export default function ColorGame({ gameType }) {
 
       <div className="relative bg-gradient-to-r from-rose-100 to-teal-100 dark:bg-gradient-to-r dark:from-slate-500 dark:to-slate-800 py-4">
         {/* color buttons */}
-        <div className="flex gap-12 justify-center py-2 border-b-2 border-white">
+        <div className="flex justify-between lg:justify-center lg:gap-12 justify-center py-2 border-b-2 border-white">
           {GameColors &&
             GameColors.map((item, index) => (
               <div
                 key={index}
                 onClick={() => openPopup(item)}
-                className={`px-8 cursor-pointer  hover:shadow-lg rounded-lg py-3  `}
+                className={`px-6 md:px-8 cursor-pointer  hover:shadow-lg rounded-lg py-3  `}
                 style={{ backgroundColor: item.color_code }}
               >
                 <button className="text-2xl font-bold text-white">
@@ -187,7 +208,7 @@ export default function ColorGame({ gameType }) {
       </div>
 
       {/* history */}
-      <div className="flex gap-4  color-game-history mt-10">
+      <div className="flex    color-game-history mt-10">
         <button
           className={`${
             selectedHistoryTab === 1 ? "bg-[#ff9600]" : "bg-[#babbbb]"

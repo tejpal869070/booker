@@ -6,7 +6,7 @@ import { PinVerification } from "../Controllers/Auth/AuthController";
 import { MdCancel } from "react-icons/md";
 
 const VerifyPin = ({ onclose2, successFunction }) => {
-  const [pin, setPin] = useState("");
+  const [pin, setPin] = useState(Number);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -67,6 +67,7 @@ const VerifyPin = ({ onclose2, successFunction }) => {
           </div>
           <OTPInput
             value={pin}
+            inputType="tel"
             onChange={setPin}
             numInputs={4}
             renderSeparator={<span>-</span>}

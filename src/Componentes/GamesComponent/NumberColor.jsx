@@ -32,10 +32,10 @@ const ColorCircle = ({ orders, number, popupData, currentGameData }) => {
   const circleNumberStyle = "text-4xl font-bold text-gray-200  ";
 
   return (
-    <div>
+    <div className=" ">
       <div
         onClick={openPopup}
-        className="relative cursor-pointer h-24 w-24 rounded-full p-1 border-2 border-dotted border-black dark:border-gray-400 overflow-hidden"
+        className="relative cursor-pointer h-14 md:h-24 w-14 md:w-24 rounded-full p-1 border-2 border-dotted border-black dark:border-gray-400 overflow-hidden"
       >
         {colorCount === 1 ? (
           <div

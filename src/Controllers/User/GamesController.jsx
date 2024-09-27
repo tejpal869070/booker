@@ -107,10 +107,8 @@ export const ColorGameAllResult = async (id) => {
   }
 };
 
-export const MyColorGameHistory = async (id) => {
-  console.log(id);
+export const MyColorGameHistory = async (id, page) => {
   try {
-    let page = 1;
     const data = await EncodeString({ mobile, id, page });
     const postData = {
       data: data,
@@ -134,7 +132,7 @@ export const AddNewColorGameBet = async (formData) => {
   const game_type = formData.game_type;
   const id = formData.id;
   const total_amount = formData.total_amount;
-  const bonuscheck = false;
+  const bonuscheck =  false;
   try {
     const data = await EncodeString({
       select,
@@ -156,6 +154,33 @@ export const AddNewColorGameBet = async (formData) => {
     );
     const decodedData = await DecodeString(response.data);
     return decodedData;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const MainGameWalletMoneyTransfer = async (formData, pin) => {
+  try {
+    const postData = {
+      mobile: mobile,
+      pin: pin,
+      amount: formData.amount,
+      type: formData.type,
+    };
+
+    const axiosConfig = {
+      headers: {
+        Authorization: `Bearer ${bearerToken}`,
+      },
+    };
+
+    const response = await axios.post(
+      `${API.url}user/color-money-transfer`,
+      postData,
+      axiosConfig
+    );
+
+    return response.data;
   } catch (error) {
     throw error;
   }

@@ -1,16 +1,39 @@
 import React, { useEffect, useState } from "react";
-import { GetGameTypes } from "../../Controllers/User/GamesController";
+import {
+  GetGameTypes,
+  MainGameWalletMoneyTransfer,
+} from "../../Controllers/User/GamesController";
 import swal from "sweetalert";
 import { API } from "../../Controllers/Api";
 import { Link } from "react-router-dom";
+import { GetUserDetails } from "../../Controllers/User/UserController";
+import { Loading1 } from "../Loading1";
+import { RiColorFilterFill } from "react-icons/ri";
+import { BiSolidWallet } from "react-icons/bi";
+import { FaHandPointRight } from "react-icons/fa";
+import { FaHandPointLeft } from "react-icons/fa";
+import { MdCancel } from "react-icons/md";
+import { ToastContainer, toast } from "react-toastify";
+import successImg from "../../assets/photos/success1-1--unscreen.gif";
+import VerifyPin from "../VerifyPin";
 
 export default function ColorGame() {
   const [gameTypes, setGameTypes] = useState([]);
+  const [user, setUser] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [gameLoading, setGameLoading] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
+  const [type, setType] = useState();
+  const [transferToAmount, setTransferToAmount] = useState();
+  const [amountHave, setAmountHave] = useState();
+  const [success, setSuccess] = useState(false);
+  const [isVerifyOpen, setVerifyOpen] = useState(false);
 
   const fetchGameTypes = async () => {
     try {
       const data = await GetGameTypes();
       setGameTypes(data.data);
+      setGameLoading(false);
     } catch (error) {
       swal({
         title: "Error!",
@@ -28,37 +51,166 @@ export default function ColorGame() {
     }
   };
 
+  const userDataGet = async () => {
+    const response = await GetUserDetails();
+    if (response !== null) {
+      setUser(response[0]);
+      setLoading(false);
+    }
+  };
+
+  const handleButtons = (id) => {
+    setIsOpen(true);
+    setType(id);
+    if (id === 1) {
+      setAmountHave(user.wallet_balance);
+    } else {
+      setAmountHave(user.color_wallet_balnace);
+    }
+  };
+
+  const openVerifyPin = () => {
+    if (transferToAmount > Number(amountHave)) {
+      toast.error("Amount Exceed", {
+        position: "top-center",
+      });
+    } else if (transferToAmount < 100 || transferToAmount === undefined) {
+      toast.error("Minimum Amount is 100", {
+        position: "top-center",
+      });
+    } else {
+      setVerifyOpen(true);
+    }
+  };
+
+  const onclose2 = () => {
+    setVerifyOpen(false);
+  };
+
+  const formData = {
+    amount: transferToAmount,
+    type: type,
+  };
+
+  const successFunction = async (pin) => {
+    try {
+      const response = await MainGameWalletMoneyTransfer(formData, pin);
+      if (response.status) {
+        setSuccess(true);
+        userDataGet();
+        setTransferToAmount(0);
+        setIsOpen(false);
+        setTimeout(() => {
+          setSuccess(false);
+        }, 3500);
+      } else {
+        toast.error(`Please Try Again !`, {
+          position: "top-center",
+        });
+      }
+    } catch (error) {
+      if (error.response.status === 302) {
+        toast.error(`${error.response.data.message}`, {
+          position: "top-center",
+        });
+      } else {
+        toast.error(`Something Went Wrong !`, {
+          position: "top-center",
+        });
+      }
+    }
+  };
+
   useEffect(() => {
     fetchGameTypes();
+    userDataGet();
   }, []);
+
+  if (loading || gameLoading) {
+    return (
+      <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-50 z-[9999]">
+        <Loading1 />
+      </div>
+    );
+  }
+
+  if (success) {
+    return (
+      <div className="fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center bg-[#000000d1] bg-opacity-50 z-[9999]">
+        <img alt="success" src={successImg} />
+        <p className="text-2xl text-white font-semibold">Success.</p>
+      </div>
+    );
+  }
 
   return (
     <div>
-      <div class="flex flex-wrap gap-6 mb-4">
-        <button class="relative" href="#">
-          <span class="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-black"></span>
-          <span class="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900">
-            Exchange Wallet Money
-          </span>
-        </button>
-        <p class="relative" href="#">
-          <span class="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-white px-3 py-1 text-base font-bold text-black transition duration-100  hover:text-gray-900">
-            Game Wallet Balance : ₹400
-          </span>
+      <div class=" hidden md:flex  gap-6 mb-4 flex-wrap  ">
+        <p class="relative " href="#">
+          <p class="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-indigo-100 dark:bg-indigo-100 text-gray-700 px-3 py-1 text-base font-bold text-black transition duration-100  ">
+            <RiColorFilterFill size={28} color="black" />
+            Game Balance : ₹ {user.color_wallet_balnace}
+          </p>
         </p>
-        <p class="relative" href="#">
-          <span class="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-white px-3 py-1 text-base font-bold text-black transition duration-100  hover:text-gray-900">
-            Main Wallet Balance : ₹1650
-          </span>
+        <div className="flex flex-col justify-between dark:text-gray-200 font-semibold">
+          <button
+            onClick={() => handleButtons(2)}
+            className="flex items-center gap-2 cursor-pointer"
+          >
+            Transfer To Main <FaHandPointRight />
+          </button>
+          <button
+            onClick={() => handleButtons(1)}
+            className="flex items-center gap-2 cursor-pointer"
+          >
+            <FaHandPointLeft />
+            Transfer To Game
+          </button>
+        </div>
+        <p class="relative " href="#">
+          <p class="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-indigo-100 dark:bg-indigo-100 text-gray-700 px-3 py-1 text-base font-bold text-black transition duration-100  ">
+            <BiSolidWallet size={28} color="black" /> Main Balance : ₹{" "}
+            {user.wallet_balance}
+          </p>
         </p>
       </div>
 
-      <div class="grid grid-cols-1 xl:grid-cols-4 gap-9 px-4 py-3 border border-2 mt-6">
+      <div class="  block md:hidden flex flex-wrap justify-between  mb-4   ">
+        <p class="relative w-[45%]" href="#">
+          <p class="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-indigo-100 dark:bg-indigo-100 text-gray-700 px-3 py-1 text-base font-bold text-black transition duration-100  ">
+            <RiColorFilterFill size={28} color="black" />
+            Game Balance : ₹ {user.color_wallet_balnace}
+          </p>
+        </p>
+        <p class="relative w-[45%]" href="#">
+          <p class="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-indigo-100 dark:bg-indigo-100 text-gray-700 px-3 py-1 text-base font-bold text-black transition duration-100  ">
+            <BiSolidWallet size={28} color="black" /> Main Balance : ₹{" "}
+            {user.wallet_balance}
+          </p>
+        </p>
+        <div className="flex    w-full flex-row justify-between dark:text-gray-200 font-semibold">
+          <button
+            onClick={() => handleButtons(2)}
+            className="flex items-center gap-2 cursor-pointer"
+          >
+            Transfer To Main <FaHandPointRight />
+          </button>
+          <button
+            onClick={() => handleButtons(1)}
+            className="flex items-center gap-2 cursor-pointer"
+          >
+            <FaHandPointLeft />
+            Transfer To Game
+          </button>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap justify-around  md:py-4 border border-4 mt-6">
         {gameTypes &&
           gameTypes.map((item, index) => (
             <Link
               key={index}
-              className="w-40 h-40 bg-gray-300 rounded-xl flex flex-col "
+              className="w-40 h-40   rounded-xl flex flex-col "
               to={{
                 pathname: "/home",
                 search: `?colorGameType=${item.id}`,
@@ -68,6 +220,84 @@ export default function ColorGame() {
             </Link>
           ))}
       </div>
+
+      {/* popup */}
+      {isOpen && (
+        <div className="animate-fade-down animate-duration-500 fixed top-0 left-0 w-full h-full flex justify-center pt-10  bg-gray-400 bg-opacity-50 z-[9999]">
+          <div className=" text-white bg-gradient-to-r from-gray-700 rounded h-[70vh] to-slate-900 p-10 inline-block">
+            <p className="text-xl font-medium text-center text-gray-200 border-b pb-2">
+              Transfer From <br />{" "}
+              {type === 1
+                ? "Main Wallet To Game Wallet"
+                : "Game Wallet To Main Wallet"}
+            </p>
+            <p className="mt-6">
+              Your {type === 1 ? "Main Wallet Balance" : "Game Wallet Balance"}
+              {"  "}
+              {"  "}
+              <span className="text-lg font-bold">
+                ₹ {type === 1 ? user.wallet_balance : user.color_wallet_balnace}
+              </span>
+            </p>{" "}
+            <div class="max-w-sm mt-4">
+              <label
+                for="input-label"
+                class="block text-sm text-gray-300 font-medium mb-2 dark:text-white"
+              >
+                Transfer To {type === 1 ? "Game Wallet" : "Main Wallet"}
+              </label>
+              <input
+                type="number"
+                id="input-label"
+                class="py-2 px-4 block text-gray-200 bg-gray-700 w-full border-x-0 border-t-0 border-b-2   text-md       dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                placeholder=" "
+                value={transferToAmount}
+                onChange={(e) => setTransferToAmount(e.target.value)}
+              />
+              <button
+                onClick={openVerifyPin}
+                class="m-auto w-full mt-4 relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group"
+              >
+                <span class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
+                  <svg
+                    class="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M14 5l7 7m0 0l-7 7m7-7H3"
+                    ></path>
+                  </svg>
+                </span>
+                <span class="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease">
+                  Transfer
+                </span>
+                <span class="relative invisible">Button Text</span>
+              </button>
+            </div>
+            {/* close button */}
+            <MdCancel
+              size={24}
+              onClick={() => setIsOpen(false)}
+              className="cursor-pointer text-center m-auto mt-6"
+            />
+          </div>
+        </div>
+      )}
+
+      {isVerifyOpen && (
+        <VerifyPin
+          onclose2={onclose2}
+          successFunction={(pin) => successFunction(pin)}
+        />
+      )}
+
+      <ToastContainer />
     </div>
   );
 }

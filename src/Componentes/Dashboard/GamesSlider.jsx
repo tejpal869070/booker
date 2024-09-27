@@ -13,20 +13,33 @@ export default function GamesSlider() {
   const settings = {
     dots: true,
     infinite: true,
-    
+
     speed: 500,
     slidesToShow: 5,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 4000,
     cssEase: "ease-in-out",
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
   return (
-    <div className="mb-10">
+    <div className="mb-10   lg:mt-6">
       <Slider {...settings}>
         {images.map((item, index) => (
-          <div className="w-full h-30 overflow-hidden gap-4" key={index}>
-            <img alt="side" className="w-[90%] rounded-lg   border-2 border-gray-500 h-[140px] object-cover" src={item} />
+          <div className="w-full h-30 overflow-hidden  " key={index}>
+            <img
+              alt="side"
+              className="w-[100%] lg:w-[90%] rounded-lg   border-2 border-gray-500 h-[140px] object-cover"
+              src={item}
+            />
           </div>
         ))}
       </Slider>

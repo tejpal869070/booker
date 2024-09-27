@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { FcPortraitMode } from "react-icons/fc";
 import { IoLogOut } from "react-icons/io5";
 import { FaMoneyBillTransfer } from "react-icons/fa6";
@@ -6,7 +6,7 @@ import { BsBank2 } from "react-icons/bs";
 import { PiNetworkFill } from "react-icons/pi";
 import { RiAccountCircleFill } from "react-icons/ri";
 import { GiTakeMyMoney } from "react-icons/gi";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import InnerSection from "./userPages/InnerSection";
 import { FaCoins } from "react-icons/fa6";
 import Cookies from "js-cookie";
@@ -20,6 +20,26 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const dropdownClassList =
     "flex w-full p-2 pl-0 text-gray-900 rounded-lg group dark:text-black dark:hover:text-white dark:hover:bg-gray-400  hover:animate-fade-right hover:animate-once hover:justify-center hover:animate-duration-[400ms]";
+
+  // close side bar on url change
+  const location = useLocation();
+
+  const paramsData = useMemo(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const params = {};
+    for (const [key, value] of queryParams.entries()) {
+      params[key] = value;
+    }
+    return params;
+  }, [location.search]); // Dependency is only location.search
+
+  useEffect(() => {
+    const sidebar = document.getElementById("sidebar-multi-level-sidebar");
+    if (sidebar) {
+      sidebar.classList.toggle("translate-x-0");
+      sidebar.classList.toggle("-translate-x-full");
+    }
+  }, [paramsData]);
 
   const handleLogout = async () => {
     Cookies.remove("token");
@@ -70,7 +90,7 @@ export default function Home() {
   }
 
   return (
-    <div className="dark:bg-black w-full h-full ">
+    <div className="dark:bg-black w-full h-full overflow-x-hidden">
       <nav className="bg-[#919ffdfc] z-10 border-b-2 border-gray-200 dark:bg-gray-900 fixed w-full">
         <div className="  flex flex-wrap items-center justify-between mx-auto p-4">
           <a
@@ -87,23 +107,13 @@ export default function Home() {
             </span>
           </a>
           <div className="flex gap-4 items-center">
-            <div>
-              {/* <IoSunny
-                size={24}
-                className="text-white cursor-pointer dark:hidden"
-                onClick={() => localStorage.setItem("theme", "dark")}
-              />
-              <MdDarkMode
-                size={24}
-                className="text-white cursor-pointer hidden dark:block "
-                onClick={() => localStorage.setItem("theme", "dark")}
-              /> */}
+            <div className="hidden lg:block">
               <ThemeToggle onNav={true} />
             </div>
-            <div className="flex flex-col items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+            <div className="flex  lg:flex-col items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
               <button
                 type="button"
-                className="flex text-sm bg-gray-800 rounded-full md:me-0 ring-4 ring-gray-300 dark:focus:ring-gray-600"
+                className="flex  text-sm bg-gray-800 rounded-full md:me-0 ring-4 ring-gray-300 dark:focus:ring-gray-600"
                 id="user-menu-button"
                 onClick={toggleDropdown}
               >
@@ -172,7 +182,7 @@ export default function Home() {
                 onClick={() => {
                   const sidebar = document.getElementById(
                     "sidebar-multi-level-sidebar"
-                  );
+                  ); 
                   sidebar.classList.toggle("translate-x-0");
                   sidebar.classList.toggle("-translate-x-full");
                 }}
@@ -747,7 +757,7 @@ export default function Home() {
 
       {/* Content */}
       <div className=" ">
-        <div className="p-8 sm:ml-64  pt-24 ">
+        <div className="p-2 lg:p-8 sm:ml-64 pt-24 lg:pt-24 ">
           <InnerSection />
         </div>
       </div>
