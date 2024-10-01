@@ -50,7 +50,8 @@ const ColorCircle = ({ orders, number, popupData, currentGameData }) => {
             style={{ background: colors[0] }}
           >
             <div
-              className="absolute h-[90%] rounded-r-full w-[48%] right-1"
+              // className="absolute  rounded-r-full  right-1"
+              className="absolute h-[85%] md:h-[90%] rounded-r-full w-[46%] md:w-[48%] right-1"
               style={{ background: colors[1] }}
             />
             <p

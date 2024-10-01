@@ -19,7 +19,7 @@ export default function DepositMethod({ onClose, paymentMethods }) {
  
   return (
     <div className="fixed animate-fade-down animate-duration-[500ms] top-0 left-0 w-full h-full flex justify-center pt-10  bg-gray-400 bg-opacity-50 z-[9999]">
-      <div className=" text-white  bg-gradient-to-r from-gray-700 rounded h-[60vh]   w-[30vw] to-slate-900 p-10 pt-6 inline-block">
+      <div className="  bg-gradient-to-r from-gray-700   text-white   rounded h-[60vh] w-[90vw]  lg:w-[30vw] to-slate-900 p-10 pt-6 inline-block">
         <MdCancel
           size={28}
           className="cursor-pointer m-auto"

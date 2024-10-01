@@ -143,7 +143,7 @@ export default function ChangePassword() {
                 {resetting ? <Loading1 width={40} /> : "Reset Password"}
               </button>
             </form>
-            <div className="text-center mt-4 font-semibold  underline">
+            <div className="text-center dark:text-gray-300 mt-4 font-semibold  underline">
               <Link to={"/home"}>Go Back </Link>
             </div>
           </div>

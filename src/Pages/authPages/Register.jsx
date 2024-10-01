@@ -75,15 +75,15 @@ export default function Register() {
 
   return (
     <div
-      className="min-h-screen  bg-fixed  bg-no-repeat bg-cover  py-6 flex flex-col justify-center sm:py-12"
+      className="min-h-screen  bg-fixed  bg-no-repeat bg-cover  py-6 px-2 lg:px-0 flex flex-col justify-center sm:py-12"
       style={{
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${bg1})`,
       }}
     >
       {!otpSent ? (
         <div className="relative py-3 sm:max-w-xl sm:mx-auto">
-          <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-sky-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
-          <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
+          <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-sky-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6  rounded-3xl"></div>
+          <div className="relative px-4 py-10 bg-white shadow-lg  rounded-3xl sm:p-20">
             <div className="max-w-md mx-auto">
               <div>
                 <h1 className="text-2xl font-semibold">SIGN UP</h1>
@@ -96,7 +96,7 @@ export default function Register() {
                         id="name"
                         name="name"
                         type="text"
-                        className="peer   h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
+                        className="peer  h-10 w-full border-b-2 border-0 border-gray-300 text-gray-900 focus:border-b-2 focus:border-gray-500 focus:outline-none"
                         placeholder="Name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
@@ -107,7 +107,7 @@ export default function Register() {
                         id="email"
                         name="email"
                         type="text"
-                        className="peer   h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
+                        className="peer  h-10 w-full border-b-2 border-0 border-gray-300 text-gray-900 focus:border-b-2 focus:border-gray-500 focus:outline-none"
                         placeholder="Email address"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -119,7 +119,7 @@ export default function Register() {
                         id="mobile"
                         name="mobile"
                         type="text"
-                        className="peer  h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
+                        className="peer  h-10 w-full border-b-2 border-0 border-gray-300 text-gray-900 focus:border-b-2 focus:border-gray-500 focus:outline-none"
                         placeholder="Mobile No."
                         value={mobile}
                         onChange={(e) => setMobile(e.target.value)}
@@ -131,7 +131,7 @@ export default function Register() {
                         id="password"
                         name="password"
                         type="password"
-                        className="peer  h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
+                        className="peer  h-10 w-full border-b-2 border-0 border-gray-300 text-gray-900 focus:border-b-2 focus:border-gray-500 focus:outline-none"
                         placeholder="Password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}

@@ -37,7 +37,7 @@ export default function ColorGameHistory({ gameType, refreshHistory }) {
     <div>
       <div className="relative overflow-x-auto  z-0">
         <p className="font-semibold dark:text-gray-200">Game Recoard : </p>
-        <div className="flex flex-wrap gap-4 mt-4">
+        <div className="grid grid-cols-5 md:grid-cols-10   gap-4 mt-4">
           {gameHistory &&
             gameHistory.map((item, index) => (
               <div className="relative flex justify-center w-16 h-16">

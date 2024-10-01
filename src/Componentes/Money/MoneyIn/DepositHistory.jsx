@@ -20,7 +20,13 @@ export default function DepositHistory() {
   const GetPaymentHistory = async () => {
     const response = await GetUserPaymentHistory();
     if (response !== null) {
-      setData(response.reverse().filter((item) => item.payment_type === "Deposit"));
+      setData(
+        response
+          .reverse()
+          .filter(
+            (item) => item.payment_type === "Deposit" || item.image !== null
+          )
+      );
       setLoading(false);
     } else {
       setData([]);
@@ -79,26 +85,26 @@ export default function DepositHistory() {
               <p className="text-center font-bold text-xl">No Recoard !</p>
             </div>
           ) : (
-            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 border-4 border-indigo-400">
               <thead className="text-xs font-semibold text-black uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                   <th scope="col" className="px-4 py-3">
                     S.No.
                   </th>
-                  <th scope="col" className="px-6 py-3">
+                  <th scope="col" className="px-4 py-3">
                     AMOUNT
                   </th>
-                  <th scope="col" className="px-6 py-3">
+                  <th scope="col" className="hidden md:table-cell px-6 py-3">
                     Transaction Hash
                   </th>
-                  <th scope="col" className="px-6 py-3">
+                  <th scope="col" className="hidden md:table-cell px-6 py-3">
                     TYPE
                   </th>
                   <th scope="col" className="px-6 py-3">
                     Status
                   </th>
                   <th scope="col" className="px-6 py-3">
-                    Added On
+                    View
                   </th>
                 </tr>
               </thead>
@@ -125,8 +131,12 @@ export default function DepositHistory() {
                         {index + 1}.
                       </th>
                       <td className="px-4 py-4">{item.amount}</td>
-                      <td className="px-6 py-4">{item.transaction_id}</td>
-                      <td className="px-6 py-4">{item.type}</td>
+                      <td className="px-6 py-4 hidden md:table-cell">
+                        {item.transaction_id}
+                      </td>
+                      <td className="px-6 py-4 hidden md:table-cell">
+                        {item.payment_type === "USDT" ? "Crypto" : item.type}
+                      </td>
                       <td className="px-6 py-4">{item.status}</td>
                       <td className="px-6 py-4">
                         <FaEye
@@ -135,6 +145,7 @@ export default function DepositHistory() {
                           onClick={() => {
                             setSelectedIndex(index);
                             setVisible((pre) => !pre);
+                            console.log(index);
                           }}
                         />
                       </td>
@@ -168,7 +179,22 @@ export default function DepositHistory() {
                             </div>
                           </td>
                         ) : (
-                          ""
+                          <td colSpan="8">
+                            <div className="p-6 text-black font-medium dark:text-gray-200   border-gray-700">
+                              <p>Transaction ID: {item.transaction_id}</p>
+                              <p>
+                                Amount: {item.amount} {item.currency} (
+                                {Number(item.amount) *
+                                  Number(item.price_at_that_time)}{" "}
+                                INR)
+                              </p>
+                              <p>Price: {item.price_at_time} INR</p>
+                              <p>Date: {item.date.split("T")[0]}</p>
+                              <p>Transfered To: {item.cypto}</p>
+
+                              <p>Status: {item.status}</p>
+                            </div>
+                          </td>
                         )}
                       </tr>
                     ) : (

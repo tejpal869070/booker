@@ -154,7 +154,7 @@ export default function ColorGame({ gameType }) {
         style={{ backgroundImage: `url(${bg1})` }}
       >
         <div className="py-2">
-          <p className="text-sm font-semibold">Number</p>
+          <p className="text-sm font-semibold">Period</p>
           <p className="font-bold">
             {currentGameData && currentGameData.period}
           </p>
@@ -208,10 +208,10 @@ export default function ColorGame({ gameType }) {
       </div>
 
       {/* history */}
-      <div className="flex    color-game-history mt-10">
+      <div className="flex    color-game-history mt-10 gap-8">
         <button
           className={`${
-            selectedHistoryTab === 1 ? "bg-[#ff9600]" : "bg-[#babbbb]"
+            selectedHistoryTab === 1 ? "bg-[#ff9600]  " : "bg-[#babbbb]"
           }`}
           onClick={() => setSelectedHistoryTab(1)}
         >

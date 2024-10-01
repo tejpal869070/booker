@@ -69,7 +69,7 @@ export default function Dashboard() {
             className="p-[3px] bg-gray-400   shadow-lg rounded shadow-4"
             key={index}
           >
-            <div className="flex flex-col w-full  p-4 justify-center rounded bg-white dark:bg-[#00000000] h-28  ">
+            <div className="flex flex-col w-full  p-4 justify-center rounded bg-white dark:bg-[#00000000]   h-full ">
               <div className="w-full flex justify-between">
                 {item.icons}
                 {index === 7 ? (

@@ -25,7 +25,13 @@ export default function WithdrawalHistory() {
   const GetPaymentHistory = async () => {
     const response = await GetUserPaymentHistory();
     if (response !== null) {
-      setData(response.reverse().filter((item) => item.payment_type === "Withdrawal"));
+      setData(
+        response
+          .reverse()
+          .filter(
+            (item) => item.payment_type === "Withdrawal" || item.image === null
+          )
+      );
       setLoading(false);
     } else {
       setData([]);
@@ -95,19 +101,19 @@ export default function WithdrawalHistory() {
                 </p>
               </div>
             ) : (
-              <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+              <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400  border-4 border-indigo-400">
                 <thead className="text-xs font-semibold text-black uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
                   <tr>
                     <th scope="col" className="px-4 py-3">
                       S.No.
                     </th>
-                    <th scope="col" className="px-6 py-3">
+                    <th scope="col" className="px-4 py-3">
                       AMOUNT
                     </th>
                     <th scope="col" className="px-6 py-3">
                       Status
                     </th>
-                    <th scope="col" className="px-6 py-3">
+                    <th scope="col" className="hidden md:table-cell px-6 py-3">
                       DATE
                     </th>
                     <th scope="col" className="px-6 py-3">
@@ -141,7 +147,9 @@ export default function WithdrawalHistory() {
                         </th>
                         <td className="px-4 py-4">₹{item.amount}</td>
                         <td className="px-6 py-4">{item.status}</td>
-                        <td className="px-6 py-4">{item.date.split("T")[0]}</td>
+                        <td className="px-6 py-4 hidden md:table-cell">
+                          {item.date.split("T")[0]}
+                        </td>
                         <td className="px-6 py-4">
                           <FaRegEye
                             size={20}
@@ -172,30 +180,75 @@ export default function WithdrawalHistory() {
             <div className="flex flex-col mt-6 gap-2">
               <div className={`${classes1}`}>
                 <p>Amount :</p>
-                <p>{singleData.amount}</p>
+                <p>
+                  {singleData.amount} {singleData.currency}
+                </p>
               </div>
 
               <div className={`${classes1}`}>
                 <p>Status :</p>
                 <p>{singleData.status}</p>
               </div>
+              {singleData.currency !== null && (
+                <div className={`${classes1}`}>
+                  <p>To :</p>
+                  <p>
+                    {singleData.cypto.slice(0, 8)}...
+                    {singleData.cypto.slice(-6)}
+                  </p>
+                </div>
+              )}
 
-              <div className={`${classes1}`}>
+              {singleData.currency !== null && (
+                <div className={`${classes1}`}>
+                  <p>At Price :</p>
+                  <p>{singleData.price_at_that_time} INR</p>
+                </div>
+              )}
+              {singleData.currency !== null && (
+                <div className={`${classes1}`}>
+                  <p>Transfer Amount :</p>
+                  <p>
+                    {(
+                      singleData.price_at_that_time * singleData.amount
+                    ).toFixed(2)}{" "}
+                    INR
+                  </p>
+                </div>
+              )}
+
+              <div
+                className={`${
+                  singleData.currency !== null ? "hidden" : "block"
+                } ${classes1}`}
+              >
                 <p>Account Holder :</p>
                 <p>{singleData.uac_holder_name}</p>
               </div>
 
-              <div className={`${classes1}`}>
+              <div
+                className={`${
+                  singleData.currency !== null ? "hidden" : "block"
+                } ${classes1}`}
+              >
                 <p>Bank Name :</p>
                 <p>{singleData.ubank_details}</p>
               </div>
 
-              <div className={`${classes1}`}>
+              <div
+                className={`${
+                  singleData.currency !== null ? "hidden" : "block"
+                } ${classes1}`}
+              >
                 <p>Account No. :</p>
                 <p>{singleData.uac_no}</p>
               </div>
 
-              <div className={`${classes1}`}>
+              <div
+                className={`${
+                  singleData.currency !== null ? "hidden" : "block"
+                } ${classes1}`}
+              >
                 <p>IFSC Code :</p>
                 <p>{singleData.uifsc_code}</p>
               </div>

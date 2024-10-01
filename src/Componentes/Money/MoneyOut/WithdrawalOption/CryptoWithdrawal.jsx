@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import gif1 from "../../../../assets/photos/bitcoingif.gif";
-import { GetUserDetails } from "../../../../Controllers/User/UserController";
+import {
+  AddCryptoWithdrawalRequest,
+  GetUserDetails,
+} from "../../../../Controllers/User/UserController";
 import { Loading1 } from "../../../Loading1";
 import VerifyPin from "../../../VerifyPin";
 import { ToastContainer, toast } from "react-toastify";
@@ -13,14 +16,51 @@ export default function CryptoWithdrawal() {
   const [loading, setLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [address, setAddress] = useState("");
-  const [amount, setAmount] = useState();
+  const [amount, setAmount] = useState(10);
+  const [processing, setProcessing] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const onclose2 = () => {
     setIsOpen(false);
   };
 
+  const formData = {
+    amount: amount,
+    address: address,
+    price_at_time: user.currency_rate,
+    currency: user.currency,
+  };
+
   const successFunction = async (pin) => {
-    console.log(pin);
+    try {
+      const response = await AddCryptoWithdrawalRequest(formData, pin);
+      if (response.status) {
+        setProcessing(false);
+        setSuccess(true);
+        setTimeout(() => {
+          setSuccess(false);
+        }, 3500);
+        setAddress("");
+        setAmount(10);
+      } else {
+        toast.error("Something Went Wrong !", {
+          position: "bottom-right",
+        });
+        setProcessing(false);
+      }
+    } catch (error) { 
+      if (error?.response.status === 302) {
+        toast.error(`${error.response.data.message}`, {
+          position: "bottom-right",
+        });
+        setProcessing(false);
+      } else {
+        toast.error("Server Error !", {
+          position: "bottom-right",
+        });
+        setProcessing(false);
+      }
+    }
   };
 
   const handle1 = async () => {
@@ -34,12 +74,7 @@ export default function CryptoWithdrawal() {
         position: "bottom-right",
       });
       return;
-    } else if (amount > Number(user.currency_rate)) {
-      toast.error("Insufficient Balance", {
-        position: "bottom-right",
-      });
-      return;
-    }
+    }  
     setIsOpen(true);
   };
 
@@ -110,7 +145,7 @@ export default function CryptoWithdrawal() {
                   for="product-name"
                   className="text-sm font-medium text-gray-900 block mb-2 dark:text-white"
                 >
-                  Amount*
+                  Quantity*
                 </label>
                 <input
                   type="text"
@@ -122,22 +157,17 @@ export default function CryptoWithdrawal() {
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
                 />
+                <p className="text-gray-800 font-medium text-sm">
+                  Rs. {(amount * Number(user.currency_rate)).toFixed(2)} Will Be
+                  duducted{" "}
+                </p>
               </div>
             </div>
             <div className="flex flex-wrap   gap-6 mt-6">
-              <button
-                onClick={handle1}
-                className="relative"
-                disabled={
-                  (user && user.ac_no === null) ||
-                  user.ac_name === null ||
-                  user.bank_name === null ||
-                  user.ifsc_code === null
-                }
-              >
+              <button onClick={handle1} className="relative">
                 <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-black dark:bg-gray-400"></span>
                 <span className="fold-bold relative inline-block h-full w-full rounded border-2 border-black dark:border-gray-500 bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900">
-                  SUBMIT
+                  {processing ? <Loading1 /> : "SUBMIT"}
                 </span>
               </button>
               <button
@@ -162,6 +192,8 @@ export default function CryptoWithdrawal() {
           successFunction={(pin) => successFunction(pin)}
         />
       )}
+      
+      
       <ToastContainer />
     </div>
   );

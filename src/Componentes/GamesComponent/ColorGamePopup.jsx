@@ -60,8 +60,8 @@ const ColorGamePopup = ({ isOpen, onClose, popupData, currentGameData }) => {
 
   if (!isOpen) return null;
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white dark:bg-[#bbbbbb] p-6 rounded-lg   shadow-lg relative">
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black bg-opacity-50     ">
+      <div className="bg-white dark:bg-[#bbbbbb] p-6 rounded-lg   shadow-lg relative  ">
         <h2 className="text-xl font-bold mb-2 text-center">Color Game </h2>
         <p className="text-center    py-1  font-bold bg-[#ffe487] px-12 rounded-lg">
           Selected{" "}
@@ -73,7 +73,7 @@ const ColorGamePopup = ({ isOpen, onClose, popupData, currentGameData }) => {
         </p>
 
         {/* Balance */}
-        <div className="flex justify-between gap-10 color-game-amount mt-6 items-center ">
+        <div className="flex justify-between gap-2 md:gap-10 color-game-amount mt-6 items-center ">
           <p className="font-semibold">Balance</p>
           <div className="flex gap-2">
             {amounts.map((item, index) => (

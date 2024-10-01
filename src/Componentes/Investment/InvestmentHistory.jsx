@@ -54,31 +54,31 @@ export default function InvestmentHistory() {
                 <p className="text-center font-bold text-xl">No Recoard !</p>
               </div>
             ) : (
-              <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+              <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 border-indigo-400 border-4">
                 <thead className="text-xs font-semibold text-black uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
                   <tr>
                     <th scope="col" className="px-4 py-3">
                       S.No.
                     </th>
-                    <th scope="col" className="px-6 py-3">
+                    <th scope="col" className="px-4 py-3">
                       INVESTMENT
                     </th>
-                    <th scope="col" className="px-6 py-3">
+                    <th scope="col" className="hidden md:table-cell px-6 py-3">
                       TYPE
                     </th>
-                    <th scope="col" className="px-6 py-3">
+                    <th scope="col" className="hidden md:table-cell px-6 py-3">
                       CLAIM TIME
                     </th>
                     <th scope="col" className="px-6 py-3">
                       Status
                     </th>
-                    <th scope="col" className="px-6 py-3">
+                    <th scope="col" className="hidden md:table-cell px-6 py-3">
                       DATE START
                     </th>
-                    <th scope="col" className="px-6 py-3">
+                    <th scope="col" className="hidden md:table-cell px-6 py-3">
                       DATE END
                     </th>
-                    <th scope="col" className="px-6 py-3">
+                    <th scope="col" className="px-4 py-3">
                       VIEW
                     </th>
                   </tr>
@@ -98,14 +98,14 @@ export default function InvestmentHistory() {
                       >
                         {index + 1}.
                       </th>
-                      <td className="px-4 py-4">{item.amount}</td>
-                      <td className="px-4 py-4">{item.plan_name}</td>
-                      <td className="px-6 py-4">
+                      <td className="px-4 py-4">₹{item.amount}</td>
+                      <td className="px-4 py-4 hidden md:table-cell">{item.plan_name}</td>
+                      <td className="px-6 py-4 hidden md:table-cell">
                         {item.times} {item.title}
                       </td>
                       <td className="px-6 py-4">{item.status}</td>
-                      <td className="px-6 py-4">{item.date.split("T")[0]}</td>
-                      <td className="px-6 py-4">
+                      <td className="px-6 py-4 hidden md:table-cell">{item.date.split("T")[0]}</td>
+                      <td className="px-6 py-4 hidden md:table-cell">
                         {getEndDate(item.date, Number(item.day_count))}
                       </td>
                       <td className="px-6 py-4">

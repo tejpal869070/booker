@@ -22,10 +22,11 @@ export default function BankWithDrawal() {
   const [ac_no, setAccNo] = useState("");
   const [ifsc_code, setIfsc] = useState("");
   const [bank_name, setBankName] = useState("");
-  const [amount, setAmount] = useState(100); 
+  const [amount, setAmount] = useState(100);
   const [processing, setProcessing] = useState(false);
   const [withdrawaing, setWithdrawaing] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [userHaveBank, setUserHaveBank] = useState(false);
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -33,7 +34,7 @@ export default function BankWithDrawal() {
     setIsOpen(false);
   };
 
-  const successFunction = async (pin) => { 
+  const successFunction = async (pin) => {
     handleWithdrawal(pin);
   };
 
@@ -107,7 +108,7 @@ export default function BankWithDrawal() {
       if (response.status) {
         setSuccess(true);
         setWithdrawaing(false);
-        userDataGet()
+        userDataGet();
         setTimeout(() => {
           setSuccess(false);
         }, 3500);
@@ -138,6 +139,14 @@ export default function BankWithDrawal() {
       setIfsc(response[0].ifsc_code);
       setBankName(response[0].bank_name);
       setLoading(false);
+      if (
+        response[0].ac_name !== null ||
+        response[0].ac_name !== null ||
+        response[0].bank_name !== null ||
+        response[0].ifsc_code !== null
+      ) {
+        setUserHaveBank(true);
+      }
     } else {
       setLoading(false);
       window.alert("Something Went Wrong !");
@@ -294,15 +303,44 @@ export default function BankWithDrawal() {
                       onChange={(e) => setAmount(e.target.value)}
                     />
                   </div>
+
+                  {userHaveBank && editing && (
+                    <div className="col-span-6">
+                      <label
+                        for="product-details"
+                        className="text-sm font-medium text-gray-900 block mb-2 dark:text-white"
+                      >
+                        Reason of Updation *
+                      </label>
+                      <input
+                        type="text"
+                        name="price"
+                        id="price"
+                        placeholder=""
+                        className={`${inputClasses}`}
+                        // value={amount}
+                        // onChange={(e) => setAmount(e.target.value)}
+                      />
+                    </div>
+                  )}
                 </div>
                 {editing ? (
                   <div className="flex flex-wrap justify-between w-full gap-6 mt-6">
-                    <button onClick={editBank} className="relative">
-                      <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-black dark:bg-gray-400"></span>
-                      <span className="fold-bold relative inline-block h-full w-full rounded border-2 border-black dark:border-gray-500 bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900">
-                        {processing ? <Loading1 width={28} /> : "SAVE"}
-                      </span>
-                    </button>
+                    {!userHaveBank ? (
+                      <button onClick={editBank} className="relative">
+                        <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-black dark:bg-gray-400"></span>
+                        <span className="fold-bold relative inline-block h-full w-full rounded border-2 border-black dark:border-gray-500 bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900">
+                          {processing ? <Loading1 width={28} /> : "SAVE"}
+                        </span>
+                      </button>
+                    ) : (
+                      <button className="relative">
+                        <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-black dark:bg-gray-400"></span>
+                        <span className="fold-bold relative inline-block h-full w-full rounded border-2 border-black dark:border-gray-500 bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900">
+                          Send For Update
+                        </span>
+                      </button>
+                    )}
                     <button
                       onClick={() => setEditing(false)}
                       className="relative"
@@ -315,7 +353,7 @@ export default function BankWithDrawal() {
                   </div>
                 ) : (
                   <div className="flex flex-wrap justify-center gap-6 mt-6">
-                    <button 
+                    <button
                       onClick={() => setIsOpen(true)}
                       className="relative"
                       disabled={

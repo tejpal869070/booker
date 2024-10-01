@@ -14,6 +14,7 @@ import { GetUserDetails } from "../Controllers/User/UserController";
 import ThemeToggle from "../Controllers/ThemeToggle";
 import { Loading1 } from "../Componentes/Loading1";
 import CreatePin from "../Componentes/Dashboard/CratePin";
+import Logo from "../assets/photos/logo.png"
 
 export default function Home() {
   const [user, setUser] = React.useState({});
@@ -22,24 +23,32 @@ export default function Home() {
     "flex w-full p-2 pl-0 text-gray-900 rounded-lg group dark:text-black dark:hover:text-white dark:hover:bg-gray-400  hover:animate-fade-right hover:animate-once hover:justify-center hover:animate-duration-[400ms]";
 
   // close side bar on url change
-  const location = useLocation();
+  // const location = useLocation();
 
-  const paramsData = useMemo(() => {
-    const queryParams = new URLSearchParams(location.search);
-    const params = {};
-    for (const [key, value] of queryParams.entries()) {
-      params[key] = value;
-    }
-    return params;
-  }, [location.search]); // Dependency is only location.search
+  // const paramsData = useMemo(() => {
+  //   const queryParams = new URLSearchParams(location.search);
+  //   const params = {};
+  //   for (const [key, value] of queryParams.entries()) {
+  //     params[key] = value;
+  //   }
+  //   return params;
+  // }, [location.search]); // Dependency is only location.search
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   const sidebar = document.getElementById("sidebar-multi-level-sidebar");
+  //   if (sidebar) {
+  //     sidebar.classList.toggle("translate-x-0");
+  //     sidebar.classList.toggle("-translate-x-full");
+  //   }
+  // }, [paramsData]);
+
+  // close side bar---------------------------------------------------------------
+
+  const handleHideSideBar = () => {
     const sidebar = document.getElementById("sidebar-multi-level-sidebar");
-    if (sidebar) {
-      sidebar.classList.toggle("translate-x-0");
-      sidebar.classList.toggle("-translate-x-full");
-    }
-  }, [paramsData]);
+    sidebar.classList.toggle("translate-x-0");
+    sidebar.classList.toggle("-translate-x-full");
+  };
 
   const handleLogout = async () => {
     Cookies.remove("token");
@@ -98,12 +107,12 @@ export default function Home() {
             className="flex items-center space-x-3 rtl:space-x-reverse sm:pl-64"
           >
             <img
-              src="https://flowbite.com/docs/images/logo.svg"
+              src={Logo}
               className="h-8"
               alt="Flowbite Logo"
             />
             <span className="self-center text-2xl font-semibold whitespace-nowrap  text-white">
-              Finance
+              FinCare
             </span>
           </a>
           <div className="flex gap-4 items-center">
@@ -120,7 +129,7 @@ export default function Home() {
                 <FcPortraitMode size={30} />
               </button>
               <div
-                className={`z-50 my-4 mt-10 border-[0.01px] border-gray right-2 shadow-xl text-base list-none bg-white absolute divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600 ${
+                className={`z-50 my-4 mt-10 border-[0.01px] border-gray right-2 top-6 md:top-4 shadow-xl text-base list-none bg-white absolute divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600 ${
                   isOpen ? "" : "hidden"
                 }`}
                 ref={dropdownRef}
@@ -144,12 +153,12 @@ export default function Home() {
                     </a>
                   </li>
                   <li>
-                    <a
-                      href="/"
+                    <Link
+                      to={{pathname:"/home", search:"?change=securityPin"}}
                       className="block px-4 py-2 text-sm text-gray-700  dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                     >
-                      Settings
-                    </a>
+                      Change Security Pin
+                    </Link>
                   </li>
                   <li>
                     <Link
@@ -182,7 +191,7 @@ export default function Home() {
                 onClick={() => {
                   const sidebar = document.getElementById(
                     "sidebar-multi-level-sidebar"
-                  ); 
+                  );
                   sidebar.classList.toggle("translate-x-0");
                   sidebar.classList.toggle("-translate-x-full");
                 }}
@@ -218,6 +227,7 @@ export default function Home() {
             <li className="side-bar-list">
               <Link
                 to={{ pathname: "/home", search: `?dashboard` }}
+                onClick={handleHideSideBar}
                 className="flex items-center p-2 text-gray-900 dark:hover:text-white rounded-lg dark:text-white  dark:hover:bg-gray-100 "
               >
                 <svg
@@ -271,6 +281,7 @@ export default function Home() {
                   <Link
                     to={{ pathname: "/home", search: `?event=inplay` }}
                     className={`${dropdownClassList}`}
+                    onClick={handleHideSideBar}
                   >
                     Inplay
                   </Link>
@@ -279,6 +290,7 @@ export default function Home() {
                   <Link
                     to={{ pathname: "/home", search: `?event=cricket` }}
                     className={`${dropdownClassList}`}
+                    onClick={handleHideSideBar}
                   >
                     Cricket
                   </Link>
@@ -287,6 +299,7 @@ export default function Home() {
                   <Link
                     to={{ pathname: "/home", search: `?event=football` }}
                     className={`${dropdownClassList}`}
+                    onClick={handleHideSideBar}
                   >
                     Football
                   </Link>
@@ -295,6 +308,7 @@ export default function Home() {
                   <Link
                     to={{ pathname: "/home", search: `?event=tennis` }}
                     className={`${dropdownClassList}`}
+                    onClick={handleHideSideBar}
                   >
                     Tennis
                   </Link>
@@ -341,6 +355,7 @@ export default function Home() {
                   <Link
                     to={{ pathname: "/home", search: `?game=color-game` }}
                     className={`${dropdownClassList}`}
+                    onClick={handleHideSideBar}
                   >
                     Color Play
                   </Link>
@@ -349,6 +364,7 @@ export default function Home() {
                   <Link
                     to={{ pathname: "/home", search: `?game=card-2020` }}
                     className={`${dropdownClassList}`}
+                    onClick={handleHideSideBar}
                   >
                     Card 2020
                   </Link>
@@ -397,6 +413,7 @@ export default function Home() {
                       search: `?investment=new-investment`,
                     }}
                     className={`${dropdownClassList}`}
+                    onClick={handleHideSideBar}
                   >
                     New Investment
                   </Link>
@@ -408,6 +425,7 @@ export default function Home() {
                       search: `?investment=investment-history`,
                     }}
                     className={`${dropdownClassList}`}
+                    onClick={handleHideSideBar}
                   >
                     Investment History
                   </Link>
@@ -455,6 +473,7 @@ export default function Home() {
                       search: `?network=downline-member`,
                     }}
                     className={`${dropdownClassList}`}
+                    onClick={handleHideSideBar}
                   >
                     My Downline Member
                   </Link>
@@ -466,6 +485,7 @@ export default function Home() {
                       search: `?network=direct-downline`,
                     }}
                     className={`${dropdownClassList}`}
+                    onClick={handleHideSideBar}
                   >
                     Direct Downline
                   </Link>
@@ -477,6 +497,7 @@ export default function Home() {
                       search: `?network=add-new-member`,
                     }}
                     className={`${dropdownClassList}`}
+                    onClick={handleHideSideBar}
                   >
                     Add New Member
                   </Link>
@@ -485,6 +506,7 @@ export default function Home() {
                   <Link
                     to={{ pathname: "/home", search: `?network=member-tree` }}
                     className={`${dropdownClassList}`}
+                    onClick={handleHideSideBar}
                   >
                     My Member Tree
                   </Link>
@@ -553,6 +575,7 @@ export default function Home() {
                   <li>
                     <Link
                       to={{ pathname: "/home", search: `?money=usdt-deposit` }}
+                      onClick={handleHideSideBar}
                       className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-6 group  dark:text-black dark:hover:bg-gray-300 hover:text-center"
                     >
                       - Money Deposit
@@ -564,6 +587,7 @@ export default function Home() {
                         pathname: "/home",
                         search: `?money=deposit-history`,
                       }}
+                      onClick={handleHideSideBar}
                       className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-6 group  dark:text-black dark:hover:bg-gray-300 hover:text-center"
                     >
                       - Deposit History
@@ -589,6 +613,7 @@ export default function Home() {
                   <li>
                     <Link
                       to={{ pathname: "/home", search: `?money=withdrawal` }}
+                      onClick={handleHideSideBar}
                       className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-6 group  dark:text-black dark:hover:bg-gray-300 hover:text-center"
                     >
                       - Withdrawal
@@ -600,6 +625,7 @@ export default function Home() {
                         pathname: "/home",
                         search: `?money=withdrawal-history`,
                       }}
+                      onClick={handleHideSideBar}
                       className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-6 group  dark:text-black dark:hover:bg-gray-300 hover:text-center"
                     >
                       - Withdrawal History
@@ -647,6 +673,7 @@ export default function Home() {
                   <Link
                     to={{ pathname: "/home", search: `?account=send-money` }}
                     className={`${dropdownClassList}`}
+                    onClick={handleHideSideBar}
                   >
                     Send Money
                   </Link>
@@ -655,6 +682,7 @@ export default function Home() {
                   <Link
                     to={{ pathname: "/home", search: `?account=today-history` }}
                     className={`${dropdownClassList}`}
+                    onClick={handleHideSideBar}
                   >
                     Today History
                   </Link>
@@ -666,6 +694,7 @@ export default function Home() {
                       search: `?account=account-history`,
                     }}
                     className={`${dropdownClassList}`}
+                    onClick={handleHideSideBar}
                   >
                     Account History
                   </Link>
@@ -714,6 +743,7 @@ export default function Home() {
                       search: `?income=matching-income`,
                     }}
                     className={`${dropdownClassList}`}
+                    onClick={handleHideSideBar}
                   >
                     Matching Income
                   </Link>
@@ -725,6 +755,7 @@ export default function Home() {
                       search: `?income=refferer-income`,
                     }}
                     className={`${dropdownClassList}`}
+                    onClick={handleHideSideBar}
                   >
                     Refferer Income
                   </Link>
@@ -733,6 +764,7 @@ export default function Home() {
                   <Link
                     to={{ pathname: "/home", search: `?income=roi-income` }}
                     className={`${dropdownClassList}`}
+                    onClick={handleHideSideBar}
                   >
                     ROI Income
                   </Link>

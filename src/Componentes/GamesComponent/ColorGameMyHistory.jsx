@@ -114,8 +114,8 @@ export default function ColorGameMyHistory({ gameType }) {
                 <td className="px-4 py-2  ">{item.price}</td>
                 <td className="px-4 py-2">{item.type}</td>
                 <td className="px-6 py-2">{item.value}</td>
-                <td className="px-6 py-2 border-l-2 flex justify-between">
-                  <p>{item.open_color}</p> <p>{item.number}</p>
+                <td className="px-6 py-2 border-l-2 flex justify-between items-center">
+                  <p>{item.open_color}</p> <p className="rounded-full p-1 bg-[#ffc989] dark:text-gray-900">{item.number}</p>
                 </td>
                 <td className="px-6 py-2 border-l-2">
                   {item.type === "Color"

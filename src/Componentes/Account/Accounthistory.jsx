@@ -30,7 +30,7 @@ export default function AccountHistory() {
     try {
       const response = await GetAccountAllStatement();
       if (response.status) {
-        setData(response.data);
+        setData(response.data.reverse());
         setLoading(false);
       } else {
         window.alert("Something Went Wrong.");
@@ -124,7 +124,9 @@ export default function AccountHistory() {
                   <tbody key={index}>
                     <tr
                       className={` text-black font-semibold dark:text-gray-200  border-b dark:border-gray-700 ${
-                        index % 2 === 0 ? "bg-white dark:bg-gray-900" : "bg-gray-200 dark:bg-gray-800"
+                        index % 2 === 0
+                          ? "bg-white dark:bg-gray-900"
+                          : "bg-gray-200 dark:bg-gray-800"
                       }`}
                     >
                       <th

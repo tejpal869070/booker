@@ -30,14 +30,14 @@ export default function NewInvestment() {
     setVerifyPinPop(false);
   };
 
-  const successFunction = async (pin) => { 
-    formData.pin = pin 
+  const successFunction = async (pin) => {
+    formData.pin = pin;
     handleForm();
   };
 
   const formData = {
     amount: amount,
-    investmentPlan: investmentPlan, 
+    investmentPlan: investmentPlan,
   };
 
   const userDataGet = async () => {
@@ -64,14 +64,18 @@ export default function NewInvestment() {
       setLoading(false);
       return;
     } else if (amount > user && user.wallet_balance) {
-      toast.error("Insufficient balance");
+      toast.error("Insufficient balance", {
+        autoClose: 2000,
+      });
       setLoading(false);
       return;
     } else if (amount < 100) {
-      toast.error("Minimum Amount is Rs.100");
+      toast.error("Minimum Amount is Rs.100", {
+        autoClose: 2000,
+      });
       setLoading(false);
       return;
-    } 
+    }
     try {
       const response = await MakeNewInvestment(formData);
       if (response.status) {
@@ -90,10 +94,14 @@ export default function NewInvestment() {
       }
     } catch (error) {
       if (error.response.status === 302) {
-        toast.error(error.response.data.message);
+        toast.error(error.response.data.message, {
+          autoClose: 2000,
+        });
         setLoading(false);
       } else {
-        toast.error("Something Went Wrong. Server Error !");
+        toast.error("Something Went Wrong. Server Error !", {
+          autoClose: 2000,
+        });
         setLoading(false);
       }
     }
@@ -103,7 +111,6 @@ export default function NewInvestment() {
     GetAllPlans();
   }, []);
 
-  
   useEffect(() => {
     userDataGet();
   }, []);
@@ -141,7 +148,7 @@ export default function NewInvestment() {
                   <span className="ml-2">View Plans 🏀</span>
                 </button>
               </div>
-              <div >
+              <div>
                 <div class="flex -mx-3">
                   <div class="w-full px-3 mb-5">
                     <label for="" class="text-xs font-semibold px-1 text-black">

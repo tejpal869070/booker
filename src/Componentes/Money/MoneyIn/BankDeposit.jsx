@@ -240,14 +240,14 @@ export default function BankDeposit() {
                             ))}
                         </select>
                       </div>
-                      <div className="flex align-center items-center mt-4 col-span-6 sm:col-span-6">
+                      <div className="flex align-center w-full items-center mt-4 col-span-12 sm:col-span-8">
                         {image !== null ? (
-                          <p className="w-full shadow-sm bg-gray-200 border-2 pr-[22px] border-gray-700 dark:bg-gray-400 text-gray-900 font-medium  rounded-xl focus:ring-cyan-600 focus:border-cyan-600 block  px-2.5 py-2.5">
-                            {image.name}
-                          </p>
+                          <p className="w-full overflow-hidden shadow-sm bg-gray-200 border-2 px-2.5 py-2.5 pr-[22px] border-gray-700 dark:bg-gray-400 text-gray-900 font-medium  rounded-xl focus:ring-cyan-600 focus:border-cyan-600 block  ">
+                            <p className="w-[95%] overflow-hidden">{image.name}</p>
+                          </p> 
                         ) : (
                           <input
-                            className="shadow-sm  bg-gray-50 border pr-[22px] border-gray-300 dark:bg-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block  px-2.5"
+                            className="shadow-sm w-full  bg-gray-50 border pr-[22px] border-gray-300 dark:bg-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block  px-2.5"
                             name="product-name"
                             id="product-name"
                             type="file"
@@ -259,7 +259,7 @@ export default function BankDeposit() {
                         {image !== null ? (
                           <MdCancel
                             size={20}
-                            className="cursor-pointer ml-[-32px]"
+                            className="cursor-pointer  ml-[-32px]"
                             onClick={(e) => setImage(null)}
                           />
                         ) : (

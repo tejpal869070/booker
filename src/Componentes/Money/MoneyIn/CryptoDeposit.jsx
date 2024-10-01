@@ -6,7 +6,7 @@ import { API } from "../../../Controllers/Api";
 import { BsQrCodeScan } from "react-icons/bs";
 import gif1 from "../../../assets/photos/cryptodepositgif.gif";
 import { MdCancel } from "react-icons/md";
-import { GrSync } from "react-icons/gr";
+import successImg from "../../../assets/photos/success1-1--unscreen.gif";
 import { Loading1 } from "../../Loading1";
 import { AddCryptoDepositRequest } from "../../../Controllers/User/UserController";
 
@@ -19,6 +19,7 @@ export default function CryptoDeposit({ data }) {
   const [inrPrice, setInrPrice] = useState();
   const [isQrShow, setQrShow] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const [transection_id, setTransectionId] = useState("");
   const [amount, setAmount] = useState(10);
@@ -30,34 +31,56 @@ export default function CryptoDeposit({ data }) {
     image: image,
     deposit_id: data.address,
     price_at_that_time: data.price,
+    currency: data.currency,
   };
 
   const handleForm = async (e) => {
     e.preventDefault();
     setLoading(true);
     if (transection_id < 10) {
-      toast.error("Invalid Transaction ID");
+      toast.error("Invalid Transaction ID", {
+        position: "top-center",
+      });
       setLoading(false);
       return;
     } else if (amount < 10) {
-      toast.error("Minimum Amount is $10");
+      toast.error("Minimum Amount is $10", {
+        position: "top-center",
+      });
       setLoading(false);
       return;
     } else if (image === null) {
-      toast.error("Please upload Payment file/image.");
+      toast.error("Please upload Payment file/image.", {
+        position: "top-center",
+      });
       setLoading(false);
       return;
     }
     try {
-      const response = await AddCryptoDepositRequest(formData);
-      console.log(response);
-      setLoading(false);
-    } catch (error) {
+      const response = await AddCryptoDepositRequest(formData); 
+      if (response.status) {
+        setLoading(false);
+        setSuccess(true);
+        setTimeout(() => {
+          setSuccess(false);
+        }, 3500);
+        setImage(null);
+        setTransectionId("");
+        setAmount(10);
+      } else {
+        toast.error("Something Went Wrong !", {
+          position: "top-center",
+        });
+        setLoading(false);
+      }
+    } catch (error) { 
       if (error?.response.status === 302) {
         toast.error(`${error.response.data.message}`);
         setLoading(false);
       } else {
-        toast.error("Server Error !");
+        toast.error("Server Error !", {
+          position: "top-center",
+        });
         setLoading(false);
       }
     }
@@ -75,7 +98,7 @@ export default function CryptoDeposit({ data }) {
 
   const handleCopy = () => {
     toast.success("Address Copied !", {
-      position: "bottom-right",
+      position: "top-center",
     });
   };
 
@@ -100,6 +123,17 @@ export default function CryptoDeposit({ data }) {
     );
   }
 
+  if (success) {
+    return (
+      <div className="fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center bg-[#000000d1] bg-opacity-50 z-[9999]">
+        <img alt="success" src={successImg} />
+        <p className="text-2xl text-white font-semibold">
+          Deposit Request Sent Successfully !.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div>
       <div className="w-full    mt-6   border-b-4 rounded-lg shadow-lg   flex flex-col">
@@ -117,11 +151,15 @@ export default function CryptoDeposit({ data }) {
                   {data?.currency} ADDRESS
                 </h1>
                 <div className="flex gap-2 items-center">
-                  <p className=" shadow-xl flex gap-2 items-center focus:animate-none   inline-flex text-md font-medium bg-indigo-900 mt-1 px-4 py-2 rounded-lg tracking-wide text-white">
-                    {data && data.address}{" "}
-                    <CopyToClipboard text={data.address} onCopy={handleCopy}>
-                      <FaCopy className="cursor-pointer  " />
-                    </CopyToClipboard>
+                  <p className="w-[90%] overflow-hidden shadow-xl flex justify-between items-center focus:animate-none   inline-flex text-md font-medium bg-indigo-900 mt-1 px-4   py-2 rounded-lg tracking-wide text-white">
+                    <p className="w-[90%] overflow-hidden">
+                      {data && data.address}{" "}
+                    </p>
+                    <div className="">
+                      <CopyToClipboard text={data.address} onCopy={handleCopy}>
+                        <FaCopy className="cursor-pointer  " />
+                      </CopyToClipboard>
+                    </div>
                   </p>
                   <BsQrCodeScan
                     size={28}
@@ -175,7 +213,7 @@ export default function CryptoDeposit({ data }) {
                   </div>
                   <div className="flex align-center items-center mt-4 col-span-7 sm:col-span-7">
                     {image !== null ? (
-                      <p className="w-full shadow-sm bg-gray-200 border-2 pr-[22px] border-gray-700 dark:bg-gray-400 text-gray-900 font-medium  rounded-xl focus:ring-cyan-600 focus:border-cyan-600 block  px-2.5 py-2.5">
+                      <p className="w-full overflow-hidden shadow-sm bg-gray-200 border-2 pr-[22px] border-gray-700 dark:bg-gray-400 text-gray-900 font-medium  rounded-xl focus:ring-cyan-600 focus:border-cyan-600 block  px-2.5 py-2.5">
                         {image.name}
                       </p>
                     ) : (
@@ -214,7 +252,7 @@ export default function CryptoDeposit({ data }) {
                   </button>
                 </div>
               </form>
-              <div className="bg-[#3defff54] flex gap-1 pb-6 shadow-lg p-4 mt-6 rounded-lg">
+              {/* <div className="bg-[#3defff54] flex gap-1 pb-6 shadow-lg p-4 mt-6 rounded-lg">
                 <div className=" w-full relative">
                   <input
                     className=" text-black rounded-lg text-sm font-medium p-2 py-1 border-2 border-gray-4000 "
@@ -242,7 +280,7 @@ export default function CryptoDeposit({ data }) {
                     {data.currency}
                   </p>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
