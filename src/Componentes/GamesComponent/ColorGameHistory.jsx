@@ -31,7 +31,7 @@ export default function ColorGameHistory({ gameType, refreshHistory }) {
 
   useEffect(() => {
     getGameHistory(gameType);
-  }, [gameType,refreshHistory]);
+  }, [gameType, refreshHistory]);
 
   return (
     <div>
@@ -43,12 +43,15 @@ export default function ColorGameHistory({ gameType, refreshHistory }) {
               <div className="relative flex justify-center w-16 h-16">
                 <div
                   className="w-10 h-10 relative  text-white rounded-full flex items-center justify-center font-semibold text-lg"
-                  style={{ backgroundColor: item.color_code }}
+                  style={{ backgroundColor: item.color_code.split(",")[0] }}
                 >
                   <p className="z-[999]">{item.number}</p>
                 </div>
                 {item.number === "5" || item.number === "0" ? (
-                  <div className="absolute w-5 h-10 rounded-r-full right-3  bg-[#5e1287]"></div>
+                  <div
+                    className="absolute w-5 h-10 rounded-r-full right-3   "
+                    style={{ backgroundColor: item.color_code.split(",")[1] }}
+                  ></div>
                 ) : (
                   ""
                 )}

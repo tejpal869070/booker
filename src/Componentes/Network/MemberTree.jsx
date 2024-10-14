@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Tree, TreeNode } from "react-organizational-chart";
-import ball from "../../assets/photos/ball.png";
+import ball from "../../assets/photos/ball2.png";
+import { GetTree } from "../../Controllers/User/UserController";
+import { toast } from "react-toastify";
 
 const familyData = {
   name: "Root",
   children: [
     {
-      name: "Child ",
+      name: "LEFT ",
       children: [
         {
           name: "Grandchild ",
@@ -19,7 +21,7 @@ const familyData = {
       ],
     },
     {
-      name: "Child",
+      name: "RIGHT",
       children: [
         {
           name: "Grandchild",
@@ -38,7 +40,7 @@ const styles = {
   node: {
     padding: "2px",
     borderRadius: "200px",
-    display: "inline-block", 
+    display: "inline-block",
     position: "relative",
   },
   text: {
@@ -69,6 +71,23 @@ const renderTreeNode = (node) => (
 );
 
 export default function MemberTree() {
+  const UserTree = async () => {
+    try {
+      const response = await GetTree();
+      if (response.status) {
+        console.log(response);
+      } else {
+        toast.error("Something Went Wrong. Please Refresh.");
+      }
+    } catch (error) {
+      toast.error("Something Went Wrong. Please Refresh.");
+    }
+  };
+
+  useEffect(() => {
+    UserTree();
+  }, []);
+
   return (
     <div>
       <div className="tree-member-first-box flex flex-wrap ml-4 gap-16 border-2 border-black  dark:border-gray-400 rounded-lg  mb-6 p-2">
@@ -96,8 +115,11 @@ export default function MemberTree() {
         lineColor={"green"}
         lineBorderRadius={"10px"}
         label={
-          <div style={styles.node} className="mb-6 border-black  dark:border-white  border-dotted  border-2">
-            <img alt="ball" src={ball} className="w-10 h-10" />
+          <div
+            style={styles.node}
+            className="mb-6 border-black  dark:border-white  border-dotted  border-2"
+          >
+            <img alt="ball" src={ball} className="w-10 h-10" loading="lazy" />
             <div style={styles.text} className="dark:text-gray-200">
               {familyData.name}
             </div>

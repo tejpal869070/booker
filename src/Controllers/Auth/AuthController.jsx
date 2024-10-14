@@ -184,3 +184,28 @@ export const PinVerification = async (pin) => {
     throw error;
   }
 };
+
+export const ChangeSecurityPin = async (formData) => {
+  try {
+    const dataToSent = {
+      pin: formData.pin,
+      email: formData.email,
+      token: formData.token,
+    };
+
+    const axiosConfig = {
+      headers: {
+        Authorization: `Bearer ${bearerToken}`,
+      },
+    };
+
+    const response = await axios.post(
+      `${API.url}user/change-pin`,
+      dataToSent,
+      axiosConfig
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

@@ -137,14 +137,14 @@ export default function CryptoDeposit({ data }) {
   return (
     <div>
       <div className="w-full    mt-6   border-b-4 rounded-lg shadow-lg   flex flex-col">
-        <div class="bg-[#e1e6ff] dark:bg-[#868ba3fc] text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden">
-          <div class="md:flex flex-row-reverse w-full">
-            <div class="hidden md:block w-1/2 bg-indigo-200  p-2">
+        <div className="bg-[#e1e6ff] dark:bg-[#868ba3fc] text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden">
+          <div className="md:flex flex-row-reverse w-full">
+            <div className="hidden md:block w-1/2 bg-indigo-200  p-2">
               <img alt="animation" className="w-full h-full " src={gif1} />
             </div>
-            <div class="w-full md:w-1/2 py-10 px-5 md:px-10">
-              <div class="  mb-6">
-                <h1 class="font-bold text-3xl text-gray-900">CRYPTO DEPOSIT</h1>
+            <div className="w-full md:w-1/2 py-10 px-5 md:px-10">
+              <div className="  mb-6">
+                <h1 className="font-bold text-3xl text-gray-900">CRYPTO DEPOSIT</h1>
               </div>
               <div className="   ">
                 <h1 className=" font-semibold text-lg text-black dark:text-gray-200">

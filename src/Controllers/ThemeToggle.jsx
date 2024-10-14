@@ -39,7 +39,7 @@ const ThemeToggle = ({ onNav }) => {
           </p>
         ) : (
           <p className="flex items-center gap-4">
-            <GiMoon size={26} color="black" />
+            <GiMoon size={26} color="white" />
           </p>
         )}
       </button>

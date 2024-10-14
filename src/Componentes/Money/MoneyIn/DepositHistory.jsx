@@ -160,6 +160,11 @@ export default function DepositHistory() {
                               <p>Date: {item.date.split("T")[0]}</p>
                               <p>Transfered To: {item.upi_id}</p>
                               <p>Status: {item.status}</p>
+                              {item.status === "Cancelled" ? (
+                                <p>Cancel Reason : {item.reason} </p>
+                              ) : (
+                                ""
+                              )}
                             </div>
                           </td>
                         ) : item.type === "Bank" ? (
@@ -176,6 +181,11 @@ export default function DepositHistory() {
                                 <p>IFSC: {item.ifsc_code}</p>
                               </div>
                               <p>Status: {item.status}</p>
+                              {item.status === "Cancelled" ? (
+                                <p>Cancel Reason : {item.reason} </p>
+                              ) : (
+                                ""
+                              )}
                             </div>
                           </td>
                         ) : (
@@ -193,6 +203,11 @@ export default function DepositHistory() {
                               <p>Transfered To: {item.cypto}</p>
 
                               <p>Status: {item.status}</p>
+                              {item.status === "Cancelled" ? (
+                                <p>Cancel Reason : {item.reason} </p>
+                              ) : (
+                                ""
+                              )}
                             </div>
                           </td>
                         )}

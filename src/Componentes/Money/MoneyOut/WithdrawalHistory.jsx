@@ -145,7 +145,10 @@ export default function WithdrawalHistory() {
                         >
                           {index + 1}.
                         </th>
-                        <td className="px-4 py-4">₹{item.amount}</td>
+                        <td className="px-4 py-4">
+                          {item.currency === null ? "₹ " : ""}
+                          {item.amount} {item.currency}
+                        </td>
                         <td className="px-6 py-4">{item.status}</td>
                         <td className="px-6 py-4 hidden md:table-cell">
                           {item.date.split("T")[0]}
@@ -189,6 +192,16 @@ export default function WithdrawalHistory() {
                 <p>Status :</p>
                 <p>{singleData.status}</p>
               </div>
+
+              {singleData.status === "Cancelled" ? (
+                <div className={`${classes1}`}>
+                  <p>Cancel Reson :</p>
+                  <p>{singleData.reason}</p>
+                </div>
+              ) : (
+                ""
+              )}
+
               {singleData.currency !== null && (
                 <div className={`${classes1}`}>
                   <p>To :</p>

@@ -29,6 +29,9 @@ export const GetUserDetails = async () => {
       return null;
     }
   } catch (error) {
+    Cookies.remove("token");
+    Cookies.remove("mobile");
+    localStorage.removeItem("userDetails");
     return null;
   }
 };
@@ -227,6 +230,7 @@ export const UpdateUserDetails = async (formData) => {
     ifsc_code: formData.ifsc_code,
     ac_no: formData.ac_no,
     ac_name: formData.ac_name,
+    ac_type: formData.ac_type,
   };
 
   const axiosConfig = {
@@ -346,3 +350,130 @@ export const GetAccountAllStatement = async () => {
     throw error;
   }
 };
+
+export const SendRequestForChangeAccount = async (formData) => {
+  const postData = {
+    mobile: mobile,
+    bank_name: formData.bank_name,
+    ifsc_code: formData.ifsc_code,
+    ac_name: formData.ac_name,
+    ac_no: formData.ac_no,
+    ac_type: formData.ac_type,
+    reason: formData.reason,
+  };
+
+  const axiosConfig = {
+    headers: {
+      Authorization: `Bearer ${bearerToken}`,
+    },
+  };
+  try {
+    const response = await axios.post(
+      `${API.url}user/update-bankdetails`,
+      postData,
+      axiosConfig
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const AddNewBelowMember = async (formData) => {
+  const postData = {
+    name: formData.name,
+    mobile: formData.mobile,
+    email: formData.email,
+    position: formData.position,
+    password: formData.password,
+    reffer_by: formData.reffer_by,
+  };
+
+  const axiosConfig = {
+    headers: {
+      Authorization: `Bearer ${bearerToken}`,
+    },
+  };
+  try {
+    const response = await axios.post(
+      `${API.url}user/add-member`,
+      postData,
+      axiosConfig
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const GetTree = async (formData) => {
+  const postData = {
+    mobile: mobile,
+  };
+
+  const axiosConfig = {
+    headers: {
+      Authorization: `Bearer ${bearerToken}`,
+    },
+  };
+  try {
+    const response = await axios.post(
+      `${API.url}user/get-tree`,
+      postData,
+      axiosConfig
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+
+
+export const GetDirectDownline = async (formData) => {
+  const postData = {
+    mobile: mobile,
+  };
+
+  const axiosConfig = {
+    headers: {
+      Authorization: `Bearer ${bearerToken}`,
+    },
+  };
+  try {
+    const response = await axios.post(
+      `${API.url}user/get-direct-downline`,
+      postData,
+      axiosConfig
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+
+
+
+export const GetMyDownline = async (formData) => {
+  const postData = {
+    mobile: mobile,
+  };
+
+  const axiosConfig = {
+    headers: {
+      Authorization: `Bearer ${bearerToken}`,
+    },
+  };
+  try {
+    const response = await axios.post(
+      `${API.url}user/get-my-downline`,
+      postData,
+      axiosConfig
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+

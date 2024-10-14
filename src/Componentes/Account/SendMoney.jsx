@@ -6,7 +6,6 @@ import {
 } from "../../Controllers/Auth/AuthController";
 import { Loading1 } from "../Loading1";
 import { ToastContainer, toast } from "react-toastify";
-import swal from "sweetalert";
 import gif1 from "../../assets/photos/sendmoneygif.gif";
 import VerifyPin from "../VerifyPin";
 import successImg from "../../assets/photos/success1-1--unscreen.gif";
@@ -141,14 +140,18 @@ export default function SendMoney() {
         <p className="lg:pl-10 font-bold text-xl mb-6 dark:text-white">
           Account {">"}Send Money
         </p>
-        <div class="bg-[#e1e6ff] dark:bg-[#868ba3fc] text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden">
-          <div class="md:flex flex-row-reverse w-full">
-            <div class="hidden md:block w-1/2 bg-indigo-200  p-2">
-              <img alt="animation" className="w-full h-full " src={gif1} />
+        <div className="bg-[#e1e6ff] dark:bg-[#868ba3fc] text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden">
+          <div className="md:flex flex-row-reverse w-full">
+            <div className="w-full md:w-1/2 bg-indigo-200  p-2">
+              <img
+                alt="animation"
+                className="w-full rounded-t-xl md:rounded-xl h-full "
+                src={gif1}
+              />
             </div>
-            <div class="w-full md:w-1/2 py-10 px-5 md:px-10">
-              <div class="  mb-6">
-                <h1 class="font-bold text-3xl text-gray-900">
+            <div className="w-full md:w-1/2 py-10 px-5 md:px-10">
+              <div className="  mb-6">
+                <h1 className="font-bold text-3xl text-gray-900">
                   WALLET MONEY TRANSFER
                 </h1>
                 <p className=" mt-2 font-medium text-lg text-[green] mb-4">
@@ -167,7 +170,7 @@ export default function SendMoney() {
                     </label>
                     <div className="flex gap-2">
                       <input
-                        type="number"
+                        type="tel"
                         name="product-name"
                         id="product-name"
                         disabled={userVerified}

@@ -126,15 +126,15 @@ export default function NewInvestment() {
 
   return (
     <div>
-      <div class="   flex items-center justify-center  ">
-        <div class="bg-[#e1e6ff] text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden">
-          <div class="md:flex flex-row-reverse w-full">
-            <div class="hidden md:block w-1/2 bg-indigo-500 py-10 px-10">
+      <div className="   flex items-center justify-center  ">
+        <div className="bg-[#e1e6ff] text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden">
+          <div className="md:flex flex-row-reverse w-full">
+            <div className=" w-full md:w-1/2 bg-indigo-500 py-10 px-10">
               <img alt="animation" className="w-full h-full " src={gif1} />
             </div>
-            <div class="w-full md:w-1/2 py-10 px-5 md:px-10">
-              <div class="text-center mb-6">
-                <h1 class="font-bold text-3xl text-gray-900">NEW INVESTMENT</h1>
+            <div className="w-full md:w-1/2 py-10 px-5 md:px-10">
+              <div className="text-center mb-6">
+                <h1 className="font-bold text-3xl text-gray-900">NEW INVESTMENT</h1>
                 <p>Let Your Money Work for You.</p>
               </div>
               <p className="  font-medium text-lg text-[green] mb-4">
@@ -149,19 +149,19 @@ export default function NewInvestment() {
                 </button>
               </div>
               <div>
-                <div class="flex -mx-3">
-                  <div class="w-full px-3 mb-5">
-                    <label for="" class="text-xs font-semibold px-1 text-black">
+                <div className="flex -mx-3">
+                  <div className="w-full px-3 mb-5">
+                    <label for="" className="text-xs font-semibold px-1 text-black">
                       Choose Plans
                     </label>
-                    <div class="flex">
-                      <div class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
-                        <i class="mdi mdi-email-outline text-gray-400 text-lg"></i>
+                    <div className="flex">
+                      <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
+                        <i className="mdi mdi-email-outline text-gray-400 text-lg"></i>
                       </div>
                       <select
                         onChange={(e) => setInvestmentPlan(e.target.value)}
                         defaultChecked={investmentPlan}
-                        class="w-full -ml-10  pr-3 py-2 text-black font-medium rounded-lg border-2 border-gray-200 outline-none focus:border-none"
+                        className="w-full -ml-10  pr-3 py-2 text-black font-medium rounded-lg border-2 border-gray-200 outline-none focus:border-none"
                       >
                         {PlansData &&
                           PlansData?.map((item, index) => (
@@ -177,20 +177,20 @@ export default function NewInvestment() {
                     </div>
                   </div>
                 </div>
-                <div class="flex -mx-3">
-                  <div class="w-full px-3 mb-8">
-                    <label for="" class="text-xs font-semibold px-1 text-black">
+                <div className="flex -mx-3">
+                  <div className="w-full px-3 mb-8">
+                    <label for="" className="text-xs font-semibold px-1 text-black">
                       Amount
                     </label>
-                    <div class="flex">
-                      <div class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
-                        <i class="mdi mdi-lock-outline text-gray-400 text-lg"></i>
+                    <div className="flex">
+                      <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
+                        <i className="mdi mdi-lock-outline text-gray-400 text-lg"></i>
                       </div>
                       <input
                         type="number"
                         value={amount}
                         onChange={(e) => setAmount(e.target.value)}
-                        class="w-full -ml-10  pr-3 py-2 rounded-lg text-black font-medium border-2 border-gray-200 outline-none focus:border-indigo-500"
+                        className="w-full -ml-10  pr-3 py-2 rounded-lg text-black font-medium border-2 border-gray-200 outline-none focus:border-indigo-500"
                       />
                     </div>
                   </div>
@@ -211,6 +211,8 @@ export default function NewInvestment() {
           </div>
         </div>
       </div>
+
+      
       {isOpen && <ViewPlans onClose={onClose} />}
       {verifyPinPopup && (
         <VerifyPin

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   AddWithdrawalRequest,
   GetUserDetails,
+  SendRequestForChangeAccount,
   UpdateUserDetails,
 } from "../../../../Controllers/User/UserController";
 import { Loading1 } from "../../../Loading1";
@@ -22,11 +23,15 @@ export default function BankWithDrawal() {
   const [ac_no, setAccNo] = useState("");
   const [ifsc_code, setIfsc] = useState("");
   const [bank_name, setBankName] = useState("");
+  const [ac_type, setAccType] = useState("");
+  const [reason, setReason] = useState("");
   const [amount, setAmount] = useState(100);
   const [processing, setProcessing] = useState(false);
   const [withdrawaing, setWithdrawaing] = useState(false);
   const [success, setSuccess] = useState(false);
   const [userHaveBank, setUserHaveBank] = useState(false);
+
+  const [accountChanging, setAccountChanging] = useState(false);
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -43,54 +48,77 @@ export default function BankWithDrawal() {
     ac_no: ac_no,
     ifsc_code: ifsc_code,
     bank_name: bank_name,
+    ac_type: ac_type,
+    reason: reason,
   };
 
-  const editBank = async () => {
-    setProcessing(true);
-    if (ac_name === null || ac_name.length < 4) {
+  // if user want to update bank account second time
+  const changeBankAccount = async () => {
+    console.log(formData);
+    setAccountChanging(true);
+    if (ac_name === null || ac_name === undefined || ac_name.length < 4) {
       toast.error("Invalid Beneficary Name", {
         position: "bottom-right",
       });
-      setProcessing(false);
+      setAccountChanging(false);
       return;
-    } else if (ac_no === null || ac_no.length < 10) {
+    } else if (ac_no === null || ac_no === undefined || ac_no.length < 10) {
       toast.error("Invalid Account Number", {
         position: "bottom-right",
       });
-      setProcessing(false);
+      setAccountChanging(false);
       return;
-    } else if (ifsc_code === null || ifsc_code.length !== 11) {
+    } else if (
+      ifsc_code === null ||
+      ifsc_code === undefined ||
+      ifsc_code.length !== 11
+    ) {
       toast.error("Invalid IFSC Code", {
         position: "bottom-right",
       });
-      setProcessing(false);
+      setAccountChanging(false);
       return;
-    } else if (bank_name === null || bank_name.length < 3) {
+    } else if (
+      ac_type === null ||
+      ac_type === undefined ||
+      ac_type.length < 4
+    ) {
+      toast.error("Invalid Account Type", {
+        position: "bottom-right",
+      });
+      setAccountChanging(false);
+      return;
+    } else if (
+      bank_name === null ||
+      bank_name === undefined ||
+      bank_name.length < 3
+    ) {
       toast.error("Invalid Bank Name", {
         position: "bottom-right",
       });
-      setProcessing(false);
+      setAccountChanging(false);
       return;
     }
     try {
-      const response = await UpdateUserDetails(formData);
+      const response = await SendRequestForChangeAccount(formData);
       if (response.status) {
-        toast.success("Bank Details Updated Successfully", {
+        toast.success("Bank Details Sent For Updation.", {
           position: "bottom-right",
         });
+        swal("Success", "Bank Details Sent For Updation.", "success");
         userDataGet();
-        setProcessing(false);
+        setAccountChanging(false);
       } else {
         toast.error("Failed to Update Bank Details", {
           position: "bottom-right",
         });
-        setProcessing(false);
+        setAccountChanging(false);
       }
     } catch (error) {
-      toast.error("Server Error or Try to Re-Login", {
+      toast.error("Server Error Try Again !!!", {
         position: "bottom-right",
       });
-      setProcessing(false);
+      setAccountChanging(false);
     }
   };
 
@@ -137,6 +165,7 @@ export default function BankWithDrawal() {
       setAccName(response[0].ac_name);
       setAccNo(response[0].ac_no);
       setIfsc(response[0].ifsc_code);
+      setAccType(response[0].ac_type);
       setBankName(response[0].bank_name);
       setLoading(false);
       if (
@@ -179,19 +208,29 @@ export default function BankWithDrawal() {
 
   return (
     <div className="z-[9999] relative">
-      <div class="   flex items-center justify-center  ">
-        <div class="bg-[#e1e6ff] dark:bg-[#868ba3fc] text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden">
-          <div class="md:flex flex-row-reverse w-full">
-            <div class="hidden md:block w-1/2 bg-indigo-200  p-2">
-              <img alt="animation" className="w-full h-full " src={gif1} />
+      <div className="   flex items-center justify-center  ">
+        <div className="bg-[#e1e6ff] dark:bg-[#868ba3fc] text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden">
+          <div className="md:flex flex-row-reverse w-full">
+            <div className="w-full   md:w-1/2 bg-indigo-200  p-2">
+              <img alt="animation" className="w-full  rounded-t-xl h-full " src={gif1} />
             </div>
-            <div class="w-full md:w-1/2 py-10 px-5 md:px-10">
-              <div class="  mb-6">
-                <h1 class="font-bold text-3xl text-gray-900">
+            <div className="w-full md:w-1/2 py-10 px-5 md:px-10">
+              <div className="  mb-2">
+                <h1 className="font-bold text-3xl text-gray-900">
                   BANK WITHDRAWAL
                 </h1>
               </div>
-              <p className="  font-medium text-lg text-[green] mb-4">
+              <p className="mb-2 text-gray-800 font-medium animate-pulse">
+                {user && user.bank_status === "N"
+                  ? "You Don't Have Any Linked Bank Account."
+                  : user.bank_status === "P"
+                  ? "Your bank details are being verified."
+                  : user.bank_status === "Y"
+                  ? "Your Bank Account Successfully Verified."
+                  : user.bank_status === "F" ? `Bank Verification Failed. Reason: ${user.reason}` : ""}
+              </p>
+
+              <p className="  font-medium text-lg text-[green] mb-6">
                 Account Balance: ₹{user && user.wallet_balance}
               </p>
 
@@ -200,7 +239,7 @@ export default function BankWithDrawal() {
                   <div className="col-span-6 sm:col-span-3">
                     <label
                       for="product-name"
-                      className="text-sm font-medium text-gray-900 block mb-2 dark:text-white"
+                      className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-800"
                     >
                       Beneficary Name *
                     </label>
@@ -220,7 +259,7 @@ export default function BankWithDrawal() {
                   <div className="col-span-6 sm:col-span-3">
                     <label
                       for="category"
-                      className="text-sm font-medium text-gray-900 block mb-2 dark:text-white"
+                      className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-800"
                     >
                       Account Number *
                     </label>
@@ -241,7 +280,7 @@ export default function BankWithDrawal() {
                   <div className="col-span-6 sm:col-span-3">
                     <label
                       for="brand"
-                      className="text-sm font-medium text-gray-900 block mb-2 dark:text-white"
+                      className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-800"
                     >
                       Bank Name *
                     </label>
@@ -263,7 +302,7 @@ export default function BankWithDrawal() {
                   <div className="col-span-6 sm:col-span-3">
                     <label
                       for="product-details"
-                      className="text-sm font-medium text-gray-900 block mb-2 dark:text-white"
+                      className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-800"
                     >
                       IFSC Code *
                     </label>
@@ -289,7 +328,7 @@ export default function BankWithDrawal() {
                   >
                     <label
                       for="product-details"
-                      className="text-sm font-medium text-gray-900 block mb-2 dark:text-white"
+                      className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-800"
                     >
                       Withdrawal Amount *
                     </label>
@@ -304,45 +343,58 @@ export default function BankWithDrawal() {
                     />
                   </div>
 
-                  {userHaveBank && editing && (
-                    <div className="col-span-6">
-                      <label
-                        for="product-details"
-                        className="text-sm font-medium text-gray-900 block mb-2 dark:text-white"
-                      >
-                        Reason of Updation *
-                      </label>
-                      <input
-                        type="text"
-                        name="price"
-                        id="price"
-                        placeholder=""
-                        className={`${inputClasses}`}
-                        // value={amount}
-                        // onChange={(e) => setAmount(e.target.value)}
-                      />
-                    </div>
-                  )}
+                  <div className="col-span-3">
+                    <label
+                      for="product-details"
+                      className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-800"
+                    >
+                      Account Type *
+                    </label>
+                    <input
+                      type="text"
+                      name="price"
+                      id="price"
+                      placeholder="Saving/Current"
+                      className={`${inputClasses}`}
+                      value={ac_type}
+                      disabled={!editing}
+                      onChange={(e) => setAccType(e.target.value)}
+                    />
+                  </div>
+                  <div
+                    className={`col-span-6 sm:col-span-3 ${  !editing || user.bank_status === "N" ? "hidden" : "" }`}
+                  >
+                    <label
+                      for="product-details"
+                      className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-800"
+                    >
+                      Reason for Updation
+                    </label>
+                    <input
+                      type="text"
+                      name="price"
+                      id="price"
+                      placeholder="I want to change because"
+                      className={`${inputClasses}`}
+                      value={reason}
+                      disabled={!editing}
+                      onChange={(e) => setReason(e.target.value)}
+                    />
+                  </div>
                 </div>
                 {editing ? (
                   <div className="flex flex-wrap justify-between w-full gap-6 mt-6">
-                    {!userHaveBank ? (
-                      <button onClick={editBank} className="relative">
-                        <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-black dark:bg-gray-400"></span>
-                        <span className="fold-bold relative inline-block h-full w-full rounded border-2 border-black dark:border-gray-500 bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900">
-                          {processing ? <Loading1 width={28} /> : "SAVE"}
-                        </span>
-                      </button>
-                    ) : (
-                      <button className="relative">
-                        <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-black dark:bg-gray-400"></span>
-                        <span className="fold-bold relative inline-block h-full w-full rounded border-2 border-black dark:border-gray-500 bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900">
-                          Send For Update
-                        </span>
-                      </button>
-                    )}
+                    <button className="relative" onClick={changeBankAccount}>
+                      <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-black dark:bg-gray-400"></span>
+                      <span className="fold-bold relative inline-block h-full w-full rounded border-2 border-black dark:border-gray-500 bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900">
+                        {accountChanging ? "Changing..." : "Send For Update"}
+                      </span>
+                    </button>
                     <button
-                      onClick={() => setEditing(false)}
+                      onClick={() => {
+                        setEditing(false);
+                        userDataGet();
+                      }}
                       className="relative"
                     >
                       <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-gray-700 dark:bg-gray-400"></span>
@@ -360,7 +412,11 @@ export default function BankWithDrawal() {
                         (user && user.ac_no === null) ||
                         user.ac_name === null ||
                         user.bank_name === null ||
-                        user.ifsc_code === null
+                        user.ifsc_code === null ||
+                        user.ac_no === undefined ||
+                        user.ac_name === undefined ||
+                        user.bank_name === undefined ||
+                        user.ifsc_code === undefined
                       }
                     >
                       <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-black dark:bg-gray-400"></span>

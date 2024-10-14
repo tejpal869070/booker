@@ -14,13 +14,14 @@ import { GetUserDetails } from "../Controllers/User/UserController";
 import ThemeToggle from "../Controllers/ThemeToggle";
 import { Loading1 } from "../Componentes/Loading1";
 import CreatePin from "../Componentes/Dashboard/CratePin";
-import Logo from "../assets/photos/logo.png"
+import Logo from "../assets/photos/logo.png";
+import bg1 from "../assets/photos/bg-main-2.jpg";
 
 export default function Home() {
   const [user, setUser] = React.useState({});
   const [loading, setLoading] = useState(true);
   const dropdownClassList =
-    "flex w-full p-2 pl-0 text-gray-900 rounded-lg group dark:text-black dark:hover:text-white dark:hover:bg-gray-400  hover:animate-fade-right hover:animate-once hover:justify-center hover:animate-duration-[400ms]";
+    "flex w-full p-2 pl-0 text-gray-900 rounded-lg group dark:text-black dark:hover:text-black  hover:bg-[#919ffdfc]  hover:animate-fade-right hover:animate-once hover:justify-center hover:animate-duration-[400ms]";
 
   // close side bar on url change
   // const location = useLocation();
@@ -100,21 +101,17 @@ export default function Home() {
 
   return (
     <div className="dark:bg-black w-full h-full overflow-x-hidden">
-      <nav className="bg-[#919ffdfc] z-10 border-b-2 border-gray-200 dark:bg-gray-900 fixed w-full">
+      <nav className="bg-gradient-to-r from-blue-800 to-indigo-900 z-10 border-b-2 border-gray-200 dark:bg-gray-900 fixed w-full">
         <div className="  flex flex-wrap items-center justify-between mx-auto p-4">
-          <a
-            href="?home"
+          <Link
+            to={{ pathname: "/home", search: `?dashboard` }}
             className="flex items-center space-x-3 rtl:space-x-reverse sm:pl-64"
           >
-            <img
-              src={Logo}
-              className="h-8"
-              alt="Flowbite Logo"
-            />
+            <img src={Logo} className="h-8" alt="bLogo" />
             <span className="self-center text-2xl font-semibold whitespace-nowrap  text-white">
               FinCare
             </span>
-          </a>
+          </Link>
           <div className="flex gap-4 items-center">
             <div className="hidden lg:block">
               <ThemeToggle onNav={true} />
@@ -142,6 +139,9 @@ export default function Home() {
                   <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
                     {user.email}
                   </span>
+                  <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
+                    M.No. {user.mobile}
+                  </span>
                 </div>
                 <ul className="py-2" aria-labelledby="user-menu-button">
                   <li>
@@ -154,7 +154,7 @@ export default function Home() {
                   </li>
                   <li>
                     <Link
-                      to={{pathname:"/home", search:"?change=securityPin"}}
+                      to={{ pathname: "/home", search: "?change=securityPin" }}
                       className="block px-4 py-2 text-sm text-gray-700  dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                     >
                       Change Security Pin
@@ -222,7 +222,7 @@ export default function Home() {
         className="fixed top-0 left-0 z-40 w-64 h-screen border-r-2   transition-transform -translate-x-full sm:translate-x-0"
         aria-label="Sidebar"
       >
-        <div className="h-full px-3 pt-16 py-4 overflow-y-auto no-scrollbar bg-[#919ffdfc] dark:bg-gray-800">
+        <div className="h-full px-3 pt-16 py-4 overflow-y-auto no-scrollbar bg-gradient-to-r from-blue-800 to-indigo-900 dark:bg-gray-800">
           <ul className="space-y-2 font-medium">
             <li className="side-bar-list">
               <Link
@@ -289,7 +289,7 @@ export default function Home() {
                 <li className="ml-11">
                   <Link
                     to={{ pathname: "/home", search: `?event=cricket` }}
-                    className={`${dropdownClassList}`}
+                    className={`${dropdownClassList} disabled`}
                     onClick={handleHideSideBar}
                   >
                     Cricket
@@ -788,10 +788,10 @@ export default function Home() {
       </aside>
 
       {/* Content */}
-      <div className=" ">
+      <div className="bg-no-repeat bg-cover bg-fixed  "  >
         <div className="p-2 lg:p-8 sm:ml-64 pt-24 lg:pt-24 ">
           <InnerSection />
-        </div>
+        </div> 
       </div>
 
       {/* Create pin */}

@@ -131,7 +131,7 @@ export default function BankDeposit() {
     return (
       <div className="fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center bg-[#000000d1] bg-opacity-50 z-[9999]">
         <img alt="success" src={successImg} />
-        <p className="text-2xl text-white font-semibold">
+        <p className="text-2xl text-center text-white font-semibold">
           Deposit Request Sent Successfully !
         </p>
       </div>
@@ -141,7 +141,7 @@ export default function BankDeposit() {
   return (
     <div>
       <div className=" ">
-        <div className="flex flex-wrap   gap-6 mt-6">
+        <div className="flex    gap-6 mt-6">
           <p className="relative cursor-pointer" onClick={() => setTab(1)}>
             <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-black dark:bg-gray-300"></span>
             <span className="fold-bold relative inline-block h-full w-full rounded border-2 border-black dark:border-gray-700 bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900">
@@ -156,15 +156,15 @@ export default function BankDeposit() {
           </p>
         </div>
         {tab === 1 ? (
-          <div class="  mt-6 flex flex-col items-center justify-center  ">
-            <div class="bg-[#e1e6ff] dark:bg-[#868ba3fc] text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden">
-              <div class="md:flex flex-row-reverse w-full">
-                <div class="hidden md:block w-1/2 bg-indigo-200  p-2">
-                  <img alt="animation" className="w-full h-full " src={gif1} />
+          <div className="  mt-6 flex flex-col items-center justify-center  ">
+            <div className="bg-[#e1e6ff] dark:bg-[#868ba3fc] text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden">
+              <div className="md:flex flex-row-reverse w-full">
+                <div className="w-full  md:w-1/2 bg-indigo-200  p-2">
+                  <img alt="animation" className="w-full h-full rounded-t-xl" src={gif1} />
                 </div>
-                <div class="w-full md:w-1/2 py-10 px-5 md:px-10">
-                  <div class="  mb-6">
-                    <h1 class="font-bold text-3xl text-gray-900">
+                <div className="w-full md:w-1/2 py-10 px-5 md:px-10">
+                  <div className="  mb-6">
+                    <h1 className="font-bold text-3xl text-gray-900">
                       UPI & BANK DEPOSIT
                     </h1>
                   </div>

@@ -5,6 +5,14 @@ import SocialShare from "../Account/SocialShare";
 import { Link } from "react-router-dom";
 import { GetUserDetails } from "../../Controllers/User/UserController";
 import { Loading1 } from "../Loading1";
+import { GiReceiveMoney } from "react-icons/gi";
+import { HiClipboardDocumentList } from "react-icons/hi2";
+import { FcConferenceCall } from "react-icons/fc";
+import { FcAreaChart } from "react-icons/fc";
+import { FcMoneyTransfer } from "react-icons/fc";
+import { BiSolidColor } from "react-icons/bi";
+import { PiFootballFill } from "react-icons/pi";
+import bg1 from "../../assets/photos/bg-main.jpg";
 
 export default function Hero1() {
   const [showShare, setShowShare] = useState(false);
@@ -43,12 +51,19 @@ export default function Hero1() {
   return (
     <div className="pb-6">
       <div className="grid grid-cols-12 gap-4 w-full">
-        <div className="col-span-12 md:col-span-8   border-2  border-[#92a0fd] dark:border-gray-200 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] dark:bg-gray-400 dark:[background-size:0px_0px]   rounded-lg flex justify-between p-4">
-          <div>
-            <h1 className="text-xl font-bold text-black">
+        <div
+          className="relative col-span-12 md:col-span-8 bg-opacity-10 bg-top bg-cover bg-left-bottom border-2 border-[#92a0fd] dark:border-gray-200 rounded-lg flex justify-between p-4"
+          style={{ backgroundImage: `url(${bg1})` }}
+        >
+          
+
+          <div className="z-[9]">
+            <h1
+              className="text-xl font-bold  text-white " 
+            >
               Congratulations {userData && userData.uname}! 🎉
             </h1>
-            <p className="text-sm mt-2 text-black">
+            <p className="text-sm mt-2 text-gray-100">
               Joining: {userData && userData?.date?.split("T")[0]}
             </p>
             <div className="flex flex-wrap   gap-4 mt-4">
@@ -75,10 +90,10 @@ export default function Hero1() {
               </Link>
             </div>
           </div>
-          <div></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-black to-transparent opacity-100 z-1" />
         </div>
 
-        <div className="col-span-12 md:col-span-4   h-60 w-full   rounded-lg">
+        <div className="col-span-12 md:col-span-4     w-full   rounded-lg">
           <div className="grid grid-cols-12 gap-4 w-full">
             <div className=" col-span-6 rounded-lg shadow-[2px_2px_3px_4px_#bee3f8] p-4">
               <HiMiniWallet size={24} color="#92a0fd" />
@@ -108,12 +123,67 @@ export default function Hero1() {
           </div>
         </div>
       </div>
+      {/* quick options */}
+      <p className="text-2xl pt-10 pb-4 dark:text-gray-200 font-bold ">
+        Qucik Action
+      </p>
+      <div className="flex flex-wrap gap-4 pb-4 ">
+        {linkData.map(({ to, icon, label }, index) => (
+          <Link key={index} className="relative cursor-pointer" to={to}>
+            <div className="overflow-hidden w-24 md:w-32 text-white bg-black dark:bg-gray-700 rounded group">
+              <p className="px-3.5 py-2 text-white bg-[#919ffdfc] group-hover:[#7b9eff] flex items-center justify-center transition-transform duration-300 group-hover:translate-y-[-5px]">
+                {icon}
+              </p>
+              <p className="  py-1 text-gray-200 text-center">{label}</p>
+            </div>
+          </Link>
+        ))}
+      </div>
+
       {showShare && (
         <SocialShare
-          url={`${window.location.origin}/register?referrer_code=`}
+          url={`${window.location.origin}/register?referrer_code=${userData.reffer_code}`}
           onClose={closeSocialShare}
         />
       )}
     </div>
   );
 }
+
+const linkData = [
+  {
+    to: { pathname: "/home", search: "?game=color-game" },
+    icon: <BiSolidColor size={30} color="#fcff21" />,
+    label: "Color Game",
+  },
+  {
+    to: { pathname: "/home", search: "?event=inplay" },
+    icon: <PiFootballFill size={30} />,
+    label: "Inplay",
+  },
+  {
+    to: { pathname: "/home", search: "?money=usdt-deposit" },
+    icon: <GiReceiveMoney size={30} />,
+    label: "Deposit",
+  },
+  {
+    to: { pathname: "/home", search: "?money=withdrawal" },
+    icon: <FcMoneyTransfer size={30} />,
+    label: "Withdraw",
+  },
+  {
+    to: { pathname: "/home", search: "?account=account-history" },
+    icon: <HiClipboardDocumentList size={30} />,
+    label: "History",
+  },
+  {
+    to: { pathname: "/home", search: "?network=downline-member" },
+    icon: <FcConferenceCall size={30} />,
+    label: "My Team",
+  },
+  {
+    to: { pathname: "/home", search: "?investment=new-investment" },
+    icon: <FcAreaChart size={30} />,
+    label: "Investment",
+  },
+];

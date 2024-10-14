@@ -10,8 +10,6 @@ export default function ColorGameMyHistory({ gameType }) {
   const [loading, setLoading] = useState(true);
   const [pageId, setPageId] = useState(1);
 
-  console.log("data", data);
-
   const fetchHistory = useCallback(
     async (gameType) => {
       try {
@@ -115,7 +113,10 @@ export default function ColorGameMyHistory({ gameType }) {
                 <td className="px-4 py-2">{item.type}</td>
                 <td className="px-6 py-2">{item.value}</td>
                 <td className="px-6 py-2 border-l-2 flex justify-between items-center">
-                  <p>{item.open_color}</p> <p className="rounded-full p-1 bg-[#ffc989] dark:text-gray-900">{item.number}</p>
+                  <p>{item.open_color}</p>{" "}
+                  <p className="rounded-full p-1 bg-[#ffc989] dark:text-gray-900">
+                    {item.number}
+                  </p>
                 </td>
                 <td className="px-6 py-2 border-l-2">
                   {item.type === "Color"
@@ -143,7 +144,10 @@ export default function ColorGameMyHistory({ gameType }) {
               <FaArrowCircleLeft size={20} className="cursor-pointer" />
             </button>
             {pageId}
-            <button onClick={() => setPageId(pageId + 1)}>
+            <button
+              disabled={data && data.length < 10}
+              onClick={() => setPageId(pageId + 1)}
+            >
               <FaArrowCircleRight size={20} className="cursor-pointer" />
             </button>
           </div>
@@ -152,11 +156,3 @@ export default function ColorGameMyHistory({ gameType }) {
     </div>
   );
 }
-
-// {item.type === "Color"
-// ? item.value === item.open_color
-// ? `+${item.winning_amount}`
-// : -item.price
-// : item.value === item.number
-// ? +item.winning_amount
-// : -item.price}

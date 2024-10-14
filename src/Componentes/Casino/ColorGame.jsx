@@ -16,6 +16,7 @@ import { MdCancel } from "react-icons/md";
 import { ToastContainer, toast } from "react-toastify";
 import successImg from "../../assets/photos/success1-1--unscreen.gif";
 import VerifyPin from "../VerifyPin";
+import gameGirl from "../../assets/photos/colorgame.jpg";
 
 export default function ColorGame() {
   const [gameTypes, setGameTypes] = useState([]);
@@ -145,9 +146,9 @@ export default function ColorGame() {
 
   return (
     <div>
-      <div class=" hidden md:flex  gap-6 mb-4 flex-wrap  ">
-        <p class="relative " href="#">
-          <p class="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-indigo-100 dark:bg-indigo-100 text-gray-700 px-3 py-1 text-base font-bold text-black transition duration-100  ">
+      <div className=" hidden md:flex  gap-6 mb-4 flex-wrap  ">
+        <p className="relative " href="#">
+          <p className="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-indigo-100 dark:bg-indigo-100 text-gray-700 px-3 py-1 text-base font-bold text-black transition duration-100  ">
             <RiColorFilterFill size={28} color="black" />
             Game Balance : ₹ {user.color_wallet_balnace}
           </p>
@@ -167,23 +168,23 @@ export default function ColorGame() {
             Transfer To Game
           </button>
         </div>
-        <p class="relative " href="#">
-          <p class="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-indigo-100 dark:bg-indigo-100 text-gray-700 px-3 py-1 text-base font-bold text-black transition duration-100  ">
+        <p className="relative " href="#">
+          <p className="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-indigo-100 dark:bg-indigo-100 text-gray-700 px-3 py-1 text-base font-bold text-black transition duration-100  ">
             <BiSolidWallet size={28} color="black" /> Main Balance : ₹{" "}
             {user.wallet_balance}
           </p>
         </p>
       </div>
 
-      <div class="  block md:hidden flex flex-wrap justify-between  mb-4   ">
-        <p class="relative w-[45%]" href="#">
-          <p class="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-indigo-100 dark:bg-indigo-100 text-gray-700 px-3 py-1 text-base font-bold text-black transition duration-100  ">
+      <div className="  block md:hidden flex flex-wrap justify-between  mb-4   ">
+        <p className="relative w-[45%]" href="#">
+          <p className="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-indigo-100 dark:bg-indigo-100 text-gray-700 px-3 py-1 text-base font-bold text-black transition duration-100  ">
             <RiColorFilterFill size={28} color="black" />
             Game Balance : ₹ {user.color_wallet_balnace}
           </p>
         </p>
-        <p class="relative w-[45%]" href="#">
-          <p class="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-indigo-100 dark:bg-indigo-100 text-gray-700 px-3 py-1 text-base font-bold text-black transition duration-100  ">
+        <p className="relative w-[45%]" href="#">
+          <p className="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-indigo-100 dark:bg-indigo-100 text-gray-700 px-3 py-1 text-base font-bold text-black transition duration-100  ">
             <BiSolidWallet size={28} color="black" /> Main Balance : ₹{" "}
             {user.wallet_balance}
           </p>
@@ -205,12 +206,11 @@ export default function ColorGame() {
         </div>
       </div>
 
-      <div class="flex flex-wrap justify-around  md:py-4 border border-4 mt-6">
+      {/* <div className="flex flex-wrap justify-around  md:py-4 border border-4 mt-6">
         {gameTypes &&
           gameTypes.map((item, index) => (
             <Link
-              key={index}
-              className="w-40 h-40   rounded-xl flex flex-col "
+              key={index} 
               to={{
                 pathname: "/home",
                 search: `?colorGameType=${item.id}`,
@@ -219,6 +219,32 @@ export default function ColorGame() {
               <img alt={item.name} src={`${API.gametype_hostURL}${item.img}`} />
             </Link>
           ))}
+      </div> */}
+
+      <div class="grid grid-cols-1 xl:grid-cols-2   py-3  ">
+        <div class="w-full   bg-black dark:bg-black ">
+          <img alt="gamegirl" className="w-full md:w-[90%]" src={gameGirl} />
+        </div>
+        <div class="w-full flex justify-center items-center   bg-black rounded-sm dark:bg-black">
+          <div class="grid grid-cols-2 xl:grid-cols-2    gap-1 md:gap-5 py-3  ">
+            {gameTypes &&
+              gameTypes.map((item, index) => (
+                <Link
+                  key={index}
+                  to={{
+                    pathname: "/home",
+                    search: `?colorGameType=${item.id}`,
+                  }}
+                  class="w-40 h-40"
+                >
+                  <img
+                    alt={item.name}
+                    src={`${API.gametype_hostURL}${item.img}`}
+                  />
+                </Link>
+              ))}
+          </div>
+        </div>
       </div>
 
       {/* popup */}
@@ -239,28 +265,28 @@ export default function ColorGame() {
                 ₹ {type === 1 ? user.wallet_balance : user.color_wallet_balnace}
               </span>
             </p>{" "}
-            <div class="max-w-sm mt-4">
+            <div className="max-w-sm mt-4">
               <label
                 for="input-label"
-                class="block text-sm text-gray-300 font-medium mb-2 dark:text-white"
+                className="block text-sm text-gray-300 font-medium mb-2 dark:text-white"
               >
                 Transfer To {type === 1 ? "Game Wallet" : "Main Wallet"}
               </label>
               <input
                 type="number"
                 id="input-label"
-                class="py-2 px-4 block text-gray-200 bg-gray-700 w-full border-x-0 border-t-0 border-b-2   text-md       dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                className="py-2 px-4 block text-gray-200 bg-gray-700 w-full border-x-0 border-t-0 border-b-2   text-md       dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                 placeholder=" "
                 value={transferToAmount}
                 onChange={(e) => setTransferToAmount(e.target.value)}
               />
               <button
                 onClick={openVerifyPin}
-                class="m-auto w-full mt-4 relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group"
+                className="m-auto w-full mt-4 relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group"
               >
-                <span class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
+                <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
                   <svg
-                    class="w-6 h-6"
+                    className="w-6 h-6"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -274,10 +300,10 @@ export default function ColorGame() {
                     ></path>
                   </svg>
                 </span>
-                <span class="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease">
+                <span className="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease">
                   Transfer
                 </span>
-                <span class="relative invisible">Button Text</span>
+                <span className="relative invisible">Button Text</span>
               </button>
             </div>
             {/* close button */}

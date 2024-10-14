@@ -3,6 +3,7 @@ import TodayUpcoming from "./CustomTab/TodayUpcoming";
 import ballimg from "../../assets/photos/ball4.png";
 import ballimg2 from "../../assets/photos/ball3.jpg";
 import footballimg from "../../assets/photos/football.webp";
+import groundimg from "../../assets/photos/ground.webp";
 
 export default function Events({ gameType }) {
   const [selectedButton, setSelectedButton] = useState(1);
@@ -13,7 +14,7 @@ export default function Events({ gameType }) {
   ];
 
   return (
-    <div>
+    <div className="relative ">
       <p className="uppercase font-bold dark:text-white">
         <img
           alt="imageer"
@@ -56,6 +57,19 @@ export default function Events({ gameType }) {
           ""
         )}
       </div>
+
+
+      <div
+          className="absolute w-full h-full top-0 bg-black bg-cover bg-center flex inset-0 justify-center align-center items-center bg-no-repeat"
+          style={{ backgroundImage: `url(${groundimg})` }}
+        >
+          <p
+            className="text-6xl text-center font-bold  "
+            style={{ textShadow: "3px 2px 19px white" }}
+          >
+            Coming Soon
+          </p>
+        </div>
     </div>
   );
 }

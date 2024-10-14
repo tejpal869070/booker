@@ -7,6 +7,8 @@ import {
 import { Loading1 } from "../../../Loading1";
 import VerifyPin from "../../../VerifyPin";
 import { ToastContainer, toast } from "react-toastify";
+import successImg from "../../../../assets/photos/success1-1--unscreen.gif";
+import swal from "sweetalert";
 
 export default function CryptoWithdrawal() {
   const inputClasses =
@@ -37,6 +39,7 @@ export default function CryptoWithdrawal() {
       if (response.status) {
         setProcessing(false);
         setSuccess(true);
+        userDataGet()
         setTimeout(() => {
           setSuccess(false);
         }, 3500);
@@ -48,11 +51,9 @@ export default function CryptoWithdrawal() {
         });
         setProcessing(false);
       }
-    } catch (error) { 
-      if (error?.response.status === 302) {
-        toast.error(`${error.response.data.message}`, {
-          position: "bottom-right",
-        });
+    } catch (error) {
+      if (error?.response?.status === 302) { 
+        swal("Error!", `${error.response.data.message}`, "error");
         setProcessing(false);
       } else {
         toast.error("Server Error !", {
@@ -74,7 +75,7 @@ export default function CryptoWithdrawal() {
         position: "bottom-right",
       });
       return;
-    }  
+    }
     setIsOpen(true);
   };
 
@@ -102,16 +103,25 @@ export default function CryptoWithdrawal() {
     );
   }
 
+  if (success) {
+    return (
+      <div className="fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center bg-[#000000d1] bg-opacity-50 z-[999999]">
+        <img alt="success" src={successImg} />
+        <p className="text-2xl text-white font-semibold">Crypto Withdrawal Scuucess.</p>
+      </div>
+    );
+  }
+
   return (
-    <div class="   flex items-center justify-center  ">
-      <div class="bg-[#e1e6ff] dark:bg-[#868ba3fc] text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden">
-        <div class="md:flex flex-row-reverse w-full">
-          <div class="hidden md:block w-1/2 bg-indigo-200  p-2">
+    <div className="   flex items-center justify-center  ">
+      <div className="bg-[#e1e6ff] dark:bg-[#868ba3fc] text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden">
+        <div className="md:flex flex-row-reverse w-full">
+          <div className="hidden md:block w-1/2 bg-indigo-200  p-2">
             <img alt="animation" className="w-full h-full " src={gif1} />
           </div>
-          <div class="w-full md:w-1/2 py-10 px-5 md:px-10">
-            <div class="  mb-6">
-              <h1 class="font-bold text-3xl text-gray-900">
+          <div className="w-full md:w-1/2 py-10 px-5 md:px-10">
+            <div className="  mb-6">
+              <h1 className="font-bold text-3xl text-gray-900">
                 CRYPTO WITHDRAWAL
               </h1>
             </div>
@@ -159,7 +169,7 @@ export default function CryptoWithdrawal() {
                 />
                 <p className="text-gray-800 font-medium text-sm">
                   Rs. {(amount * Number(user.currency_rate)).toFixed(2)} Will Be
-                  duducted{" "}
+                  deducted{" "}
                 </p>
               </div>
             </div>
@@ -192,8 +202,7 @@ export default function CryptoWithdrawal() {
           successFunction={(pin) => successFunction(pin)}
         />
       )}
-      
-      
+
       <ToastContainer />
     </div>
   );

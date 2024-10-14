@@ -17,6 +17,9 @@ import swal from "sweetalert";
 import { Loading1 } from "../Loading1";
 import FlipCountdown from "@rumess/react-flip-countdown";
 import { GetUserDetails } from "../../Controllers/User/UserController";
+import offer1 from "../../assets/photos/offer1.jpg";
+import offer2 from "../../assets/photos/offer2.jpg";
+import offer3 from "../../assets/photos/offer3.jpg"
 
 export default function ColorGame({ gameType }) {
   const [selectedHistoryTab, setSelectedHistoryTab] = useState(1);
@@ -137,116 +140,123 @@ export default function ColorGame({ gameType }) {
   }
 
   return (
-    <div>
-      <div className="flex justify-between items-center px-2">
-        <Link
-          className="cursor-pointer   "
-          to={{ pathname: "", search: "?game=color-game" }}
-        >
-          <IoHome size={24} className="" />
-        </Link>
-        <p className="font-medium text-medium pr-4">
-          Balance : ₹ {user && user.color_wallet_balnace}
-        </p>
-      </div>
-      <div
-        className="flex bg-no-repeat bg-cover px-2 md:px-4 justify-between w-full border-b-2 border-gray pb-2"
-        style={{ backgroundImage: `url(${bg1})` }}
-      >
-        <div className="py-2">
-          <p className="text-sm font-semibold">Period</p>
-          <p className="font-bold">
-            {currentGameData && currentGameData.period}
+    <div className="flex">
+      <div className="w-full">
+        <div className="flex justify-between items-center px-2">
+          <Link
+            className="cursor-pointer   "
+            to={{ pathname: "", search: "?game=color-game" }}
+          >
+            <IoHome size={24} className="dark:text-white" />
+          </Link>
+          <p className="font-medium dark:text-gray-200 text-medium pr-4">
+            Balance : ₹ {user && user.color_wallet_balnace}
           </p>
         </div>
-        <div>
-          <Timer
-            currentGameData={currentGameData}
-            refresh={refresh}
-            countdownFunction={countdownFunction}
-          />
-        </div>
-      </div>
-
-      <div className="relative bg-gradient-to-r from-rose-100 to-teal-100 dark:bg-gradient-to-r dark:from-slate-500 dark:to-slate-800 py-4">
-        {/* color buttons */}
-        <div className="flex justify-between lg:justify-center lg:gap-12 justify-center py-2 border-b-2 border-white">
-          {GameColors &&
-            GameColors.map((item, index) => (
-              <div
-                key={index}
-                onClick={() => openPopup(item)}
-                className={`px-6 md:px-8 cursor-pointer  hover:shadow-lg rounded-lg py-3  `}
-                style={{ backgroundColor: item.color_code }}
-              >
-                <button className="text-2xl font-bold text-white">
-                  {item.color_name}
-                </button>
-              </div>
-            ))}
-        </div>
-
-        {/* color numbers */}
-        <NumberColor
-          numbersData={GameNumber}
-          currentGameData={currentGameData && currentGameData}
-        />
-
-        {isCountDown && (
-          <div className="absolute w-full h-full top-0 bg-[#000000c9] flex justify-center items-center">
-            <FlipCountdown
-              size="large"
-              hideYear
-              hideMonth
-              hideDay
-              hideHour
-              endAt={currentGameData.end_date} // Date/Time
-              // onTimeUp={() => getGameHistory(gameType)}
+        <div
+          className="flex bg-no-repeat bg-cover px-2 md:px-4 justify-between w-full border-b-2 border-gray pb-2"
+          style={{ backgroundImage: `url(${bg1})` }}
+        >
+          <div className="py-2">
+            <p className="text-sm font-semibold">Period</p>
+            <p className="font-bold">
+              {currentGameData && currentGameData.period}
+            </p>
+          </div>
+          <div>
+            <Timer
+              currentGameData={currentGameData}
+              refresh={refresh}
+              countdownFunction={countdownFunction}
             />
           </div>
-        )}
-      </div>
+        </div>
 
-      {/* history */}
-      <div className="flex    color-game-history mt-10 gap-8">
-        <button
-          className={`${
-            selectedHistoryTab === 1 ? "bg-[#ff9600]  " : "bg-[#babbbb]"
-          }`}
-          onClick={() => setSelectedHistoryTab(1)}
-        >
-          Game History
-        </button>
+        <div className="relative bg-gradient-to-r from-rose-100 to-teal-100 dark:bg-gradient-to-r dark:from-slate-500 dark:to-slate-800 py-4">
+          {/* color buttons */}
+          <div className="flex justify-between lg:justify-center lg:gap-12 justify-center py-2 border-b-2 border-white">
+            {GameColors &&
+              GameColors.map((item, index) => (
+                <div
+                  key={index}
+                  onClick={() => openPopup(item)}
+                  className={`px-6 md:px-8 cursor-pointer  hover:shadow-lg rounded-lg py-3  `}
+                  style={{ backgroundColor: item.color_code }}
+                >
+                  <button className="text-2xl font-bold text-white">
+                    {item.color_name}
+                  </button>
+                </div>
+              ))}
+          </div>
 
-        <button
-          className={`${
-            selectedHistoryTab === 3 ? "bg-[#ff9600]" : "bg-[#babbbb]"
-          }`}
-          onClick={() => setSelectedHistoryTab(3)}
-        >
-          My History
-        </button>
-      </div>
-
-      {/* history tabs */}
-      <div className="border-2 border-gray-400 mt-2 rounded-lg p-1">
-        {selectedHistoryTab === 1 ? (
-          <ColorGameHistory
-            gameType={gameType}
-            refreshHistory={refreshHistory}
+          {/* color numbers */}
+          <NumberColor
+            numbersData={GameNumber}
+            currentGameData={currentGameData && currentGameData}
           />
-        ) : (
-          <ColorGameMyHistory gameType={gameType} />
-        )}
-      </div>
 
-      {/* popup */}
-      <ColorGamePopup
-        isOpen={isPopupOpen}
-        onClose={closePopup}
-        popupData={popupData}
-        currentGameData={currentGameData && currentGameData}
-      />
+          {isCountDown && (
+            <div className="absolute w-full h-full top-0 bg-[#000000c9] flex justify-center items-center">
+              <FlipCountdown
+                size="large"
+                hideYear
+                hideMonth
+                hideDay
+                hideHour
+                endAt={currentGameData.end_date} // Date/Time
+                // onTimeUp={() => getGameHistory(gameType)}
+              />
+            </div>
+          )}
+        </div>
+
+        {/* history */}
+        <div className="flex    color-game-history mt-10 gap-8">
+          <button
+            className={`${
+              selectedHistoryTab === 1 ? "bg-[#ff9600]  " : "bg-[#babbbb]"
+            }`}
+            onClick={() => setSelectedHistoryTab(1)}
+          >
+            Game History
+          </button>
+
+          <button
+            className={`${
+              selectedHistoryTab === 3 ? "bg-[#ff9600]" : "bg-[#babbbb]"
+            }`}
+            onClick={() => setSelectedHistoryTab(3)}
+          >
+            My History
+          </button>
+        </div>
+
+        {/* history tabs */}
+        <div className="border-2 border-gray-400 mt-2 rounded-lg p-1">
+          {selectedHistoryTab === 1 ? (
+            <ColorGameHistory
+              gameType={gameType}
+              refreshHistory={refreshHistory}
+            />
+          ) : (
+            <ColorGameMyHistory gameType={gameType} />
+          )}
+        </div>
+
+        {/* popup */}
+        <ColorGamePopup
+          isOpen={isPopupOpen}
+          onClose={closePopup}
+          popupData={popupData}
+          currentGameData={currentGameData && currentGameData}
+        />
+      </div>
+      <div className="hidden w-80 pt-6 px-4 lg:block">
+        <img alt="offer1" src={offer1} />
+        <img alt="offer2" className="mt-2" src={offer2} />
+        <img alt="offer3" className="mt-2" src={offer3} />
+      </div>
     </div>
   );
 }
