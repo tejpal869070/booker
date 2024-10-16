@@ -97,7 +97,7 @@ export default function WithdrawalHistory() {
               <div>
                 <img alt="no data" src={gif1} className="m-auto" />
                 <p className="text-center dark:text-gray-200 font-bold text-xl">
-                  No Recoard !
+                  No Recode !
                 </p>
               </div>
             ) : (

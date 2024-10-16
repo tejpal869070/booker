@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { ColorGameAllResult } from "../../Controllers/User/GamesController";
 import swal from "sweetalert";
+import { Loading1 } from "../Loading1";
 
 export default function ColorGameHistory({ gameType, refreshHistory }) {
   const [gameHistory, setGameHistory] = useState([]);
+  const [loading, setLoading] = useState(true);
   const getGameHistory = async (gameType) => {
     try {
       const response = await ColorGameAllResult(gameType);
       if (response.status) {
         setGameHistory(response.data);
+        setLoading(false)
       } else {
         window.location.reload();
       }
@@ -33,10 +36,22 @@ export default function ColorGameHistory({ gameType, refreshHistory }) {
     getGameHistory(gameType);
   }, [gameType, refreshHistory]);
 
+
+  if (loading) {
+    return (
+      <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-50 z-[9999]">
+        <Loading1 />
+      </div>
+    );
+  }
+
   return (
     <div>
+      <div className="color-game-history">
+        <button className="bg-[#ff9600]">Game History</button>
+      </div>
       <div className="relative overflow-x-auto  z-0">
-        <p className="font-semibold dark:text-gray-200">Game Recoard : </p>
+        <p className="font-semibold dark:text-gray-200">Game Recode : </p>
         <div className="grid grid-cols-5 md:grid-cols-10   gap-4 mt-4">
           {gameHistory &&
             gameHistory.map((item, index) => (

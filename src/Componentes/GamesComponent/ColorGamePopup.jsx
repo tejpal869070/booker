@@ -33,10 +33,8 @@ const ColorGamePopup = ({ isOpen, onClose, popupData, currentGameData }) => {
     setLoading(true);
     try {
       const response = await AddNewColorGameBet(formData);
-      if (response.status) {
-        toast.success("Bet placed successfully", {
-          position: "top-center",
-        });
+      if (response.status) {  
+        onClose("success") 
       } else {
         toast.error("Somthing Went Wrong !", {
           position: "top-center",
@@ -61,6 +59,7 @@ const ColorGamePopup = ({ isOpen, onClose, popupData, currentGameData }) => {
   if (!isOpen) return null;
   return (
     <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black bg-opacity-50     ">
+      <ToastContainer />
       <div className="bg-white dark:bg-[#bbbbbb] p-6 rounded-lg   shadow-lg relative  ">
         <h2 className="text-xl font-bold mb-2 text-center">Color Game </h2>
         <p className="text-center    py-1  font-bold bg-[#ffe487] px-12 rounded-lg">
@@ -126,13 +125,13 @@ const ColorGamePopup = ({ isOpen, onClose, popupData, currentGameData }) => {
 
         {/* buttons */}
         <div className="flex   justify-around mt-10">
-          <button className="relative" onClick={onClose}>
+          <button className="relative" onClick={() => onClose("close")}>
             <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-black"></span>
             <span className="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900">
               Close
             </span>
           </button>
-          <button className="relative" onClick={handleBet}>
+          <button className="relative" onClick={handleBet} disabled={loading}>
             <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-black"></span>
             <span className="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900">
               {loading ? "Processing..." : "Place Bid"}
@@ -140,7 +139,7 @@ const ColorGamePopup = ({ isOpen, onClose, popupData, currentGameData }) => {
           </button>
         </div>
       </div>
-      <ToastContainer />
+      
     </div>
   );
 };

@@ -19,7 +19,9 @@ import FlipCountdown from "@rumess/react-flip-countdown";
 import { GetUserDetails } from "../../Controllers/User/UserController";
 import offer1 from "../../assets/photos/offer1.jpg";
 import offer2 from "../../assets/photos/offer2.jpg";
-import offer3 from "../../assets/photos/offer3.jpg"
+import offer3 from "../../assets/photos/offer3.jpg";
+import { toast, ToastContainer } from "react-toastify";
+import betSuccessGif from "../../assets/photos/bet-success.gif"
 
 export default function ColorGame({ gameType }) {
   const [selectedHistoryTab, setSelectedHistoryTab] = useState(1);
@@ -34,14 +36,25 @@ export default function ColorGame({ gameType }) {
   const [refreshHistory, setRefreshHis] = useState(true);
   const [user, setUser] = useState();
   const [userLoading, setUserLoading] = useState(true);
+  const [betPlace, setBetPlaced] = useState(false);
 
   const openPopup = (item) => {
     setIsPopupOpen(true);
     setPopupData(item);
   };
-  const closePopup = () => {
-    setIsPopupOpen(false);
-    userDataGet();
+  const closePopup = (type) => {
+    setRefreshHis((pre) => !pre);
+    if (type === "success") {
+      setIsPopupOpen(false);
+      userDataGet();
+      setBetPlaced(true);
+      setTimeout(() => {
+        setBetPlaced(false);
+      }, 800);
+    } else {
+      setIsPopupOpen(false);
+      userDataGet();
+    }
   };
 
   // color game colors and number api
@@ -141,6 +154,7 @@ export default function ColorGame({ gameType }) {
 
   return (
     <div className="flex">
+      <ToastContainer />
       <div className="w-full">
         <div className="flex justify-between items-center px-2">
           <Link
@@ -191,11 +205,30 @@ export default function ColorGame({ gameType }) {
           </div>
 
           {/* color numbers */}
-          <NumberColor
-            numbersData={GameNumber}
-            currentGameData={currentGameData && currentGameData}
-          />
+          <div className="  pt-4 border-b-2 border-white">
+            <div className="grid grid-cols-5 grid-rows-2 gap-4 lg:px-10">
+              {GameNumber &&
+                GameNumber.map((item, index) => (
+                  <ColorCircle
+                    key={item.id}
+                    number={item.number}
+                    orders={item.orders}
+                    popupData={item}
+                    currentGameData={currentGameData}
+                    refresh={() => {
+                      userDataGet();
+                      setRefreshHis((pre) => !pre);
+                      setBetPlaced(true);
+                      setTimeout(() => {
+                        setBetPlaced(false);
+                      }, 800);
+                    }}
+                  />
+                ))}
+            </div>
+          </div>
 
+          {/* Countdown Flip */}
           {isCountDown && (
             <div className="absolute w-full h-full top-0 bg-[#000000c9] flex justify-center items-center">
               <FlipCountdown
@@ -204,7 +237,7 @@ export default function ColorGame({ gameType }) {
                 hideMonth
                 hideDay
                 hideHour
-                endAt={currentGameData.end_date} // Date/Time
+                endAt={currentGameData?.end_date} // Date/Time
                 // onTimeUp={() => getGameHistory(gameType)}
               />
             </div>
@@ -212,42 +245,23 @@ export default function ColorGame({ gameType }) {
         </div>
 
         {/* history */}
-        <div className="flex    color-game-history mt-10 gap-8">
-          <button
-            className={`${
-              selectedHistoryTab === 1 ? "bg-[#ff9600]  " : "bg-[#babbbb]"
-            }`}
-            onClick={() => setSelectedHistoryTab(1)}
-          >
-            Game History
-          </button>
-
-          <button
-            className={`${
-              selectedHistoryTab === 3 ? "bg-[#ff9600]" : "bg-[#babbbb]"
-            }`}
-            onClick={() => setSelectedHistoryTab(3)}
-          >
-            My History
-          </button>
-        </div>
-
-        {/* history tabs */}
         <div className="border-2 border-gray-400 mt-2 rounded-lg p-1">
-          {selectedHistoryTab === 1 ? (
-            <ColorGameHistory
-              gameType={gameType}
-              refreshHistory={refreshHistory}
-            />
-          ) : (
-            <ColorGameMyHistory gameType={gameType} />
-          )}
+          <ColorGameHistory
+            gameType={gameType}
+            refreshHistory={refreshHistory}
+          />
+        </div>
+        <div className="border-2 border-gray-400 mt-4 rounded-lg p-1">
+          <ColorGameMyHistory
+            gameType={gameType}
+            refreshHistory={refreshHistory}
+          />
         </div>
 
         {/* popup */}
         <ColorGamePopup
           isOpen={isPopupOpen}
-          onClose={closePopup}
+          onClose={(type) => closePopup(type)}
           popupData={popupData}
           currentGameData={currentGameData && currentGameData}
         />
@@ -257,6 +271,82 @@ export default function ColorGame({ gameType }) {
         <img alt="offer2" className="mt-2" src={offer2} />
         <img alt="offer3" className="mt-2" src={offer3} />
       </div>
+
+      {betPlace && (
+        <div className="fixed  top-0 left-0 w-full h-full flex justify-center items-center backdrop-blur-sm 	 z-[9999]">
+          <img alt="gifff" src={betSuccessGif} className="w-40 h-40"/>
+        </div>
+      )}
     </div>
   );
 }
+
+// color game numbers
+
+const ColorCircle = ({
+  orders,
+  number,
+  popupData,
+  currentGameData,
+  refresh,
+}) => {
+  const colors = orders.map((order) => order.color_code);
+  const colorCount = colors.length;
+
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const openPopup = () => setIsPopupOpen(true);
+  const closePopup = (type) => {
+    
+    if (type === "success") {
+      setIsPopupOpen(false);
+      refresh();
+    } else {
+      setIsPopupOpen(false);
+    }
+  };
+
+  const circleNumberStyle = "text-4xl font-bold text-gray-200  ";
+
+  return (
+    <div className=" ">
+      <div
+        onClick={openPopup}
+        className="relative cursor-pointer h-14 md:h-24 w-14 md:w-24 rounded-full p-1 border-2 border-dotted border-black dark:border-gray-400 overflow-hidden"
+      >
+        {colorCount === 1 ? (
+          <div
+            className="h-full w-full rounded-full flex justify-center items-center"
+            style={{ background: colors[0] }}
+          >
+            <p className={circleNumberStyle}>{number}</p>
+          </div>
+        ) : colorCount > 1 ? (
+          <div
+            className="w-full h-full rounded-full"
+            style={{ background: colors[0] }}
+          >
+            <div
+              // className="absolute  rounded-r-full  right-1"
+              className="absolute h-[85%] md:h-[90%] rounded-r-full w-[46%] md:w-[48%] right-1"
+              style={{ background: colors[1] }}
+            />
+            <p
+              className={`absolute h-full text-center flex justify-center items-center w-full m-auto inset-0 ${circleNumberStyle}`}
+            >
+              {number}
+            </p>
+          </div>
+        ) : (
+          <div className="h-full w-full bg-transparent" />
+        )}
+      </div>
+      <ColorGamePopup
+        isOpen={isPopupOpen}
+        onClose={(type) => closePopup(type)}
+        popupData={popupData}
+        currentGameData={currentGameData}
+      />
+    </div>
+  );
+};

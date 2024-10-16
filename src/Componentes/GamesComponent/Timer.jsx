@@ -17,7 +17,7 @@ export default function Timer({ currentGameData, refresh, countdownFunction }) {
     // loop-----------------------------------------
     const intervalId = setInterval(() => {
       const currentTime = new Date();
-      const endTime = new Date(currentGameData.end_date);
+      const endTime = new Date(currentGameData?.end_date);
       const timeLeft = endTime - currentTime;
 
       if (timeLeft <= 0) {

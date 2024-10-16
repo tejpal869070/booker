@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import ColorGamePopup from "./ColorGamePopup";
+import { toast, ToastContainer } from "react-toastify";
 
 export default function NumberColor({ numbersData, currentGameData }) {
   return (
     <div className="  pt-4 border-b-2 border-white">
+      <ToastContainer />
       <div className="grid grid-cols-5 grid-rows-2 gap-4 lg:px-10">
         {numbersData &&
           numbersData.map((item, index) => (
@@ -27,7 +29,17 @@ const ColorCircle = ({ orders, number, popupData, currentGameData }) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const openPopup = () => setIsPopupOpen(true);
-  const closePopup = () => setIsPopupOpen(false);
+  const closePopup = (type) => {
+    if (type === "success") {
+      setIsPopupOpen(false);
+      toast.success("Bet placed successfully", {
+        position: "bottom-center",
+        autoClose: 2000,
+      });
+    } else {
+      setIsPopupOpen(false);
+    }
+  };
 
   const circleNumberStyle = "text-4xl font-bold text-gray-200  ";
 
@@ -66,7 +78,7 @@ const ColorCircle = ({ orders, number, popupData, currentGameData }) => {
       </div>
       <ColorGamePopup
         isOpen={isPopupOpen}
-        onClose={closePopup}
+        onClose={(type) => closePopup(type)}
         popupData={popupData}
         currentGameData={currentGameData}
       />

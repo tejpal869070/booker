@@ -94,7 +94,7 @@ export default function AccountHistory() {
             {filteredData && filteredData.length === 0 ? (
               <div>
                 <img alt="no data" src={gif1} className="m-auto" />
-                <p className="text-center font-bold text-xl">No Recoard !</p>
+                <p className="text-center font-bold text-xl">No Recode !</p>
               </div>
             ) : (
               <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">

@@ -8,8 +8,8 @@ import { useLocation } from "react-router-dom";
 
 export default function DepositHistory() {
   const [data, setData] = useState([]);
-  const [selectedIndex, setSelectedIndex] = useState();
   const [loading, setLoading] = useState(true);
+  const [selectedIndex, setSelectedIndex] = useState();
   const [visible, setVisible] = useState(false);
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
@@ -82,7 +82,7 @@ export default function DepositHistory() {
           {filteredData && filteredData.length === 0 ? (
             <div>
               <img alt="no data" src={gif1} className="m-auto" />
-              <p className="text-center font-bold text-xl">No Recoard !</p>
+              <p className="text-center font-bold text-xl">No Recode !</p>
             </div>
           ) : (
             <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 border-4 border-indigo-400">
@@ -144,9 +144,8 @@ export default function DepositHistory() {
                           className="cursor-pointer"
                           onClick={() => {
                             setSelectedIndex(index);
-                            setVisible((pre) => !pre);
-                            console.log(index);
-                          }}
+                            setVisible((pre) => !pre); 
+                          }} 
                         />
                       </td>
                     </tr>
