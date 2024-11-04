@@ -44,13 +44,13 @@ export default function ColorGameMyHistory({ gameType, refreshHistory }) {
     fetchHistory(gameType);
   }, [gameType, fetchHistory, refreshHistory]);
 
-  if (loading) {
-    return (
-      <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-50 z-[9999]">
-        <Loading1 />
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-50 z-[9999]">
+  //       <Loading1 />
+  //     </div>
+  //   );
+  // }
   return (
     <div className="">
       <div className="color-game-history">
@@ -87,7 +87,7 @@ export default function ColorGameMyHistory({ gameType, refreshHistory }) {
             </tr>
           </thead>
 
-          {data.map((item, index) => (
+          {data && data.map((item, index) => (
             <tbody className=" ">
               <tr
                 key={index}

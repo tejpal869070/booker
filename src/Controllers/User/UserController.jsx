@@ -32,6 +32,7 @@ export const GetUserDetails = async () => {
     Cookies.remove("token");
     Cookies.remove("mobile");
     localStorage.removeItem("userDetails");
+    window.location.href = "/home"
     return null;
   }
 };
@@ -406,9 +407,10 @@ export const AddNewBelowMember = async (formData) => {
   }
 };
 
-export const GetTree = async (formData) => {
+export const GetTree = async (uid) => {
   const postData = {
     mobile: mobile,
+    uid: uid
   };
 
   const axiosConfig = {

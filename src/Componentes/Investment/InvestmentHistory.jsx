@@ -51,7 +51,7 @@ export default function InvestmentHistory() {
             {data && data.length === 0 ? (
               <div>
                 <img alt="no data" src={gif1} className="m-auto" />
-                <p className="text-center font-bold text-xl">No Recode !</p>
+                <p className="text-center font-bold text-xl">No Records !</p>
               </div>
             ) : (
               <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 border-indigo-400 border-4">

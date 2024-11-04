@@ -36,6 +36,18 @@ export default function Details({ onClose, singleData }) {
           </div>
 
           <div className={`${classes1}`}>
+            <p>Invest. Return :</p>
+            <p>
+              {(
+                (Number((singleData.amount * singleData.percentage) / 100) +
+                  Number(singleData.amount)) /
+                singleData.times
+              ).toFixed(0)}
+              /{singleData.plan_name}
+            </p>
+          </div>
+
+          <div className={`${classes1}`}>
             <p>Approx Return :</p>
             <p>
               {(singleData.amount * singleData.percentage) / 100 +

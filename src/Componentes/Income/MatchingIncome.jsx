@@ -1,6 +1,7 @@
 import React from "react";
 import TableComponent from "../TableComponent";
 import DateSelector from "./DateSelector";
+import groundimg from "../../assets/photos/ground.webp"
 
 export default function MatchingIncome() {
   const tableData = [
@@ -37,10 +38,21 @@ export default function MatchingIncome() {
     "Action",
   ];
   return (
-    <div>
+    <div className="relative">
       <p className="font-bold text-xl mb-6   dark:text-white">Income Manager {">"}Matching Income</p>
       <DateSelector/>
       <TableComponent tableData={tableData} tableHead={tableHead} />
+      <div
+          className="absolute w-full h-full top-0 bg-black bg-cover bg-center flex inset-0 justify-center align-center items-center bg-no-repeat"
+          style={{ backgroundImage: `url(${groundimg})` }}
+        >
+          <p
+            className="text-6xl text-center font-bold  "
+            style={{ textShadow: "3px 2px 19px white" }}
+          >
+            Coming Soon
+          </p>
+        </div>
     </div>
   );
 }

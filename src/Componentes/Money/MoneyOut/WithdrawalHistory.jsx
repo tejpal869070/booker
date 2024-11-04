@@ -88,7 +88,7 @@ export default function WithdrawalHistory() {
     <div className="relative">
       <div className=" ">
         <div>
-          <h1 className="mb-6 font-bold text-lg">
+          <h1 className="mb-6 font-bold dark:text-gray-200 text-lg">
             Money In {">"}Withdrawal History
           </h1>
           <DateSelector />
@@ -97,7 +97,7 @@ export default function WithdrawalHistory() {
               <div>
                 <img alt="no data" src={gif1} className="m-auto" />
                 <p className="text-center dark:text-gray-200 font-bold text-xl">
-                  No Recode !
+                  No Records !
                 </p>
               </div>
             ) : (

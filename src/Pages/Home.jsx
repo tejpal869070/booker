@@ -504,7 +504,7 @@ export default function Home() {
                 </li>
                 <li className="ml-11">
                   <Link
-                    to={{ pathname: "/home", search: `?network=member-tree` }}
+                    to={{ pathname: "/home", search: `?network=member-tree&uid=${user?.uid}` }}
                     className={`${dropdownClassList}`}
                     onClick={handleHideSideBar}
                   >

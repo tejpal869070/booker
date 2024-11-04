@@ -287,7 +287,7 @@ export default function ColorGame() {
 
       {/* popup */}
       {isOpen && (
-        <div className="animate-fade-down animate-duration-500 fixed top-0 left-0 w-full h-full flex justify-center pt-10  bg-[#7687a3cc] bg-opacity-50 z-[9999]">
+        <div className="animate-fade-down animate-duration-500 fixed top-0 left-0 w-full h-full flex justify-center pt-10  backdrop-blur-md   z-[9999]">
           <div className=" text-white bg-gradient-to-r from-gray-700 rounded h-[60vh] to-slate-900 p-10 inline-block">
             <p className="text-xl font-medium text-center text-gray-200 border-b pb-2">
               Transfer From <br />{" "}

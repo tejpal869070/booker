@@ -134,7 +134,9 @@ export default function NewInvestment() {
             </div>
             <div className="w-full md:w-1/2 py-10 px-5 md:px-10">
               <div className="text-center mb-6">
-                <h1 className="font-bold text-3xl text-gray-900">NEW INVESTMENT</h1>
+                <h1 className="font-bold text-3xl text-gray-900">
+                  NEW INVESTMENT
+                </h1>
                 <p>Let Your Money Work for You.</p>
               </div>
               <p className="  font-medium text-lg text-[green] mb-4">
@@ -151,7 +153,10 @@ export default function NewInvestment() {
               <div>
                 <div className="flex -mx-3">
                   <div className="w-full px-3 mb-5">
-                    <label for="" className="text-xs font-semibold px-1 text-black">
+                    <label
+                      for=""
+                      className="text-xs font-semibold px-1 text-black"
+                    >
                       Choose Plans
                     </label>
                     <div className="flex">
@@ -179,7 +184,10 @@ export default function NewInvestment() {
                 </div>
                 <div className="flex -mx-3">
                   <div className="w-full px-3 mb-8">
-                    <label for="" className="text-xs font-semibold px-1 text-black">
+                    <label
+                      for=""
+                      className="text-xs font-semibold px-1 text-black"
+                    >
                       Amount
                     </label>
                     <div className="flex">
@@ -212,7 +220,8 @@ export default function NewInvestment() {
         </div>
       </div>
 
-      
+       
+
       {isOpen && <ViewPlans onClose={onClose} />}
       {verifyPinPopup && (
         <VerifyPin

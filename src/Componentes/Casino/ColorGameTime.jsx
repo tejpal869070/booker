@@ -133,12 +133,24 @@ export default function ColorGame({ gameType }) {
   };
 
   const userDataGet = async () => {
-    const response = await GetUserDetails();
-    if (response !== null) {
-      setUser(response[0]);
+    setUserLoading(true);
+    try {
+      const response = await GetUserDetails();
+      if (response !== null && response.length > 0) {
+        setUser(response[0]);
+      } else {
+        // Handle case where response is null or empty
+        console.warn("No user data found.");
+        setUser(null); // Optionally reset user state
+      }
+    } catch (error) {
+      console.error("Error fetching user details:", error);
+      // Optionally handle error state or notify the user
+    } finally {
       setUserLoading(false);
     }
   };
+
 
   useEffect(() => {
     userDataGet();
@@ -238,7 +250,7 @@ export default function ColorGame({ gameType }) {
                 hideDay
                 hideHour
                 endAt={currentGameData?.end_date} // Date/Time
-                // onTimeUp={() => getGameHistory(gameType)}
+              // onTimeUp={() => getGameHistory(gameType)}
               />
             </div>
           )}
@@ -274,7 +286,7 @@ export default function ColorGame({ gameType }) {
 
       {betPlace && (
         <div className="fixed  top-0 left-0 w-full h-full flex justify-center items-center backdrop-blur-sm 	 z-[9999]">
-          <img alt="gifff" src={betSuccessGif} className="w-40 h-40"/>
+          <img alt="gifff" src={betSuccessGif} className="w-40 h-40" />
         </div>
       )}
     </div>
@@ -297,7 +309,7 @@ const ColorCircle = ({
 
   const openPopup = () => setIsPopupOpen(true);
   const closePopup = (type) => {
-    
+
     if (type === "success") {
       setIsPopupOpen(false);
       refresh();

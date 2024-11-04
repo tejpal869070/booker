@@ -3,7 +3,7 @@ import { ColorGameAllResult } from "../../Controllers/User/GamesController";
 import swal from "sweetalert";
 import { Loading1 } from "../Loading1";
 
-export default function ColorGameHistory({ gameType, refreshHistory }) {
+export default function ColorGameHistory({ gameType, refreshHistory }) { 
   const [gameHistory, setGameHistory] = useState([]);
   const [loading, setLoading] = useState(true);
   const getGameHistory = async (gameType) => {
@@ -11,7 +11,7 @@ export default function ColorGameHistory({ gameType, refreshHistory }) {
       const response = await ColorGameAllResult(gameType);
       if (response.status) {
         setGameHistory(response.data);
-        setLoading(false)
+        setLoading(false) 
       } else {
         window.location.reload();
       }
@@ -37,13 +37,13 @@ export default function ColorGameHistory({ gameType, refreshHistory }) {
   }, [gameType, refreshHistory]);
 
 
-  if (loading) {
-    return (
-      <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-50 z-[9999]">
-        <Loading1 />
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-50 z-[9999]">
+  //       <Loading1 />
+  //     </div>
+  //   );
+  // }
 
   return (
     <div>
@@ -51,11 +51,11 @@ export default function ColorGameHistory({ gameType, refreshHistory }) {
         <button className="bg-[#ff9600]">Game History</button>
       </div>
       <div className="relative overflow-x-auto  z-0">
-        <p className="font-semibold dark:text-gray-200">Game Recode : </p>
+        <p className="font-semibold dark:text-gray-200">Game Records : </p>
         <div className="grid grid-cols-5 md:grid-cols-10   gap-4 mt-4">
           {gameHistory &&
             gameHistory.map((item, index) => (
-              <div className="relative flex justify-center w-16 h-16">
+              <div className="relative flex justify-center w-16 h-16" key={index}>
                 <div
                   className="w-10 h-10 relative  text-white rounded-full flex items-center justify-center font-semibold text-lg"
                   style={{ backgroundColor: item.color_code.split(",")[0] }}

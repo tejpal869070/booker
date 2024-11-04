@@ -92,7 +92,7 @@ export default function Downlinemember() {
                     {index + 1}.
                   </th>
                   <td className="px-6 py-4">{item.username}</td>
-                  <td className="px-6 py-4">{item.phone}</td>
+                  <td className="px-6 py-4">{item.mobile}</td>
                   <td className="px-6 py-4"> 
                     {item.position === "L"
                       ? "LEFT"

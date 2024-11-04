@@ -75,7 +75,7 @@ export default function Register() {
 
   return (
     <div
-      className="min-h-screen  bg-fixed  bg-no-repeat bg-cover  py-6 px-2 lg:px-0 flex flex-col justify-center sm:py-12"
+      className="min-h-screen  bg-fixed  bg-no-repeat bg-cover  py-6 px-6 lg:px-0 flex flex-col justify-center sm:py-12"
       style={{
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${bg1})`,
       }}
