@@ -123,6 +123,7 @@ export default function ColorGame({ gameType }) {
   const refresh = () => {
     setIsCountDown(false);
     currentData();
+    userDataGet()
     setRefreshHis((pre) => !pre);
   };
 
@@ -156,7 +157,7 @@ export default function ColorGame({ gameType }) {
     userDataGet();
   }, []);
 
-  if (loading || currentGameLoading || userLoading) {
+  if (loading ) {
     return (
       <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-50 z-[9999]">
         <Loading1 />

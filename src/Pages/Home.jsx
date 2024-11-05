@@ -219,10 +219,10 @@ export default function Home() {
 
       <aside
         id="sidebar-multi-level-sidebar"
-        className="fixed top-0 left-0 z-40 w-64 h-screen border-r-2   transition-transform -translate-x-full sm:translate-x-0"
+        className="fixed top-0 flex left-0 z-40 w-full sm:w-64 h-screen    transition-transform -translate-x-full sm:translate-x-0"
         aria-label="Sidebar"
       >
-        <div className="h-full px-3 pt-16 py-4 overflow-y-auto no-scrollbar bg-gradient-to-r from-blue-800 to-indigo-900 dark:bg-gray-800">
+        <div className="h-full px-3 w-64 transition-transform border-r-2   sm:translate-x-0 pt-16 py-4 overflow-y-auto no-scrollbar bg-gradient-to-r from-blue-800 to-indigo-900 dark:bg-gray-800">
           <ul className="space-y-2 font-medium">
             <li className="side-bar-list">
               <Link
@@ -504,7 +504,10 @@ export default function Home() {
                 </li>
                 <li className="ml-11">
                   <Link
-                    to={{ pathname: "/home", search: `?network=member-tree&uid=${user?.uid}` }}
+                    to={{
+                      pathname: "/home",
+                      search: `?network=member-tree&uid=${user?.uid}`,
+                    }}
                     className={`${dropdownClassList}`}
                     onClick={handleHideSideBar}
                   >
@@ -785,13 +788,25 @@ export default function Home() {
             </li>
           </ul>
         </div>
+        <div
+          onClick={() => {
+            const sidebar = document.getElementById(
+              "sidebar-multi-level-sidebar"
+            );
+            sidebar.classList.toggle("translate-x-0");
+            sidebar.classList.toggle("-translate-x-full");
+          }} 
+          className="flex-1  sm:hidden border-none"
+        >
+           
+        </div>
       </aside>
 
       {/* Content */}
-      <div className="bg-no-repeat bg-cover bg-fixed  "  >
+      <div className="bg-no-repeat bg-cover bg-fixed  ">
         <div className="p-2 lg:p-8 sm:ml-64 pt-24 lg:pt-24 ">
           <InnerSection />
-        </div> 
+        </div>
       </div>
 
       {/* Create pin */}

@@ -55,6 +55,7 @@ export default function ColorGame() {
   };
 
   const userDataGet = async () => {
+    setLoading(true)
     const response = await GetUserDetails();
     if (response !== null) {
       setUser(response[0]);
@@ -273,7 +274,7 @@ export default function ColorGame() {
                     pathname: "/home",
                     search: `?colorGameType=${item.id}`,
                   }}
-                  class="w-60 h-60"
+                  class="w-full h-60"
                 >
                   <img
                     alt={item.name}

@@ -129,8 +129,8 @@ export default function Hero1() {
       </p>
       <div className="flex flex-wrap justify-between gap-4 pb-4 ">
         {linkData.map(({ to, icon, label }, index) => (
-          <Link key={index} className="flex-1 relative cursor-pointer" to={to}>
-            <div className="overflow-hidden w-24 md:w-32 text-white bg-black dark:bg-gray-700 rounded group">
+          <Link key={index} className=" flex-1 min-w-28 relative cursor-pointer" to={to}>
+            <div className="overflow-hidden    text-white bg-black dark:bg-gray-700 rounded group">
               <p className="px-3.5 py-2 text-white bg-[#919ffdfc] group-hover:[#7b9eff] flex items-center justify-center transition-transform duration-300 group-hover:translate-y-[-5px]">
                 {icon}
               </p>

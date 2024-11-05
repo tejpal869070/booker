@@ -87,120 +87,136 @@ export default function ColorGameMyHistory({ gameType, refreshHistory }) {
             </tr>
           </thead>
 
-          {data && data.map((item, index) => (
-            <tbody className=" ">
-              <tr
-                key={index}
-                className={`  border-b-2 border-gray-300 dark:bg-gray-800 dark:border-gray-700  `}
-              >
-                <th
-                  scope="row"
-                  className="px-6 py-[3px] font-medium text-gray-900 whitespace-nowrap dark:text-white"
+          {data &&
+            data.map((item, index) => (
+              <tbody className=" ">
+                <tr
+                  key={index}
+                  className={`  border-b-2 border-gray-300 dark:bg-gray-800 dark:border-gray-700  `}
                 >
-                  {item.Period}
-                </th>
-                <td className="px-4 py-[3px] hidden md:table-cell  ">
-                  {item.price}
-                </td>
-                <td className="px-4 py-[3px] hidden md:table-cell">
-                  {item.type}
-                </td>
-                <td className="px-6 py-[3px] hidden md:table-cell">
-                  {item.value}
-                </td>
-                <td className="px-6 py-[3px] border-l-2  hidden md:flex flex-row justify-between items-center">
-                  <p>{item.open_color}</p>{" "}
-                  <p className="rounded-full p-1 bg-[#ffc989] dark:text-gray-900">
-                    {item.number}
-                  </p>
-                </td>
-                <td
-                  className={`px-6 py-[3px]    ${
-                    item.type === "Color"
-                      ? item.value !== "Violet"
-                        ? item.value !== item.open_color
-                          ? "text-[red]"
-                          : "text-[green]"
-                        : item.value === item.open_color ||
-                          item.number === "0" ||
-                          item.number === "5"
+                  <th
+                    scope="row"
+                    className="px-6 py-[3px] font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    {item.Period}
+                  </th>
+                  <td className="px-4 py-[3px] hidden md:table-cell  ">
+                    {item.price}
+                  </td>
+                  <td className="px-4 py-[3px] hidden md:table-cell">
+                    {item.type}
+                  </td>
+                  <td className="px-6 py-[3px] hidden md:table-cell">
+                    {item.value}
+                  </td>
+                  <td className="px-6 py-[3px] border-l-2  hidden md:flex flex-row justify-between items-center">
+                    <p>{item.open_color}</p>{" "}
+                    <p className="rounded-full p-1 bg-[#ffc989] dark:text-gray-900">
+                      {item.number}
+                    </p>
+                  </td>
+                  <td
+                    className={`px-6 py-[3px]    ${
+                      item.type === "Color"
+                        ? item.value === "Red"
+                          ? item.number === "0"
+                            ? "text-[green]"
+                            : item.value === item.open_color
+                            ? "text-[green]"
+                            : "text-[red]"
+                          : item.value === "Green"
+                          ? item.number === "5"
+                            ? "text-[green]"
+                            : item.value === item.open_color
+                            ? "text-[green]"
+                            : "text-[red]"
+                          : item.value === "Violet"
+                          ? item.number === "0" || item.number === "5"
+                            ? "text-[green]"
+                            : "text-[red]"
+                          : 0
+                        : item.value === item.number
                         ? "text-[green]"
                         : "text-[red]"
+                    }`}
+                  >
+                    {item.type === "Color"
+                      ? item.value === "Red"
+                        ? item.number === "0"
+                          ? `+${item.if_open_zero}`
+                          : item.value === item.open_color
+                          ? `+${item.winning_amount}`
+                          : -item.price
+                        : item.value === "Green"
+                        ? item.number === "5"
+                          ? `+${item.if_open_zero}`
+                          : item.value === item.open_color
+                          ? `+${item.winning_amount}`
+                          : -item.price
+                        : item.value === "Violet"
+                        ? item.number === "0" || item.number === "5"
+                          ? `+${item.if_open_zero}`
+                          : -item.price
+                        : 0
                       : item.value === item.number
-                      ? "text-[green]"
-                      : "text-[red]"
-                  }`}
-                >
-                  {item.type === "Color"
-                    ? item.value !== "Violet"
-                      ? item.value !== item.open_color
-                        ? -item.price
-                        : `+${item.winning_amount}`
-                      : item.value === item.open_color ||
-                        item.number === "0" ||
-                        item.number === "5"
-                      ? `+${item.if_open_zero}`
-                      : -item.price
-                    : item.value === item.number
-                    ? `+${item.winning_amount}`
-                    : -item.price}
-                </td>
-                <td
-                  className="px-6 py-[3px]  md:hidden"
-                  onClick={() => {
-                    setSelectedIndex(index);
-                    setVisible((pre) => !pre);
-                  }}
-                >
-                  <FaCircleChevronDown
-                    size={20}
-                    className="text-black dark:text-gray-200"
-                  />
-                </td>
-              </tr>
-              {visible && selectedIndex === index ? (
-                <tr className="  bg-gray-300  dark:bg-gray-400">
-                  <td colSpan="3 " className="py-2">
-                    <div className="text-black dark:text-gray-800 flex px-10 justify-between">
-                      <p>Period</p>
-                      <p>{item.Period}</p>
-                    </div>
-                    <div className="text-black dark:text-gray-800 flex px-10 justify-between">
-                      <p>Amount</p>
-                      <p>{item.price}</p>
-                    </div>
-                    <div className="text-black dark:text-gray-800 flex px-10 justify-between">
-                      <p>Type</p>
-                      <p>{item.type}</p>
-                    </div>
-                    <div className="text-black dark:text-gray-800 flex px-10 justify-between">
-                      <p>Seleted</p>
-                      <p>{item.value}</p>
-                    </div>
-                    <div className="text-black dark:text-gray-800 flex px-10 justify-between">
-                      <p>Result</p>
-                      <p className="flex gap-2">
-                        <p>{item.open_color}</p>{" /"}
-                        <p className=" ">
-                          {item.number}
-                        </p>
-                      </p>
-                    </div>
-                    <div className="text-black dark:text-gray-800 flex px-10 justify-between">
-                      <p>Date</p>
-                      <p>{item.date?.split("T")[0]}</p>
-                    </div>
-                    <div className="text-black dark:text-gray-800 flex px-10 justify-between">
-                      <p>Time</p>
-                      <p>{item.date?.split("T")[1]}(UTC)</p>
-                    </div>
+                      ? `+${item.winning_amount}`
+                      : -item.price}
+                  </td>
+                  <td
+                    className="px-6 py-[3px]  md:hidden"
+                    onClick={() => {
+                      setSelectedIndex(index);
+                      setVisible((pre) => !pre);
+                    }}
+                  >
+                    <FaCircleChevronDown
+                      size={20}
+                      className="text-black dark:text-gray-200"
+                    />
                   </td>
                 </tr>
-              ) : (
-                ""
-              )}
-            </tbody>
-          ))}
+                {visible && selectedIndex === index ? (
+                  <tr className="  bg-gray-300  dark:bg-gray-400">
+                    <td colSpan="3 " className="py-2">
+                      <div className="text-black dark:text-gray-800 flex px-10 justify-between">
+                        <p>Period</p>
+                        <p>{item.Period}</p>
+                      </div>
+                      <div className="text-black dark:text-gray-800 flex px-10 justify-between">
+                        <p>Amount</p>
+                        <p>{item.price}</p>
+                      </div>
+                      <div className="text-black dark:text-gray-800 flex px-10 justify-between">
+                        <p>Type</p>
+                        <p>{item.type}</p>
+                      </div>
+                      <div className="text-black dark:text-gray-800 flex px-10 justify-between">
+                        <p>Seleted</p>
+                        <p>{item.value}</p>
+                      </div>
+                      <div className="text-black dark:text-gray-800 flex px-10 justify-between">
+                        <p>Result</p>
+                        <p className="flex gap-2">
+                          <p>{item.open_color}</p>
+                          {" /"}
+                          <p className=" ">{item.number}</p>
+                        </p>
+                      </div>
+                      <div className="text-black dark:text-gray-800 flex px-10 justify-between">
+                        <p>Date</p>
+                        <p>{item.date?.split("T")[0]}</p>
+                      </div>
+                      <div className="text-black dark:text-gray-800 flex px-10 justify-between">
+                        <p>Time</p>
+                        <p>{item.date?.split("T")[1]}(UTC)</p>
+                      </div>
+                    </td>
+                  </tr>
+                ) : (
+                  ""
+                )}
+              </tbody>
+            ))}
 
           <div className="flex items-center gap-2 ">
             <button

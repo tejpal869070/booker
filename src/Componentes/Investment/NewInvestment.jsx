@@ -9,7 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { Loading1 } from "../Loading1";
 import successImg from "../../assets/photos/success1-1--unscreen.gif";
 import gif1 from "../../assets/photos/growwealthgif.gif";
-import VerifyPin from "../VerifyPin";
+import VerifyPin from "../VerifyPin"; 
 
 export default function NewInvestment() {
   const [isOpen, setIsOpen] = useState(false);
@@ -114,6 +114,10 @@ export default function NewInvestment() {
   useEffect(() => {
     userDataGet();
   }, []);
+  
+
+  
+
 
   if (success) {
     return (
@@ -142,14 +146,7 @@ export default function NewInvestment() {
               <p className="  font-medium text-lg text-[green] mb-4">
                 Account Balance: ₹{user && user.wallet_balance}
               </p>
-              <div className="  mb-4">
-                <button
-                  onClick={() => setIsOpen(true)}
-                  className="animate-bounce shadow-xl focus:animate-none   inline-flex text-md font-medium bg-indigo-900 mt-3 px-4 py-2 rounded-lg tracking-wide text-white"
-                >
-                  <span className="ml-2">View Plans 🏀</span>
-                </button>
-              </div>
+              <div className="  mb-4"></div>
               <div>
                 <div className="flex -mx-3">
                   <div className="w-full px-3 mb-5">
@@ -201,12 +198,16 @@ export default function NewInvestment() {
                         className="w-full -ml-10  pr-3 py-2 rounded-lg text-black font-medium border-2 border-gray-200 outline-none focus:border-indigo-500"
                       />
                     </div>
+                    <p className="text-gray-700 text-xs italic">
+                      Minimum Amount is ₹100
+                    </p>
                   </div>
                 </div>
                 <div className="flex flex-wrap   gap-6  ">
                   <button
                     className="relative"
                     onClick={() => setVerifyPinPop(true)}
+                    disabled={amount < 100}
                   >
                     <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-black dark:bg-gray-500"></span>
                     <span className="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900">
@@ -220,7 +221,86 @@ export default function NewInvestment() {
         </div>
       </div>
 
-       
+      <div className="w-full flex flex-col gap-4 items-center justify-center py-4">
+        <p className="animate-bounce shadow-xl focus:animate-none   inline-flex text-xl font-medium bg-indigo-900 mt-3 px-4 py-2 rounded-lg tracking-wide text-white">
+          <span className="ml-2">OUR INVESTMENT PLANS 🏀</span>
+        </p>
+        <p className="underlined font-medium text-gray-800 dark:text-gray-200">Enter Amount Above To Calculate Returns</p>
+      </div>
+
+
+      <div className="flex flex-wrap   gap-4   py-3  ">
+        {PlansData &&
+          PlansData.map((item, index) => (
+            <div
+              key={index}
+              className=" min-w-full shadow-lg   md:min-w-[48%] lg:min-w-[24%] flex   space-y-8 items-start flex-col bg-[#6489fd26] rounded-3xl border border-gray-200 bg-white p-6 text-gray-900 xl:p-8"
+            >
+              <h3 className="text-lg font-medium dark:text-gray-100">{item.plan_name}</h3>
+              <div className="my-8 flex items-baseline justify-center ">
+                <span className="mr-2 text-2xl font-extrabold dark:text-gray-200">
+                  ₹
+                  {(
+                    (Number((amount * item.percentage) / 100) +
+                      Number(amount)) /
+                    item.times
+                  ).toFixed(0)}
+                  /{item.plan_name}
+                </span>
+                {/* <span className="text-gray-600">/{item.plan_name}</span> */}
+              </div>
+
+              {/* <p className="font-light text-gray-600 sm:text-sm">
+                Best option for personal use & for your next project.
+              </p> */}
+
+              <ul
+                role="list"
+                className="mb-8 space-y-4 text-left text-gray-600  text-sm"
+              >
+                <li className="dark:text-gray-300 flex items-center space-x-3 ">
+                  <svg
+                    className="h-5 w-5 flex-shrink-0 bg-gray-900 rounded-full p-0.5 text-white"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clip-rule="evenodd"
+                    ></path>
+                  </svg>
+                  <span>
+                    {item.times} {item.title} Payout
+                  </span>
+                </li>
+                <li className="dark:text-gray-300 flex items-center space-x-3">
+                  <svg
+                    className="h-5 w-5 flex-shrink-0 bg-gray-900 rounded-full p-0.5 text-white"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clip-rule="evenodd"
+                    ></path>
+                  </svg>
+                  <span>{item.percentage}% Interest Rate</span>
+                </li>
+              </ul>
+
+              <a className="cursor-pointer bg-gray-900 dark:bg-indigo-800 w-full rounded-md  p-3 text-center text-sm font-semibold text-white shadow-sm  hover:-translate-y-1">
+                Total Return: ₹
+                {(
+                  Number((amount * item.percentage) / 100) + Number(amount)
+                ).toFixed(0)}
+              </a>
+            </div>
+          ))}
+      </div>
 
       {isOpen && <ViewPlans onClose={onClose} />}
       {verifyPinPopup && (
