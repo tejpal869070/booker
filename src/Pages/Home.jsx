@@ -358,15 +358,15 @@ export default function Home() {
                     onClick={handleHideSideBar}
                   >
                     Color Play
-                  </Link>
+                  </Link> 
                 </li>
                 <li className="ml-11">
                   <Link
-                    to={{ pathname: "/home", search: `?game=card-2020` }}
+                    to={{ pathname: "/home", search: `?game=aviator` }}
                     className={`${dropdownClassList}`}
                     onClick={handleHideSideBar}
                   >
-                    Card 2020
+                    Aviator
                   </Link>
                 </li>
               </ul>

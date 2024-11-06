@@ -1,8 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import Timer from "../GamesComponent/Timer";
-import NumberColor from "../GamesComponent/NumberColor";
 import ColorGameHistory from "../GamesComponent/ColorGameHistory";
-import ColorGameChart from "../GamesComponent/ColorGameChart";
 import ColorGameMyHistory from "../GamesComponent/ColorGameMyHistory";
 import bg1 from "../../assets/photos/bg1.png";
 import ColorGamePopup from "../GamesComponent/ColorGamePopup";
@@ -21,7 +19,10 @@ import offer1 from "../../assets/photos/offer1.jpg";
 import offer2 from "../../assets/photos/offer2.jpg";
 import offer3 from "../../assets/photos/offer3.jpg";
 import { toast, ToastContainer } from "react-toastify";
-import betSuccessGif from "../../assets/photos/bet-success.gif"
+import { IoMdVolumeHigh } from "react-icons/io";
+import betSuccessGif from "../../assets/photos/bet-success.gif";
+import { FaVolumeMute } from "react-icons/fa";
+import audio1 from "../../assets/audio/betPlace.mp3";
 
 export default function ColorGame({ gameType }) {
   const [selectedHistoryTab, setSelectedHistoryTab] = useState(1);
@@ -37,6 +38,15 @@ export default function ColorGame({ gameType }) {
   const [user, setUser] = useState();
   const [userLoading, setUserLoading] = useState(true);
   const [betPlace, setBetPlaced] = useState(false);
+  const [sound, isSound] = useState(false);
+
+  // whether red or green can be selected
+  const [RedSelected, setRedSelected] = useState(true);
+  const [GreenSelected, setGreenSelected] = useState(true);
+
+  const controllSound = () => {
+    isSound((pre) => !pre);
+  };
 
   const openPopup = (item) => {
     setIsPopupOpen(true);
@@ -123,7 +133,7 @@ export default function ColorGame({ gameType }) {
   const refresh = () => {
     setIsCountDown(false);
     currentData();
-    userDataGet()
+    userDataGet();
     setRefreshHis((pre) => !pre);
   };
 
@@ -152,12 +162,18 @@ export default function ColorGame({ gameType }) {
     }
   };
 
-
   useEffect(() => {
     userDataGet();
   }, []);
 
-  if (loading ) {
+  useEffect(() => {
+    const sound1 = document.getElementById("sound3");
+    if (sound && betPlace) {
+      sound1.play(); 
+    }
+  }, [sound, betPlace]);
+
+  if (loading) {
     return (
       <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-50 z-[9999]">
         <Loading1 />
@@ -167,19 +183,39 @@ export default function ColorGame({ gameType }) {
 
   return (
     <div className="flex">
+      <audio id="sound3">
+        <source src={audio1} type="audio/mp3" />
+        Your browser does not support the audio element.
+      </audio>
       <ToastContainer />
       <div className="w-full">
         <div className="flex justify-between items-center px-2">
-          <Link
-            className="cursor-pointer   "
-            to={{ pathname: "", search: "?game=color-game" }}
-          >
-            <IoHome size={24} className="dark:text-white" />
-          </Link>
+          <div className="flex items-center justify-center gap-2">
+            <Link
+              className="cursor-pointer   "
+              to={{ pathname: "", search: "?game=color-game" }}
+            >
+              <IoHome size={24} className="dark:text-white" />
+            </Link>
+            {sound ? (
+              <IoMdVolumeHigh
+                size={24}
+                className="cursor-pointer text-gray-900 dark:text-gray-200"
+                onClick={controllSound}
+              />
+            ) : (
+              <FaVolumeMute
+                size={24}
+                className="cursor-pointer text-gray-900 dark:text-gray-200"
+                onClick={controllSound}
+              />
+            )}
+          </div>
           <p className="font-medium dark:text-gray-200 text-medium pr-4">
             Balance : ₹ {user && user.color_wallet_balnace}
           </p>
         </div>
+
         <div
           className="flex bg-no-repeat bg-cover px-2 md:px-4 justify-between w-full border-b-2 border-gray pb-2"
           style={{ backgroundImage: `url(${bg1})` }}
@@ -195,6 +231,7 @@ export default function ColorGame({ gameType }) {
               currentGameData={currentGameData}
               refresh={refresh}
               countdownFunction={countdownFunction}
+              sound={sound}
             />
           </div>
         </div>
@@ -204,8 +241,15 @@ export default function ColorGame({ gameType }) {
           <div className="flex justify-between lg:justify-center lg:gap-12 justify-center py-2 border-b-2 border-white">
             {GameColors &&
               GameColors.map((item, index) => (
-                <div
+                <button
                   key={index}
+                  disabled={
+                    !GreenSelected
+                      ? index === 0
+                      : !RedSelected
+                      ? index === 2
+                      : false
+                  }
                   onClick={() => openPopup(item)}
                   className={`px-6 md:px-8 cursor-pointer  hover:shadow-lg rounded-lg py-3  `}
                   style={{ backgroundColor: item.color_code }}
@@ -213,7 +257,7 @@ export default function ColorGame({ gameType }) {
                   <button className="text-2xl font-bold text-white">
                     {item.color_name}
                   </button>
-                </div>
+                </button>
               ))}
           </div>
 
@@ -251,7 +295,7 @@ export default function ColorGame({ gameType }) {
                 hideDay
                 hideHour
                 endAt={currentGameData?.end_date} // Date/Time
-              // onTimeUp={() => getGameHistory(gameType)}
+                // onTimeUp={() => getGameHistory(gameType)}
               />
             </div>
           )}
@@ -310,7 +354,6 @@ const ColorCircle = ({
 
   const openPopup = () => setIsPopupOpen(true);
   const closePopup = (type) => {
-
     if (type === "success") {
       setIsPopupOpen(false);
       refresh();

@@ -14,11 +14,11 @@ export default function GamesSlider() {
     dots: true,
     infinite: true,
 
-    speed: 500,
+    speed: 3000,
     slidesToShow: 5,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 4000,
+    autoplaySpeed: 50,
     cssEase: "ease-in-out",
     responsive: [
       {
@@ -37,7 +37,7 @@ export default function GamesSlider() {
           <div className="w-full h-30 overflow-hidden  " key={index}>
             <img
               alt="side"
-              className="w-[100%] lg:w-[90%] rounded-lg   border-2 border-gray-500 h-[140px] object-cover"
+              className="w-[100%] lg:w-[90%] rounded-lg    h-[140px] object-cover"
               src={item}
             />
           </div>

@@ -1,7 +1,8 @@
 import React, { useEffect, useMemo } from "react";
 import { useLocation } from "react-router-dom";
 import ColorGame from "../Componentes/Casino/ColorGame";
-import Card2020 from "../Componentes/Casino/Card2020";
+import Card2020 from "../Componentes/Casino/Aviator";
+import Aviator from "../Componentes/Casino/Aviator";
 
 export default function LiveCasino() {
   const location = useLocation();
@@ -22,8 +23,8 @@ export default function LiveCasino() {
 
   if (paramsData && paramsData.game === "color-game") {
     return <div>{<ColorGame />}</div>;
-  } else if (paramsData && paramsData.game === "card-2020") {
-    return <div>{<Card2020 />}</div>;
+  } else if (paramsData && paramsData.game === "aviator") {
+    return <div>{<Aviator />}</div>;
   } else {
     return <div>no game selected</div>;
   }

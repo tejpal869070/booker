@@ -4,9 +4,7 @@ import { IoSunny } from "react-icons/io5";
 import { GiMoon } from "react-icons/gi";
 
 const ThemeToggle = ({ onNav }) => {
-  const [darkMode, setDarkMode] = useState(
-    () => localStorage.getItem("theme") === "dark"
-  );
+  const [darkMode, setDarkMode] = useState(true);
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", darkMode);

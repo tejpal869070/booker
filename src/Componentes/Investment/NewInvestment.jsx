@@ -236,9 +236,9 @@ export default function NewInvestment() {
               key={index}
               className=" min-w-full shadow-lg   md:min-w-[48%] lg:min-w-[24%] flex   space-y-8 items-start flex-col bg-[#6489fd26] rounded-3xl border border-gray-200 bg-white p-6 text-gray-900 xl:p-8"
             >
-              <h3 className="text-lg font-medium dark:text-gray-100">{item.plan_name}</h3>
+              <h3 className="text-lg font-medium dark:text-gray-800">{item.plan_name}</h3>
               <div className="my-8 flex items-baseline justify-center ">
-                <span className="mr-2 text-2xl font-extrabold dark:text-gray-200">
+                <span className="mr-2 text-2xl font-extrabold dark:text-gray-800">
                   ₹
                   {(
                     (Number((amount * item.percentage) / 100) +
@@ -258,7 +258,7 @@ export default function NewInvestment() {
                 role="list"
                 className="mb-8 space-y-4 text-left text-gray-600  text-sm"
               >
-                <li className="dark:text-gray-300 flex items-center space-x-3 ">
+                <li className="dark:text-gray-800 flex items-center space-x-3 ">
                   <svg
                     className="h-5 w-5 flex-shrink-0 bg-gray-900 rounded-full p-0.5 text-white"
                     fill="currentColor"
@@ -275,7 +275,7 @@ export default function NewInvestment() {
                     {item.times} {item.title} Payout
                   </span>
                 </li>
-                <li className="dark:text-gray-300 flex items-center space-x-3">
+                <li className="dark:text-gray-800 flex items-center space-x-3">
                   <svg
                     className="h-5 w-5 flex-shrink-0 bg-gray-900 rounded-full p-0.5 text-white"
                     fill="currentColor"
