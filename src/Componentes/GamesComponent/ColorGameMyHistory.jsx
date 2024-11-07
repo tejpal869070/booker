@@ -19,6 +19,7 @@ export default function ColorGameMyHistory({ gameType, refreshHistory }) {
         const response = await MyColorGameHistory(gameType, pageId);
         if (response.status) {
           setData(response.data);
+          console.log(response.data);
           setLoading(false);
         }
       } catch (error) {
@@ -82,6 +83,9 @@ export default function ColorGameMyHistory({ gameType, refreshHistory }) {
                 Result
               </th>
               <th scope="col" className="px-6 py-3  md:hidden">
+                P/L
+              </th>
+              <th scope="col" className="px-6 py-3  md:hidden">
                 View
               </th>
             </tr>
@@ -103,6 +107,7 @@ export default function ColorGameMyHistory({ gameType, refreshHistory }) {
                   <td className="px-4 py-[3px] hidden md:table-cell  ">
                     {item.price}
                   </td>
+
                   <td className="px-4 py-[3px] hidden md:table-cell">
                     {item.type}
                   </td>
@@ -112,6 +117,13 @@ export default function ColorGameMyHistory({ gameType, refreshHistory }) {
                   <td className="px-6 py-[3px] border-l-2  hidden md:flex flex-row justify-between items-center">
                     <p>{item.open_color}</p>{" "}
                     <p className="rounded-full p-1 bg-[#ffc989] dark:text-gray-900">
+                      {item.number}
+                    </p>
+                  </td>
+                  <td className="px-6 py-[3px]   md:hidden flex flex-row justify-center items-center">
+                    <p
+                      className={`rounded-full  w-8  h-8  flex items-center justify-center  dark:text-gray-900 bg-[${item.open_color}]`}
+                    >
                       {item.number}
                     </p>
                   </td>
@@ -177,7 +189,7 @@ export default function ColorGameMyHistory({ gameType, refreshHistory }) {
                 </tr>
                 {visible && selectedIndex === index ? (
                   <tr className="  bg-gray-300  dark:bg-gray-400">
-                    <td colSpan="3 " className="py-2">
+                    <td colSpan="4 " className="py-2">
                       <div className="text-black dark:text-gray-800 flex px-10 justify-between">
                         <p>Period</p>
                         <p>{item.Period}</p>

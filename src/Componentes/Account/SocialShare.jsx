@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { ToastContainer, toast } from "react-toastify";
-import { MdCancel } from "react-icons/md";
+import { MdCancel } from "react-icons/md"; 
 
 const SocialShare = ({ url, onClose }) => {
   const [isCopied1, setIsCopied1] = useState(false);

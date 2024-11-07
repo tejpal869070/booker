@@ -22,6 +22,8 @@ import Events from "../../Componentes/Events/Events";
 import LiveCasino from "../LiveCasino";
 import ColorGameTime from "../../Componentes/Casino/ColorGameTime";
 import ChangePin from "../../Componentes/Account/ChangePin";
+import UserProfile from "../../Componentes/Account/UserProfile";
+import Wallet from "../../Componentes/Account/Wallet";
 
 export default function InnerSection() {
   const location = useLocation();
@@ -43,6 +45,10 @@ export default function InnerSection() {
     return <div>{<Events gameType="tennis" />}</div>;
   } else if (paramsData && paramsData.investment === "new-investment") {
     return <div> {<NewInvestment />} </div>;
+  } else if (paramsData && paramsData.user === "profile") {
+    return <div> {<UserProfile />} </div>;
+  }else if (paramsData && paramsData.user === "wallet") {
+    return <div> {<Wallet />} </div>;
   } else if (paramsData && paramsData.investment === "investment-history") {
     return <div> {<InvestmentHistory />} </div>;
   } else if (paramsData && paramsData.network === "downline-member") {

@@ -189,7 +189,13 @@ export default function ColorGame({ gameType }) {
       </audio>
       <ToastContainer />
       <div className="w-full">
-        <div className="flex justify-between items-center px-2">
+
+
+        <div>
+
+        </div>
+        {/* home volume balance */}
+        <div className=" flex justify-between items-center px-2">
           <div className="flex items-center justify-center gap-2">
             <Link
               className="cursor-pointer   "
@@ -289,7 +295,7 @@ export default function ColorGame({ gameType }) {
           {isCountDown && (
             <div className="absolute w-full h-full top-0 bg-[#000000c9] flex justify-center items-center">
               <FlipCountdown
-                size="large"
+                className="size-medium lg:size-large"
                 hideYear
                 hideMonth
                 hideDay

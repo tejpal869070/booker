@@ -197,7 +197,7 @@ export default function ColorGame() {
   }
 
   return (
-    <div>
+    <div className="h-screen">
       <div className=" hidden md:flex   gap-6 mb-4 flex-wrap  ">
         <p className="relative " href="#">
           <p className="fold-bold border-2 border-black dark:border-gray-400 relative z-[2] inline-block h-full w-full rounded  bg-indigo-100 dark:bg-indigo-100 text-gray-700 px-3 py-1 text-base font-bold text-black transition duration-100  ">
@@ -274,7 +274,7 @@ export default function ColorGame() {
                     pathname: "/home",
                     search: `?colorGameType=${item.id}`,
                   }}
-                  class="w-full h-60"
+                  class="w-full h-60 m-auto"
                 >
                   <img
                     alt={item.name}

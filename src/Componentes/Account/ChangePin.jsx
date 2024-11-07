@@ -181,7 +181,7 @@ export default function ChangePin() {
   }
 
   return (
-    <div className="pb-10 ">
+    <div className="pb-10 h-screen">
       <p className="text-2xl font-bold dark:text-gray-200 border-b-2 pb-4 border-gray-800 dark:border-gray-400 ">
         Change Security PIN
       </p>

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { Loading1 } from "../../Componentes/Loading1";
 import { ChangePasswordControll } from "../../Controllers/User/UserController";
+import Logo from "../../assets/photos/logo.png";
 
 export default function ChangePassword() {
   const [formError, setFormError] = useState();
@@ -45,7 +46,7 @@ export default function ChangePassword() {
       if (response.error === false) {
         Cookies.remove("mobile");
         Cookies.remove("token");
-        toast.success("Password reset success!" ,{
+        toast.success("Password reset success!", {
           position: "top-center",
         });
         toast.success("Please Login Again!");
@@ -66,12 +67,20 @@ export default function ChangePassword() {
 
   const { mobile, password, new_password } = user;
   return (
-    <div>
+    <div className="dark:bg-black">
       <section
         className="bg-no-repeat bg-center	bg-cover "
         style={{ backgroundImage: `url(${bg1})` }}
       >
-        <div className="flex flex-col items-center justify-center px-6 py-8   mx-auto md:h-screen lg:py-0">
+        <div className="w-full flex justify-center items-center">
+          <Link
+            to={{ pathname: "/home", search: `?dashboard` }}
+            className="flex items-center "
+          >
+            <img src={Logo} className="h-20" alt="bLogo" />
+          </Link>
+        </div>
+        <div className="flex flex-col items-center mt-6  px-6 py-8   mx-auto  h-screen lg:py-0">
           <div className="w-full p-6 bg-[#ffffffbd] rounded-lg shadow dark:border md:mt-0 sm:max-w-md dark:bg-gray-800 dark:border-gray-700 sm:p-8">
             <h2 className="mb-1 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Change Password
