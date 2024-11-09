@@ -13,6 +13,8 @@ import { FcMoneyTransfer } from "react-icons/fc";
 import { BiSolidColor } from "react-icons/bi";
 import { PiFootballFill } from "react-icons/pi";
 import bg1 from "../../assets/photos/bg-main.jpg";
+import { FaBomb } from "react-icons/fa";
+
 
 export default function Hero1() {
   const [showShare, setShowShare] = useState(false);
@@ -55,12 +57,8 @@ export default function Hero1() {
           className="relative   col-span-12 md:col-span-8 bg-opacity-10 bg-top bg-cover bg-left-bottom border-2 border-[#92a0fd] dark:border-gray-200 rounded-lg flex justify-between p-4"
           style={{ backgroundImage: `url(${bg1})` }}
         >
-          
-
           <div className="z-[9]">
-            <h1
-              className="text-xl font-bold  text-white " 
-            >
+            <h1 className="text-xl font-bold  text-white ">
               Congratulations {userData && userData.uname}! 🎉
             </h1>
             <p className="text-sm mt-2 text-gray-100">
@@ -86,6 +84,18 @@ export default function Hero1() {
                 <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-black"></span>
                 <span className="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900">
                   Deposit
+                </span>
+              </Link>
+              <Link
+                className="relative"
+                to={{
+                  pathname: "/home",
+                  search: "?user=VIP",
+                }}
+              >
+                <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-black"></span>
+                <span className="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-white px-6 py-1 text-base font-bold text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900">
+                  VIP
                 </span>
               </Link>
             </div>
@@ -125,11 +135,15 @@ export default function Hero1() {
       </div>
       {/* quick options */}
       <p className="text-2xl pt-10 pb-4 dark:text-gray-200 font-bold ">
-        Qucik Action
+        Quick Action
       </p>
       <div className="flex flex-wrap justify-between gap-4 pb-4 ">
         {linkData.map(({ to, icon, label }, index) => (
-          <Link key={index} className=" flex-1 min-w-28 relative cursor-pointer" to={to}>
+          <Link
+            key={index}
+            className=" flex-1 min-w-28 relative cursor-pointer"
+            to={to}
+          >
             <div className="overflow-hidden    text-white bg-black dark:bg-gray-700 rounded group">
               <p className="px-3.5 py-2 text-white bg-[#919ffdfc] group-hover:[#7b9eff] flex items-center justify-center transition-transform duration-300 group-hover:translate-y-[-5px]">
                 {icon}
@@ -155,6 +169,11 @@ const linkData = [
     to: { pathname: "/home", search: "?game=color-game" },
     icon: <BiSolidColor size={30} color="#fcff21" />,
     label: "Color Game",
+  },
+  {
+    to: { pathname: "/home", search: "?game=mines" },
+    icon: <FaBomb size={30} color="#fcff21" />,
+    label: "Mines Game",
   },
   {
     to: { pathname: "/home", search: "?event=inplay" },

@@ -24,6 +24,7 @@ import ColorGameTime from "../../Componentes/Casino/ColorGameTime";
 import ChangePin from "../../Componentes/Account/ChangePin";
 import UserProfile from "../../Componentes/Account/UserProfile";
 import Wallet from "../../Componentes/Account/Wallet";
+import VIP from "../../Componentes/Account/VIP";
 
 export default function InnerSection() {
   const location = useLocation();
@@ -47,8 +48,10 @@ export default function InnerSection() {
     return <div> {<NewInvestment />} </div>;
   } else if (paramsData && paramsData.user === "profile") {
     return <div> {<UserProfile />} </div>;
-  }else if (paramsData && paramsData.user === "wallet") {
+  } else if (paramsData && paramsData.user === "wallet") {
     return <div> {<Wallet />} </div>;
+  } else if (paramsData && paramsData.user === "VIP") {
+    return <div> {<VIP />} </div>;
   } else if (paramsData && paramsData.investment === "investment-history") {
     return <div> {<InvestmentHistory />} </div>;
   } else if (paramsData && paramsData.network === "downline-member") {

@@ -71,7 +71,7 @@ export default function Wallet() {
               key={index}
               to={item.linkTo}
               className="w-1/4  backdrop-blur-sm flex flex-col gap-1  p-2 pt-2 rounded-lg flex   items-center   "
-            >
+            > 
               <p className="p-2 dark:bg-gray-500 rounded-lg shadow-lg">
                 {item.icons}
               </p>

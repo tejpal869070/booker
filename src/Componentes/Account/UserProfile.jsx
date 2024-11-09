@@ -7,6 +7,12 @@ import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { ToastContainer, toast } from "react-toastify";
+import { FaWallet } from "react-icons/fa";
+import { BsWalletFill } from "react-icons/bs";
+import { FaUserFriends } from "react-icons/fa";
+import { FaUserPlus } from "react-icons/fa6";
+
+
 
 export default function UserProfile() {
   const [user, setUser] = React.useState({});
@@ -93,6 +99,23 @@ export default function UserProfile() {
             </div>
           </div>
 
+          <div className="flex flex-wrap   mt-6 rounded bg-gray-100 dark:bg-gray-600 py-2  ">
+            {links.map((item, index) => (
+              <Link
+                key={index}
+                to={item.linkTo}
+                className="w-1/4  backdrop-blur-sm flex flex-col gap-1  p-2 pt-2 rounded-lg flex   items-center   "
+              >
+                <p className="p-2 dark:bg-gray-500 rounded-lg shadow-lg">
+                  {item.icons}
+                </p>
+                <p className=" text-sm text-gray-500 dark:text-gray-200 text-center">
+                  {item.label}
+                </p>
+              </Link>
+            ))}
+          </div>
+
           <div class="flex items-center py-3 rounded mt-3 text-lg bg-gray-100 dark:bg-gray-600 py-2 px-3">
             <span className="text-gray-800 dark:text-gray-300 font-semibold">
               Refer
@@ -165,8 +188,7 @@ export default function UserProfile() {
                 Downline Member
               </span>
               <span class="ml-auto flex items-center justify-center gap-2 dark:text-gray-200 font-semibold">
-                {user.my_downline}{" "}
-                <FaAngleRight />
+                {user.my_downline} <FaAngleRight />
               </span>
             </Link>
             <Link
@@ -177,8 +199,7 @@ export default function UserProfile() {
                 Direct Downline
               </span>
               <span class="ml-auto flex items-center justify-center gap-2 dark:text-gray-200 font-semibold">
-                {user.direct_downline}{" "}
-                <FaAngleRight />
+                {user.direct_downline} <FaAngleRight />
               </span>
             </Link>
             <Link
@@ -233,3 +254,26 @@ export default function UserProfile() {
     </div>
   );
 }
+
+const links = [
+  {
+    label: "Wallet",
+    icons: <FaWallet size={26} className="dark:text-white" />,
+    linkTo: "/home?user=wallet",
+  },
+  {
+    label: "Investment",
+    icons: <BsWalletFill size={26} className="dark:text-white" />,
+    linkTo: "/home?investment=new-investment",
+  },
+  {
+    label: "My Team",
+    icons: <FaUserFriends size={26} className="dark:text-white" />,
+    linkTo: "/home?network=direct-downline",
+  },
+  {
+    label: "Add in Team",
+    icons: <FaUserPlus size={26} className="dark:text-white" />,
+    linkTo: "/home?network=add-new-member",
+  },
+];

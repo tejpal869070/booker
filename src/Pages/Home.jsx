@@ -370,6 +370,15 @@ export default function Home() {
                 </li>
                 <li className="ml-11">
                   <Link
+                    to={{ pathname: "/home", search: `?game=mines` }}
+                    className={`${dropdownClassList}`}
+                    onClick={handleHideSideBar}
+                  >
+                    Mines Game
+                  </Link>
+                </li>
+                <li className="ml-11">
+                  <Link
                     to={{ pathname: "/home", search: `?game=aviator` }}
                     className={`${dropdownClassList}`}
                     onClick={handleHideSideBar}
@@ -847,8 +856,8 @@ export default function Home() {
                 Wallet
               </span>
             </Link>
-            <button
-              type="button"
+            <Link
+              to={{ pathname: "/home", search: "?user=VIP" }}
               class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
             >
               <RiVipDiamondFill
@@ -858,7 +867,7 @@ export default function Home() {
               <span class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">
                 VIP
               </span>
-            </button>
+            </Link>
             <Link
               to={{ pathname: "/home", search: `?user=profile` }}
               class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
@@ -882,7 +891,7 @@ export default function Home() {
 
       {/* Content */}
       <div className="bg-no-repeat bg-cover bg-fixed dark:bg-black ">
-        <div className="p-2 lg:p-8 sm:ml-64  pb-16 lg:pt-24  ">
+        <div className="p-2 md:p-8 sm:ml-64  pb-24 md:pt-24  ">
           <InnerSection />
         </div>
       </div>
