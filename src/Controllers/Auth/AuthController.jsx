@@ -10,6 +10,8 @@ export const CheckUserExistance = async (formData) => {
     const postData = {
       mobile: formData.mobile,
       email: formData.email,
+      reffer_by: formData.reffer_by,
+      position : formData.position || "L"
     };
 
     const response = await axios.post(
@@ -30,6 +32,8 @@ export const userRegistration = async (formData) => {
       mobile: formData.mobile,
       password: formData.password,
       email: formData.email,
+      reffer_by: formData.reffer_by,
+      position: formData.position,
       token: formData.token,
     };
 

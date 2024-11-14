@@ -196,3 +196,43 @@
 .animate-zoom-in {
   animation: zoomIn 0.5s ease-in-out forwards;
 }
+
+
+
+/* plinkogame */
+.plinko-board {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f7fafc;
+}
+
+.board-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.start-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #3182ce;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.start-button:hover {
+  background-color: #2b6cb0;
+}
+
+.plinko-board-content {
+  position: relative;
+}
+
+.chip {
+  transition: all 0.1s ease-out;
+}

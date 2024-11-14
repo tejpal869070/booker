@@ -85,8 +85,8 @@ export default function WithdrawalHistory() {
   }
 
   return (
-    <div className="relative">
-      <div className=" ">
+    <div className="relative h-screen">
+      <div className="">
         <div>
           <h1 className="mb-6 font-bold dark:text-gray-200 text-lg">
             Money In {">"}Withdrawal History

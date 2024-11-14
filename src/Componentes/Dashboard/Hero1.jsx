@@ -14,6 +14,7 @@ import { BiSolidColor } from "react-icons/bi";
 import { PiFootballFill } from "react-icons/pi";
 import bg1 from "../../assets/photos/bg-main.jpg";
 import { FaBomb } from "react-icons/fa";
+import { PiBowlingBallBold } from "react-icons/pi";
 
 
 export default function Hero1() {
@@ -174,6 +175,11 @@ const linkData = [
     to: { pathname: "/home", search: "?game=mines" },
     icon: <FaBomb size={30} color="#fcff21" />,
     label: "Mines Game",
+  },
+  {
+    to: { pathname: "/home", search: "?game=plinko" },
+    icon: <PiBowlingBallBold size={30}   />,
+    label: "Plinko Game",
   },
   {
     to: { pathname: "/home", search: "?event=inplay" },

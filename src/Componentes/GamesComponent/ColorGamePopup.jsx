@@ -40,10 +40,10 @@ const ColorGamePopup = ({ isOpen, onClose, popupData, currentGameData }) => {
           position: "top-center",
         });
       }
-    } catch (error) {
+    } catch (error) { 
       if (error.response.status === 302) {
         const decodederror = atob(error.response.data);
-        toast.error(JSON.parse(decodederror).massage, {
+        toast.error(JSON.parse(decodederror).message, {
           position: "top-center",
         });
       } else {

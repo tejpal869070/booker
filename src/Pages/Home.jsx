@@ -379,6 +379,15 @@ export default function Home() {
                 </li>
                 <li className="ml-11">
                   <Link
+                    to={{ pathname: "/home", search: `?game=plinko` }}
+                    className={`${dropdownClassList}`}
+                    onClick={handleHideSideBar}
+                  >
+                    Plinko
+                  </Link>
+                </li>
+                <li className="ml-11">
+                  <Link
                     to={{ pathname: "/home", search: `?game=aviator` }}
                     className={`${dropdownClassList}`}
                     onClick={handleHideSideBar}

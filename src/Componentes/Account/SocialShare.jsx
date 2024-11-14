@@ -63,7 +63,7 @@ const SocialShare = ({ url, onClose }) => {
             </div>
             <div className="w-full flex flex-wrap justify-between gap-4 mt-4">
               <CopyToClipboard
-                text={url}
+                text={`${url}&position=L`}
                 onCopy={handleCopy}
                 className={`w-full md:w-[48%]  text-white rounded text-sm py-2 px-5    ${
                   isCopied1 ? "bg-[green]" : "bg-indigo-500"
@@ -72,7 +72,7 @@ const SocialShare = ({ url, onClose }) => {
                 <button> {isCopied1 ? "Copied" : "Copy Left Position"} </button>
               </CopyToClipboard>
               <CopyToClipboard
-                text={url}
+                text={`${url}&position=R`}
                 onCopy={handleCopy2}
                 className={`w-full md:w-[48%]  text-white rounded text-sm py-2 px-5    ${
                   isCopied2 ? "bg-[green]" : "bg-indigo-500"

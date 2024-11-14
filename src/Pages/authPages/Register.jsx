@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import bg1 from "../../assets/photos/stadium.jpg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -15,15 +15,31 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [mobile, setMobile] = useState("");
   const [password, setPassword] = useState("");
+  
   const [loading, setLoading] = useState(false);
 
   const [otpSent, setOtpSent] = useState(false);
+
+
+  const location = useLocation();
+
+  const getQueryParam = (name) => {
+    const searchParams = new URLSearchParams(location.search);
+    return searchParams.get(name);
+  };
+
+  const refferCode = getQueryParam("referrer_code");
+  const userPosition = getQueryParam("position");
+
+  const [reffer_by, setRefferBy] = useState(refferCode); 
 
   const formData = {
     name: name,
     email: email,
     mobile: mobile,
     password: password,
+    reffer_by: reffer_by || "5Zw8gbwv",
+    position: userPosition
   };
 
   const handleRegister = async (e) => {
@@ -137,6 +153,18 @@ export default function Register() {
                         onChange={(e) => setPassword(e.target.value)}
                       />
                     </div>
+                    <div className="relative">
+                      <input
+                        autocomplete="off"
+                        id="password"
+                        name="password"
+                        type="text"
+                        className="peer  h-10 w-full border-b-2 border-0 border-gray-300 text-gray-900 focus:border-b-2 focus:border-gray-500 focus:outline-none"
+                        placeholder="Referral code"
+                        value={reffer_by}
+                        onChange={(e) => setRefferBy(e.target.value)}
+                      />
+                    </div>
                     <div className="relative mt-10">
                       {/* <button className="bg-cyan-500 text-white rounded-md px-2 py-1">
                     Submit
@@ -158,7 +186,9 @@ export default function Register() {
                     </div>
                     <p className="text-sm">
                       Already have an account?{" "}
-                      <Link to={"/login"}>Login Now</Link>
+                      <Link to={"/login"} className="underlined text-[blue]">
+                        Login Now
+                      </Link>
                     </p>
                   </div>
                 </form>
