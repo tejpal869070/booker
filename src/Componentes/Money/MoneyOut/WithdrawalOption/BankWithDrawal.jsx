@@ -23,7 +23,7 @@ export default function BankWithDrawal() {
   const [ac_no, setAccNo] = useState("");
   const [ifsc_code, setIfsc] = useState("");
   const [bank_name, setBankName] = useState("");
-  const [ac_type, setAccType] = useState("");
+  const [ac_type, setAccType] = useState("Saving");
   const [reason, setReason] = useState("");
   const [amount, setAmount] = useState(100);
   const [processing, setProcessing] = useState(false);
@@ -54,7 +54,7 @@ export default function BankWithDrawal() {
 
   // if user want to update bank account second time
   const changeBankAccount = async () => {
-    console.log(formData);
+    console.log(formData)
     setAccountChanging(true);
     if (ac_name === null || ac_name === undefined || ac_name.length < 4) {
       toast.error("Invalid Beneficary Name", {
@@ -106,8 +106,15 @@ export default function BankWithDrawal() {
           position: "bottom-right",
         });
         swal("Success", "Bank Details Sent For Updation.", "success");
+        setAccName("");
+        setAccNo("");
+        setIfsc("");
+        setBankName("");
+        setAccType("Saving");
+        setReason("");
         userDataGet();
         setAccountChanging(false);
+        setEditing(false)
       } else {
         toast.error("Failed to Update Bank Details", {
           position: "bottom-right",
@@ -165,7 +172,7 @@ export default function BankWithDrawal() {
       setAccName(response[0].ac_name);
       setAccNo(response[0].ac_no);
       setIfsc(response[0].ifsc_code);
-      setAccType(response[0].ac_type);
+      setAccType(response[0].ac_type || "Saving");
       setBankName(response[0].bank_name);
       setLoading(false);
       if (
@@ -212,7 +219,11 @@ export default function BankWithDrawal() {
         <div className="bg-[#e1e6ff] dark:bg-[#868ba3fc] text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden">
           <div className="md:flex flex-row-reverse w-full">
             <div className="w-full   md:w-1/2 bg-indigo-200  p-2">
-              <img alt="animation" className="w-full  rounded-t-xl h-full " src={gif1} />
+              <img
+                alt="animation"
+                className="w-full  rounded-t-xl h-full "
+                src={gif1}
+              />
             </div>
             <div className="w-full md:w-1/2 py-10 px-5 md:px-10">
               <div className="  mb-2">
@@ -224,10 +235,12 @@ export default function BankWithDrawal() {
                 {user && user.bank_status === "N"
                   ? "You Don't Have Any Linked Bank Account."
                   : user.bank_status === "P"
-                  ? "Your bank details are being verified."
+                  ? "Your bank details are being verified.--------------------"
                   : user.bank_status === "Y"
                   ? "Your Bank Account Successfully Verified."
-                  : user.bank_status === "F" ? `Bank Verification Failed. Reason: ${user.reason}` : ""}
+                  : user.bank_status === "F"
+                  ? `Bank Verification Failed. Reason: ${user.reason}`
+                  : ""}
               </p>
 
               <p className="  font-medium text-lg text-[green] mb-6">
@@ -350,19 +363,22 @@ export default function BankWithDrawal() {
                     >
                       Account Type *
                     </label>
-                    <input
-                      type="text"
+                    <select
                       name="price"
                       id="price"
-                      placeholder="Saving/Current"
                       className={`${inputClasses}`}
                       value={ac_type}
                       disabled={!editing}
                       onChange={(e) => setAccType(e.target.value)}
-                    />
+                    >
+                      <option value="Saving">Saving</option>
+                      <option value="Current">Current</option>
+                    </select>
                   </div>
                   <div
-                    className={`col-span-6 sm:col-span-3 ${  !editing || user.bank_status === "N" ? "hidden" : "" }`}
+                    className={`col-span-6 sm:col-span-3 ${
+                      !editing || user.bank_status === "N" ? "hidden" : ""
+                    }`}
                   >
                     <label
                       for="product-details"

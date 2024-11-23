@@ -8,7 +8,7 @@ export default function MinesGame() {
   const [isBetPlaced, setIsBetPlaced] = useState();
 
   const handleClick = (type) => {
-    setSelected(type);
+    setSelected(type); 
   };
 
   const isBetPlacedFunction = (betPlaced) => {
@@ -20,14 +20,14 @@ export default function MinesGame() {
   };
 
   return (
-    <div>
+    <div className="min-h-screen ">
       <div className="flex flex-wrap-reverse">
         <div className="w-[100%] md:w-[35%] lg:w-[25%] p-6 h-screen/2 bg-gray-500">
           <div className="w-full flex space-x-2 bg-gray-800 rounded-full px-2 py-3">
             <button
               onClick={() => handleClick("Manual")}
               disabled={isBetPlaced}
-              className={`relative w-1/2 px-6 py-2 rounded-full overflow-hidden  font-medium z-[99] transition-all  ${
+              className={`relative w-1/2 px-6 py-2 rounded-full overflow-hidden  font-medium   transition-all  ${
                 selected === "Manual"
                   ? "bg-blue-500 text-gray-100"
                   : "bg-gray-300 text-gray-900"
@@ -68,12 +68,16 @@ export default function MinesGame() {
               }
             />
           ) : (
-            <AutoMode />
+            <AutoMode
+              isBetPlacedFunction={(isBetPlaced) =>
+                isBetPlacedFunction(isBetPlaced)
+              }
+            />
           )}
         </div>
         <div
           id="boxBoard"
-          className=" relative w-[100%] md:w-[65%] lg:w-[75%] p-6 h-screen/2 bg-gray-600"
+          className=" relative w-[100%] md:w-[65%] lg:w-[75%] p-6 h-screen/2 bg-[#0F212E]"
         ></div>
       </div>
     </div>

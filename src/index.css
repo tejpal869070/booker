@@ -236,3 +236,26 @@
 .chip {
   transition: all 0.1s ease-out;
 }
+
+
+
+
+@keyframes flip {
+  0% {
+    transform: perspective(1000px) rotateX(0deg);
+  }
+  50% {
+    transform: perspective(1000px) rotateX(180deg);
+  }
+  100% {
+    transform: perspective(1000px) rotateX(0deg);
+  }
+}
+
+.transform {
+  transform-style: preserve-3d;
+}
+
+.rotate-x-180 {
+  animation: flip 0.5s forwards;
+}

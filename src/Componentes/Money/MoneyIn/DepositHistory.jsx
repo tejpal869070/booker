@@ -130,7 +130,10 @@ export default function DepositHistory() {
                       >
                         {index + 1}.
                       </th>
-                      <td className="px-4 py-4">{item.amount}</td>
+                      <td className="px-4 py-4">
+                        {item.currency === null ? "₹ " : ""}
+                        {item.amount} {item.currency}
+                      </td>
                       <td className="px-6 py-4 hidden md:table-cell">
                         {item.transaction_id}
                       </td>
@@ -144,8 +147,8 @@ export default function DepositHistory() {
                           className="cursor-pointer"
                           onClick={() => {
                             setSelectedIndex(index);
-                            setVisible((pre) => !pre); 
-                          }} 
+                            setVisible((pre) => !pre);
+                          }}
                         />
                       </td>
                     </tr>
@@ -172,9 +175,9 @@ export default function DepositHistory() {
                               <p>Transaction ID: {item.transaction_id}</p>
                               <p>Amount: {item.amount}</p>
                               <p>Date: {item.date.split("T")[0]}</p>
-                              <p>Transfered To: </p>
+                              <p>Transfered To:-{">"} </p>
                               <div>
-                                <p>Account Holder: {item.ac_holder_name}</p>
+                                <p>Account Holder: {item.name}</p>
                                 <p>Account No.: {item.ac_no}</p>
                                 <p>Bank Name: {item.bank_name}</p>
                                 <p>IFSC: {item.ifsc_code}</p>

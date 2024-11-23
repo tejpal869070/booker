@@ -14,7 +14,7 @@ import { GetUserDetails } from "../Controllers/User/UserController";
 import ThemeToggle from "../Controllers/ThemeToggle";
 import { Loading1 } from "../Componentes/Loading1";
 import CreatePin from "../Componentes/Dashboard/CratePin";
-import Logo from "../assets/photos/logo.png";
+import Logo from "../assets/photos/mainlogo.png";
 import { RiVipDiamondFill } from "react-icons/ri";
 
 export default function Home() {
@@ -101,25 +101,24 @@ export default function Home() {
 
   return (
     <div className="relative dark:bg-black w-full h-full overflow-x-hidden">
-      <div className="md:hidden w-full z-[999]   flex items-center justify-center ">
+      <div className="md:hidden w-full z-[999]  pt-2 pb-2 flex items-center justify-center ">
         <Link
           to={{ pathname: "/home", search: `?dashboard` }}
-          className="flex items-center space-x-3 rtl:space-x-reverse sm:pl-64"
+          className="flex items-center space-x-3 rtl:space-x-reverse  sm:pl-64"
         >
-          <img src={Logo} className="h-20" alt="bLogo" />
+          <img src={Logo} className=" w-[40%] m-auto" alt="bLogo" />
         </Link>
       </div>
       <nav className="hidden md:block bg-gradient-to-r from-blue-800 to-indigo-900 z-10 border-b-2 border-gray-200 dark:bg-gray-900 fixed w-full">
         <div className="  flex flex-wrap items-center justify-between mx-auto p-4">
-          <Link
+          {/* <Link
             to={{ pathname: "/home", search: `?dashboard` }}
             className="flex items-center space-x-3 rtl:space-x-reverse sm:pl-64"
           >
             <img src={Logo} className="h-8" alt="bLogo" />
-            <span className="self-center text-2xl font-semibold whitespace-nowrap  text-white">
-              FinCare
-            </span>
-          </Link>
+             
+          </Link> */}
+          <div className="sm:pl-64" />
           <div className="flex gap-4 items-center">
             <div className="hidden lg:block">
               <ThemeToggle onNav={true} />
@@ -230,7 +229,15 @@ export default function Home() {
         className="fixed top-0 flex left-0 z-40 w-full sm:w-64 h-screen    transition-transform -translate-x-full sm:translate-x-0"
         aria-label="Sidebar"
       >
-        <div className="h-full px-3 w-64 transition-transform border-r-2   sm:translate-x-0 pt-16 py-4 overflow-y-auto no-scrollbar bg-gradient-to-r from-blue-800 to-indigo-900 dark:bg-gray-800">
+        <div className="h-full px-3 w-64 transition-transform border-r-2   sm:translate-x-0   py-4 overflow-y-auto no-scrollbar bg-gradient-to-r from-blue-800 to-indigo-900 dark:bg-gray-800">
+          <div className="">
+            <Link
+              to={{ pathname: "/home", search: `?dashboard` }}
+              className="  "
+            >
+              <img src={Logo} className="w-[60%] m-auto mb-4" alt="bLogo" />
+            </Link>
+          </div>
           <ul className="space-y-2 font-medium">
             <li className="side-bar-list">
               <Link
@@ -828,14 +835,14 @@ export default function Home() {
 
       {/* bottom navigation in mobile */}
       <div className="md:hidden  fixed w-screen z-[99999]   bottom-0">
-        <div class="fixed bottom-0 left-0 z-50 w-full h-16 bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600">
-          <div class="grid h-full max-w-lg grid-cols-4 mx-auto font-medium">
+        <div className="fixed bottom-0 left-0 z-50 w-full h-16 bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600">
+          <div className="grid h-full max-w-lg grid-cols-4 mx-auto font-medium">
             <Link
               to={{ pathname: "/home", search: `?dashboard` }}
-              class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
+              className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
             >
               <svg
-                class="w-5 h-5 mb-2 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+                className="w-5 h-5 mb-2 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor"
@@ -843,16 +850,16 @@ export default function Home() {
               >
                 <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
               </svg>
-              <span class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">
+              <span className="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">
                 Home
               </span>
             </Link>
             <Link
               to={{ pathname: "/home", search: `?user=wallet` }}
-              class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
+              className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
             >
               <svg
-                class="w-5 h-5 mb-2 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+                className="w-5 h-5 mb-2 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor"
@@ -861,28 +868,28 @@ export default function Home() {
                 <path d="M11.074 4 8.442.408A.95.95 0 0 0 7.014.254L2.926 4h8.148ZM9 13v-1a4 4 0 0 1 4-4h6V6a1 1 0 0 0-1-1H1a1 1 0 0 0-1 1v13a1 1 0 0 0 1 1h17a1 1 0 0 0 1-1v-2h-6a4 4 0 0 1-4-4Z" />
                 <path d="M19 10h-6a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1Zm-4.5 3.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2ZM12.62 4h2.78L12.539.41a1.086 1.086 0 1 0-1.7 1.352L12.62 4Z" />
               </svg>
-              <span class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">
+              <span className="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">
                 Wallet
               </span>
             </Link>
             <Link
               to={{ pathname: "/home", search: "?user=VIP" }}
-              class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
+              className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
             >
               <RiVipDiamondFill
                 className="text-[#6B7280] dark:text-[#9CA3AF] "
                 size={26}
               />
-              <span class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">
+              <span className="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">
                 VIP
               </span>
             </Link>
             <Link
               to={{ pathname: "/home", search: `?user=profile` }}
-              class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
+              className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
             >
               <svg
-                class="w-5 h-5 mb-2 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+                className="w-5 h-5 mb-2 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor"
@@ -890,7 +897,7 @@ export default function Home() {
               >
                 <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z" />
               </svg>
-              <span class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">
+              <span className="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">
                 Profile
               </span>
             </Link>

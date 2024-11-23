@@ -39,7 +39,7 @@ export default function DepositMethod({ onClose, paymentMethods }) {
 
                 <div className={`${classes1}`}>
                   <p>Bank Holder : </p>
-                  <p>{item.ac_holder_name}</p>
+                  <p>{item.name}</p>
                 </div>
 
                 <div className={`${classes1}`}>

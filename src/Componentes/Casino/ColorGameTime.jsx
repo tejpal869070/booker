@@ -23,6 +23,9 @@ import { IoMdVolumeHigh } from "react-icons/io";
 import betSuccessGif from "../../assets/photos/bet-success.gif";
 import { FaVolumeMute } from "react-icons/fa";
 import audio1 from "../../assets/audio/betPlace.mp3";
+import FlipClockCountdown from "@leenguyen/react-flip-clock-countdown";
+import "@leenguyen/react-flip-clock-countdown/dist/index.css";
+import CountDownTimer from "../GamesComponent/CountDownTimer";
 
 export default function ColorGame({ gameType }) {
   const [selectedHistoryTab, setSelectedHistoryTab] = useState(1);
@@ -169,7 +172,7 @@ export default function ColorGame({ gameType }) {
   useEffect(() => {
     const sound1 = document.getElementById("sound3");
     if (sound && betPlace) {
-      sound1.play(); 
+      sound1.play();
     }
   }, [sound, betPlace]);
 
@@ -189,11 +192,7 @@ export default function ColorGame({ gameType }) {
       </audio>
       <ToastContainer />
       <div className="w-full">
-
-
-        <div>
-
-        </div>
+        <div></div>
         {/* home volume balance */}
         <div className=" flex justify-between items-center px-2">
           <div className="flex items-center justify-center gap-2">
@@ -233,12 +232,14 @@ export default function ColorGame({ gameType }) {
             </p>
           </div>
           <div>
-            <Timer
-              currentGameData={currentGameData}
-              refresh={refresh}
-              countdownFunction={countdownFunction}
-              sound={sound}
-            />
+            {currentGameData?.end_date && (
+              <Timer
+                currentGameData={currentGameData}
+                refresh={refresh}
+                countdownFunction={countdownFunction}
+                sound={sound}
+              />
+            )}
           </div>
         </div>
 
@@ -284,7 +285,7 @@ export default function ColorGame({ gameType }) {
                       setBetPlaced(true);
                       setTimeout(() => {
                         setBetPlaced(false);
-                      }, 800);
+                      }, 700);
                     }}
                   />
                 ))}
@@ -293,17 +294,16 @@ export default function ColorGame({ gameType }) {
 
           {/* Countdown Flip */}
           {isCountDown && (
-            <div className="absolute w-full h-full top-0 bg-[#000000c9] flex justify-center items-center">
-              <FlipCountdown
-                className="size-medium lg:size-large"
-                hideYear
-                hideMonth
-                hideDay
-                hideHour
-                endAt={currentGameData?.end_date} // Date/Time
-                // onTimeUp={() => getGameHistory(gameType)}
-              />
-            </div>
+          <div className="absolute w-full h-full top-0 bg-[#000000c9] flex justify-center items-center">
+            <FlipCountdown
+              className="size-medium lg:size-large"
+              hideYear
+              hideMonth
+              hideDay
+              hideHour
+              endAt={currentGameData?.end_date}
+            /> 
+          </div>
           )}
         </div>
 

@@ -39,7 +39,7 @@ export default function Register() {
     mobile: mobile,
     password: password,
     reffer_by: reffer_by || "5Zw8gbwv",
-    position: userPosition
+    position: userPosition || "L"
   };
 
   const handleRegister = async (e) => {

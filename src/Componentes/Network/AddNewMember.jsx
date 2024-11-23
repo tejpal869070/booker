@@ -58,13 +58,9 @@ const AddNewMember = () => {
     try {
       const response = await AddNewBelowMember(formData);
       if (response.status) {
-        setSuccess(true);
-        console.log(response);
-      } else {
-        console.log("error");
-      }
-    } catch (error) {
-      console.log(error);
+        setSuccess(true); 
+      }  
+    } catch (error) { 
       if (error.response.status === 302) {
         setError(`${error.response.data.message}`, {
           position: "top-center",

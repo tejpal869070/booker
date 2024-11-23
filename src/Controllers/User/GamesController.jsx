@@ -132,7 +132,7 @@ export const AddNewColorGameBet = async (formData) => {
   const game_type = formData.game_type;
   const id = formData.id;
   const total_amount = formData.total_amount;
-  const bonuscheck =  false;
+  const bonuscheck = false;
   try {
     const data = await EncodeString({
       select,
@@ -176,6 +176,32 @@ export const MainGameWalletMoneyTransfer = async (formData, pin) => {
 
     const response = await axios.post(
       `${API.url}user/color-money-transfer`,
+      postData,
+      axiosConfig
+    );
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const MinesGameUpdateWallet = async (formData) => {
+  try {
+    const postData = {
+      mobile: mobile,
+      amount: formData.amount,
+      type: formData.type,
+    };
+
+    const axiosConfig = {
+      headers: {
+        Authorization: `Bearer ${bearerToken}`,
+      },
+    };
+
+    const response = await axios.post(
+      `${API.url}user/add-balance-update`,
       postData,
       axiosConfig
     );

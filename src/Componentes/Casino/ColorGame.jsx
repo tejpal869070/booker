@@ -164,29 +164,29 @@ export default function ColorGame() {
                 setFlashPopup(false);
                 handleButtons(1);
               }}
-              class="relative inline-block text-lg group"
+              className="relative inline-block text-lg group"
             >
-              <span class="relative z-10 block px-5 py-3 overflow-hidden font-medium leading-tight text-gray-800 transition-colors duration-300 ease-out border-2 border-gray-900 rounded-lg group-hover:text-white">
-                <span class="absolute inset-0 w-full h-full px-5 py-3 rounded-lg bg-gray-50"></span>
-                <span class="absolute left-0 w-48 h-48 -ml-2 transition-all duration-300 origin-top-right -rotate-90 -translate-x-full translate-y-12 bg-gray-900 group-hover:-rotate-180 ease"></span>
-                <span class="relative">Recharge</span>
+              <span className="relative z-10 block px-5 py-3 overflow-hidden font-medium leading-tight text-gray-800 transition-colors duration-300 ease-out border-2 border-gray-900 rounded-lg group-hover:text-white">
+                <span className="absolute inset-0 w-full h-full px-5 py-3 rounded-lg bg-gray-50"></span>
+                <span className="absolute left-0 w-48 h-48 -ml-2 transition-all duration-300 origin-top-right -rotate-90 -translate-x-full translate-y-12 bg-gray-900 group-hover:-rotate-180 ease"></span>
+                <span className="relative">Recharge</span>
               </span>
               <span
-                class="absolute bottom-0 right-0 w-full h-12 -mb-1 -mr-1 transition-all duration-200 ease-linear bg-gray-900 rounded-lg group-hover:mb-0 group-hover:mr-0"
+                className="absolute bottom-0 right-0 w-full h-12 -mb-1 -mr-1 transition-all duration-200 ease-linear bg-gray-900 rounded-lg group-hover:mb-0 group-hover:mr-0"
                 data-rounded="rounded-lg"
               ></span>
             </button>
             <button
               onClick={() => setFlashPopup(false)}
-              class="relative inline-block text-lg group"
+              className="relative inline-block text-lg group"
             >
-              <span class="relative z-10 block px-5 py-3 overflow-hidden font-medium leading-tight text-gray-800 transition-colors duration-300 ease-out border-2 border-gray-900 rounded-lg group-hover:text-white">
-                <span class="absolute inset-0 w-full h-full px-5 py-3 rounded-lg bg-gray-50"></span>
-                <span class="absolute left-0 w-48 h-48 -ml-2 transition-all duration-300 origin-top-right -rotate-90 -translate-x-full translate-y-12 bg-gray-900 group-hover:-rotate-180 ease"></span>
-                <span class="relative">Close</span>
+              <span className="relative z-10 block px-5 py-3 overflow-hidden font-medium leading-tight text-gray-800 transition-colors duration-300 ease-out border-2 border-gray-900 rounded-lg group-hover:text-white">
+                <span className="absolute inset-0 w-full h-full px-5 py-3 rounded-lg bg-gray-50"></span>
+                <span className="absolute left-0 w-48 h-48 -ml-2 transition-all duration-300 origin-top-right -rotate-90 -translate-x-full translate-y-12 bg-gray-900 group-hover:-rotate-180 ease"></span>
+                <span className="relative">Close</span>
               </span>
               <span
-                class="absolute bottom-0 right-0 w-full h-12 -mb-1 -mr-1 transition-all duration-200 ease-linear bg-gray-900 rounded-lg group-hover:mb-0 group-hover:mr-0"
+                className="absolute bottom-0 right-0 w-full h-12 -mb-1 -mr-1 transition-all duration-200 ease-linear bg-gray-900 rounded-lg group-hover:mb-0 group-hover:mr-0"
                 data-rounded="rounded-lg"
               ></span>
             </button>
@@ -260,12 +260,12 @@ export default function ColorGame() {
         </div>
       </div>
 
-      <div class="grid grid-cols-1 xl:grid-cols-2   py-3  ">
-        <div class="w-full hidden md:block   bg-black dark:bg-black ">
+      <div className="grid grid-cols-1 xl:grid-cols-2   py-3  ">
+        <div className="w-full hidden md:block   bg-black dark:bg-black ">
           <img alt="gamegirl" className="w-full md:w-[90%]" src={gameGirl} />
         </div>
-        <div class="w-full flex justify-center items-center   bg-black rounded-sm dark:bg-black">
-          <div class="grid grid-cols-2 xl:grid-cols-2    gap-1 md:gap-5 py-3  ">
+        <div className="w-full flex justify-center items-center   bg-black rounded-sm dark:bg-black">
+          <div className="grid grid-cols-2 xl:grid-cols-2    gap-1 md:gap-5 py-3  ">
             {gameTypes &&
               gameTypes.map((item, index) => (
                 <Link
@@ -274,7 +274,7 @@ export default function ColorGame() {
                     pathname: "/home",
                     search: `?colorGameType=${item.id}`,
                   }}
-                  class="w-full h-60 m-auto"
+                  className="w-full h-60 m-auto"
                 >
                   <img
                     alt={item.name}

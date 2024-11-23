@@ -1,88 +1,94 @@
-import React, { useState } from "react";
-import ColorGamePopup from "./ColorGamePopup";
-import { toast, ToastContainer } from "react-toastify";
+import React, { useState, useEffect, useRef, Suspense } from "react";
+import audio1 from "../../assets/audio/sound1.mp3";
+import audio2 from "../../assets/audio/successSound.mp3";
 
-export default function NumberColor({ numbersData, currentGameData }) {
+export default function Timer({
+  currentGameData,
+  refresh,
+  countdownFunction,
+  sound,
+}) {
+  const [minLeft, setMinLeft] = useState("00");
+  const [secLeft, setSecLeft] = useState("00");
+  const [countDownSound, setCountDownSound] = useState(false);
+  const [successSound, setSuccessSound] = useState(false);
+
+  useEffect(() => {
+    const calculateTimeLeft = (timeLeft) => {
+      const seconds = Math.floor((timeLeft / 1000) % 60);
+      const minutes = Math.floor((timeLeft / (1000 * 60)) % 60);
+      return {
+        minutes: String(minutes).padStart(2, "0"),
+        seconds: String(seconds).padStart(2, "0"),
+      };
+    };
+
+    // loop-----------------------------------------
+    const intervalId = setInterval(() => {
+      const currentTime = new Date(currentGameData?.api_get_time);
+      const endTime = new Date(currentGameData?.end_date);
+      const timeLeft = endTime - currentTime;
+      const sound1 = document.getElementById("sound1");
+
+      if (timeLeft <= 0) {
+        // game end not trigger refresh function to get new current game data
+        setCountDownSound(false);
+        setSuccessSound(true);
+        refresh();
+        setMinLeft("00");
+        setSecLeft("00");
+        clearInterval(intervalId); // Clear the interval on game end
+      } else {
+        const countdownLimit = Number(currentGameData.coundown) * 1000;
+        if (timeLeft < countdownLimit) {
+          // countdown start here
+          countdownFunction();
+          setCountDownSound(true);
+        }
+        setSuccessSound(false)
+        const { minutes, seconds } = calculateTimeLeft(timeLeft);
+        setMinLeft(minutes);
+        setSecLeft(seconds);
+      }
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, [currentGameData]);
+
+  useEffect(() => {
+    const sound1 = document.getElementById("sound1");
+    if (sound && countDownSound) {
+      sound1.play();
+    } else {
+      sound1.pause();
+    }
+  }, [sound, countDownSound]);
+  
+  useEffect(() => {
+    const sound2 = document.getElementById("sound2");
+    if (sound && successSound) { 
+      sound2.play();
+    }  
+  }, [sound, successSound]);
+
   return (
-    <div className="  pt-4 border-b-2 border-white">
-      <ToastContainer />
-      <div className="grid grid-cols-5 grid-rows-2 gap-4 lg:px-10">
-        {numbersData &&
-          numbersData.map((item, index) => (
-            <ColorCircle
-              key={item.id}
-              number={item.number}
-              orders={item.orders}
-              popupData={item}
-              currentGameData={currentGameData}
-            />
-          ))}
+    <div className="mt-2">
+      <audio loop id="sound1">
+        <source src={audio1} type="audio/mp3" />
+        Your browser does not support the audio element.
+      </audio>
+
+      <audio id="sound2">
+        <source src={audio2} type="audio/mp3" />
+        Your browser does not support the audio element.
+      </audio>
+
+      <div className="border-4 border-black rounded-lg px-4 py-1 inline-block bg-gray-100 shadow-lg">
+        <h1 className="font-semibold ">Time Remaining</h1>
+        <h2 className="text-center font-bold text-4xl">
+          {minLeft}:{secLeft}
+        </h2>
       </div>
     </div>
   );
 }
-
-const ColorCircle = ({ orders, number, popupData, currentGameData }) => {
-  const colors = orders.map((order) => order.color_code);
-  const colorCount = colors.length;
-
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-
-  const openPopup = () => setIsPopupOpen(true);
-  const closePopup = (type) => {
-    if (type === "success") {
-      setIsPopupOpen(false);
-      toast.success("Bet placed successfully", {
-        position: "bottom-center",
-        autoClose: 2000,
-      });
-    } else {
-      setIsPopupOpen(false);
-    }
-  };
-
-  const circleNumberStyle = "text-4xl font-bold text-gray-200  ";
-
-  return (
-    <div className=" ">
-      <div
-        onClick={openPopup}
-        className="relative cursor-pointer h-14 md:h-24 w-14 md:w-24 rounded-full p-1 border-2 border-dotted border-black dark:border-gray-400 overflow-hidden"
-      >
-        {colorCount === 1 ? (
-          <div
-            className="h-full w-full rounded-full flex justify-center items-center"
-            style={{ background: colors[0] }}
-          >
-            <p className={circleNumberStyle}>{number}</p>
-          </div>
-        ) : colorCount > 1 ? (
-          <div
-            className="w-full h-full rounded-full"
-            style={{ background: colors[0] }}
-          >
-            <div
-              // className="absolute  rounded-r-full  right-1"
-              className="absolute h-[85%] md:h-[90%] rounded-r-full w-[46%] md:w-[48%] right-1"
-              style={{ background: colors[1] }}
-            />
-            <p
-              className={`absolute h-full text-center flex justify-center items-center w-full m-auto inset-0 ${circleNumberStyle}`}
-            >
-              {number}
-            </p>
-          </div>
-        ) : (
-          <div className="h-full w-full bg-transparent" />
-        )}
-      </div>
-      <ColorGamePopup
-        isOpen={isPopupOpen}
-        onClose={(type) => closePopup(type)}
-        popupData={popupData}
-        currentGameData={currentGameData}
-      />
-    </div>
-  );
-};
-//

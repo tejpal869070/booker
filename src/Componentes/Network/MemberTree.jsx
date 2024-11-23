@@ -160,8 +160,7 @@ export default function MemberTree() {
       };
 
       const result = buildTree(response.data);
-      const stringifyData = JSON.stringify(result, null, 2);
-      console.log(stringifyData);
+      const stringifyData = JSON.stringify(result, null, 2); 
       setData(JSON.parse(stringifyData));
       setloading(false);
     } catch (error) {

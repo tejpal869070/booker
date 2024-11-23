@@ -7,6 +7,7 @@ import { FaArrowCircleRight } from "react-icons/fa";
 import { FaCircleChevronDown } from "react-icons/fa6";
 
 export default function ColorGameMyHistory({ gameType, refreshHistory }) {
+  console.log(refreshHistory)
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [pageId, setPageId] = useState(1);
@@ -18,8 +19,7 @@ export default function ColorGameMyHistory({ gameType, refreshHistory }) {
       try {
         const response = await MyColorGameHistory(gameType, pageId);
         if (response.status) {
-          setData(response.data);
-          console.log(response.data);
+          setData(response.data); 
           setLoading(false);
         }
       } catch (error) {

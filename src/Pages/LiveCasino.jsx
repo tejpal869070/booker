@@ -19,9 +19,7 @@ export default function LiveCasino() {
     return data;
   }, [location.search]);
 
-  // useEffect(() => {
-  //   console.log(paramsData);
-  // }, [paramsData]);
+   
 
   if (paramsData && paramsData.game === "color-game") {
     return <div>{<ColorGame />}</div>;
