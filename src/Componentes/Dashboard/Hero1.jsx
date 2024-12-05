@@ -15,7 +15,7 @@ import { PiFootballFill } from "react-icons/pi";
 import bg1 from "../../assets/photos/bg-main.jpg";
 import { FaBomb } from "react-icons/fa";
 import { PiBowlingBallBold } from "react-icons/pi";
-
+import Games from "./Games";
 
 export default function Hero1() {
   const [showShare, setShowShare] = useState(false);
@@ -110,7 +110,7 @@ export default function Hero1() {
               <HiMiniWallet size={24} color="#92a0fd" />
               <p className="font-bold dark:text-gray-300">Total Balance</p>
               <p className="text-2xl font-bold text-black dark:text-gray-300">
-                ₹{userData.wallet_balance}
+                ₹{Number(userData.wallet_balance).toFixed(2)}
               </p>
             </div>
 
@@ -134,8 +134,12 @@ export default function Hero1() {
           </div>
         </div>
       </div>
+
+      {/* Games */}
+      <Games />
+
       {/* quick options */}
-      <p className="text-2xl pt-10 pb-4 dark:text-gray-200 font-bold ">
+      <p className="text-2xl   pb-4 dark:text-gray-200 font-bold ">
         Quick Action
       </p>
       <div className="flex flex-wrap justify-between gap-4 pb-4 ">
@@ -166,21 +170,21 @@ export default function Hero1() {
 }
 
 const linkData = [
-  {
-    to: { pathname: "/home", search: "?game=color-game" },
-    icon: <BiSolidColor size={30} color="#fcff21" />,
-    label: "Color Game",
-  },
-  {
-    to: { pathname: "/home", search: "?game=mines" },
-    icon: <FaBomb size={30} color="#fcff21" />,
-    label: "Mines Game",
-  },
-  {
-    to: { pathname: "/home", search: "?game=plinko" },
-    icon: <PiBowlingBallBold size={30}   />,
-    label: "Plinko Game",
-  },
+  // {
+  //   to: { pathname: "/home", search: "?game=color-game" },
+  //   icon: <BiSolidColor size={30} color="#fcff21" />,
+  //   label: "Color Game",
+  // },
+  // {
+  //   to: { pathname: "/home", search: "?game=mines" },
+  //   icon: <FaBomb size={30} color="#fcff21" />,
+  //   label: "Mines Game",
+  // },
+  // {
+  //   to: { pathname: "/home", search: "?game=plinko" },
+  //   icon: <PiBowlingBallBold size={30}   />,
+  //   label: "Plinko Game",
+  // },
   {
     to: { pathname: "/home", search: "?event=inplay" },
     icon: <PiFootballFill size={30} />,

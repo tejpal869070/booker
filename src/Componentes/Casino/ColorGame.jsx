@@ -44,7 +44,7 @@ export default function ColorGame() {
         icon: "error",
         buttons: {
           confirm: "OK",
-        },
+        }, 
         dangerMode: true,
       }).then((willRedirect) => {
         if (willRedirect) {
@@ -301,7 +301,7 @@ export default function ColorGame() {
               {"  "}
               {"  "}
               <span className="text-lg font-bold">
-                ₹ {type === 1 ? user.wallet_balance : user.color_wallet_balnace}
+                ₹  {type === 1 ? Number(user.wallet_balance).toFixed(2) : Number(user.color_wallet_balnace).toFixed(2)}
               </span>
             </p>{" "}
             <div className="max-w-sm mt-4">

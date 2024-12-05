@@ -1,15 +1,18 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { MyColorGameHistory } from "../../Controllers/User/GamesController";
-import { Loading1 } from "../Loading1";
 import swal from "sweetalert";
 import { FaArrowCircleLeft } from "react-icons/fa";
 import { FaArrowCircleRight } from "react-icons/fa";
 import { FaCircleChevronDown } from "react-icons/fa6";
 
-export default function ColorGameMyHistory({ gameType, refreshHistory }) {
-  console.log(refreshHistory)
+export default function ColorGameMyHistory({
+  gameType,
+  refreshHistory,
+  isCountDown,
+  currentGameData,
+  betWon,
+}) {
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [pageId, setPageId] = useState(1);
   const [selectedIndex, setSelectedIndex] = useState();
   const [visible, setVisible] = useState(false);
@@ -19,8 +22,7 @@ export default function ColorGameMyHistory({ gameType, refreshHistory }) {
       try {
         const response = await MyColorGameHistory(gameType, pageId);
         if (response.status) {
-          setData(response.data); 
-          setLoading(false);
+          setData(response.data);
         }
       } catch (error) {
         swal({
@@ -39,19 +41,59 @@ export default function ColorGameMyHistory({ gameType, refreshHistory }) {
       }
     },
     [pageId]
-  ); // Add pageId as a dependency
+  );
 
   useEffect(() => {
     fetchHistory(gameType);
-  }, [gameType, fetchHistory, refreshHistory]);
+  }, [gameType, fetchHistory, refreshHistory, isCountDown]);
 
-  // if (loading) {
-  //   return (
-  //     <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-50 z-[9999]">
-  //       <Loading1 />
-  //     </div>
-  //   );
-  // }
+  useEffect(() => {
+    let totalAmount = 0; // Start with a totalAmount of 0
+    if (currentGameData?.period) {
+      const lastBet =
+        data &&
+        data?.filter(
+          (item) => Number(item.Period) === Number(currentGameData.period) - 1
+        );
+      if (lastBet.length > 0) {
+        lastBet.forEach((item) => {
+          if (item.type === "Color") {
+            if (item.value === "Red") {
+              if (item.number === "0") {
+                totalAmount += Number(item.if_open_zero); // Accumulate the value
+              } else if (item.value === item.open_color) {
+                totalAmount += Number(item.winning_amount); // Accumulate the value
+              } else {
+                totalAmount -= Number(item.price); // Accumulate the value
+              }
+            } else if (item.value === "Green") {
+              if (item.number === "5") {
+                totalAmount += Number(item.if_open_zero); // Accumulate the value
+              } else if (item.value === item.open_color) {
+                totalAmount += Number(item.winning_amount); // Accumulate the value
+              } else {
+                totalAmount -= Number(item.price); // Accumulate the value
+              }
+            } else if (item.value === "Violet") {
+              if (item.number === "0" || item.number === "5") {
+                totalAmount += Number(item.if_open_zero); // Accumulate the value
+              } else {
+                totalAmount -= Number(item.price); // Accumulate the value
+              }
+            }
+          } else {
+            if (item.value === item.number) {
+              totalAmount += Number(item.winning_amount); // Accumulate the value
+            } else {
+              totalAmount -= Number(item.price); // Accumulate the value
+            }
+          }
+        });
+        betWon(totalAmount);
+      }
+    }
+  }, [currentGameData]); // Add `data` to dependencies if needed
+
   return (
     <div className="">
       <div className="color-game-history">
@@ -122,7 +164,7 @@ export default function ColorGameMyHistory({ gameType, refreshHistory }) {
                   </td>
                   <td className="px-6 py-[3px]   md:hidden flex flex-row justify-center items-center">
                     <p
-                      className={`rounded-full  w-8  h-8  flex items-center justify-center  dark:text-gray-900 bg-[${item.open_color}]`}
+                      className={`rounded-full  w-8  h-8  flex items-center justify-center  dark:text-gray-900 bg-gray-200`}
                     >
                       {item.number}
                     </p>

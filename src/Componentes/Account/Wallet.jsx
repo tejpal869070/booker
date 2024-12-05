@@ -102,9 +102,7 @@ export default function Wallet() {
     userDataGet();
   }, []);
 
-  useEffect(()=>{
-    console.log("wallet",process.env.REACT_APP_WALLET_UPDATE_KEY)
-  },[])
+ 
 
   if (loading) {
     return (
@@ -203,7 +201,7 @@ export default function Wallet() {
                 {"  "}
                 <span className="text-lg font-bold">
                   ₹{" "}
-                  {type === 1 ? user.wallet_balance : user.color_wallet_balnace}
+                  {type === 1 ? Number(user.wallet_balance).toFixed(2) : Number(user.color_wallet_balnace).toFixed(2)}
                 </span>
               </p>{" "}
               <div className="max-w-sm mt-4">

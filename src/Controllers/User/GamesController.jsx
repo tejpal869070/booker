@@ -1,6 +1,7 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 import { API } from "../Api";
+import CryptoJS from "crypto-js";
 
 var EncodedMobile = btoa(JSON.stringify(Cookies.get("mobile")));
 var mobile = Cookies.get("mobile");
@@ -188,10 +189,16 @@ export const MainGameWalletMoneyTransfer = async (formData, pin) => {
 
 export const MinesGameUpdateWallet = async (formData) => {
   try {
+    const timestamp = Date.now().toString();
+    const secretKey = process.env.REACT_APP_WALLET_UPDATE_KEY;
+
+    const secret = CryptoJS.AES.encrypt(timestamp, secretKey).toString();
     const postData = {
       mobile: mobile,
       amount: formData.amount,
       type: formData.type,
+      key: secret,
+      timeStamp: timestamp,
     };
 
     const axiosConfig = {

@@ -2,25 +2,34 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import ManualMode from "../GamesComponent/MinesGame/ManualMode";
 import AutoMode from "../GamesComponent/MinesGame/AutoMode";
+import { FlashPopup } from "../GamesComponent/RechargePopup";
 
 export default function MinesGame() {
   const [selected, setSelected] = useState("Manual");
   const [isBetPlaced, setIsBetPlaced] = useState();
+  const [isFlashPopup, setFlashPopup] = useState(true);
+  const [isRecharged, setRecharged] = useState(false);
 
   const handleClick = (type) => {
-    setSelected(type); 
+    setSelected(type);
   };
 
   const isBetPlacedFunction = (betPlaced) => {
     if (betPlaced) {
       setIsBetPlaced(true);
-    } else {
+    } else { 
       setIsBetPlaced(false);
     }
   };
 
+  const handleClose = () => {
+    setFlashPopup(false);
+    setRecharged((pre) => !pre);
+  };
+
   return (
     <div className="min-h-screen ">
+      {isFlashPopup && <FlashPopup handleClose={handleClose} />}
       <div className="flex flex-wrap-reverse">
         <div className="w-[100%] md:w-[35%] lg:w-[25%] p-6 h-screen/2 bg-gray-500">
           <div className="w-full flex space-x-2 bg-gray-800 rounded-full px-2 py-3">
@@ -66,6 +75,7 @@ export default function MinesGame() {
               isBetPlacedFunction={(isBetPlaced) =>
                 isBetPlacedFunction(isBetPlaced)
               }
+              isRecharged={isRecharged}
             />
           ) : (
             <AutoMode

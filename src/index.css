@@ -259,3 +259,18 @@
 .rotate-x-180 {
   animation: flip 0.5s forwards;
 }
+
+
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rotate {
+  animation: rotate 2s linear forwards; /* Rotate for 5 seconds */
+}

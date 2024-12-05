@@ -15,6 +15,8 @@ import ThemeToggle from "../Controllers/ThemeToggle";
 import { Loading1 } from "../Componentes/Loading1";
 import CreatePin from "../Componentes/Dashboard/CratePin";
 import Logo from "../assets/photos/mainlogo.png";
+// import Logo from "../assets/photos/mylogo2.png";
+
 import { RiVipDiamondFill } from "react-icons/ri";
 
 export default function Home() {
@@ -106,7 +108,12 @@ export default function Home() {
           to={{ pathname: "/home", search: `?dashboard` }}
           className="flex items-center space-x-3 rtl:space-x-reverse  sm:pl-64"
         >
-          <img src={Logo} className=" w-[40%] m-auto" alt="bLogo" />
+          <img
+            src={Logo}
+            className=" w-[40%] m-auto"
+            alt="bLogo"
+            style={{ filter: "drop-shadow(0px 0px 34px white)" }}
+          />
         </Link>
       </div>
       <nav className="hidden md:block bg-gradient-to-r from-blue-800 to-indigo-900 z-10 border-b-2 border-gray-200 dark:bg-gray-900 fixed w-full">
@@ -229,13 +236,18 @@ export default function Home() {
         className="fixed top-0 flex left-0 z-40 w-full sm:w-64 h-screen    transition-transform -translate-x-full sm:translate-x-0"
         aria-label="Sidebar"
       >
-        <div className="h-full px-3 w-64 transition-transform border-r-2   sm:translate-x-0   py-4 overflow-y-auto no-scrollbar bg-gradient-to-r from-blue-800 to-indigo-900 dark:bg-gray-800">
+        <div className="h-full px-3 w-64 transition-transform border-r-2   sm:translate-x-0   py-4 overflow-y-auto no-scrollbar bg-gradient-to-r from-blue-800 to-indigo-900  dark:bg-gray-800">
           <div className="">
             <Link
               to={{ pathname: "/home", search: `?dashboard` }}
-              className="  "
+              className="  " 
             >
-              <img src={Logo} className="w-[60%] m-auto mb-4" alt="bLogo" />
+              <img
+                src={Logo}
+                className="w-[60%] m-auto mb-4"
+                alt="bLogo"
+                style={{ filter: "drop-shadow(0px 0px 34px white)" }}
+              />
             </Link>
           </div>
           <ul className="space-y-2 font-medium">
@@ -386,14 +398,23 @@ export default function Home() {
                 </li>
                 <li className="ml-11">
                   <Link
+                    to={{ pathname: "/home", search: `?game=wheel` }}
+                    className={`${dropdownClassList}`}
+                    onClick={handleHideSideBar}
+                  >
+                    Wheel Game
+                  </Link>
+                </li>
+                {/* <li className="ml-11">
+                  <Link
                     to={{ pathname: "/home", search: `?game=plinko` }}
                     className={`${dropdownClassList}`}
                     onClick={handleHideSideBar}
                   >
                     Plinko
                   </Link>
-                </li>
-                <li className="ml-11">
+                </li> */}
+                {/* <li className="ml-11">
                   <Link
                     to={{ pathname: "/home", search: `?game=aviator` }}
                     className={`${dropdownClassList}`}
@@ -401,7 +422,7 @@ export default function Home() {
                   >
                     Aviator
                   </Link>
-                </li>
+                </li> */}
               </ul>
             </li>
             <li className="side-bar-list">

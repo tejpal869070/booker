@@ -3,7 +3,11 @@ import { ColorGameAllResult } from "../../Controllers/User/GamesController";
 import swal from "sweetalert";
 import { Loading1 } from "../Loading1";
 
-export default function ColorGameHistory({ gameType, refreshHistory }) { 
+export default function ColorGameHistory({
+  gameType,
+  refreshHistory,
+  isCountDown,
+}) {
   const [gameHistory, setGameHistory] = useState([]);
   const [loading, setLoading] = useState(true);
   const getGameHistory = async (gameType) => {
@@ -11,7 +15,7 @@ export default function ColorGameHistory({ gameType, refreshHistory }) {
       const response = await ColorGameAllResult(gameType);
       if (response.status) {
         setGameHistory(response.data);
-        setLoading(false) 
+        setLoading(false);
       } else {
         window.location.reload();
       }
@@ -34,8 +38,7 @@ export default function ColorGameHistory({ gameType, refreshHistory }) {
 
   useEffect(() => {
     getGameHistory(gameType);
-  }, [gameType, refreshHistory]);
-
+  }, [gameType, refreshHistory, isCountDown]);
 
   // if (loading) {
   //   return (
@@ -55,7 +58,10 @@ export default function ColorGameHistory({ gameType, refreshHistory }) {
         <div className="grid grid-cols-5 md:grid-cols-10   gap-4 mt-4">
           {gameHistory &&
             gameHistory.map((item, index) => (
-              <div className="relative flex justify-center w-16 h-16" key={index}>
+              <div
+                className="relative flex justify-center w-16 h-16"
+                key={index}
+              >
                 <div
                   className="w-10 h-10 relative  text-white rounded-full flex items-center justify-center font-semibold text-lg"
                   style={{ backgroundColor: item.color_code.split(",")[0] }}

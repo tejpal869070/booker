@@ -12,8 +12,7 @@ import {
   ColorGameNumbers,
 } from "../../Controllers/User/GamesController";
 import swal from "sweetalert";
-import { Loading1 } from "../Loading1";
-import FlipCountdown from "@rumess/react-flip-countdown";
+import { Loading1 } from "../Loading1"; 
 import { GetUserDetails } from "../../Controllers/User/UserController";
 import offer1 from "../../assets/photos/offer1.jpg";
 import offer2 from "../../assets/photos/offer2.jpg";
@@ -25,7 +24,7 @@ import { FaVolumeMute } from "react-icons/fa";
 import audio1 from "../../assets/audio/betPlace.mp3";
 import FlipClockCountdown from "@leenguyen/react-flip-clock-countdown";
 import "@leenguyen/react-flip-clock-countdown/dist/index.css";
-import CountDownTimer from "../GamesComponent/CountDownTimer";
+import Countdown from "../GamesComponent/Countdown";
 
 export default function ColorGame({ gameType }) {
   const [selectedHistoryTab, setSelectedHistoryTab] = useState(1);
@@ -42,6 +41,10 @@ export default function ColorGame({ gameType }) {
   const [userLoading, setUserLoading] = useState(true);
   const [betPlace, setBetPlaced] = useState(false);
   const [sound, isSound] = useState(false);
+  const [isBetWin, setBetWin] = useState(false);
+  const [winAmount, setWinAmount] = useState();
+
+  const [remainingSecond, setRemainingSecond] = useState();
 
   // whether red or green can be selected
   const [RedSelected, setRedSelected] = useState(true);
@@ -51,10 +54,20 @@ export default function ColorGame({ gameType }) {
     isSound((pre) => !pre);
   };
 
+  const betWon = (totalAmount) => {
+    setWinAmount(totalAmount);
+    setBetWin(true);
+    setTimeout(() => {
+      setBetWin(false);
+      setWinAmount(0);
+    }, 2000);
+  };
+
   const openPopup = (item) => {
     setIsPopupOpen(true);
     setPopupData(item);
   };
+
   const closePopup = (type) => {
     setRefreshHis((pre) => !pre);
     if (type === "success") {
@@ -134,16 +147,17 @@ export default function ColorGame({ gameType }) {
 
   // when game end
   const refresh = () => {
+    setRefreshHis((pre) => !pre);
     setIsCountDown(false);
     currentData();
     userDataGet();
-    setRefreshHis((pre) => !pre);
   };
 
   // count down start
-  const countdownFunction = () => {
+  const countdownFunction = (seconds) => {
     setIsCountDown(true);
     setIsPopupOpen(false);
+    setRemainingSecond(seconds); 
   };
 
   const userDataGet = async () => {
@@ -236,7 +250,7 @@ export default function ColorGame({ gameType }) {
               <Timer
                 currentGameData={currentGameData}
                 refresh={refresh}
-                countdownFunction={countdownFunction}
+                countdownFunction={(seconds) => countdownFunction(seconds)}
                 sound={sound}
               />
             )}
@@ -294,16 +308,31 @@ export default function ColorGame({ gameType }) {
 
           {/* Countdown Flip */}
           {isCountDown && (
-          <div className="absolute w-full h-full top-0 bg-[#000000c9] flex justify-center items-center">
-            <FlipCountdown
-              className="size-medium lg:size-large"
-              hideYear
-              hideMonth
-              hideDay
-              hideHour
-              endAt={currentGameData?.end_date}
-            /> 
-          </div>
+            <div className="absolute w-full h-full top-0 bg-[#000000c9] flex justify-center items-center">
+              <Countdown seconds={Number(remainingSecond)} />
+            </div>
+          )}
+          {isBetWin && (
+            <div className="z-[999] absolute top-0 w-full h-full backdrop-blur-[2px] flex  justify-center items-center">
+              <img
+                alt="banner"
+                loading="lazy"
+                src={
+                  winAmount > 0
+                    ? require("../../assets/photos/winimg.png")
+                    : require("../../assets/photos/lossimg.png")
+                }
+                className="w-[300px]"
+              />
+              <p
+                className={`absolute mt-20 text-2xl font-bold ${
+                  winAmount > 0 ? "text-[#13b70a]" : "text-red-800"
+                }`}
+              >
+                {/* +₹{winAmount} */}
+                {winAmount > 0 ? `+₹${winAmount}` : `-₹${Math.abs(winAmount)}`}
+              </p>
+            </div>
           )}
         </div>
 
@@ -312,12 +341,16 @@ export default function ColorGame({ gameType }) {
           <ColorGameHistory
             gameType={gameType}
             refreshHistory={refreshHistory}
+            isCountDown={isCountDown}
           />
         </div>
         <div className="border-2 border-gray-400 mt-4 rounded-lg p-1">
           <ColorGameMyHistory
             gameType={gameType}
             refreshHistory={refreshHistory}
+            isCountDown={isCountDown}
+            currentGameData={currentGameData}
+            betWon={(totalAmount) => betWon(totalAmount)}
           />
         </div>
 

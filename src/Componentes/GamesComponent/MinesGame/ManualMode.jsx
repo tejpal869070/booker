@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom/client";
 import { mines } from "../../../assets/Data/GamesData";
 import { GetUserDetails } from "../../../Controllers/User/UserController";
 import { MinesGameUpdateWallet } from "../../../Controllers/User/GamesController";
 import { ToastContainer, toast } from "react-toastify";
 import { minesProfitTable } from "../../../assets/Data/MinesData";
+import { EncryptTimestamp } from "../../../Controllers/Auth/EncryptTimestamp";
 
-export default function ManualMode({ isBetPlacedFunction }) {
+export default function ManualMode({ isBetPlacedFunction, isRecharged }) {
   const [amount, setAmount] = useState(100);
   const [totalBombs, setTotalBombs] = useState(1);
   const [totlaBalance, setTotalBalance] = useState();
@@ -15,6 +16,13 @@ export default function ManualMode({ isBetPlacedFunction }) {
   const [openedMines, setOpenedMines] = useState([]);
   const [isBetPlaced, setIsBetPlaced] = useState(false);
   const [bombFound, setBombFound] = useState(false);
+  const [isCashOut, setCashOut] = useState(false);
+
+  const amountRef = useRef(amount);
+
+  useEffect(() => {
+    amountRef.current = amount;
+  }, [amount]);
 
   const formData = {};
 
@@ -31,6 +39,7 @@ export default function ManualMode({ isBetPlacedFunction }) {
   const updateWalletBalance = async (type, amount) => {
     formData.type = type;
     formData.amount = amount;
+
     try {
       const response = await MinesGameUpdateWallet(formData);
       if (response.status) {
@@ -58,10 +67,8 @@ export default function ManualMode({ isBetPlacedFunction }) {
       toast.error("Invalid Bet Amount", { position: "top-center" });
       return;
     }
-    console.log("up", totlaBalance);
 
     if (amount > totlaBalance) {
-      console.log("down", totlaBalance);
       toast.error("Insufficient Balance", { position: "top-center" });
       return;
     }
@@ -71,6 +78,7 @@ export default function ManualMode({ isBetPlacedFunction }) {
   };
 
   const handleCashOut = async () => {
+    setCashOut(true);
     setBombFound(true);
     const audio = new Audio(require("../../../assets/audio/successSound.mp3")); // or use a URL
     audio.play();
@@ -91,6 +99,7 @@ export default function ManualMode({ isBetPlacedFunction }) {
     );
     await userDataGet();
     setTimeout(() => {
+      setCashOut(false);
       resetGame();
     }, 2000);
   };
@@ -130,6 +139,10 @@ export default function ManualMode({ isBetPlacedFunction }) {
   };
 
   useEffect(() => {
+    userDataGet();
+  }, [isRecharged]);
+
+  useEffect(() => {
     generateRandom();
   }, [totalBombs]);
 
@@ -142,10 +155,25 @@ export default function ManualMode({ isBetPlacedFunction }) {
   }, []);
 
   useEffect(() => {
+    if (!bombFound && openedMines.length === 25 - totalBombs) {
+      console.log("here");
+      handleCashOut();
+    }
+  }, [openedMines, totalBombs, bombFound]);
+
+  const doubleTheAmount = () => {
+    if (amountRef.current * 2 > totlaBalance) {
+      setAmount(totlaBalance);
+    } else {
+      setAmount((pre) => pre * 2);
+    }
+  };
+
+  useEffect(() => {
     const element = document.getElementById("boxBoard");
     if (element) {
       ReactDOM.createRoot(element).render(
-        <div>
+        <div className="relative">
           <div class=" grid  grid-cols-5 gap-2 px-4 py-3  ">
             {mines.map((item, index) => (
               <button
@@ -185,6 +213,24 @@ export default function ManualMode({ isBetPlacedFunction }) {
               </button>
             ))}
           </div>
+          {isCashOut && (
+            <div className="absolute flex animate-jump-in backdrop-blur-[1px] justify-center items-center top-0 left-0 right-0 bottom-0 w-full h-full">
+              <img
+                alt="banner"
+                className="w-[400px]"
+                src={require("../../../assets/photos/winimg.png")}
+              />
+              <p className="absolute mt-24 font-bold text-2xl text-[#13b70a]">
+                +₹
+                {(
+                  Number(amount) *
+                  (minesProfitTable.find(
+                    (item) => item.totalBomb === totalBombs
+                  )?.profit[openedMines.length - 1]?.profit || 0)
+                ).toFixed(2)}
+              </p>
+            </div>
+          )}
         </div>
       );
     }
@@ -231,12 +277,28 @@ export default function ManualMode({ isBetPlacedFunction }) {
               <p className="lg:text-sm font-medium">Bet Amount</p>
               <p>₹{totlaBalance}</p>
             </div>
-            <input
-              className="w-full rounded border px-2 py-1  outline-none font-semibold text-lg"
-              placeholder="Enter Amount "
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-            />
+            <div className="flex relative items-center">
+              <input
+                className="w-full rounded border px-2 py-1  outline-none font-semibold text-lg"
+                placeholder="Enter Amount "
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+              />
+              <div className="absolute right-0.5 ">
+                <button
+                  onClick={() => setAmount((pre) => pre / 2)}
+                  className="px-1.5  py-2 bg-gray-500 text-gray-200   text-sm  font-medium  "
+                >
+                  1/2
+                </button>
+                <button
+                  onClick={() => doubleTheAmount()}
+                  className="px-1.5  py-2 bg-gray-500 text-gray-200 border-l-2 text-sm  font-medium border-gray-200"
+                >
+                  2x
+                </button>
+              </div>
+            </div>
             <p className="mt-3 lg:mt-2 lg:text-sm dark:text-gray-200 font-medium">
               Bombs
             </p>

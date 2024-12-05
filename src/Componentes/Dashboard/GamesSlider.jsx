@@ -31,7 +31,7 @@ export default function GamesSlider() {
     ],
   };
   return (
-    <div className="mb-10   lg:mt-6">
+    <div className="mb-10    ">
       <Slider {...settings}>
         {images.map((item, index) => (
           <div className="w-full h-30 overflow-hidden  " key={index}>

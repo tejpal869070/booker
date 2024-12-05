@@ -5,6 +5,7 @@ import Card2020 from "../Componentes/Casino/Aviator";
 import Aviator from "../Componentes/Casino/Aviator";
 import MinesGame from "../Componentes/Casino/MinesGame";
 import Plinko from "../Componentes/Casino/Plinko";
+import WheelGame from "../Componentes/Casino/WheelGame";
 
 export default function LiveCasino() {
   const location = useLocation();
@@ -19,8 +20,6 @@ export default function LiveCasino() {
     return data;
   }, [location.search]);
 
-   
-
   if (paramsData && paramsData.game === "color-game") {
     return <div>{<ColorGame />}</div>;
   } else if (paramsData && paramsData.game === "mines") {
@@ -29,6 +28,8 @@ export default function LiveCasino() {
     return <div>{<Aviator />}</div>;
   } else if (paramsData && paramsData.game === "plinko") {
     return <div>{<Plinko />}</div>;
+  } else if (paramsData && paramsData.game === "wheel") {
+    return <div>{<WheelGame />}</div>;
   } else {
     return <div>no game selected</div>;
   }
