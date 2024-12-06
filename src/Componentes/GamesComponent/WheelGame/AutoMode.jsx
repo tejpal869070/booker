@@ -1,17 +1,47 @@
 import React, { useEffect, useRef, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
+import { GetUserDetails } from "../../../Controllers/User/UserController";
+import { MinesGameUpdateWallet } from "../../../Controllers/User/GamesController";
 
-export default function AutoMode({ handleSpin }) {
+export default function AutoMode({
+  handleSpin,
+  stopAutoBet,
+  isWin,
+  selectedColor,
+}) {
   const [amount, setAmount] = useState(100);
-  const [totlaBalance, setTotalBalance] = useState(1000);
+  const [totlaBalance, setTotalBalance] = useState(0);
   const [totalBets, setTotalBets] = useState(0);
   const [stopLoss, setStopLoss] = useState(0);
   const [stopProfit, setStopProfit] = useState(0);
   const [increaseOnWin, setIncreaseOnWin] = useState(0);
   const [increaseOnLoss, setIncreaseOnLoss] = useState(0);
+  const [isAutoBetStart, setAutoBetStart] = useState(false);
 
   const amountRef = useRef(amount);
   const balanceRef = useRef(totlaBalance);
+
+  // update wallet balance online---------------------------------------------
+  const formData = {};
+  const updateWalletBalance = async (type, amount) => {
+    formData.type = type;
+    formData.amount = amount;
+
+    try {
+      const response = await MinesGameUpdateWallet(formData);
+      if (response.status) {
+        // Handle successful response if needed
+      }
+    } catch (error) {
+      if (error.response.status === 302) {
+        toast.error(error.response.data.message, {
+          position: "top-center",
+        });
+      } else {
+        toast.error("Server Error");
+      }
+    }
+  };
 
   const handleSpinClick = async () => {
     if (amountRef.current > totlaBalance || amountRef.current === 0) {
@@ -20,6 +50,7 @@ export default function AutoMode({ handleSpin }) {
       });
       return;
     }
+    setAutoBetStart(true);
     handleSpin(
       amountRef.current,
       stopProfit,
@@ -28,6 +59,16 @@ export default function AutoMode({ handleSpin }) {
       totalBets
     );
     setTotalBalance((pre) => pre - amountRef.current);
+    await updateWalletBalance("deduct", amountRef.current);
+  };
+
+  const userDataGet = async () => {
+    const response = await GetUserDetails();
+    if (response !== null) {
+      setTotalBalance(Number(response[0].color_wallet_balnace));
+    } else {
+      window.location.href = "/";
+    }
   };
 
   useEffect(() => {
@@ -37,6 +78,28 @@ export default function AutoMode({ handleSpin }) {
   useEffect(() => {
     balanceRef.current = totlaBalance;
   }, [totlaBalance]);
+
+  useEffect(() => {
+    const updateBalance = async () => {
+      if (isWin) {
+        if (selectedColor?.profit !== 0.0) {
+          setTotalBalance(
+            (pre) => pre + amountRef.current * selectedColor?.profit
+          );
+          await updateWalletBalance(
+            "add",
+            amountRef.current * selectedColor?.profit
+          );
+        }
+      }
+    };
+
+    updateBalance();
+  }, [selectedColor, isWin]);
+
+  useEffect(() => {
+    userDataGet();
+  }, []);
 
   const doubleTheAmount = () => {
     if (amountRef.current * 2 > balanceRef.current) {
@@ -93,21 +156,21 @@ export default function AutoMode({ handleSpin }) {
         />
         {/* )} */}
 
-        {/* {isAutoBetStart ? (
+        {isAutoBetStart ? (
           <button
             onClick={() => stopAutoBet()}
-            className={`w-full rounded font-semibold text-lg text-white py-2 mt-3 bg-green-400`}
+            className={`w-full rounded font-semibold text-lg text-white py-2 mt-3 bg-red-500`}
           >
             Stop Auto Bet
           </button>
-        ) : ( */}
-        <button
-          className={`w-full rounded font-semibold text-lg bg-[#20E701]   text-[#05080A] py-2 mt-3  `}
-          onClick={() => handleSpinClick()}
-        >
-          Start Auto Bet
-        </button>
-        {/* )} */}
+        ) : (
+          <button
+            className={`w-full rounded font-semibold text-lg bg-[#20E701]   text-[#05080A] py-2 mt-3  `}
+            onClick={() => handleSpinClick()}
+          >
+            Start Auto Bet
+          </button>
+        )}
       </div>
 
       <div>

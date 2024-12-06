@@ -55,7 +55,7 @@ const ManualMode = ({
       setAmount((pre) => pre * 2);
     }
   };
-
+ 
   const handleSpinClick = async () => {
     if (amountRef.current > totalBalance || amountRef.current === 0) { // Fixed spelling here
       toast.warn("Insufficient Balance", {

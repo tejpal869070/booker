@@ -16,6 +16,8 @@ const WheelGame = () => {
   const [isWin, setWin] = useState(false);
   const [gameType, setGameType] = useState("low");
   const timeoutRef = useRef([]);
+  const currentRotationRef = useRef(currentRotation);
+  const [isAutoBetStart, setAutoBetStart] = useState();
 
   const handleClick = (type) => {
     setSelected(type);
@@ -28,12 +30,10 @@ const WheelGame = () => {
     setWinAmount(amount);
     setGameStarted(true);
     const newRotation = Math.floor(Math.random() * 360) + 1800;
-    const totalRotation = currentRotation + newRotation;
+    const totalRotation = currentRotationRef.current + newRotation;
     setRotation(-totalRotation);
-
     const adjustedRotation = totalRotation % 360;
     const angle = (adjustedRotation / 360) * 100;
-    console.log(angle);
 
     if (colors.length > 0) {
       if (gameType === "low" || gameType === "medium") {
@@ -67,6 +67,10 @@ const WheelGame = () => {
     }
   };
 
+  useEffect(() => {
+    currentRotationRef.current = currentRotation;
+  }, [currentRotation]);
+
   const handleSpin = (amount, stopProfit, stopLoss, balanceRef, totalBets) => {
     if (selected === "Manual") {
       handleSpinFunction(amount);
@@ -74,6 +78,7 @@ const WheelGame = () => {
       let currentBet = 0;
 
       const startBetting = () => {
+        setAutoBetStart(true);
         if (stopProfit > 0 || stopLoss > 0 || totalBets == 0) {
           const infiniteBetting = () => {
             currentBet++;
@@ -84,16 +89,16 @@ const WheelGame = () => {
         } else {
           const startRegularBetting = () => {
             if (balanceRef < amount) {
-              // stopAutoBet();
+              stopAutoBet();
               toast.warn("Insufficient funds");
               return;
             }
             if (currentBet < totalBets) {
               handleSpinFunction(amount);
-              currentBet++; 
+              currentBet++;
               timeoutRef.current.push(setTimeout(startRegularBetting, 3500));
             } else {
-              // stopAutoBet();
+              stopAutoBet();
             }
           };
           startRegularBetting();
@@ -110,6 +115,11 @@ const WheelGame = () => {
     setSelectedColor(null);
     setWin(false);
     setWinAmount(0);
+  };
+
+  const stopAutoBet = () => {
+    timeoutRef.current.forEach((id) => clearTimeout(id));
+    setAutoBetStart(false);
   };
 
   const handleGameType = (type) => {
@@ -137,6 +147,7 @@ const WheelGame = () => {
           <div className="w-full flex space-x-2 bg-gray-800 rounded-full px-2 py-3">
             <button
               onClick={() => handleClick("Manual")}
+              disabled={isAutoBetStart}
               className={`relative w-1/2 px-6 py-2 rounded-full overflow-hidden  font-medium   transition-all  ${
                 selected === "Manual"
                   ? "bg-blue-500 text-gray-100"
@@ -156,6 +167,7 @@ const WheelGame = () => {
 
             <button
               onClick={() => handleClick("Auto")}
+              disabled={isAutoBetStart}
               className={`relative w-1/2 px-6 py-2 rounded-full overflow-hidden  font-medium transition-all  ${
                 selected === "Auto"
                   ? "bg-blue-500 text-gray-100"
@@ -184,6 +196,9 @@ const WheelGame = () => {
             />
           ) : (
             <AutoMode
+              stopAutoBet={() => stopAutoBet()}
+              selectedColor={selectedColor}
+              isWin={isWin}
               handleSpin={(
                 amount,
                 stopProfit,
@@ -198,7 +213,7 @@ const WheelGame = () => {
         </div>
         <div
           id="wheelBoard"
-          className=" relative w-[100%] md:w-[65%] lg:w-[75%] p-6 h-screen/2 bg-[#0 F212E]"
+          className=" relative w-[100%] md:w-[65%] lg:w-[75%] p-6 h-screen/2 bg-[#0F212E]"
         >
           <div className="flex justify-center items-center">
             <div className="relative flex flex-col items-center mt-10">
