@@ -13,7 +13,7 @@ export default function Graph({
   resetGraph,
 }) {
   return (
-    <div className="fixed z-[10] bottom-4 right-4   rounded h-80 bg-[#213743] rounded ">
+    <div className="fixed z-[999] bottom-4 right-4   rounded h-80 bg-[#213743] rounded ">
       <div className="flex items-center justify-between bg-[#1A2C38]">
         <p className=" w-full rounded py-2 px-6 font-medium text-gray-100 flex gap-2 items-center">
           <AiOutlineAreaChart size={20} />

@@ -42,7 +42,7 @@ export default function AutoMode({ isBetPlacedFunction }) {
 
   const [betAmountWin, setBetAmountWin] = useState();
 
-  const userDataGet = async () => {
+  const userDataGet = async () => { 
     const response = await GetUserDetails();
     if (response !== null) {
       const newBalance = Number(response[0].color_wallet_balnace);
