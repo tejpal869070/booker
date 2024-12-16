@@ -53,8 +53,7 @@ export default function BankWithDrawal() {
   };
 
   // if user want to update bank account second time
-  const changeBankAccount = async () => {
-    console.log(formData)
+  const changeBankAccount = async () => { 
     setAccountChanging(true);
     if (ac_name === null || ac_name === undefined || ac_name.length < 4) {
       toast.error("Invalid Beneficary Name", {

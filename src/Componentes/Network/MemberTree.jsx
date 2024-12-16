@@ -163,8 +163,7 @@ export default function MemberTree() {
       const stringifyData = JSON.stringify(result, null, 2); 
       setData(JSON.parse(stringifyData));
       setloading(false);
-    } catch (error) {
-      console.error("Error fetching data:", error);
+    } catch (error) { 
       setloading(false);
       setData([]);
     }
@@ -300,7 +299,7 @@ export default function MemberTree() {
   }
 
   return (
-    <div>
+    <div className="min-h-screen">
       <div className="tree-member-first-box flex flex-wrap  gap-16 border-2 border-black  dark:border-gray-400 rounded-lg  mb-6 p-2">
         <div className="">
           <p className="bg-[#ff9600] px-2 text-white rounded-lg">TARUN9742</p>

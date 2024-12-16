@@ -144,7 +144,7 @@ export default function NewInvestment() {
                 <p>Let Your Money Work for You.</p>
               </div>
               <p className="  font-medium text-lg text-[green] mb-4">
-                Account Balance: ₹{user && user.wallet_balance}
+                Account Balance: ₹{user && user.wallet_balance || 0.00}
               </p>
               <div className="  mb-4"></div>
               <div>

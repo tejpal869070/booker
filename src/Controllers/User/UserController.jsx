@@ -1,9 +1,8 @@
 import axios from "axios";
-import Cookies from "js-cookie";
 import { API } from "../Api";
 
-var mobile = Cookies.get("mobile");
-var bearerToken = Cookies.get("token");
+var mobile = sessionStorage.getItem("mobile");
+var bearerToken = sessionStorage.getItem("token");
 
 export const GetUserDetails = async () => {
   try {
@@ -29,10 +28,10 @@ export const GetUserDetails = async () => {
       return null;
     }
   } catch (error) {
-    Cookies.remove("token");
-    Cookies.remove("mobile");
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("mobile");
     localStorage.removeItem("userDetails");
-    window.location.href = "/home"
+    window.location.href = "/home";
     return null;
   }
 };
@@ -352,6 +351,29 @@ export const GetAccountAllStatement = async () => {
   }
 };
 
+export const GetGameWalletStatement = async (page) => {
+  const postData = {
+    mobile: mobile,
+    page: page,
+  };
+
+  const axiosConfig = {
+    headers: {
+      Authorization: `Bearer ${bearerToken}`,
+    },
+  };
+  try {
+    const response = await axios.post(
+      `${API.url}game/get-statement`,
+      postData,
+      axiosConfig
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const SendRequestForChangeAccount = async (formData) => {
   const postData = {
     mobile: mobile,
@@ -410,7 +432,7 @@ export const AddNewBelowMember = async (formData) => {
 export const GetTree = async (uid) => {
   const postData = {
     mobile: mobile,
-    uid: uid
+    uid: uid,
   };
 
   const axiosConfig = {
@@ -429,8 +451,6 @@ export const GetTree = async (uid) => {
     throw error;
   }
 };
-
-
 
 export const GetDirectDownline = async (formData) => {
   const postData = {
@@ -454,9 +474,6 @@ export const GetDirectDownline = async (formData) => {
   }
 };
 
-
-
-
 export const GetMyDownline = async (formData) => {
   const postData = {
     mobile: mobile,
@@ -479,3 +496,71 @@ export const GetMyDownline = async (formData) => {
   }
 };
 
+export const GetVipPlans = async () => {
+  const postData = {
+    mobile: mobile,
+  };
+
+  const axiosConfig = {
+    headers: {
+      Authorization: `Bearer ${bearerToken}`,
+    },
+  };
+  try {
+    const response = await axios.post(
+      `${API.url}user/get-wagering`,
+      postData,
+      axiosConfig
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const CasinoAuth = async (formData) => {
+  const data = {
+    gameCode: formData.gameCode,
+    providerCode: formData.providerCode,
+    id: formData.id,
+    currency: "INR",
+    displayName: formData.displayName,
+    mobile: formData.mobile,
+  };
+
+  try {
+    const response = await axios.post(
+      `${API.url}user/get-single-casino`,
+      data,
+      {
+        proxy: {
+          host: "97.74.84.91",
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const GetAllCasinoGames = async (formData) => {
+  try {
+    const postData = {
+      mobile: mobile,
+    };
+    const axiosConfig = {
+      headers: {
+        Authorization: `Bearer ${bearerToken}`,
+      },
+    };
+    const response = await axios.post(
+      `${API.url}user/get-casino-games`,
+      postData,
+      axiosConfig
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

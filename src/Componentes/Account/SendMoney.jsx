@@ -135,7 +135,7 @@ export default function SendMoney() {
   }
 
   return (
-    <div>
+    <div className="min-h-screen">
       <div>
         <p className="lg:pl-10 font-bold text-xl mb-6 dark:text-white">
           Account {">"}Send Money

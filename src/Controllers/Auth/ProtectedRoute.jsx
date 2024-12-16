@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import Cookies from "js-cookie";
+import { useState, useEffect } from "react"; 
 import { CheckToken } from "./AuthController";
 import { Loading1 } from "../../Componentes/Loading1";
 
@@ -8,8 +7,8 @@ export const ProtectedRoute = ({ children }) => {
 
   useEffect(() => {
     const checkToken = async () => {
-      const mobile = Cookies.get("mobile");
-      const token = Cookies.get("token");
+      const mobile = sessionStorage.getItem("mobile");
+      const token = sessionStorage.getItem("token");
 
       if (!token || !mobile) {
         // Redirect to login page without a full page reload

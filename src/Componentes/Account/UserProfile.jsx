@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { GetUserDetails } from "../../Controllers/User/UserController";
 import { Loading1 } from "../Loading1";
 import ThemeToggle from "../../Controllers/ThemeToggle";
-import { FaAngleRight } from "react-icons/fa";
-import Cookies from "js-cookie";
+import { FaAngleRight } from "react-icons/fa"; 
 import { Link } from "react-router-dom";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { ToastContainer, toast } from "react-toastify";
@@ -58,8 +57,8 @@ export default function UserProfile() {
   }, []);
 
   const handleLogout = async () => {
-    Cookies.remove("token");
-    Cookies.remove("mobile");
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("mobile");
     localStorage.removeItem("userDetails");
     window.location.href = "/";
   };

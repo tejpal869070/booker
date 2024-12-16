@@ -1,11 +1,12 @@
 import React, { useEffect, useMemo } from "react";
 import { useLocation } from "react-router-dom";
 import ColorGame from "../Componentes/Casino/ColorGame";
-import Card2020 from "../Componentes/Casino/Aviator";
 import Aviator from "../Componentes/Casino/Aviator";
 import MinesGame from "../Componentes/Casino/MinesGame";
 import Plinko from "../Componentes/Casino/Plinko";
 import WheelGame from "../Componentes/Casino/WheelGame";
+import LiveCasinoDashboard from "../Componentes/Casino/LiveCasinoDashboard";
+import CasinoLobby from "../Componentes/Casino/CasinoLobby";
 
 export default function LiveCasino() {
   const location = useLocation();
@@ -30,7 +31,20 @@ export default function LiveCasino() {
     return <div>{<Plinko />}</div>;
   } else if (paramsData && paramsData.game === "wheel") {
     return <div>{<WheelGame />}</div>;
+  } else if (paramsData && paramsData.game === "casino") {
+    return <div>{<LiveCasinoDashboard />}</div>;
+  } else if (paramsData && paramsData.game === "casino-lobby") {
+    return <div>{<CasinoLobby />}</div>;
   } else {
-    return <div>no game selected</div>;
+    return (
+      <div>
+        <iframe
+          src="https://www.crazygames.com/embed/ragdoll-archers"
+          style={{ width: "80vw", height: "90vh" }}
+          frameborder="0"
+          allow="gamepad *;"
+        ></iframe>
+      </div>
+    );
   }
 }

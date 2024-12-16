@@ -8,12 +8,18 @@ import PreLoad from "./Pages/PreLoad";
 import { ProtectedRoute } from "./Controllers/Auth/ProtectedRoute";
 import ChangePassword from "./Pages/authPages/ChangePassword";
 import ForgetPassword from "./Pages/authPages/ForgetPassword";
+import AboutUs from "./Pages/AboutUs";
+import AstroHome from "./Pages/AstroHome";
+import Horoscope from "./Pages/Horoscope";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<PreLoad />} />
+        {/* <Route path="/about-us-astrology" element={<AboutUs />} />
+        <Route path="/astrology-home" element={<AstroHome />} />
+        <Route path="/astrology-horoscope" element={<Horoscope />} /> */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/otp-verify" element={<OtpVerify />} />
@@ -31,7 +37,7 @@ function App() {
           path="/change-password"
           element={
             <ProtectedRoute>
-              <ChangePassword  />
+              <ChangePassword />
             </ProtectedRoute>
           }
         />

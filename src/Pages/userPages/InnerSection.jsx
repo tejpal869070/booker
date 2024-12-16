@@ -25,6 +25,7 @@ import ChangePin from "../../Componentes/Account/ChangePin";
 import UserProfile from "../../Componentes/Account/UserProfile";
 import Wallet from "../../Componentes/Account/Wallet";
 import VIP from "../../Componentes/Account/VIP";
+import GameWalletHistory from "../../Componentes/Account/GameWalletHistory";
 
 export default function InnerSection() {
   const location = useLocation();
@@ -65,7 +66,7 @@ export default function InnerSection() {
   } else if (paramsData && paramsData.money === "usdt-deposit") {
     return <div> {<BankDeposit />} </div>;
   } else if (paramsData && paramsData.money === "deposit-history") {
-    return <div> {<DepositHistory />} </div>;
+    return <div> {<DepositHistory />} </div>; 
   } else if (paramsData && paramsData.money === "withdrawal") {
     return <div>{<Withdrawal />}</div>;
   } else if (paramsData && paramsData.money === "withdrawal-history") {
@@ -76,7 +77,9 @@ export default function InnerSection() {
     return <div> {<TodayHistory />} </div>;
   } else if (paramsData && paramsData.account === "account-history") {
     return <div> {<AccountHistory />} </div>;
-  } else if (paramsData && paramsData.income === "matching-income") {
+  } else if (paramsData && paramsData.account === "game-wallet-history") {
+    return <div> {<GameWalletHistory />} </div>;
+  }else if (paramsData && paramsData.income === "matching-income") {
     return <div> {<MatchingIncome />} </div>;
   } else if (paramsData && paramsData.income === "refferer-income") {
     return <div> {<ReferIncome />} </div>;

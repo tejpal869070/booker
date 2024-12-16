@@ -1,12 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import ProgressBar from "@ramonak/react-progress-bar";
 import { FaCrown } from "react-icons/fa6";
-import bg1 from "../../assets/photos/Untitled-1-02.png";
+import { MdVerified } from "react-icons/md";
+import {
+  GetUserDetails,
+  GetVipPlans,
+} from "../../Controllers/User/UserController";
+import { API } from "../../Controllers/Api";
+import { Loading1 } from "../Loading1";
 
 export default function VIP() {
   const [tab, setTab] = useState(1);
-
+  const [plans, setPlans] = useState([]);
+  const [user, setUser] = useState({});
+  const [loading, setLoading] = useState(true);
   const settings = {
     dots: true,
     infinite: true,
@@ -41,6 +49,39 @@ export default function VIP() {
       },
     ],
   };
+
+  const getVipPlans = async () => {
+    try {
+      const response = await GetVipPlans();
+      if (response && response.status) {
+        setPlans(response.data);
+      }
+    } catch (error) {
+      window.alert("Server Error. Try Again !");
+    }
+  };
+
+  const userDataGet = async () => {
+    const response = await GetUserDetails();
+    if (response !== null) {
+      setUser(response[0]);
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getVipPlans();
+    userDataGet();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-50 z-[9999]">
+        <Loading1 />
+      </div>
+    );
+  }
+
   return (
     <div className="mb-10 lg:mt-6 h-screen pb-10">
       <Slider {...settings}>
@@ -48,7 +89,7 @@ export default function VIP() {
           <div className="relative px-2 pb-4">
             <img
               className="w-[95%] h-[12rem] lg:h-40 rounded-lg  absolute top-0"
-              src={item.img1}
+              src={API.url + "assets/img/" + item.bgimage}
               alt="baner"
             />
             <div className="relative px-6 py-4 text-white z-[1000] ">
@@ -60,24 +101,35 @@ export default function VIP() {
                 Upgrading to {item.title} requires{" "}
               </p>
               <p className="font-semibold text-xl lg:text-lg">
-                ₹{item.mininum} Amount
+                ₹{item.minimumrebetamount} Amount
               </p>
               <p className="text-right text-xs mr-2  mt-4 lg:mt-0">
                 {item.title}
               </p>
               <ProgressBar
-                completed={item.currentComplete}
+                completed={Math.max(0, Math.min((Number(user?.wagering).toFixed(2) / Number(item.minimumrebetamount)) * 100, 100).toFixed(2)) }
                 maxCompleted={100}
                 height="15px"
                 labelSize="11px"
                 className=""
               />
+
+              {/* <ProgressBar
+                completed={500 /1000 * 100}
+                maxCompleted={100}
+                height="15px"
+                labelSize="11px"
+                className=""
+              /> */}
               <div className="flex justify-between mt-1.5">
-                <p className="text-sm lg:text-[10px] rounded-xl font-medium px-3  bg-gradient-to-r from-blue-200 to-cyan-200 text-gray-700">
-                  {item.currentComplete}/{item.mininum}
+                <p className="text-sm lg:text-[10px] rounded-xl flex items-center justify-center font-medium px-3  bg-gradient-to-r from-blue-200 to-cyan-200 text-gray-700">
+                  {/* {user?.wagering}/{item.minimumrebetamount} */}
+                  {Number(user?.wagering) >= Number(item.minimumrebetamount) ? <MdVerified size={20} color="green"/> : `${user?.wagering}/${item.minimumrebetamount}`}
                 </p>
                 <p className="text-sm lg:text-[12px]">
-                  Require ₹{item.mininum - item.currentComplete} to Upgrade
+                  
+                  {Number(item.minimumrebetamount)  - Number(user?.wagering) > 0 ? `Require ₹ ${Number(item.minimumrebetamount).toFixed(2)   -  Number(user?.wagering).toFixed(2)} ` : "Upgraded" } 
+                  
                 </p>
               </div>
             </div>
@@ -96,7 +148,7 @@ export default function VIP() {
                       <p>
                         Level Up Reward{" "}
                         <span className="text-[green] bg-gray-200 px-2 rounded-lg">
-                          ₹{item.levelReward}
+                          ₹{item.levelreward}
                         </span>
                       </p>
                       <p>Will receive only 1 time</p>
@@ -114,7 +166,7 @@ export default function VIP() {
                       <p>
                         Monthly Reward{" "}
                         <span className="text-[green] bg-gray-200 px-2 rounded-lg">
-                          {item.monthyReward}%
+                          {item.monthyreward}%
                         </span>
                       </p>
                       <p>Will receive on 1st of every month</p>
@@ -213,57 +265,18 @@ export default function VIP() {
       ) : (
         rules.map((item, index) => (
           <div className="px-4 rounded bg-indigo-400 mt-2 py-3">
-            <p className="text-center px-4 bg-red-400 rounded-t-md py-1 text-gray-200 font-medium">{item.name}</p>
-            <p className="text-justify dark:text-gray-700 mt-1">{item.description}</p>
+            <p className="text-center px-4 bg-red-400 rounded-t-md py-1 text-gray-200 font-medium">
+              {item.name}
+            </p>
+            <p className="text-justify dark:text-gray-700 mt-1">
+              {item.description}
+            </p>
           </div>
         ))
       )}
     </div>
   );
 }
-
-const plans = [
-  {
-    id: 1,
-    title: "VIP1",
-    img1: require("../../assets/photos/vip1bg.jpg"),
-    mininum: 1000,
-    currentComplete: 40,
-    active: true,
-    monthyReward: "1",
-    levelReward: "100",
-  },
-  {
-    id: 2,
-    title: "VIP2",
-    img1: require("../../assets/photos/vip2bg.jpg"),
-    mininum: 50000,
-    currentComplete: 30,
-    active: false,
-    monthyReward: "1.5",
-    levelReward: "150",
-  },
-  {
-    id: 3,
-    title: "VIP3",
-    img1: require("../../assets/photos/vip3bg.jpg"),
-    mininum: 10000,
-    currentComplete: 24,
-    active: false,
-    monthyReward: "2",
-    levelReward: "300",
-  },
-  {
-    id: 4,
-    title: "VIP4",
-    img1: require("../../assets/photos/vip4bg.jpg"),
-    mininum: 500000,
-    currentComplete: 15,
-    active: false,
-    monthyReward: "2.5",
-    levelReward: "500",
-  },
-];
 
 const data = [
   {

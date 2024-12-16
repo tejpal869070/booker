@@ -18,41 +18,7 @@ export default function DateSelector() {
     params.set("to", e.target.value);
     navigate(`${location.pathname}?${params.toString()}`);
   }; 
-
-  // const handleSearch = async () => {
-  //   const todayDate = new Date();
-  //   const year = todayDate.getFullYear();
-  //   const month = String(todayDate.getMonth() + 1).padStart(2, "0");
-  //   const day = String(todayDate.getDate()).padStart(2, "0");
-
-  //   // Format as YYYY-MM-DD
-  //   const formattedDate = `${year}-${month}-${day}`;
-
-  //   const StartDate = new URLSearchParams(location.search).get("from");
-  //   const EndDate = new URLSearchParams(location.search).get("to");
-
-  //   // Check if dates are provided
-  //   if (!StartDate || !EndDate) {
-  //     toast.error("Please select both start and end dates");
-  //     return;
-  //   }
-
-  //   // Convert date strings to Date objects for comparison
-  //   const startDateObj = new Date(StartDate);
-  //   const endDateObj = new Date(EndDate);
-  //   const todayDateObj = new Date(formattedDate);
-
-  //   // Validate date ranges
-  //   if (endDateObj > todayDateObj) {
-  //     toast.error("End date cannot be in the future.");
-  //     return;
-  //   } else if (startDateObj > endDateObj) {
-  //     toast.error("Start date cannot be after end date.");
-  //     return;
-  //   }
-
-  //   window.alert("ok");
-  // };
+ 
 
   return (
     <div className="mb-4">
@@ -62,7 +28,8 @@ export default function DateSelector() {
           aria-label="Date"
           placeholder="Start Date"
           type="date"
-          className="border-2 border-[#ff9600] rounded py-1"
+          color="black"
+          className="border-2 text-black border-[#ff9600] rounded py-1"
           onChange={handleStartDate}
         />
         <p  className="dark:text-gray-200">to</p>
@@ -70,7 +37,8 @@ export default function DateSelector() {
           aria-label="Date"
           placeholder="Start Date"
           type="date"
-          className="border-2 border-[#ff9600] rounded py-1"
+          color="black"
+          className="border-2 text-black border-[#ff9600] rounded py-1"
           onChange={handleEndDate}
         />
         {/* <button className="relative ml-6" onClick={handleSearch}>

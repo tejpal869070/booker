@@ -15,6 +15,8 @@ import { MdCancel } from "react-icons/md";
 import VerifyPin from "../VerifyPin";
 import { ToastContainer, toast } from "react-toastify";
 import { MainGameWalletMoneyTransfer } from "../../Controllers/User/GamesController";
+import { IoGameController } from "react-icons/io5";
+
 
 export default function Wallet() {
   const [user, setUser] = React.useState({});
@@ -278,7 +280,17 @@ const links = [
     linkTo: "/home?money=withdrawal",
   },
   {
-    label: "Deposit Hitory",
+    label: "Send Money",
+    icons: <RiUserSharedFill size={26} className="dark:text-white" />,
+    linkTo: "/home?account=send-money",
+  },
+  {
+    label: "Investment",
+    icons: <TbMoneybag fill="white" size={26} className="dark:text-white" />,
+    linkTo: "/home?investment=new-investment",
+  },
+  {
+    label: "Deposit History",
     icons: <FaWallet size={26} className="dark:text-white" />,
     linkTo: "/home?money=deposit-history",
   },
@@ -288,29 +300,26 @@ const links = [
     linkTo: "/home?money=withdrawal-history",
   },
 
-  {
-    label: "Investment",
-    icons: <TbMoneybag fill="white" size={26} className="dark:text-white" />,
-    linkTo: "/home?investment=new-investment",
-  },
+  
   {
     label: "Investment History",
     icons: <TiDocumentText size={26} className="dark:text-white" />,
     linkTo: "/home?investment=investment-history",
   },
-  {
-    label: "Send Money",
-    icons: <RiUserSharedFill size={26} className="dark:text-white" />,
-    linkTo: "/home?account=send-money",
-  },
+  
   {
     label: "Today History",
     icons: <GrDocumentText size={26} className="dark:text-white" />,
     linkTo: "/home?account=today-history",
   },
   {
-    label: "Account History",
+    label: "Account Statement",
     icons: <FaHistory size={26} className="dark:text-white" />,
     linkTo: "/home?account=account-history",
+  },
+  {
+    label: "Game Wallet Statement",
+    icons: <IoGameController size={26} className="dark:text-white" />,
+    linkTo: "/home?account=game-wallet-history",
   },
 ];

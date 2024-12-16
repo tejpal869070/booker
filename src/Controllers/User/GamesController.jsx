@@ -1,11 +1,10 @@
-import axios from "axios";
-import Cookies from "js-cookie";
+import axios from "axios"; 
 import { API } from "../Api";
 import CryptoJS from "crypto-js";
 
-var EncodedMobile = btoa(JSON.stringify(Cookies.get("mobile")));
-var mobile = Cookies.get("mobile");
-var bearerToken = Cookies.get("token");
+var EncodedMobile = btoa(JSON.stringify(sessionStorage.getItem("mobile")));
+var mobile = sessionStorage.getItem("mobile");
+var bearerToken = sessionStorage.getItem("token");
 
 export const DecodeString = async (str) => {
   const decodedurl = atob(str);
@@ -28,7 +27,7 @@ export const GetGameTypes = async () => {
       },
     };
     const response = await axios.post(
-      `${API.colorGameUrl}user/get-game-type`,
+      `${API.colorGameUrl}/get-game-type`,
       postData,
       axiosConfig
     );
@@ -46,7 +45,7 @@ export const ColorGameNumbers = async (id) => {
       data: data,
     };
     const response = await axios.post(
-      `${API.colorGameUrl}user/get-game-mapping-number`,
+      `${API.colorGameUrl}get-game-mapping-number`,
       postData
     );
     const decodedData = await DecodeString(response.data);
@@ -63,7 +62,7 @@ export const ColorGameColors = async (id) => {
       data: data,
     };
     const response = await axios.post(
-      `${API.colorGameUrl}user/get-game-mapping-color`,
+      `${API.colorGameUrl}get-game-mapping-color`,
       postData
     );
     const decodedData = await DecodeString(response.data);
@@ -80,7 +79,7 @@ export const ColorGameCurrentData = async (id) => {
       data: data,
     };
     const response = await axios.post(
-      `${API.colorGameUrl}user/get-record-not-complete`,
+      `${API.colorGameUrl}get-record-not-complete`,
       postData
     );
     const decodedData = await DecodeString(response.data);
@@ -98,7 +97,7 @@ export const ColorGameAllResult = async (id) => {
       data: data,
     };
     const response = await axios.post(
-      `${API.colorGameUrl}user/get-record-complete`,
+      `${API.colorGameUrl}get-record-complete`,
       postData
     );
     const decodedData = await DecodeString(response.data);
@@ -115,7 +114,7 @@ export const MyColorGameHistory = async (id, page) => {
       data: data,
     };
     const response = await axios.post(
-      `${API.colorGameUrl}user/get-bet-record`,
+      `${API.colorGameUrl}get-bet-record`,
       postData
     );
     const decodedData = await DecodeString(response.data);
@@ -150,7 +149,7 @@ export const AddNewColorGameBet = async (formData) => {
       data: data,
     };
     const response = await axios.post(
-      `${API.colorGameUrl}user/add-bet-details`,
+      `${API.colorGameUrl}add-bet-details`,
       postData
     );
     const decodedData = await DecodeString(response.data);
@@ -189,16 +188,23 @@ export const MainGameWalletMoneyTransfer = async (formData, pin) => {
 
 export const MinesGameUpdateWallet = async (formData) => {
   try {
-    const timestamp = Date.now().toString();
+    const amount = formData.amount;
+    const type = formData.type;
+    const game_type = formData.game_type; 
+
+    const data =  {
+      amount,
+      type,
+      game_type, 
+    };
+
     const secretKey = process.env.REACT_APP_WALLET_UPDATE_KEY;
 
-    const secret = CryptoJS.AES.encrypt(timestamp, secretKey).toString();
+    const encodedData = CryptoJS.AES.encrypt(JSON.stringify(data), secretKey).toString();
+
     const postData = {
       mobile: mobile,
-      amount: formData.amount,
-      type: formData.type,
-      key: secret,
-      timeStamp: timestamp,
+      data: encodedData,
     };
 
     const axiosConfig = {

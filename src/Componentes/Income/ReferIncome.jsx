@@ -37,7 +37,7 @@ export default function ReferIncome() {
     "Action",
   ];
   return (
-    <div>
+    <div className="min-h-screen">
       <p className="font-bold text-xl mb-6 dark:text-white">
         Income Manager {">"} Reffer Income
       </p>

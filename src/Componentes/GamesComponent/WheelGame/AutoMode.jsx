@@ -33,7 +33,7 @@ export default function AutoMode() {
   const [initialBetAmount, setInitialBetAmount] = useState();
   const [desiredSpins, setDesiredSpins] = useState(0);
   const [spinCount, setSpinCount] = useState(0);
-  
+
   // New state to track if a spin is in progress
   const [isSpinning, setIsSpinning] = useState(false);
 
@@ -96,7 +96,7 @@ export default function AutoMode() {
         setCurrentRotation(totalRotation);
         setGameStarted(false);
         setWin(true);
-        setIsSpinning(false); 
+        setIsSpinning(false);
         setTimeout(() => {
           setWin(false);
         }, 2000);
@@ -108,7 +108,7 @@ export default function AutoMode() {
     const currentBalance = balanceRef.current;
     if (isSpinning) {
       toast.warn("Please wait for the current spin to finish.");
-      return;  
+      return;
     }
     if (stopLoss < amountRef.current && stopLoss > 0) {
       toast.error(
@@ -146,7 +146,7 @@ export default function AutoMode() {
       setWegeredAmount((pre) => pre + amountRef.current);
       handleSpinFunction(amountRef.current);
       setTotalBalance((pre) => pre - amountRef.current);
-      await updateWalletBalance("deduct", amountRef.current);
+      updateWalletBalance("deduct", amountRef.current);
     }
   };
 
@@ -183,14 +183,14 @@ export default function AutoMode() {
   const updateWalletBalance = async (type, amount) => {
     formData.type = type;
     formData.amount = amount;
+    formData.game_type = "Wheel";
 
     try {
       const response = await MinesGameUpdateWallet(formData);
       if (response && response.status) {
-        // Handle successful response if needed
       }
     } catch (error) {
-      if (error.response.status === 302) {
+      if (error?.response?.status === 302) {
         toast.error(error.response.data.message, {
           position: "top-center",
         });
@@ -236,7 +236,8 @@ export default function AutoMode() {
             (pre) =>
               pre +
               amountRef.current * selectedColor?.profit -
-              amountRef.current );
+              amountRef.current
+          );
           setTotalWin((pre) => pre + 1);
           setTotalBalance(
             (pre) => pre + amountRef.current * selectedColor?.profit
@@ -245,12 +246,11 @@ export default function AutoMode() {
             "add",
             amountRef.current * selectedColor?.profit
           );
-        }
-        // if loss means 0.00x
-        else {
+        } else {
           if (increaseOnLoss > 0) {
             setAmount((pre) => pre + (pre * Number(increaseOnLoss)) / 100);
           }
+
           setGraphProfit((pre) => pre - amountRef.current);
           setTotalLoss((pre) => pre + 1);
         }
@@ -287,13 +287,11 @@ export default function AutoMode() {
     startingBalanceRef.current = startingBalance;
   }, [startingBalance, totalBalance]);
 
-
-
   return (
     <div>
       <div className="flex flex-wrap-reverse">
         <div className="w-[100%] md:w-[35%] lg:w-[25%] p-6 h-screen/2 bg-gray-500">
-          <GameTypeSelector />
+          <GameTypeSelector gameStarted={autoSpin} />
           <div>
             <ToastContainer />
             <div>
@@ -307,26 +305,32 @@ export default function AutoMode() {
                   placeholder="Enter Amount "
                   type="number"
                   value={amount}
+                  disabled={autoSpin}
                   onChange={(e) => setAmount(Number(e.target.value))} // Convert to number
                 />
                 <div className="absolute right-0.5">
                   <button
                     onClick={() => setAmount((pre) => pre / 2)}
+                    disabled={autoSpin}
                     className="px-1.5 py-1.5 bg-gray-500 text-gray-200 text-sm font-medium"
                   >
                     1/2
                   </button>
                   <button
                     onClick={() => doubleTheAmount()}
+                    disabled={autoSpin}
                     className="px-1.5 py-1.5 bg-gray-500 text-gray-200 border-l-2 text-sm font-medium border-gray-200"
                   >
                     2x
                   </button>
                 </div>
               </div>
-              <p className="lg:text-sm font-medium dark:text-gray-200 mt-3">Risk</p>
+              <p className="lg:text-sm font-medium dark:text-gray-200 mt-3">
+                Risk
+              </p>
               <select
                 value={gameType}
+                disabled={autoSpin}
                 onChange={(e) => selectGameType(e)} // Changed to onChange
                 className="w-full rounded border px-2 py-1 outline-none font-semibold text-lg"
               >
@@ -336,18 +340,23 @@ export default function AutoMode() {
               </select>
             </div>
             <div>
-              <p className="lg:text-sm text-gray-200 font-medium mt-1 mb-1">Desired Spins (0 for infinite)</p>
+              <p className="lg:text-sm text-gray-200 font-medium mt-1 mb-1">
+                Desired Spins (0 for infinite)
+              </p>
               <input
                 className="w-full rounded border px-2 py-1 outline-none font-semibold text-lg"
                 placeholder="Enter number of spins"
                 type="number"
                 value={desiredSpins}
+                disabled={autoSpin}
                 onChange={(e) => setDesiredSpins(Number(e.target.value) || 0)}
               />
             </div>
 
             <button
-              className={`mt-4 px-6 py-3 ${autoSpin ? "bg-red-500" : "bg-blue-500"} w-full text-white text-lg font-semibold rounded-lg transition`}
+              className={`mt-4 px-6 py-3 ${
+                autoSpin ? "bg-red-500" : "bg-blue-500"
+              } w-full text-white text-lg font-semibold rounded-lg transition`}
               onClick={() => {
                 if (autoSpin) {
                   stopAutoSpin();
@@ -359,49 +368,65 @@ export default function AutoMode() {
               {autoSpin ? "Stop Auto Bet" : "Start Auto Bet"}
             </button>
             <div>
-              <p className="lg:text-sm text-gray-200 font-medium mt-1 mb-1">Stop On Profit</p>
-              <input 
+              <p className="lg:text-sm text-gray-200 font-medium mt-1 mb-1">
+                Stop On Profit
+              </p>
+              <input
                 className="w-full rounded border px-2 py-1 outline-none font-semibold text-lg"
                 placeholder="0.0000"
                 type="number"
+                disabled={autoSpin}
                 value={stopProfit}
                 onChange={(e) => setStopProfit(e.target.value) || 0}
               />
             </div>
             <div>
-              <p className="lg:text-sm text-gray-200 font-medium mt-1 mb-1">Stop On Loss</p>
+              <p className="lg:text-sm text-gray-200 font-medium mt-1 mb-1">
+                Stop On Loss
+              </p>
               <input
                 className="w-full rounded border px-2 py-1 outline-none font-semibold text-lg"
                 placeholder="0.0000"
                 type="number"
+                disabled={autoSpin}
                 value={stopLoss}
                 onChange={(e) => setStopLoss(e.target.value) || 0}
               />
             </div>
             <div>
-              <p className="lg:text-sm text-gray-200 font-medium mt-1 mb-1">Increase on WIN</p>
+              <p className="lg:text-sm text-gray-200 font-medium mt-1 mb-1">
+                Increase on WIN
+              </p>
               <div className="relative">
                 <input
                   className="w-full rounded border px-2 py-1 outline-none font-semibold text-lg"
                   placeholder="0.0000"
                   type="number"
+                  disabled={autoSpin}
                   value={increaseOnWin}
                   onChange={(e) => setIncreaseOnWin(e.target.value)}
                 />
-                <p className="absolute right-2 h-full flex items-center justify-center text-gray-800 font-semibold top-0 bottom-0">%</p>
+                <p className="absolute right-2 h-full flex items-center justify-center text-gray-800 font-semibold top-0 bottom-0">
+                  %
+                </p>
               </div>
             </div>
             <div>
-              <p className="lg:text-sm text-gray-200 font-medium mt-1 mb-1">Increase on LOSS</p>
+              <p className="lg:text-sm text-gray-200 font-medium mt-1 mb-1">
+                Increase on LOSS
+              </p>
               <div className="relative">
                 <input
                   className="w-full rounded border px-2 py-1 outline-none font-semibold text-lg"
                   placeholder="0.0000"
                   type="number"
+                  disabled={autoSpin}
                   value={increaseOnLoss}
                   onChange={(e) => setIncreaseOnLoss(e.target.value)}
                 />
-                <p className="absolute right-2 h-full flex items-center justify-center text-gray-800 font-semibold top-0 bottom-0">%</p>
+                <p className="absolute right-2 h-full flex items-center justify-center text-gray-800 font-semibold top-0 bottom-0">
+                  %
+                </p>
               </div>
             </div>
             <div className="flex items-center justify-between px-4 py-2 mt-1 rounded bg-gray-900">

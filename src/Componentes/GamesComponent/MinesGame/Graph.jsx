@@ -7,7 +7,7 @@ import { IoRefreshCircleSharp } from "react-icons/io5";
 export default function Graph({
   wageredAmount,
   graphProfit,
-  totalWin,
+  totalWin, 
   totalLoss,
   handleClose,
   resetGraph,

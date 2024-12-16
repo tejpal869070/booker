@@ -3,7 +3,7 @@ import { FaEye } from "react-icons/fa";
 import { MyInvestMentHistory } from "../../Controllers/User/UserController";
 import { Loading1 } from "../Loading1";
 import Details from "./Details";
-import gif1 from "../../assets/photos/nodatagif.gif";
+import gif1 from "../../assets/photos/nodata.png";
 
 export default function InvestmentHistory() {
   const [data, setData] = useState([]);
@@ -41,7 +41,7 @@ export default function InvestmentHistory() {
   }
 
   return (
-    <div className="relative">
+    <div className="relative min-h-screen">
       <div className=" ">
         <div>
           <h1 className="mb-6 font-bold text-lg dark:text-white">
@@ -51,7 +51,7 @@ export default function InvestmentHistory() {
             {data && data.length === 0 ? (
               <div>
                 <img alt="no data" src={gif1} className="m-auto" />
-                <p className="text-center font-bold text-xl">No Records !</p>
+                <p className="text-center font-bold dark:text-white text-xl">No Records !</p>
               </div>
             ) : (
               <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 border-indigo-400 border-4">

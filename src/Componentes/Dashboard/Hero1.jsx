@@ -106,7 +106,7 @@ export default function Hero1() {
 
         <div className="col-span-12 md:col-span-4     w-full   rounded-lg">
           <div className="grid grid-cols-12 gap-4 w-full">
-            <div className=" col-span-6 rounded-lg shadow-[2px_2px_3px_2px_#bee3f8] p-4">
+            <div className=" col-span-6 rounded-lg  p-4 border-2 border-black" style={{boxShadow:"0px 0px 4px white"}}>
               <HiMiniWallet size={24} color="#92a0fd" />
               <p className="font-bold dark:text-gray-300">Total Balance</p>
               <p className="text-2xl font-bold text-black dark:text-gray-300">
@@ -114,7 +114,7 @@ export default function Hero1() {
               </p>
             </div>
 
-            <div className=" col-span-6 rounded-lg shadow-[2px_2px_3px_2px_#bee3f8] p-4">
+            <div className=" col-span-6 rounded-lg  p-4 border-2 border-black" style={{boxShadow:"0px 0px 4px white"}}>
               <MdGeneratingTokens size={26} color="#92a0fd" />
               <p className="font-bold dark:text-gray-300">
                 {userData.currency} Value

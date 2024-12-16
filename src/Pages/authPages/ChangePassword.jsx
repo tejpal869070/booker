@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import Cookies from "js-cookie";
+import React, { useState } from "react"; 
 import bg1 from "../../assets/photos/security-bg.jpg";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -11,7 +10,7 @@ export default function ChangePassword() {
   const [formError, setFormError] = useState();
   const [resetting, setResetting] = useState(false);
 
-  const sessionMobile = Cookies.get("mobile");
+  const sessionMobile = sessionStorage.getItem("mobile");
 
   const [user, setUser] = useState({
     mobile: "",
@@ -44,8 +43,8 @@ export default function ChangePassword() {
     try {
       const response = await ChangePasswordControll(user);
       if (response.error === false) {
-        Cookies.remove("mobile");
-        Cookies.remove("token");
+        sessionStorage.removeItem("mobile");
+        sessionStorage.removeItem("token");
         toast.success("Password reset success!", {
           position: "top-center",
         });

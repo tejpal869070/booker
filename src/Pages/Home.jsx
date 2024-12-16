@@ -8,8 +8,7 @@ import { RiAccountCircleFill } from "react-icons/ri";
 import { GiTakeMyMoney } from "react-icons/gi";
 import { Link, useLocation } from "react-router-dom";
 import InnerSection from "./userPages/InnerSection";
-import { FaCoins } from "react-icons/fa6";
-import Cookies from "js-cookie";
+import { FaCoins } from "react-icons/fa6"; 
 import { GetUserDetails } from "../Controllers/User/UserController";
 import ThemeToggle from "../Controllers/ThemeToggle";
 import { Loading1 } from "../Componentes/Loading1";
@@ -54,8 +53,8 @@ export default function Home() {
   };
 
   const handleLogout = async () => {
-    Cookies.remove("token");
-    Cookies.remove("mobile");
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("mobile");
     localStorage.removeItem("userDetails");
     window.location.href = "/";
   };
@@ -103,19 +102,7 @@ export default function Home() {
 
   return (
     <div className="relative dark:bg-black w-full h-full overflow-x-hidden">
-      <div className="md:hidden w-full z-[999]  pt-2 pb-2 flex items-center justify-center ">
-        <Link
-          to={{ pathname: "/home", search: `?dashboard` }}
-          className="flex items-center space-x-3 rtl:space-x-reverse  sm:pl-64"
-        >
-          <img
-            src={Logo}
-            className=" w-[40%] m-auto"
-            alt="bLogo"
-            style={{ filter: "drop-shadow(0px 0px 34px white)" }}
-          />
-        </Link>
-      </div>
+       <div className="md:hidden w-full z-[999]  pt-2 pb-2 flex items-center justify-center "></div>
       <nav className="hidden md:block bg-gradient-to-r from-blue-800 to-indigo-900 z-10 border-b-2 border-gray-200 dark:bg-gray-900 fixed w-full">
         <div className="  flex flex-wrap items-center justify-between mx-auto p-4">
           {/* <Link
@@ -240,7 +227,7 @@ export default function Home() {
           <div className="">
             <Link
               to={{ pathname: "/home", search: `?dashboard` }}
-              className="  " 
+              className="  "
             >
               <img
                 src={Logo}
@@ -405,15 +392,15 @@ export default function Home() {
                     Wheel Game
                   </Link>
                 </li>
-                {/* <li className="ml-11">
+                <li className="ml-11">
                   <Link
-                    to={{ pathname: "/home", search: `?game=plinko` }}
+                    to={{ pathname: "/home", search: `?game=casino` }}
                     className={`${dropdownClassList}`}
                     onClick={handleHideSideBar}
                   >
-                    Plinko
+                    Casino
                   </Link>
-                </li> */}
+                </li>
                 {/* <li className="ml-11">
                   <Link
                     to={{ pathname: "/home", search: `?game=aviator` }}
@@ -753,7 +740,31 @@ export default function Home() {
                     className={`${dropdownClassList}`}
                     onClick={handleHideSideBar}
                   >
-                    Account History
+                    Account Statement
+                  </Link>
+                </li>
+                <li className="ml-11">
+                  <Link
+                    to={{
+                      pathname: "/home",
+                      search: `?account=game-wallet-history`,
+                    }}
+                    className={`${dropdownClassList}`}
+                    onClick={handleHideSideBar}
+                  >
+                    Game Wallet
+                  </Link>
+                </li>
+                <li className="ml-11">
+                  <Link
+                    to={{
+                      pathname: "/home",
+                      search: `?account=bet-history`,
+                    }}
+                    className={`${dropdownClassList}`}
+                    onClick={handleHideSideBar}
+                  >
+                    Bet History
                   </Link>
                 </li>
               </ul>

@@ -1,9 +1,8 @@
 import axios from "axios";
-import { API } from "../Api";
-import Cookies from "js-cookie";
+import { API } from "../Api"; 
 
-var mobile = Cookies.get("mobile");
-var bearerToken = Cookies.get("token");
+var mobile = sessionStorage.getItem("mobile");
+var bearerToken = sessionStorage.getItem("token");
 
 export const CheckUserExistance = async (formData) => {
   try {

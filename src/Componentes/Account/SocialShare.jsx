@@ -28,7 +28,7 @@ const SocialShare = ({ url, onClose }) => {
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-50 z-[9999]">
+    <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center  backdrop-blur-[2px] z-[9999]">
       <div className="  flex items-center justify-center">
         <div className="bg-gray-100 dark:bg-gray-300 w-full mx-4 p-4 rounded-xl animate-fade-down animate-once animate-duration-500">
           <div className="flex justify-between items center border-b border-gray-200 py-3">

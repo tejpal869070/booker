@@ -39,13 +39,14 @@ export default function ManualMode({ isBetPlacedFunction, isRecharged }) {
   const updateWalletBalance = async (type, amount) => {
     formData.type = type;
     formData.amount = amount;
+    formData.game_type = "Mines";
 
     try {
       const response = await MinesGameUpdateWallet(formData);
       if (response.status) {
       }
     } catch (error) {
-      if (error.response.status === 302) {
+      if (error?.response?.status === 302) {
         toast.error(error.response.data.message, {
           position: "top-center",
         });
@@ -73,7 +74,7 @@ export default function ManualMode({ isBetPlacedFunction, isRecharged }) {
       return;
     }
     setIsBetPlaced(true);
-    await updateWalletBalance("deduct", amount);
+    updateWalletBalance("deduct", amount);
     setTotalBalance((pre) => pre - amount);
   };
 
@@ -109,13 +110,13 @@ export default function ManualMode({ isBetPlacedFunction, isRecharged }) {
     if (bombIndex.includes(item.id)) {
       setBombFound(true);
       setIsBetPlaced(false);
-      const audio = new Audio(require("../../../assets/audio/blast1.mp3")); // or use a URL
+      const audio = new Audio(require("../../../assets/audio/blast1.mp3"));
       audio.play();
       setTimeout(() => {
         resetGame();
       }, 2000);
     } else {
-      const audio = new Audio(require("../../../assets/audio/success1.mp3")); // or use a URL
+      const audio = new Audio(require("../../../assets/audio/success1.mp3"));
       audio.play();
     }
   };
@@ -156,7 +157,6 @@ export default function ManualMode({ isBetPlacedFunction, isRecharged }) {
 
   useEffect(() => {
     if (!bombFound && openedMines.length === 25 - totalBombs) {
-      console.log("here");
       handleCashOut();
     }
   }, [openedMines, totalBombs, bombFound]);
@@ -286,7 +286,13 @@ export default function ManualMode({ isBetPlacedFunction, isRecharged }) {
               />
               <div className="absolute right-0.5 ">
                 <button
-                  onClick={() => setAmount((pre) => pre / 2)}
+                  onClick={() => {
+                    if (amount > 1) {
+                      setAmount((pre) => pre / 2);
+                    } else {
+                      setAmount(1);
+                    }
+                  }}
                   className="px-1.5  py-2 bg-gray-500 text-gray-200   text-sm  font-medium  "
                 >
                   1/2

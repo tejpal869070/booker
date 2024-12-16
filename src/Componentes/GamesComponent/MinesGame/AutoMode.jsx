@@ -34,6 +34,12 @@ export default function AutoMode({ isBetPlacedFunction }) {
   const [isGraph, setIsGraph] = useState(false);
   const initialBetAmount = amount;
 
+  const profitRef = useRef(profit);
+
+  useEffect(() => {
+    profitRef.current = profit;
+  }, [profit]);
+
   // graph datat
   const [wageredAmount, setWegeredAmount] = useState(0);
   const [graphProfit, setGraphProfit] = useState(0);
@@ -42,7 +48,7 @@ export default function AutoMode({ isBetPlacedFunction }) {
 
   const [betAmountWin, setBetAmountWin] = useState();
 
-  const userDataGet = async () => { 
+  const userDataGet = async () => {
     const response = await GetUserDetails();
     if (response !== null) {
       const newBalance = Number(response[0].color_wallet_balnace);
@@ -57,13 +63,14 @@ export default function AutoMode({ isBetPlacedFunction }) {
   const updateWalletBalance = async (type, amount) => {
     formData.type = type;
     formData.amount = amount;
+    formData.game_type = "Mines";
 
     try {
-      const response = MinesGameUpdateWallet(formData);
+      const response = await MinesGameUpdateWallet(formData);
       if (response.status) {
       }
     } catch (error) {
-      if (error.response.status === 302) {
+      if (error?.response?.status === 302) {
         toast.error(error.response.data.message, {
           position: "top-center",
         });
@@ -149,7 +156,7 @@ export default function AutoMode({ isBetPlacedFunction }) {
         setTotalBalance((prevBalance) => prevBalance - amountRef.current);
       }
     } else if (type === "add") {
-      updateWalletBalance(
+      await updateWalletBalance(
         "add",
         amountRef.current *
           minesProfitTable.find((item) => item.totalBomb === totalBombs).profit[
@@ -293,6 +300,14 @@ export default function AutoMode({ isBetPlacedFunction }) {
   };
 
   useEffect(() => {
+    setProfit(
+      minesProfitTable.find((item) => item.totalBomb === totalBombs).profit[
+        userSelectedIndex.length - 1
+      ]?.profit
+    );
+  }, [userSelectedIndex, bombIndexRef.current]);
+
+  useEffect(() => {
     const element = document.getElementById("boxBoard");
     if (element) {
       const root = ReactDOM.createRoot(element);
@@ -332,7 +347,7 @@ export default function AutoMode({ isBetPlacedFunction }) {
               <div>
                 <div className="rounded-lg animate-jump-in p-4 border-2 bg-[#16242C] w-40 py-4 px-6 border-[#28A73C] flex flex-col gap-2 justify-center items-center">
                   <p className="text-center text-[#20E701] font-semibold text-lg lg:text-3xl">
-                    {profit}x
+                    {profitRef.current}x
                   </p>
                   <p className="text-center text-[#20E701] font-semibold text-lg border-t-2 border-gray-400 pt-0.5">
                     +₹
@@ -363,7 +378,7 @@ export default function AutoMode({ isBetPlacedFunction }) {
 
   return (
     <div>
-      <ToastContainer /> 
+      <ToastContainer />
       <div>
         <div className="flex justify-between dark:text-gray-200">
           <p className="lg:text-sm font-medium">Bet Amount</p>

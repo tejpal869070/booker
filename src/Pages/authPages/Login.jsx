@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import bg1 from "../../assets/photos/stadium.jpg";
-import { ToastContainer, toast } from "react-toastify";
-import Cookies from "js-cookie"; 
+import { ToastContainer, toast } from "react-toastify"; 
 import { IoEyeOff } from "react-icons/io5";
 import { FaEye } from "react-icons/fa";
 import { Loading1 } from "../../Componentes/Loading1";
@@ -38,8 +37,8 @@ export default function Login() {
     try {
       const response = await userLogin(userData);
       if (response.status) {
-        Cookies.set("token", response.token);
-        Cookies.set("mobile", response.mobile); 
+        sessionStorage.setItem("token", response.token);
+        sessionStorage.setItem("mobile", response.mobile); 
         toast.success("Login Successfull");
         setCreating(false);
         setTimeout(function () {
@@ -52,7 +51,7 @@ export default function Login() {
       }
     } catch (error) {
       if (error.response && error.response.status === 404) {
-        toast.error("Invalid Credentials");
+        toast.error(`${error.response.data.message}`);
         setCreating(false);
         return;
       }
@@ -115,7 +114,7 @@ export default function Login() {
                     )}
                   </div>
                   <div className="relative ">
-                    <button className="relative mt-4 w-full" type="submit">
+                    <button className="relative mt-4 w-full" type="submit" disabled={creating}>
                       <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-black"></span>
                       <span className="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900">
                         {creating ? <Loading1 width={30} /> : "LOGIN"}

@@ -166,13 +166,10 @@ export default function ColorGame({ gameType }) {
       const response = await GetUserDetails();
       if (response !== null && response.length > 0) {
         setUser(response[0]);
-      } else {
-        // Handle case where response is null or empty
-        console.warn("No user data found.");
+      } else { 
         setUser(null); // Optionally reset user state
       }
-    } catch (error) {
-      console.error("Error fetching user details:", error);
+    } catch (error) { 
       // Optionally handle error state or notify the user
     } finally {
       setUserLoading(false);

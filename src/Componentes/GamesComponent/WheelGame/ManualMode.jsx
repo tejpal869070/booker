@@ -16,7 +16,8 @@ export default function ManualMode() {
   const [gameStarted, setGameStarted] = useState(false);
   const [currentRotation, setCurrentRotation] = useState(0);
   const [isWin, setWin] = useState(false);
-  const [winAmount, setWinAmount] = useState();
+  const [winAmount, setWinAmount] = useState(); 
+ 
 
   const amountRef = useRef(amount);
 
@@ -31,6 +32,8 @@ export default function ManualMode() {
   const selectGameType = (e) => {
     setGameType(e.target.value);
   };
+
+   
 
   const handleSpinFunction = (amount) => {
     const audio = new Audio(require("../../../assets/audio/spin-232536.mp3"));
@@ -86,7 +89,7 @@ export default function ManualMode() {
     }
     handleSpinFunction(amountRef.current);
     setTotalBalance((pre) => pre - amountRef.current);
-    await updateWalletBalance("deduct", amountRef.current);
+    updateWalletBalance("deduct", amountRef.current);
   };
 
   // update wallet balance online---------------------------------------------
@@ -94,14 +97,14 @@ export default function ManualMode() {
   const updateWalletBalance = async (type, amount) => {
     formData.type = type;
     formData.amount = amount;
+    formData.game_type = "Wheel";
 
     try {
       const response = await MinesGameUpdateWallet(formData);
-      if (response.status) {
-        // Handle successful response if needed
+      if (response && response.status) {
       }
-    } catch (error) {
-      if (error.response.status === 302) {
+    } catch (error) { 
+      if (error?.response?.status === 302) {
         toast.error(error.response.data.message, {
           position: "top-center",
         });
@@ -158,14 +161,13 @@ export default function ManualMode() {
       return () => clearTimeout(timer);
     }
   }, [transitionEnabled]);
-
-  console.log(selectedColor)
+ 
 
   return (
     <div>
       <div className="flex flex-wrap-reverse">
         <div className="w-[100%] md:w-[35%] lg:w-[25%] p-6 h-screen/2 bg-gray-500">
-          <GameTypeSelector />
+          <GameTypeSelector gameStarted={gameStarted} />
           <div>
             <ToastContainer />
             <div>
@@ -185,12 +187,14 @@ export default function ManualMode() {
                 <div className="absolute right-0.5   ">
                   <button
                     onClick={() => setAmount((pre) => pre / 2)}
+                    disabled={gameStarted}
                     className="px-1.5  py-1.5 bg-gray-500 text-gray-200   text-sm  font-medium  "
                   >
                     1/2
                   </button>
                   <button
                     onClick={() => doubleTheAmount()}
+                    disabled={gameStarted}
                     className="px-1.5  py-1.5 bg-gray-500 text-gray-200 border-l-2 text-sm  font-medium border-gray-200"
                   >
                     2x
@@ -293,7 +297,10 @@ export default function ManualMode() {
           {isWin && (
             <div className="absolute w-full h-full flex justify-center items-center top-0 left-0 z-[500]">
               <div className="border-2 animate-jump border-gray-500 flex flex-col gap-2 justify-center items-center p-6 rounded-full">
-                <p className="font-bold text-4xl  " style={{color: selectedColor?.color}}>
+                <p
+                  className="font-bold text-4xl  "
+                  style={{ color: selectedColor?.color }}
+                >
                   {selectedColor?.profit}x
                 </p>
                 <p

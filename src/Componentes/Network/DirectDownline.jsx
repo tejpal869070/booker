@@ -37,7 +37,7 @@ export default function DirextDownline() {
   }
 
   return (
-    <div>
+    <div className="min-h-screen">
       <h1 className="mb-4 font-bold text-lg dark:text-white">
         Direct Downline{" "}
       </h1>
@@ -75,7 +75,16 @@ export default function DirextDownline() {
             <tbody>
               <tr>
                 <td colspan="8" className="text-center p-4">
-                  No Records Found!
+                  <div>
+                    <img
+                      alt="no data"
+                      src={require("../../assets/photos/nodata.png")}
+                      className="m-auto"
+                    />
+                    <p className="text-center font-bold dark:text-white text-xl">
+                      No Records !
+                    </p>
+                  </div>
                 </td>
               </tr>
             </tbody>

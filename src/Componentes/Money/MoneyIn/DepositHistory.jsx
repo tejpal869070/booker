@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { GetUserPaymentHistory } from "../../../Controllers/User/UserController";
 import { FaEye } from "react-icons/fa";
 import { Loading1 } from "../../Loading1";
-import gif1 from "../../../assets/photos/nodatagif.gif";
+import gif1 from "../../../assets/photos/nodata.png";
 import DateSelector from "../../Income/DateSelector";
 import { useLocation } from "react-router-dom";
 

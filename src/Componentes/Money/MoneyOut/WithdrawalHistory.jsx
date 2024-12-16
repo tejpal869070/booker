@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { FaRegEye } from "react-icons/fa";
 import { GetUserPaymentHistory } from "../../../Controllers/User/UserController";
 import { Loading1 } from "../../Loading1";
-import gif1 from "../../../assets/photos/nodatagif.gif";
+import gif1 from "../../../assets/photos/nodata.png";
 import { useLocation } from "react-router-dom";
 import DateSelector from "../../Income/DateSelector";
 import { MdCancel } from "react-icons/md";

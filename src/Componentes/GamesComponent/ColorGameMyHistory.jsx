@@ -22,7 +22,7 @@ export default function ColorGameMyHistory({
       try {
         const response = await MyColorGameHistory(gameType, pageId);
         if (response.status) {
-          setData(response.data);
+          setData(response.data); 
         }
       } catch (error) {
         swal({

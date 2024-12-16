@@ -14,6 +14,14 @@ export default function Games() {
           </Link>
         ))}
       </div>
+
+      <Link className="cursor-pointer" to={{ pathname: "/home", search: `?game=casino` }}>
+        <img
+          alt="casino poater"
+          src={require("../../assets/photos/casino-1.jpg")}
+          className="w-full mb-4"
+        />
+      </Link>
     </div>
   );
 }

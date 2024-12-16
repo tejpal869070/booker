@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { FaRegEye } from "react-icons/fa";
 import AccountHistoryPeriod from "./AccountHistoryPeriod";
-import gif1 from "../../assets/photos/nodatagif.gif";
+import gif1 from "../../assets/photos/nodata.png";
 import { GetAccountAllStatement } from "../../Controllers/User/UserController";
 import DateSelector from "../Income/DateSelector";
 import { Loading1 } from "../Loading1";
@@ -21,7 +21,7 @@ export default function AccountHistory() {
   const showModal = useCallback(
     (index) => {
       setIsVisible((pre) => !pre);
-      setSelectedIndex(index);
+      setSelectedIndex(index); 
     },
     [setIsVisible, setSelectedIndex]
   );
@@ -45,7 +45,7 @@ export default function AccountHistory() {
   };
 
   useEffect(() => {
-    GetAllStatement();
+    GetAllStatement(); 
   }, []);
 
   useEffect(() => {
@@ -82,7 +82,7 @@ export default function AccountHistory() {
   }
 
   return (
-    <div className="relative">
+    <div className="relative min-h-screen">
       <div className=" ">
         <div>
           <h1 className="mb-6 font-bold text-lg dark:text-white ">
