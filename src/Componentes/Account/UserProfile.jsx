@@ -59,7 +59,7 @@ export default function UserProfile() {
   const handleLogout = async () => {
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("mobile");
-    localStorage.removeItem("userDetails");
+    sessionStorage.removeItem("userDetails");
     window.location.href = "/";
   };
 

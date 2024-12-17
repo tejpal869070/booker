@@ -12,10 +12,7 @@ export default function LiveCasinoDashboard() {
   const [activeTab, setActiveTab] = useState(0);
   const [gameData, setGameData] = useState([]);
   const [uniqueGameData, setUniqueGameData] = useState([]);
-  const [providerName, setProviderName] = useState("");
-  const [launchUrl, setLaunchUrl] = useState("");
-
-  const [lobbyLoading, setLobbyLoading] = useState(false);
+  const [providerName, setProviderName] = useState(""); 
 
   const formData = {};
   const handleCasinoSelect = async (item) => {
@@ -44,7 +41,7 @@ export default function LiveCasinoDashboard() {
         const response = await GetAllCasinoGames();
         setGameData(response?.data?.games);
       } catch (error) {
-        console.log(error);
+        window.alert("Something Went Wrong.")
       }
     };
 
@@ -64,15 +61,15 @@ export default function LiveCasinoDashboard() {
   }, []);
 
   return (
-    <div className="w-full   mx-auto p-4">
+    <div className="w-full   mx-auto p-4 min-h-screen">
       {/* Tab navigation */}
-      <div className="flex gap-4   overflow-x-scroll  pb-4 ">
+      <div className="flex gap-4 overflow-x-scroll pb-4 ">
         <button
           onClick={() => {
             setActiveTab(0);
             setProviderName("");
           }}
-          className={`  min-w-40 px-6 py-1.5 text-nowrap    text-xs font-medium    rounded-full focus:outline-none transition duration-300 ease-in-out ${
+          className={`min-w-40 px-6 py-1.5 text-nowrap    text-xs font-medium    rounded-full focus:outline-none transition duration-300 ease-in-out ${
             activeTab === 0
               ? "border-b-2 border-gray-100 text-blue-500 bg-[#1FB173] text-white"
               : "  bg-gray-200"

@@ -8,7 +8,7 @@ const ThemeToggle = ({ onNav }) => {
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", darkMode);
-    localStorage.setItem("theme", darkMode ? "dark" : "light");
+    sessionStorage.setItem("theme", darkMode ? "dark" : "light");
   }, [darkMode]);
 
   const handleClick = () => {

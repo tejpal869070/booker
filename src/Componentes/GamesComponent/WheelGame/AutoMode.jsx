@@ -127,7 +127,6 @@ export default function AutoMode() {
         Number(startingBalanceRef.current) + Number(stopProfit) &&
       Number(stopProfit) > 0
     ) {
-      console.log(currentBalance, startingBalanceRef.current, stopProfit);
       toast.warn("You have reached your stop profit", {
         position: "top-center",
       });

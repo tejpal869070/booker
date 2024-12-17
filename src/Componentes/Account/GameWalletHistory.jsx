@@ -103,7 +103,7 @@ export default function GameWalletHistory() {
                 <thead className="text-xs font-semibold text-black uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
                   <tr>
                     <th scope="col" className="px-4 py-3">
-                      S.No.
+                      ID.
                     </th>
                     {/* <th scope="col" className="px-6 py-3">
                       TYPE

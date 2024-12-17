@@ -8,7 +8,7 @@ import { RiAccountCircleFill } from "react-icons/ri";
 import { GiTakeMyMoney } from "react-icons/gi";
 import { Link, useLocation } from "react-router-dom";
 import InnerSection from "./userPages/InnerSection";
-import { FaCoins } from "react-icons/fa6"; 
+import { FaCoins } from "react-icons/fa6";
 import { GetUserDetails } from "../Controllers/User/UserController";
 import ThemeToggle from "../Controllers/ThemeToggle";
 import { Loading1 } from "../Componentes/Loading1";
@@ -55,7 +55,7 @@ export default function Home() {
   const handleLogout = async () => {
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("mobile");
-    localStorage.removeItem("userDetails");
+    sessionStorage.removeItem("userDetails");
     window.location.href = "/";
   };
 
@@ -63,7 +63,7 @@ export default function Home() {
     const response = await GetUserDetails();
     if (response !== null) {
       setUser(response[0]);
-      localStorage.setItem("userDetails", JSON.stringify(response[0]));
+      sessionStorage.setItem("userDetails", JSON.stringify(response[0]));
       setLoading(false);
     }
   };
@@ -102,7 +102,7 @@ export default function Home() {
 
   return (
     <div className="relative dark:bg-black w-full h-full overflow-x-hidden">
-       <div className="md:hidden w-full z-[999]  pt-2 pb-2 flex items-center justify-center "></div>
+      <div className="md:hidden w-full z-[999]  pt-2 pb-2 flex items-center justify-center "></div>
       <nav className="hidden md:block bg-gradient-to-r from-blue-800 to-indigo-900 z-10 border-b-2 border-gray-200 dark:bg-gray-900 fixed w-full">
         <div className="  flex flex-wrap items-center justify-between mx-auto p-4">
           {/* <Link
@@ -755,7 +755,7 @@ export default function Home() {
                     Game Wallet
                   </Link>
                 </li>
-                <li className="ml-11">
+                {/* <li className="ml-11">
                   <Link
                     to={{
                       pathname: "/home",
@@ -766,7 +766,7 @@ export default function Home() {
                   >
                     Bet History
                   </Link>
-                </li>
+                </li> */}
               </ul>
             </li>
 

@@ -21,7 +21,7 @@ export default function AccountHistory() {
   const showModal = useCallback(
     (index) => {
       setIsVisible((pre) => !pre);
-      setSelectedIndex(index); 
+      setSelectedIndex(index);
     },
     [setIsVisible, setSelectedIndex]
   );
@@ -45,7 +45,7 @@ export default function AccountHistory() {
   };
 
   useEffect(() => {
-    GetAllStatement(); 
+    GetAllStatement();
   }, []);
 
   useEffect(() => {
@@ -118,6 +118,9 @@ export default function AccountHistory() {
                     <th scope="col" className="px-6 py-3">
                       Received From
                     </th>
+                    <th scope="col" className="px-6 py-3">
+                      Remaining Balance
+                    </th>
                   </tr>
                 </thead>
                 {filteredData.map((item, index) => (
@@ -148,6 +151,8 @@ export default function AccountHistory() {
                           ? item.description.split(" ")[2]
                           : ""}
                       </td>
+                      <td className="px-6 py-4">₹{item.balance}</td>
+
                     </tr>
                     {isVisible && selectedIndex === index ? (
                       <tr>

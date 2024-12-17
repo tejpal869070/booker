@@ -34,7 +34,7 @@ export default function Hero1() {
     const response = await GetUserDetails();
     if (response !== null) {
       setUserData(response[0]);
-      localStorage.setItem("userDetails", JSON.stringify(response[0]));
+      sessionStorage.setItem("userDetails", JSON.stringify(response[0]));
       setLoading(false);
     }
   };

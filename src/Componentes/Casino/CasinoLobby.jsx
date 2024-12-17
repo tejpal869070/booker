@@ -38,11 +38,10 @@ export default function CasinoLobby() {
           await userDataGet();
 
           const response = await CasinoAuth(formData);
-          const launchUrl = response?.response?.launchURL;
-          console.log(response?.response?.launchURL)
+          const launchUrl = response?.response?.launchURL; 
           setLaunchUrl(launchUrl);
         } catch (err) {
-          console.error("Error fetching data:", err); 
+          window.alert("Something Went Wrong")
         } finally {
           setLoading(false);
         }

@@ -30,7 +30,7 @@ export const GetUserDetails = async () => {
   } catch (error) {
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("mobile");
-    localStorage.removeItem("userDetails");
+    sessionStorage.removeItem("userDetails");
     window.location.href = "/home";
     return null;
   }
@@ -292,6 +292,29 @@ export const AddCryptoWithdrawalRequest = async (formData, pin) => {
   try {
     const response = await axios.post(
       `${API.url}user/add-usdt-withdrawal-request`,
+      postData,
+      axiosConfig
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const RemoveWithdrawalRequest = async (id) => {
+  const postData = {
+    mobile: mobile,
+    id: id, 
+  };
+
+  const axiosConfig = {
+    headers: {
+      Authorization: `Bearer ${bearerToken}`,
+    },
+  };
+  try {
+    const response = await axios.post(
+      `${API.url}user/decline-withdrawal-request`,
       postData,
       axiosConfig
     );
