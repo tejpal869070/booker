@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import bg1 from "../../assets/photos/stadium.jpg";
-import { ToastContainer, toast } from "react-toastify"; 
+import { ToastContainer, toast } from "react-toastify";
 import { IoEyeOff } from "react-icons/io5";
 import { FaEye } from "react-icons/fa";
 import { Loading1 } from "../../Componentes/Loading1";
-import { userLogin } from "../../Controllers/Auth/AuthController"; 
+import { CheckToken, userLogin } from "../../Controllers/Auth/AuthController";
 
 export default function Login() {
   const [creating, setCreating] = useState(false);
@@ -38,7 +38,7 @@ export default function Login() {
       const response = await userLogin(userData);
       if (response.status) {
         sessionStorage.setItem("token", response.token);
-        sessionStorage.setItem("mobile", response.mobile); 
+        sessionStorage.setItem("mobile", response.mobile);
         toast.success("Login Successfull");
         setCreating(false);
         setTimeout(function () {
@@ -60,7 +60,6 @@ export default function Login() {
     }
   };
 
-
   
 
   return (
@@ -81,18 +80,18 @@ export default function Login() {
               <form onSubmit={handleLogin}>
                 <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
                   <div className="relative">
-                    <input 
+                    <input
                       id="Mobile"
                       name="Mobile"
                       type="text"
                       value={mobile}
                       onChange={(e) => setMobile(e.target.value)}
                       className="peer  h-10 w-full border-b-2 border-0 border-gray-300 text-gray-900 focus:border-b-2 focus:border-gray-500 focus:outline-none"
-                      placeholder="Mobile Number"
+                      placeholder="Mobile / Email"
                     />
                   </div>
                   <div className="relative flex items-center">
-                    <input 
+                    <input
                       id="password"
                       name="password"
                       type={showPassword ? "text" : "password"}
@@ -114,7 +113,11 @@ export default function Login() {
                     )}
                   </div>
                   <div className="relative ">
-                    <button className="relative mt-4 w-full" type="submit" disabled={creating}>
+                    <button
+                      className="relative mt-4 w-full"
+                      type="submit"
+                      disabled={creating}
+                    >
                       <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-black"></span>
                       <span className="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900">
                         {creating ? <Loading1 width={30} /> : "LOGIN"}
@@ -123,9 +126,16 @@ export default function Login() {
                   </div>
                   <p className="text-sm">
                     Don't have an account?{" "}
-                    <Link to={"/register"} className="underlined text-[blue]">Register Now</Link>
+                    <Link to={"/register"} className="underlined text-[blue]">
+                      Register Now
+                    </Link>
                   </p>
-                  <Link to={"/forget-password"} className="text-sm font-semibold cursor-pointer">Forgot Password ?</Link>
+                  <Link
+                    to={"/forget-password"}
+                    className="text-sm font-semibold cursor-pointer"
+                  >
+                    Forgot Password ?
+                  </Link>
                 </div>
               </form>
             </div>

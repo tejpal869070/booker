@@ -151,7 +151,7 @@ export default function AccountHistory() {
                           ? item.description.split(" ")[2]
                           : ""}
                       </td>
-                      <td className="px-6 py-4">₹{item.balance}</td>
+                      <td className="px-6 py-4">₹{Number(item.balance).toFixed(2)}</td>
 
                     </tr>
                     {isVisible && selectedIndex === index ? (

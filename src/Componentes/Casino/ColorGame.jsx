@@ -155,7 +155,7 @@ export default function ColorGame() {
           <p className="text-center mt-4  text-xl md:text-2xl font-bold">
             Game Balance :{" "}
             <span className="text-[#169b16] text-2xl">
-              ₹{user.color_wallet_balnace}
+              ₹{Number(user.color_wallet_balnace).toFixed(2)}
             </span>
           </p>
           <div className="flex gap-4 mt-6 justify-center">
@@ -202,7 +202,7 @@ export default function ColorGame() {
         <p className="relative " href="#">
           <p className="fold-bold border-2 border-black dark:border-gray-400 relative z-[2] inline-block h-full w-full rounded  bg-indigo-100 dark:bg-indigo-100 text-gray-700 px-3 py-1 text-base font-bold text-black transition duration-100  ">
             <RiColorFilterFill size={28} color="black" />
-            Game Balance : ₹{user.color_wallet_balnace}
+            Game Balance : ₹{Number(user.color_wallet_balnace).toFixed(2)}
           </p>
           <div className="absolute w-full h-full bg-black dark:bg-gray-200 animate-pulse animate-duration-1000 top-1 left-1 z-[1] rounded "/>
         </p>
@@ -224,7 +224,7 @@ export default function ColorGame() {
         <p className="relative " href="#">
           <p className="fold-bold border-2 border-black dark:border-gray-400 relative z-[2] inline-block h-full w-full rounded     bg-indigo-100 dark:bg-indigo-100 text-gray-700 px-3 py-1 text-base font-bold text-black transition duration-100  ">
             <BiSolidWallet size={28} color="black" /> Main Balance : ₹
-            {user.wallet_balance}
+            {Number(user.wallet_balance).toFixed(2)}
           </p>
           <div className="absolute w-full h-full bg-black dark:bg-gray-200 animate-pulse animate-duration-1000 top-1 left-1 z-[1] rounded "/>
         </p>
@@ -234,13 +234,13 @@ export default function ColorGame() {
         <p className="relative w-[45%]" href="#">
           <p className="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-indigo-100 dark:bg-indigo-100 text-gray-700 px-3 py-1 text-base font-bold text-black transition duration-100  ">
             <RiColorFilterFill size={28} color="black" />
-            Game Balance : <br/> <p className="text-xl">₹{user.color_wallet_balnace}</p>
+            Game Balance : <br/> <p className="text-xl">₹{Number(user.color_wallet_balnace).toFixed(2)}</p>
           </p>
         </p>
         <p className="relative w-[45%]" href="#">
           <p className="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-indigo-100 dark:bg-indigo-100 text-gray-700 px-3 py-1 text-base font-bold text-black transition duration-100  ">
             <BiSolidWallet size={28} color="black" /> Main Balance : 
-            <p className="text-xl">₹{user.wallet_balance}</p>
+            <p className="text-xl">₹{Number(user.wallet_balance).toFixed(2)}</p>
           </p>
         </p>
         <div className="flex    w-full flex-row justify-between px-4 dark:text-gray-200 font-semibold">

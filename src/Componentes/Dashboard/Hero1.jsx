@@ -9,12 +9,9 @@ import { GiReceiveMoney } from "react-icons/gi";
 import { HiClipboardDocumentList } from "react-icons/hi2";
 import { FcConferenceCall } from "react-icons/fc";
 import { FcAreaChart } from "react-icons/fc";
-import { FcMoneyTransfer } from "react-icons/fc";
-import { BiSolidColor } from "react-icons/bi";
+import { FcMoneyTransfer } from "react-icons/fc"; 
 import { PiFootballFill } from "react-icons/pi";
-import bg1 from "../../assets/photos/bg-main.jpg";
-import { FaBomb } from "react-icons/fa";
-import { PiBowlingBallBold } from "react-icons/pi";
+import bg1 from "../../assets/photos/bg-main.jpg"; 
 import Games from "./Games";
 
 export default function Hero1() {
@@ -54,8 +51,7 @@ export default function Hero1() {
   return (
     <div className="pb-6">
       <div className="grid grid-cols-12 gap-4 w-full">
-        <div
-          className="relative   col-span-12 md:col-span-8 bg-opacity-10 bg-top bg-cover bg-left-bottom border-2 border-[#92a0fd] dark:border-gray-200 rounded-lg flex justify-between p-4"
+        <div className="relative   col-span-12 lg:col-span-6 xl:col-span-8 bg-opacity-10 bg-top bg-cover bg-left-bottom border-2 border-[#92a0fd] dark:border-gray-200 rounded-lg flex justify-between p-4"
           style={{ backgroundImage: `url(${bg1})` }}
         >
           <div className="z-[9]">
@@ -104,7 +100,7 @@ export default function Hero1() {
           <div className="absolute inset-0 bg-gradient-to-b rounded-lg from-black to-transparent opacity-100 z-1" />
         </div>
 
-        <div className="col-span-12 md:col-span-4     w-full   rounded-lg">
+        <div className="col-span-12 lg:col-span-6 xl:col-span-4     w-full   rounded-lg">
           <div className="grid grid-cols-12 gap-4 w-full">
             <div className=" col-span-6 rounded-lg  p-4 border-2 border-black" style={{boxShadow:"0px 0px 4px white"}}>
               <HiMiniWallet size={24} color="#92a0fd" />
@@ -126,7 +122,7 @@ export default function Hero1() {
               </p>
             </div>
 
-            <div className="col-span-12 md:col-span-6 xl:col-span-12  bg-gradient-to-r from-indigo-400 to-cyan-400 py-2 rounded-lg px-4">
+            <div className="col-span-12    bg-gradient-to-r from-indigo-400 to-cyan-400 py-2 rounded-lg px-4">
               <p className="font-bold text-white">
                 {userData.currency} Rate : ₹{userData.currency_rate}/COIN
               </p>

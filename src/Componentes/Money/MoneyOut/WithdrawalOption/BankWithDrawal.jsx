@@ -243,7 +243,7 @@ export default function BankWithDrawal() {
               </p>
 
               <p className="  font-medium text-lg text-[green] mb-6">
-                Account Balance: ₹{user && user.wallet_balance}
+                Account Balance: ₹{user && Number(user.wallet_balance).toFixed(2)}
               </p>
 
               <div>

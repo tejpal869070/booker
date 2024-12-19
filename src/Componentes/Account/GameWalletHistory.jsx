@@ -6,6 +6,8 @@ import { Loading1 } from "../Loading1";
 import { useLocation } from "react-router-dom";
 import { FaArrowCircleLeft } from "react-icons/fa";
 import { FaArrowCircleRight } from "react-icons/fa";
+import { FaRegEye } from "react-icons/fa";
+import { MdCancel } from "react-icons/md";
 
 export default function GameWalletHistory() {
   const [isVisible, setIsVisible] = useState(false);
@@ -16,8 +18,17 @@ export default function GameWalletHistory() {
   const [endDate, setEndDate] = useState();
   const [filteredData, setFilteredData] = useState([]);
   const [pageId, setPageId] = useState(1);
+  const [isPopupOpen, setPopupOpen] = useState(false);
+  const [popupData, setPopupData] = useState({});
+
+  const classes1 = "flex justify-between border-b border-gray-400";
 
   const location = useLocation();
+
+  const setOpenCasinoTransection = (item) => {
+    setPopupOpen(true);
+    setPopupData(item);
+  };
 
   const showModal = useCallback(
     (index) => {
@@ -56,7 +67,7 @@ export default function GameWalletHistory() {
     setEndDate(end);
   }, [location]);
 
-  useEffect(() => { 
+  useEffect(() => {
     const endDateObj = new Date(endDate);
     endDateObj.setHours(23, 59, 59, 999);
 
@@ -82,7 +93,7 @@ export default function GameWalletHistory() {
   }
 
   return (
-    <div className="relative min-h-screen">
+    <div className=" min-h-screen">
       <div className=" ">
         <div>
           <h1 className="mb-6 font-bold text-lg dark:text-white ">
@@ -121,7 +132,7 @@ export default function GameWalletHistory() {
                       Desc.
                     </th>
                     <th scope="col" className="px-6 py-3">
-                      Remaining Balance
+                      Updated Balance
                     </th>
                   </tr>
                 </thead>
@@ -145,20 +156,45 @@ export default function GameWalletHistory() {
                       <td
                         className={`px-6 py-2 ${
                           item.bet_type === "Win Bet" ||
-                          item.game_type === "Received"
+                          (item.transaction_type === "credit" &&
+                            (item.bet_type === "win" ||
+                              item.bet_type === "bonus" ||
+                              item.bet_type === "spin" ||
+                              item.bet_type === "bet")) ||
+                          (item.transaction_type === "debit" &&
+                            (item.bet_type === "cancel" ||
+                              item.bet_type === "partial_cancel"))
                             ? "text-[green]"
                             : "text-red-600"
                         }`}
                       >
                         {item.bet_type === "Win Bet" ||
-                        item.game_type === "Received"
+                        (item.transaction_type === "credit" &&
+                          (item.bet_type === "win" ||
+                            item.bet_type === "bonus" ||
+                            item.bet_type === "spin" ||
+                            item.bet_type === "bet")) ||
+                        (item.transaction_type === "debit" &&
+                          (item.bet_type === "cancel" ||
+                            item.bet_type === "partial_cancel"))
                           ? "+"
                           : "-"}
                         ₹{Number(item.bet_balance).toFixed(2)}
                       </td>
-                      <td className="px-6 py-2">{item.game_type}</td>
+                      <td className="px-6 py-2 flex justify-left items-center gap-2">
+                        {item.game_type}{" "}
+                        {item.game_type === "casino" && (
+                          <FaRegEye
+                            className="cursor-pointer"
+                            size={16}
+                            onClick={() => {
+                              setOpenCasinoTransection(item);
+                            }}
+                          />
+                        )}
+                      </td>
                       <td className="px-6 py-2">{item.bet_type}</td>
-                      <td className="px-6 py-2">₹{item.total_balance}</td>
+                      <td className="px-6 py-2">₹{Number(item.total_balance).toFixed(2)}</td>
                     </tr>
                     {isVisible && selectedIndex === index ? (
                       <tr>
@@ -191,6 +227,62 @@ export default function GameWalletHistory() {
           </div>
         </div>
       </div>
+
+      {isPopupOpen && (
+        <div className="absolute w-full h-full top-0">
+          <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-50 z-[9999]">
+            <div className=" text-white bg-gradient-to-r from-gray-700 rounded h-[70vh] to-slate-900 p-10 inline-block">
+              <h1 className="text-center text-2xl font-bold ">
+                CASINO TRANSECTION{" "}
+              </h1>
+              <div className="flex flex-col mt-6 gap-2">
+                <div className={`${classes1}`}>
+                  <p>Amount :</p>
+                  <p>₹{Number(popupData.bet_balance).toFixed(2)}</p>
+                </div>
+
+                <div className={`${classes1}`}>
+                  <p>Type :</p>
+                  <p className="uppercase">{popupData.bet_type}</p>
+                </div>
+
+                <div className={`${classes1}`}>
+                  <p>Trnx.Type :</p>
+                  <p className="uppercase">{popupData.transaction_type}</p>
+                </div>
+
+                <div className={`${classes1}`}>
+                  <p>Updated Balance :</p>
+                  <p className="uppercase">{Number(popupData.total_balance).toFixed(2)}</p>
+                </div>
+
+                <div className={`${classes1}`}>
+                  <p>Provider Code :</p>
+                  <p>{popupData?.game_name?.split("&")[0]}</p>
+                </div>
+
+                <div className={`${classes1}`}>
+                  <p>Game Code :</p>
+                  <p>{popupData?.game_name?.split("&")[1]}</p>
+                </div>
+                <div className={`${classes1}`}>
+                  <p>Trnx.Id :</p>
+                  <p>{popupData?.transaction_id}</p>
+                </div>
+                <div className={`${classes1}`}>
+                  <p>Ref.Id :</p>
+                  <p>{popupData?.reference_id}</p>
+                </div>
+              </div>
+              <MdCancel
+                size={30}
+                onClick={() => setPopupOpen(false)}
+                className="cursor-pointer mt-8 flex justify-center m-auto"
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

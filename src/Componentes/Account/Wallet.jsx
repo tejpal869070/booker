@@ -127,7 +127,7 @@ export default function Wallet() {
           <p className="text-2xl font-bold text-center mt-6 dark:text-gray-200 ">
             ₹
             {user &&
-              Number(user.wallet_balance) + Number(user.color_wallet_balnace)}
+              Number(user.wallet_balance).toFixed(2) + Number(user.color_wallet_balnace).toFixed(2)}
           </p>
           <p className="text-center text-sm  text-gray-400 -mt-1">
             Total Balance
@@ -136,7 +136,7 @@ export default function Wallet() {
           <div className="flex justify-between w-full px-4 mt-6">
             <div className="flex w-[45%] flex-col justify-center items-center rounded-lg  p-4 px-6  bg-gradient-to-r from-red-400 to-red-300">
               <p className="font-semibold text-2xl text-white">
-                ₹{user && user.wallet_balance}
+                ₹{user && Number(user.wallet_balance).toFixed(2)}
               </p>
               <p className="text-sm text-gray-200">Main Wallet</p>
             </div>
