@@ -130,18 +130,18 @@ export default function DepositHistory() {
                       >
                         {index + 1}.
                       </th>
-                      <td className="px-4 py-4">
+                      <td className="whitespace-nowrappx-4 py-4">
                         {item.currency === null ? "₹ " : ""}
                         {item.amount} {item.currency}
                       </td>
-                      <td className="px-6 py-4 hidden md:table-cell">
+                      <td className="whitespace-nowrappx-6 py-4 hidden md:table-cell">
                         {item.transaction_id}
                       </td>
-                      <td className="px-6 py-4 hidden md:table-cell">
+                      <td className="whitespace-nowrappx-6 py-4 hidden md:table-cell">
                         {item.payment_type === "USDT" ? "Crypto" : item.type}
                       </td>
-                      <td className="px-6 py-4">{item.status}</td>
-                      <td className="px-6 py-4">
+                      <td className="whitespace-nowrappx-6 py-4">{item.status}</td>
+                      <td className="whitespace-nowrappx-6 py-4">
                         <FaEye
                           size={20}
                           className="cursor-pointer"

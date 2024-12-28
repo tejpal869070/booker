@@ -138,20 +138,20 @@ export default function AccountHistory() {
                       >
                         {index + 1}.
                       </th>
-                      <td className="px-4 py-4">{item.type}</td>
-                      <td className="px-6 py-4">{item.date.split("T")[0]}</td>
-                      <td className="px-6 py-4">₹{item.amount}</td>
-                      <td className="px-6 py-4">
+                      <td className="whitespace-nowrappx-4 py-4">{item.type}</td>
+                      <td className="whitespace-nowrappx-6 py-4">{item.date.split("T")[0]}</td>
+                      <td className="whitespace-nowrappx-6 py-4">₹{item.amount}</td>
+                      <td className="whitespace-nowrappx-6 py-4">
                         {item.description.split(" ").includes("To")
                           ? item.description.split(" ")[2]
                           : ""}
                       </td>
-                      <td className="px-6 py-4">
+                      <td className="whitespace-nowrappx-6 py-4">
                         {item.description.split(" ").includes("from")
                           ? item.description.split(" ")[2]
                           : ""}
                       </td>
-                      <td className="px-6 py-4">₹{Number(item.balance).toFixed(2)}</td>
+                      <td className="whitespace-nowrappx-6 py-4">₹{Number(item.balance).toFixed(2)}</td>
 
                     </tr>
                     {isVisible && selectedIndex === index ? (

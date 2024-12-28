@@ -29,8 +29,7 @@ export default function ColorGame() {
   const [transferToAmount, setTransferToAmount] = useState();
   const [amountHave, setAmountHave] = useState();
   const [success, setSuccess] = useState(false);
-  const [isVerifyOpen, setVerifyOpen] = useState(false);
-  const [flashPopup, setFlashPopup] = useState(true);
+  const [isVerifyOpen, setVerifyOpen] = useState(false); 
 
   const fetchGameTypes = async () => {
     try {
@@ -147,54 +146,7 @@ export default function ColorGame() {
     );
   }
 
-  if (flashPopup) {
-    return (
-      <div className="fixed  top-0 left-0 w-full h-full flex flex-col bg-opacity-25 justify-center items-center  backdrop-blur	bg-black z-[9999]">
-        <div className="  rounded-lg bg-white p-4">
-          <img alt="imgggg" className="w-80" src={gif1} />
-          <p className="text-center mt-4  text-xl md:text-2xl font-bold">
-            Game Balance :{" "}
-            <span className="text-[#169b16] text-2xl">
-              ₹{Number(user.color_wallet_balnace).toFixed(2)}
-            </span>
-          </p>
-          <div className="flex gap-4 mt-6 justify-center">
-            <button
-              onClick={() => {
-                setFlashPopup(false);
-                handleButtons(1);
-              }}
-              className="relative inline-block text-lg group"
-            >
-              <span className="relative z-10 block px-5 py-3 overflow-hidden font-medium leading-tight text-gray-800 transition-colors duration-300 ease-out border-2 border-gray-900 rounded-lg group-hover:text-white">
-                <span className="absolute inset-0 w-full h-full px-5 py-3 rounded-lg bg-gray-50"></span>
-                <span className="absolute left-0 w-48 h-48 -ml-2 transition-all duration-300 origin-top-right -rotate-90 -translate-x-full translate-y-12 bg-gray-900 group-hover:-rotate-180 ease"></span>
-                <span className="relative">Recharge</span>
-              </span>
-              <span
-                className="absolute bottom-0 right-0 w-full h-12 -mb-1 -mr-1 transition-all duration-200 ease-linear bg-gray-900 rounded-lg group-hover:mb-0 group-hover:mr-0"
-                data-rounded="rounded-lg"
-              ></span>
-            </button>
-            <button
-              onClick={() => setFlashPopup(false)}
-              className="relative inline-block text-lg group"
-            >
-              <span className="relative z-10 block px-5 py-3 overflow-hidden font-medium leading-tight text-gray-800 transition-colors duration-300 ease-out border-2 border-gray-900 rounded-lg group-hover:text-white">
-                <span className="absolute inset-0 w-full h-full px-5 py-3 rounded-lg bg-gray-50"></span>
-                <span className="absolute left-0 w-48 h-48 -ml-2 transition-all duration-300 origin-top-right -rotate-90 -translate-x-full translate-y-12 bg-gray-900 group-hover:-rotate-180 ease"></span>
-                <span className="relative">Close</span>
-              </span>
-              <span
-                className="absolute bottom-0 right-0 w-full h-12 -mb-1 -mr-1 transition-all duration-200 ease-linear bg-gray-900 rounded-lg group-hover:mb-0 group-hover:mr-0"
-                data-rounded="rounded-lg"
-              ></span>
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  
 
   return (
     <div className="h-screen">

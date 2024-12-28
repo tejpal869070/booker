@@ -151,8 +151,8 @@ export default function GameWalletHistory() {
                       >
                         {item.id}.
                       </th>
-                      {/* <td className="px-4 py-2">{item.type}</td> */}
-                      <td className="px-6 py-2">{item.date?.split("T")[0]}</td>
+                      {/* <td className="whitespace-nowrappx-4 py-2">{item.type}</td> */}
+                      <td className="whitespace-nowrappx-6 py-2">{item.date?.split("T")[0]}</td>
                       <td
                         className={`px-6 py-2 ${
                           item.bet_type === "Win Bet" ||
@@ -181,7 +181,7 @@ export default function GameWalletHistory() {
                           : "-"}
                         ₹{Number(item.bet_balance).toFixed(2)}
                       </td>
-                      <td className="px-6 py-2 flex justify-left items-center gap-2">
+                      <td className="whitespace-nowrappx-6 py-2 flex justify-left items-center gap-2">
                         {item.game_type}{" "}
                         {item.game_type === "casino" && (
                           <FaRegEye
@@ -193,8 +193,8 @@ export default function GameWalletHistory() {
                           />
                         )}
                       </td>
-                      <td className="px-6 py-2">{item.bet_type}</td>
-                      <td className="px-6 py-2">₹{Number(item.total_balance).toFixed(2)}</td>
+                      <td className="whitespace-nowrappx-6 py-2">{item.bet_type}</td>
+                      <td className="whitespace-nowrappx-6 py-2">₹{Number(item.total_balance).toFixed(2)}</td>
                     </tr>
                     {isVisible && selectedIndex === index ? (
                       <tr>

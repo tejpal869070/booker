@@ -103,8 +103,7 @@ export default function Dashboard() {
 
   return (
     <div>
-      <Hero1 /> 
-      <GamesSlider />
+      <Hero1 />  
       <div className="w-full pb-10 overflow-hidden grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
         {data.map((item, index) => (
           <div className="mt-6 group w-[95%] h-[150px] rounded-[8px] bg-white dark:bg-gray-800 relative p-4 border-2 border-[#c3c6ce] transition duration-500 ease-out overflow-visible hover:border-[#008bf8] hover:shadow-lg">

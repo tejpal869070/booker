@@ -101,19 +101,19 @@ export default function DirextDownline() {
                   >
                     {index + 1}.
                   </th>
-                  <td className="px-6 py-4">{item.username}</td>
-                  <td className="px-6 py-4">{item.mobile}</td>
-                  <td className="px-6 py-4">
+                  <td className="whitespace-nowrappx-6 py-4">{item.username}</td>
+                  <td className="whitespace-nowrappx-6 py-4">{item.mobile}</td>
+                  <td className="whitespace-nowrappx-6 py-4">
                     {item.position === "L"
                       ? "LEFT"
                       : item.position === "R"
                       ? "RIGHT"
                       : ""}
                   </td>
-                  <td className="px-6 py-4">{item.date?.split("T")[0]}</td>
-                  <td className="px-6 py-4">₹{item.balance}</td>
-                  <td className="px-6 py-4">₹{item.total_investment}</td>
-                  <td className="px-6 py-4">{item.paidType}</td>
+                  <td className="whitespace-nowrappx-6 py-4">{item.date?.split("T")[0]}</td>
+                  <td className="whitespace-nowrappx-6 py-4">₹{item.balance}</td>
+                  <td className="whitespace-nowrappx-6 py-4">₹{item.total_investment}</td>
+                  <td className="whitespace-nowrappx-6 py-4">{item.paidType}</td>
                 </tr>
               ))}
             </tbody>

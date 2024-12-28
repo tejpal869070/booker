@@ -9,15 +9,29 @@ import { GiReceiveMoney } from "react-icons/gi";
 import { HiClipboardDocumentList } from "react-icons/hi2";
 import { FcConferenceCall } from "react-icons/fc";
 import { FcAreaChart } from "react-icons/fc";
-import { FcMoneyTransfer } from "react-icons/fc"; 
+import { FcMoneyTransfer } from "react-icons/fc";
 import { PiFootballFill } from "react-icons/pi";
-import bg1 from "../../assets/photos/bg-main.jpg"; 
+import bg1 from "../../assets/photos/bg-main.jpg";
 import Games from "./Games";
+import { FaArrowCircleRight } from "react-icons/fa";
+import { FaArrowCircleLeft } from "react-icons/fa";
+import { MdCancel } from "react-icons/md";
+import { MainGameWalletMoneyTransfer } from "../../Controllers/User/GamesController";
+import { toast, ToastContainer } from "react-toastify";
+import VerifyPin from "../VerifyPin";
 
 export default function Hero1() {
   const [showShare, setShowShare] = useState(false);
   const [userData, setUserData] = useState({});
   const [loading, setLoading] = useState(true);
+  const [isWalletsOpen, setIsWalletsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [type, setType] = useState();
+  const [transferToAmount, setTransferToAmount] = useState();
+  const [amountHave, setAmountHave] = useState();
+  const [success, setSuccess] = useState(false);
+  const [isVerifyOpen, setVerifyOpen] = useState(false);
+  const [error, setError] = useState("");
 
   const openSocialShare = () => {
     setShowShare(true);
@@ -36,6 +50,64 @@ export default function Hero1() {
     }
   };
 
+  const handleButtons = (id) => {
+    setIsOpen(true);
+    setType(id);
+    if (id === 1) {
+      setAmountHave(userData.wallet_balance);
+    } else {
+      setAmountHave(userData.color_wallet_balnace);
+    }
+  };
+
+  const openVerifyPin = () => {
+    if (transferToAmount > Number(amountHave)) {
+      setError("Amount Exceed");
+    } else if (transferToAmount < 100 || transferToAmount === undefined) {
+      setError("Minimum Amount is 100");
+    } else {
+      setVerifyOpen(true);
+    }
+  };
+
+  const onclose2 = () => {
+    setVerifyOpen(false);
+  };
+
+  const formData = {
+    amount: transferToAmount,
+    type: type,
+  };
+
+  const successFunction = async (pin) => {
+    try {
+      const response = await MainGameWalletMoneyTransfer(formData, pin);
+      if (response.status) {
+        setSuccess(true);
+        userDataGet();
+        setTransferToAmount(0);
+        setIsOpen(false);
+        setTimeout(() => {
+          setSuccess(false);
+        }, 3500);
+      } else {
+        toast.error(`Please Try Again !`, {
+          position: "top-center",
+        });
+      }
+    } catch (error) {
+      if (error.response.status === 302) {
+        toast.error(`${error.response.data.message}`, {
+          position: "top-center",
+        });
+      } else {
+        toast.error(`Something Went Wrong !`, {
+          position: "top-center",
+        });
+      }
+    }
+  };
+
   useEffect(() => {
     userDataGet();
   }, []);
@@ -50,8 +122,10 @@ export default function Hero1() {
 
   return (
     <div className="pb-6">
+      <ToastContainer />
       <div className="grid grid-cols-12 gap-4 w-full">
-        <div className="relative   col-span-12 lg:col-span-6 xl:col-span-8 bg-opacity-10 bg-top bg-cover bg-left-bottom border-2 border-[#92a0fd] dark:border-gray-200 rounded-lg flex justify-between p-4"
+        <div
+          className="relative   col-span-12 lg:col-span-6 xl:col-span-8 bg-opacity-10 bg-top bg-cover bg-left-bottom border-2 border-[#92a0fd] dark:border-gray-200 rounded-lg flex justify-between p-4"
           style={{ backgroundImage: `url(${bg1})` }}
         >
           <div className="z-[9]">
@@ -102,15 +176,33 @@ export default function Hero1() {
 
         <div className="col-span-12 lg:col-span-6 xl:col-span-4     w-full   rounded-lg">
           <div className="grid grid-cols-12 gap-4 w-full">
-            <div className=" col-span-6 rounded-lg  p-4 border-2 border-black" style={{boxShadow:"0px 0px 4px white"}}>
-              <HiMiniWallet size={24} color="#92a0fd" />
+            <div
+              className=" col-span-6 rounded-lg  p-4 border-2 border-black"
+              style={{ boxShadow: "0px 0px 4px white" }}
+            >
+              <div
+                onClick={() => setIsWalletsOpen(true)}
+                class="flex justify-between"
+              >
+                <HiMiniWallet className="" size={26} color="#92a0fd" />
+                <p class="blinking-btn hidden md:flex cursor-pointer px-2 bg-green-500 rounded-full text-sm md:text-xs text-white font-medium   justify-center items-center">
+                  EXCHANGE
+                </p>
+              </div>
               <p className="font-bold dark:text-gray-300">Total Balance</p>
               <p className="text-2xl font-bold text-black dark:text-gray-300">
-                ₹{Number(userData.wallet_balance).toFixed(2)}
+                ₹
+                {(
+                  Number(userData.wallet_balance) +
+                  Number(userData.color_wallet_balnace)
+                ).toFixed(2)}
               </p>
             </div>
 
-            <div className=" col-span-6 rounded-lg  p-4 border-2 border-black" style={{boxShadow:"0px 0px 4px white"}}>
+            <div
+              className=" col-span-6 rounded-lg  p-4 border-2 border-black"
+              style={{ boxShadow: "0px 0px 4px white" }}
+            >
               <MdGeneratingTokens size={26} color="#92a0fd" />
               <p className="font-bold dark:text-gray-300">
                 {userData.currency} Value
@@ -159,6 +251,136 @@ export default function Hero1() {
         <SocialShare
           url={`${window.location.origin}/register?referrer_code=${userData.reffer_code}`}
           onClose={closeSocialShare}
+        />
+      )}
+
+      {isWalletsOpen && (
+        <div class="animate-fade-down animate-duration-500 fixed top-0 left-0 w-full h-full flex justify-center items-center pt-10  backdrop-blur-[4px]   z-[9999]">
+          <div class=" text-white bg-gradient-to-r from-gray-700 rounded   to-slate-900 p-10 inline-block">
+            <div class="flex gap-6 items-center">
+              <section class="px-6 py-2 rounded border-2 border-white">
+                <p class="text-white font-semibold text-center text-2xl">
+                  Main Wallet
+                </p>
+                <p class="font-semibold text-xl text-center mt-2 pt-2 border-gray-400  text-white border-t-2">
+                  ₹{userData.wallet_balance}
+                </p>
+              </section>
+              <section class="px-6 py-2 rounded border-2 border-white">
+                <p class="text-white font-semibold text-center text-2xl">
+                  Game Wallet
+                </p>
+                <p class="font-semibold text-xl text-center mt-2 pt-2 border-gray-400  text-white border-t-2">
+                  ₹{userData.color_wallet_balnace}
+                </p>
+              </section>
+            </div>
+            <div class="flex gap-6 items-center justify-around mt-2">
+              <section
+                onClick={() => handleButtons(1)}
+                class="px-6 py-2 rounded-full cursor-pointer bg-green-400"
+              >
+                <p class="text-white font-semibold flex justify-center items-center gap-2 text-center text-sm">
+                  Transfer To Game
+                  <FaArrowCircleRight size={20} />
+                </p>
+              </section>
+              <section
+                onClick={() => handleButtons(2)}
+                class="px-6 py-2 rounded-full cursor-pointer bg-green-400"
+              >
+                <p class="text-white font-semibold flex justify-center items-center gap-2 text-center text-sm">
+                  <FaArrowCircleLeft size={20} />
+                  Transfer To Main
+                </p>
+              </section>
+            </div>
+            <MdCancel
+              onClick={() => setIsWalletsOpen(false)}
+              size={22}
+              className="m-auto mt-6 cursor-pointer"
+            />
+          </div>
+        </div>
+      )}
+
+      {/* popup */}
+      {isOpen && (
+        <div className="animate-fade-down animate-duration-500 fixed top-0 left-0 w-full h-full flex justify-center pt-10  backdrop-blur-md   z-[9999]">
+          <div className=" text-white bg-gradient-to-r from-gray-700 rounded h-[60vh] to-slate-900 p-10 inline-block">
+            <p className="text-xl font-medium text-center text-gray-200 border-b pb-2">
+              Transfer From <br />{" "}
+              {type === 1
+                ? "Main Wallet To Game Wallet"
+                : "Game Wallet To Main Wallet"}
+            </p>
+            <p className="mt-6">
+              Your {type === 1 ? "Main Wallet Balance" : "Game Wallet Balance"}
+              {"  "}
+              {"  "}
+              <span className="text-lg font-bold">
+                ₹{" "}
+                {type === 1
+                  ? Number(userData.wallet_balance).toFixed(2)
+                  : Number(userData.color_wallet_balnace).toFixed(2)}
+              </span>
+            </p>{" "}
+            <div className="max-w-sm mt-4">
+              <label
+                for="input-label"
+                className="block text-sm text-gray-300 font-medium mb-2 dark:text-white"
+              >
+                Transfer To {type === 1 ? "Game Wallet" : "Main Wallet"}
+              </label>
+              <input
+                type="number"
+                id="input-label"
+                className="py-2 px-4 block text-gray-200 bg-gray-700 w-full border-x-0 border-t-0 border-b-2   text-md       dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                placeholder=" "
+                value={transferToAmount}
+                onChange={(e) => setTransferToAmount(e.target.value)}
+              />
+              {error && <p className="text-red-500 italic text-sm">{error}</p>}
+              <button
+                onClick={openVerifyPin}
+                className="m-auto w-full mt-4 relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group"
+              >
+                <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M14 5l7 7m0 0l-7 7m7-7H3"
+                    ></path>
+                  </svg>
+                </span>
+                <span className="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease">
+                  Transfer
+                </span>
+                <span className="relative invisible">Button Text</span>
+              </button>
+            </div>
+            {/* close button */}
+            <MdCancel
+              size={30}
+              onClick={() => setIsOpen(false)}
+              className="cursor-pointer text-center m-auto mt-6"
+            />
+          </div>
+        </div>
+      )}
+
+      {isVerifyOpen && (
+        <VerifyPin
+          onclose2={onclose2}
+          successFunction={(pin) => successFunction(pin)}
         />
       )}
     </div>

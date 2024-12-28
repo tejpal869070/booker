@@ -42,9 +42,29 @@
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
-
-/* For IE, Edge and Firefox */
+ 
 .scrollbar-hide {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
+}
+
+.blinking-btn {
+  animation: blink 1s infinite alternate;
+}
+
+/* Keyframes for the blinking effect */
+@keyframes blink {
+  0% {
+    background-color: red;
+    color: white;
+  }
+  100% {
+    background-color: rgb(207, 194, 8);
+    color: white;
+  }
+}
+
+
+td {
+  @apply whitespace-nowrap;
 }

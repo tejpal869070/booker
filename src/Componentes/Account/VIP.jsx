@@ -253,9 +253,9 @@ export default function VIP() {
                     >
                       {index + 1}.
                     </th>
-                    <td className="px-4 py-3 ">₹{item.amount}</td>
-                    <td className="px-6 py-3">{item.type}</td>
-                    <td className="px-6 py-3">{item.date}</td>
+                    <td className="whitespace-nowrappx-4 py-3 ">₹{item.amount}</td>
+                    <td className="whitespace-nowrappx-6 py-3">{item.type}</td>
+                    <td className="whitespace-nowrappx-6 py-3">{item.date}</td>
                   </tr>
                 ))}
               </tbody>

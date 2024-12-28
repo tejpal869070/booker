@@ -98,17 +98,17 @@ export default function InvestmentHistory() {
                       >
                         {index + 1}.
                       </th>
-                      <td className="px-4 py-4">₹{item.amount}</td>
-                      <td className="px-4 py-4 hidden md:table-cell">{item.plan_name}</td>
-                      <td className="px-6 py-4 hidden md:table-cell">
+                      <td className="whitespace-nowrappx-4 py-4">₹{item.amount}</td>
+                      <td className="whitespace-nowrappx-4 py-4 hidden md:table-cell">{item.plan_name}</td>
+                      <td className="whitespace-nowrappx-6 py-4 hidden md:table-cell">
                         {item.times} {item.title}
                       </td>
-                      <td className="px-6 py-4">{item.status}</td>
-                      <td className="px-6 py-4 hidden md:table-cell">{item.date.split("T")[0]}</td>
-                      <td className="px-6 py-4 hidden md:table-cell">
+                      <td className="whitespace-nowrappx-6 py-4">{item.status}</td>
+                      <td className="whitespace-nowrappx-6 py-4 hidden md:table-cell">{item.date.split("T")[0]}</td>
+                      <td className="whitespace-nowrappx-6 py-4 hidden md:table-cell">
                         {getEndDate(item.date, Number(item.day_count))}
                       </td>
-                      <td className="px-6 py-4">
+                      <td className="whitespace-nowrappx-6 py-4">
                         <FaEye
                           size={20}
                           className="cursor-pointer"

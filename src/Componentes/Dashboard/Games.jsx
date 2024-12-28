@@ -8,9 +8,9 @@ export default function Games() {
         {gameData.map((item, index) => (
           <Link
             to={item.to}
-            class="w-[32%] md:w-[19%] lg:w-[15%] mb-2   bg-gray-300 rounded-xl"
+            class="w-[32%] md:w-[19%] lg:w-[15%] mb-4   bg-gray-300 rounded-xl"
           >
-            <img alt="poster" src={item.image} />
+            <img alt="poster" src={item.image} className="rounded-xl"/>
           </Link>
         ))}
       </div>
@@ -38,8 +38,38 @@ const gameData = [
     to: { pathname: "/home", search: "?game=mines" },
   },
   {
-    id: 2,
+    id: 3,
     image: require("../../assets/photos/wheel.png"),
     to: { pathname: "/home", search: "?game=wheel" },
+  },
+  {
+    id: 4,
+    image: require("../../assets/photos/aviator.png"),
+    to: { pathname: "/home", search: "?game=casino-lobby&data=eyJwcm92aWRlckNvZGUiOiJQRyIsImdhbWVDb2RlIjoiQVRSIn0%3D" },
+  },
+  {
+    id: 4,
+    image: require("../../assets/photos/dragon.png"),
+    to: { pathname: "/home", search: "?game=casino-lobby&data=eyJwcm92aWRlckNvZGUiOiJTTiIsImdhbWVDb2RlIjoiRFQ3TSJ9" },
+  },
+  {
+    id: 4,
+    image: require("../../assets/photos/ander.png"),
+    to: { pathname: "/home", search: "?game=casino-lobby&data=eyJwcm92aWRlckNvZGUiOiJTTiIsImdhbWVDb2RlIjoiQUJDIn0%3D" },
+  },
+  {
+    id: 4,
+    image: require("../../assets/photos/LUCKY.png"),
+    to: { pathname: "/home", search: "?game=casino-lobby&data=eyJwcm92aWRlckNvZGUiOiJTTiIsImdhbWVDb2RlIjoiVUQ3In0%3D" },
+  },
+  {
+    id: 4,
+    image: require("../../assets/photos/3PATTI.png"),
+    to: { pathname: "/home", search: "?game=casino-lobby&data=eyJwcm92aWRlckNvZGUiOiJTTiIsImdhbWVDb2RlIjoiVFAyMCJ9" },
+  },
+  {
+    id: 4,
+    image: require("../../assets/photos/VIEWALL.png"),
+    to: { pathname: "/home", search: "?game=casino" },
   },
 ];
