@@ -126,14 +126,15 @@ export default function GameWalletHistory() {
                       AMOUNT
                     </th>
                     <th scope="col" className="px-6 py-3">
+                      Updated Balance
+                    </th>
+                    <th scope="col" className="px-6 py-3">
                       GAME NAME
                     </th>
                     <th scope="col" className="px-6 py-3">
                       Desc.
                     </th>
-                    <th scope="col" className="px-6 py-3">
-                      Updated Balance
-                    </th>
+                    
                   </tr>
                 </thead>
                 {filteredData.map((item, index) => (
@@ -181,6 +182,7 @@ export default function GameWalletHistory() {
                           : "-"}
                         ₹{Number(item.bet_balance).toFixed(2)}
                       </td>
+                      <td className="whitespace-nowrappx-6 py-2">₹{Number(item.total_balance).toFixed(2)}</td>
                       <td className="whitespace-nowrappx-6 py-2 flex justify-left items-center gap-2">
                         {item.game_type}{" "}
                         {item.game_type === "casino" && (
@@ -194,7 +196,7 @@ export default function GameWalletHistory() {
                         )}
                       </td>
                       <td className="whitespace-nowrappx-6 py-2">{item.bet_type}</td>
-                      <td className="whitespace-nowrappx-6 py-2">₹{Number(item.total_balance).toFixed(2)}</td>
+                      
                     </tr>
                     {isVisible && selectedIndex === index ? (
                       <tr>
@@ -242,36 +244,8 @@ export default function GameWalletHistory() {
                 </div>
 
                 <div className={`${classes1}`}>
-                  <p>Type :</p>
-                  <p className="uppercase">{popupData.bet_type}</p>
-                </div>
-
-                <div className={`${classes1}`}>
-                  <p>Trnx.Type :</p>
-                  <p className="uppercase">{popupData.transaction_type}</p>
-                </div>
-
-                <div className={`${classes1}`}>
-                  <p>Updated Balance :</p>
-                  <p className="uppercase">{Number(popupData.total_balance).toFixed(2)}</p>
-                </div>
-
-                <div className={`${classes1}`}>
-                  <p>Provider Code :</p>
-                  <p>{popupData?.game_name?.split("&")[0]}</p>
-                </div>
-
-                <div className={`${classes1}`}>
-                  <p>Game Code :</p>
-                  <p>{popupData?.game_name?.split("&")[1]}</p>
-                </div>
-                <div className={`${classes1}`}>
-                  <p>Trnx.Id :</p>
-                  <p>{popupData?.transaction_id}</p>
-                </div>
-                <div className={`${classes1}`}>
-                  <p>Ref.Id :</p>
-                  <p>{popupData?.reference_id}</p>
+                  <p>Round Id :</p>
+                  <p> {popupData.round_id}</p>
                 </div>
               </div>
               <MdCancel

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import bg1 from "../assets/photos/stadium2.jpg";
-import gif1 from "../assets/photos/footballgif1.gif";
+import gif1 from "../assets/photos/logo (1).gif";
 import { useNavigate } from "react-router-dom";
 
 export default function PreLoad() {
@@ -8,7 +8,7 @@ export default function PreLoad() {
   useEffect(() => {
     setTimeout(() => {
       navigate("/home");
-    }, 3400);
+    }, 4000);
   }, [navigate]);
 
   return (
@@ -20,7 +20,9 @@ export default function PreLoad() {
         }}
       >
         <div className="flex flex-col justify-center items-center h-full w-full">
-          <img alt="gif" src={gif1} className="w-100 h-auto" />
+          <div className="rounded-full p-6 backdrop-blur-md bg-white/30">
+            <img alt="gif" src={gif1} className="w-80 h-auto" />
+          </div>
         </div>
       </div>
     </div>

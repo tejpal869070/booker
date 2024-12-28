@@ -82,9 +82,6 @@ export default function BankDeposit() {
         setUtr("");
         setImage(null);
         setSepositId();
-        setTimeout(() => {
-          setSuccess(false);
-        }, 3500);
       } else {
         toast.error("Something Went Wrong");
         setCreating(false);
@@ -127,17 +124,6 @@ export default function BankDeposit() {
     );
   }
 
-  if (success) {
-    return (
-      <div className="fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center bg-[#000000d1] bg-opacity-50 z-[9999]">
-        <img alt="success" src={successImg} />
-        <p className="text-2xl text-center text-white font-semibold">
-          Deposit Request Sent Successfully !
-        </p>
-      </div>
-    );
-  }
-
   return (
     <div>
       <div className=" ">
@@ -160,7 +146,11 @@ export default function BankDeposit() {
             <div className="bg-[#e1e6ff] dark:bg-[#868ba3fc] text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden">
               <div className="md:flex flex-row-reverse w-full">
                 <div className="w-full  md:w-1/2 bg-indigo-200  p-2">
-                  <img alt="animation" className="w-full h-full rounded-t-xl" src={gif1} />
+                  <img
+                    alt="animation"
+                    className="w-full h-full rounded-t-xl"
+                    src={gif1}
+                  />
                 </div>
                 <div className="w-full md:w-1/2 py-10 px-5 md:px-10">
                   <div className="  mb-6">
@@ -205,7 +195,7 @@ export default function BankDeposit() {
                           Amount*
                         </label>
                         <input
-                          type="text"
+                          type="number"
                           name="product-name"
                           id="product-name"
                           className={`${inputClasses}`}
@@ -243,8 +233,10 @@ export default function BankDeposit() {
                       <div className="flex align-center w-full items-center mt-4 col-span-12 sm:col-span-8">
                         {image !== null ? (
                           <p className="w-full overflow-hidden shadow-sm bg-gray-200 border-2 px-2.5 py-2.5 pr-[22px] border-gray-700 dark:bg-gray-400 text-gray-900 font-medium  rounded-xl focus:ring-cyan-600 focus:border-cyan-600 block  ">
-                            <p className="w-[95%] overflow-hidden">{image.name}</p>
-                          </p> 
+                            <p className="w-[95%] overflow-hidden">
+                              {image.name}
+                            </p>
+                          </p>
                         ) : (
                           <input
                             className="shadow-sm w-full  bg-gray-50 border pr-[22px] border-gray-300 dark:bg-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block  px-2.5"
@@ -305,6 +297,27 @@ export default function BankDeposit() {
       </div>
       {isOpen && (
         <DepositMethod onClose={onClose} paymentMethods={paymentMethods} />
+      )}
+
+      {success && (
+        <div className="fixed top-0 left-0 w-full h-full flex flex-col  pt-20 items-center bg-black/30 backdrop-blur-[2px]  z-[9999]">
+          <div className="p-6 rounded-lg shadow bg-white flex flex-col items-center justify-center">
+            <img
+              alt="success"
+              src={require("../../../assets/photos/check.png")}
+              className="w-16"
+            />
+            <p className="text-lg mt-3 text-center text-gray-600 font-semibold">
+              Please wait while we are <br /> verifying your Deposit
+            </p>
+            <button
+              onClick={() => setSuccess(false)}
+              className="w-20 rounded bg-black/50 text-white text-xs py-1 font-semibold mt-6"
+            >
+              OK
+            </button>
+          </div>
+        </div>
       )}
       <ToastContainer />
     </div>

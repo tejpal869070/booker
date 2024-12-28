@@ -17,7 +17,6 @@ import { ToastContainer, toast } from "react-toastify";
 import { MainGameWalletMoneyTransfer } from "../../Controllers/User/GamesController";
 import { IoGameController } from "react-icons/io5";
 
-
 export default function Wallet() {
   const [user, setUser] = React.useState({});
   const [loading, setLoading] = useState(true);
@@ -27,8 +26,6 @@ export default function Wallet() {
   const [transferToAmount, setTransferToAmount] = useState();
   const [isVerifyOpen, setVerifyOpen] = useState(false);
   const [success, setSuccess] = useState(false);
-
-
 
   const userDataGet = async () => {
     const response = await GetUserDetails();
@@ -104,8 +101,6 @@ export default function Wallet() {
     userDataGet();
   }, []);
 
- 
-
   if (loading) {
     return (
       <div className="w-screen h-screen flex items-center justify-center m-auto inset-0">
@@ -113,8 +108,6 @@ export default function Wallet() {
       </div>
     );
   }
-
- 
 
   return (
     <div>
@@ -127,7 +120,9 @@ export default function Wallet() {
           <p className="text-2xl font-bold text-center mt-6 dark:text-gray-200 ">
             ₹
             {user &&
-              Number(user.wallet_balance).toFixed(2) + Number(user.color_wallet_balnace).toFixed(2)}
+              (
+                Number(user.wallet_balance) + Number(user.color_wallet_balnace)
+              ).toFixed(2)}
           </p>
           <p className="text-center text-sm  text-gray-400 -mt-1">
             Total Balance
@@ -142,7 +137,7 @@ export default function Wallet() {
             </div>
             <div className="flex w-[45%] flex-col justify-center items-center rounded-lg  p-4 px-6  bg-gradient-to-r from-red-400 to-red-300">
               <p className="font-semibold text-2xl text-white">
-                ₹{user && user.color_wallet_balnace}
+                ₹{user && Number(user.color_wallet_balnace).toFixed(2)}
               </p>
               <p className="text-sm text-gray-200">Game Wallet</p>
             </div>
@@ -203,7 +198,9 @@ export default function Wallet() {
                 {"  "}
                 <span className="text-lg font-bold">
                   ₹{" "}
-                  {type === 1 ? Number(user.wallet_balance).toFixed(2) : Number(user.color_wallet_balnace).toFixed(2)}
+                  {type === 1
+                    ? Number(user.wallet_balance).toFixed(2)
+                    : Number(user.color_wallet_balnace).toFixed(2)}
                 </span>
               </p>{" "}
               <div className="max-w-sm mt-4">
@@ -300,13 +297,12 @@ const links = [
     linkTo: "/home?money=withdrawal-history",
   },
 
-  
   {
     label: "Investment History",
     icons: <TiDocumentText size={26} className="dark:text-white" />,
     linkTo: "/home?investment=investment-history",
   },
-  
+
   {
     label: "Today History",
     icons: <GrDocumentText size={26} className="dark:text-white" />,
