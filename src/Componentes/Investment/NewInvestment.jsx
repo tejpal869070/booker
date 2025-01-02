@@ -9,18 +9,24 @@ import { ToastContainer, toast } from "react-toastify";
 import { Loading1 } from "../Loading1";
 import successImg from "../../assets/photos/success1-1--unscreen.gif";
 import gif1 from "../../assets/photos/growwealthgif.gif";
-import VerifyPin from "../VerifyPin"; 
+import VerifyPin from "../VerifyPin";
+import { BiSolidDollarCircle } from "react-icons/bi";
+import { IoDocumentTextOutline } from "react-icons/io5";
 
 export default function NewInvestment() {
   const [isOpen, setIsOpen] = useState(false);
   const [PlansData, setPlansData] = useState([]);
   const [user, setUser] = useState({});
-  const [amount, setAmount] = useState(100);
+  const [amount, setAmount] = useState(10);
   const [investmentPlan, setInvestmentPlan] = useState();
   const [pin, setPin] = useState("");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [verifyPinPopup, setVerifyPinPop] = useState(false);
+  const [retrunPercentage, setReturnPercentage] = useState(0);
+  const [payoutDays, setPayoutDays] = useState(0);
+
+  const [instructionOpen, setInstructionOpen] = useState(false);
 
   const onClose = () => {
     setIsOpen(false);
@@ -37,7 +43,6 @@ export default function NewInvestment() {
 
   const formData = {
     amount: amount,
-    investmentPlan: investmentPlan,
   };
 
   const userDataGet = async () => {
@@ -69,7 +74,7 @@ export default function NewInvestment() {
       });
       setLoading(false);
       return;
-    } else if (amount < 100) {
+    } else if (amount < 1) {
       toast.error("Minimum Amount is Rs.100", {
         autoClose: 2000,
       });
@@ -114,10 +119,30 @@ export default function NewInvestment() {
   useEffect(() => {
     userDataGet();
   }, []);
-  
 
-  
-
+  useEffect(() => {
+    let planDevisionByAmount = [];
+    PlansData.forEach((i) => planDevisionByAmount.push(i.amount_end));
+    if (amount) {
+      const selectedPlan = planDevisionByAmount.findIndex(
+        (i) => Number(amount) <= Number(i)
+      );
+      console.log(selectedPlan);
+      if (selectedPlan !== -1) {
+        setInvestmentPlan(PlansData[selectedPlan].id);
+        setReturnPercentage(PlansData[selectedPlan].retrun_percentage);
+        setPayoutDays(
+          (Number(amount) * 2) /
+            ((Number(amount) *
+              Number(PlansData[selectedPlan].retrun_percentage)) /
+              100)
+        );
+      } else {
+        setReturnPercentage(0);
+        setPayoutDays(0);
+      }
+    }
+  }, [amount, PlansData]);
 
   if (success) {
     return (
@@ -143,8 +168,16 @@ export default function NewInvestment() {
                 </h1>
                 <p>Let Your Money Work for You.</p>
               </div>
-              <p className="  font-medium text-lg text-[green] mb-4">
-                Account Balance: ₹{user && Number(user.wallet_balance).toFixed(2) || 0.00}
+              <p className=" flex gap-2 font-medium text-lg text-[green] mb-4">
+                Account Balance:{" "}
+                <p className="px-3 bg-green-500 rounded-full text-[#ffca00] text-sm py-1  flex justify-center items-center">
+                  <BiSolidDollarCircle size={16} />
+                  {(user &&
+                    (
+                      Number(user.wallet_balance) / Number(user.currency_rate)
+                    ).toFixed(2)) ||
+                    0.0}
+                </p>
               </p>
               <div className="  mb-4"></div>
               <div>
@@ -163,15 +196,17 @@ export default function NewInvestment() {
                       <select
                         onChange={(e) => setInvestmentPlan(e.target.value)}
                         defaultChecked={investmentPlan}
-                        className="w-full -ml-10  pr-3 py-2 text-black font-medium rounded-lg border-2 border-gray-200 outline-none focus:border-none"
+                        value={investmentPlan}
+                        className="w-full -ml-10  pr-3 py-2 text-green-500 font-medium rounded-lg border-2 border-gray-200 outline-none focus:border-none"
                       >
                         {PlansData &&
                           PlansData?.map((item, index) => (
                             <option
                               key={index}
                               value={item.id}
-                              className="font-semibold cursor-pointer"
+                              className="font-semibold cursor-pointer text-green-500"
                             >
+                              ${item.amount_start} - {item.amount_end}{" "}
                               {item.plan_name}
                             </option>
                           ))}
@@ -199,107 +234,54 @@ export default function NewInvestment() {
                       />
                     </div>
                     <p className="text-gray-700 text-xs italic">
-                      Minimum Amount is ₹100
+                      Minimum Amount is $1
                     </p>
                   </div>
                 </div>
-                <div className="flex flex-wrap   gap-6  ">
+
+                <div className="flex justify-between border-[0.5px] bg-white border-gray-500 rounded-lg mb-2">
+                  <div className="w-1/2 p-4 text-center  ">
+                    <p className="text-md font-semibold text-gray-600">
+                      Interest Rate
+                    </p>
+                    <p className="text-2xl  text-green-500 font-bold">
+                      {retrunPercentage || 0}%
+                    </p>
+                  </div>
+                  <div className="w-1/2 p-4 border-l-2 text-center  ">
+                    <p className="text-md font-semibold text-gray-600">
+                      Payout Period
+                    </p>
+                    <p className="text-2xl  text-green-500 font-bold">
+                      {Number(payoutDays).toFixed(0)} Days
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex justify-between  mt-4  gap-6  ">
                   <button
                     className="relative"
                     onClick={() => setVerifyPinPop(true)}
-                    disabled={amount < 100}
+                    disabled={amount < 1}
                   >
                     <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-black dark:bg-gray-500"></span>
                     <span className="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900">
                       {loading ? <Loading1 width={30} /> : "SUBMIT"}
                     </span>
                   </button>
+
+                  <p
+                    onClick={() => setInstructionOpen(true)}
+                    className="px-4 py-1 text-semibold blinking-btn rounded-full flex justify-center items-center gap-1 cursor-pointer"
+                  >
+                    <IoDocumentTextOutline />
+                    Instruction
+                  </p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-
-      <div className="w-full flex flex-col gap-4 items-center justify-center py-4">
-        <p className="animate-bounce shadow-xl focus:animate-none   inline-flex text-xl font-medium bg-indigo-900 mt-3 px-4 py-2 rounded-lg tracking-wide text-white">
-          <span className="ml-2">OUR INVESTMENT PLANS 🏀</span>
-        </p>
-        <p className="underlined font-medium text-gray-800 dark:text-gray-200">Enter Amount Above To Calculate Returns</p>
-      </div>
-
-
-      <div className="flex flex-wrap   gap-4   py-3  ">
-        {PlansData &&
-          PlansData.map((item, index) => (
-            <div
-              key={index}
-              className=" min-w-full shadow-lg   md:min-w-[48%] lg:min-w-[24%] flex   space-y-8 items-start flex-col bg-[#6489fd26] rounded-3xl border border-gray-200 bg-white p-6 text-gray-900 xl:p-8"
-            >
-              <h3 className="text-lg font-medium dark:text-gray-800">{item.plan_name}</h3>
-              <div className="my-8 flex items-baseline justify-center ">
-                <span className="mr-2 text-2xl font-extrabold dark:text-gray-800">
-                  ₹
-                  {(
-                    (Number((amount * item.percentage) / 100) +
-                      Number(amount)) /
-                    item.times
-                  ).toFixed(0)}
-                  /{item.plan_name}
-                </span>
-                {/* <span className="text-gray-600">/{item.plan_name}</span> */}
-              </div>
-
-              {/* <p className="font-light text-gray-600 sm:text-sm">
-                Best option for personal use & for your next project.
-              </p> */}
-
-              <ul
-                role="list"
-                className="mb-8 space-y-4 text-left text-gray-600  text-sm"
-              >
-                <li className="dark:text-gray-800 flex items-center space-x-3 ">
-                  <svg
-                    className="h-5 w-5 flex-shrink-0 bg-gray-900 rounded-full p-0.5 text-white"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                  <span>
-                    {item.times} {item.title} Payout
-                  </span>
-                </li>
-                <li className="dark:text-gray-800 flex items-center space-x-3">
-                  <svg
-                    className="h-5 w-5 flex-shrink-0 bg-gray-900 rounded-full p-0.5 text-white"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                  <span>{item.percentage}% Interest Rate</span>
-                </li>
-              </ul>
-
-              <a className="cursor-pointer bg-gray-900 dark:bg-indigo-800 w-full rounded-md  p-3 text-center text-sm font-semibold text-white shadow-sm  hover:-translate-y-1">
-                Total Return: ₹
-                {(
-                  Number((amount * item.percentage) / 100) + Number(amount)
-                ).toFixed(0)}
-              </a>
-            </div>
-          ))}
       </div>
 
       {isOpen && <ViewPlans onClose={onClose} />}
@@ -308,6 +290,28 @@ export default function NewInvestment() {
           onclose2={onclose2}
           successFunction={(pin) => successFunction(pin)}
         />
+      )}
+
+      {instructionOpen && (
+        <div className="fixed top-0 left-0 w-full h-full bg-black/30 backdrop-blur-sm z-[9999] flex justify-center items-center">
+          <div className="p-4 rounded bg-white max-w-lg text-center mx-4">
+            <p className="mb-3 font-semibold text-black text-xl">INSTRUCTION</p>
+            <p className="mt-1 text-md text-gray-600 text-justify">
+              Your investment will be credited after the specified date, once it
+              has grown to twice its original value.{" "}
+              <span className="font-semibold text-black text-indigo-800  ">
+                This process will take place once the investment reaches 2x its
+                initial amount.
+              </span>
+            </p>
+            <button
+              onClick={() => setInstructionOpen(false)}
+              className="w-40 rounded bg-indigo-600 px-4 py-2 text-white font-semibold mt-4"
+            >
+              OK
+            </button>
+          </div>
+        </div>
       )}
       <ToastContainer />
     </div>

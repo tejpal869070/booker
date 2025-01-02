@@ -268,7 +268,7 @@ export default function Home() {
                 }}
               >
                 <PiNetworkFill size={24} className="dark:text-black" />
-                <span className="flex-1 ms-3 text-left rtl:text-right dark:text-black whitespace-nowrap">
+                <span className="flex-1 ms-3 text-left rtl:text-right dark:text-black whitespace-nowrap ">
                   Events
                 </span>
                 <svg
@@ -342,7 +342,7 @@ export default function Home() {
               >
                 <FaCoins size={20} className="dark:text-black" />
 
-                <span className="flex-1 ms-3 text-left rtl:text-right dark:text-black whitespace-nowrap">
+                <span className="flex-1 ms-3 text-left rtl:text-right dark:text-black whitespace-nowrap ">
                   Live Casino
                 </span>
                 <svg
@@ -424,7 +424,7 @@ export default function Home() {
                 }}
               >
                 <FaMoneyBillTransfer size={24} className="dark:text-black" />
-                <span className="flex-1 ms-3 text-left rtl:text-right dark:text-black whitespace-nowrap">
+                <span className="flex-1 ms-3 text-left rtl:text-right dark:text-black whitespace-nowrap ">
                   Investment
                 </span>
                 <svg
@@ -484,7 +484,7 @@ export default function Home() {
                 }}
               >
                 <PiNetworkFill size={24} className="dark:text-black" />
-                <span className="flex-1 ms-3 text-left rtl:text-right dark:text-black whitespace-nowrap">
+                <span className="flex-1 ms-3 text-left rtl:text-right dark:text-black whitespace-nowrap ">
                   Network
                 </span>
                 <svg
@@ -577,7 +577,7 @@ export default function Home() {
                 }}
               >
                 <BsBank2 size={24} className="dark:text-black" />
-                <span className="flex-1 ms-3 text-left rtl:text-right dark:text-black whitespace-nowrap">
+                <span className="flex-1 ms-3 text-left rtl:text-right dark:text-black whitespace-nowrap ">
                   Money
                 </span>
                 <svg
@@ -690,7 +690,7 @@ export default function Home() {
                 }}
               >
                 <RiAccountCircleFill size={24} className="dark:text-black" />
-                <span className="flex-1 ms-3 text-left rtl:text-right dark:text-black whitespace-nowrap">
+                <span className="flex-1 ms-3 text-left rtl:text-right dark:text-black whitespace-nowrap ">
                   My Account
                 </span>
                 <svg
@@ -781,7 +781,7 @@ export default function Home() {
                 }}
               >
                 <GiTakeMyMoney size={24} className="dark:text-black" />
-                <span className="flex-1 ms-3 text-left rtl:text-right dark:text-black whitespace-nowrap">
+                <span className="flex-1 ms-3 text-left rtl:text-right dark:text-black whitespace-nowrap ">
                   My Income
                 </span>
                 <svg
@@ -846,7 +846,7 @@ export default function Home() {
                 className="flex items-center cursor-pointer p-2 text-gray-900 rounded-lg dark:text-white hover:bg-[#abbaff] dark:hover:bg-gray-700 group"
               >
                 <IoLogOut size={26} className="dark:text-black" />
-                <span className="flex-1 ms-3 dark:text-black whitespace-nowrap">
+                <span className="flex-1 ms-3 dark:text-black whitespace-nowrap ">
                   Logout
                 </span>
               </div>

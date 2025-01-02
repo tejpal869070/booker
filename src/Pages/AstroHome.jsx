@@ -342,7 +342,7 @@ export default function AstroHome() {
         </div> */}
         <h1 class="mx-auto my-16 max-w-4xl text-center     font-display text-5xl font-bold tracking-normal text-slate-900 sm:text-7xl">
           Make your photos{" "}
-          <span class="relative whitespace-nowrap text-[#800000]">
+          <span class="relative whitespace-nowrap  text-[#800000]">
             <svg
               aria-hidden="true"
               viewBox="0 0 418 42"
@@ -549,7 +549,7 @@ export default function AstroHome() {
           </a>
           <h1 class="mx-auto max-w-4xl font-display text-5xl font-bold tracking-normal text-slate-900 sm:text-7xl">
             Make your photos{" "}
-            <span class="relative whitespace-nowrap text-orange-400">
+            <span class="relative whitespace-nowrap  text-orange-400">
               <svg
                 aria-hidden="true"
                 viewBox="0 0 418 42"

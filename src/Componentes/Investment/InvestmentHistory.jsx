@@ -51,35 +51,31 @@ export default function InvestmentHistory() {
             {data && data.length === 0 ? (
               <div>
                 <img alt="no data" src={gif1} className="m-auto" />
-                <p className="text-center font-bold dark:text-white text-xl">No Records !</p>
+                <p className="text-center font-bold dark:text-white text-xl">
+                  No Records !
+                </p>
               </div>
             ) : (
               <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 border-indigo-400 border-4">
                 <thead className="text-xs font-semibold text-black uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
                   <tr>
-                    <th scope="col" className="px-4 py-3">
+                    <th scope="col" className="px-4 py-3 whitespace-nowrap ">
                       S.No.
                     </th>
-                    <th scope="col" className="px-4 py-3">
+                    <th scope="col" className="px-4 py-3 whitespace-nowrap ">
                       INVESTMENT
                     </th>
-                    <th scope="col" className="hidden md:table-cell px-6 py-3">
-                      TYPE
+                    <th scope="col" className=" px-6 py-3 whitespace-nowrap ">
+                      PLAN
                     </th>
-                    <th scope="col" className="hidden md:table-cell px-6 py-3">
-                      CLAIM TIME
-                    </th>
-                    <th scope="col" className="px-6 py-3">
+                    <th scope="col" className="px-6 py-3 whitespace-nowrap ">
                       Status
                     </th>
-                    <th scope="col" className="hidden md:table-cell px-6 py-3">
+                    <th scope="col" className=" px-6 py-3 whitespace-nowrap ">
                       DATE START
                     </th>
-                    <th scope="col" className="hidden md:table-cell px-6 py-3">
-                      DATE END
-                    </th>
-                    <th scope="col" className="px-4 py-3">
-                      VIEW
+                    <th scope="col" className=" px-6 py-3 whitespace-nowrap ">
+                      PAYOUT DATE
                     </th>
                   </tr>
                 </thead>
@@ -94,29 +90,36 @@ export default function InvestmentHistory() {
                     >
                       <th
                         scope="row"
-                        className="px-6 py-4 font-medium text-gray-900 dark:text-gray-100 whitespace-nowrap dark:text-white"
+                        className="px-6 py-4 font-medium text-gray-900 dark:text-gray-100 whitespace-nowrap  dark:text-white"
                       >
                         {index + 1}.
                       </th>
-                      <td className="whitespace-nowrappx-4 py-4">₹{item.amount}</td>
-                      <td className="whitespace-nowrappx-4 py-4 hidden md:table-cell">{item.plan_name}</td>
-                      <td className="whitespace-nowrappx-6 py-4 hidden md:table-cell">
-                        {item.times} {item.title}
+                      <td className="whitespace-nowrap  px-4 py-4">
+                        ${item.amount}
                       </td>
-                      <td className="whitespace-nowrappx-6 py-4">{item.status}</td>
-                      <td className="whitespace-nowrappx-6 py-4 hidden md:table-cell">{item.date.split("T")[0]}</td>
-                      <td className="whitespace-nowrappx-6 py-4 hidden md:table-cell">
-                        {getEndDate(item.date, Number(item.day_count))}
+                      <td className="whitespace-nowrap  px-4 py-4 ">
+                        {item.plan_name}
                       </td>
-                      <td className="whitespace-nowrappx-6 py-4">
-                        <FaEye
-                          size={20}
-                          className="cursor-pointer"
-                          onClick={() => {
-                            setIsOpen(true);
-                            setSingleData(item);
-                          }}
-                        />
+
+                      <td className="whitespace-nowrap  px-6 py-4">
+                        {item.status}
+                      </td>
+                      <td className="whitespace-nowrap  px-6 py-4 ">
+                        {item.date.split("T")[0]}
+                      </td>
+                      <td className="whitespace-nowrap  py-4 ">
+                        {(() => {
+                          const parsedDate = new Date(item.date);
+                          const daysToAdd =
+                            (Number(item.amount) * 2) /
+                            ((Number(item.amount) *
+                              Number(item.retrun_percentage)) /
+                              100);
+                          parsedDate.setDate(
+                            parsedDate.getDate() + Math.floor(daysToAdd)
+                          );
+                          return parsedDate.toISOString().split('T')[0];
+                        })()}
                       </td>
                     </tr>
                   </tbody>

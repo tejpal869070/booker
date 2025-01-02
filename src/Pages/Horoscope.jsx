@@ -12,7 +12,7 @@ export default function Horoscope() {
         <h1 class="mx-auto max-w-4xl font-display text-5xl font-medium tracking-tight text-slate-900 sm:text-7xl">
           <span class="inline-block">
             Your{" "}
-            <span class="relative whitespace-nowrap text-[#800000]">
+            <span class="relative whitespace-nowrap  text-[#800000]">
               <svg
                 aria-hidden="true"
                 viewBox="0 0 418 42"

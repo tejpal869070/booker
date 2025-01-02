@@ -87,23 +87,23 @@ export default function Downlinemember() {
                 >
                   <th
                     scope="row"
-                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  dark:text-white"
                   >
                     {index + 1}.
                   </th>
-                  <td className="whitespace-nowrappx-6 py-4">{item.username}</td>
-                  <td className="whitespace-nowrappx-6 py-4">{item.mobile}</td>
-                  <td className="whitespace-nowrappx-6 py-4"> 
+                  <td className="whitespace-nowrap px-6 py-4">{item.username}</td>
+                  <td className="whitespace-nowrap px-6 py-4">{item.mobile}</td>
+                  <td className="whitespace-nowrap px-6 py-4"> 
                     {item.position === "L"
                       ? "LEFT"
                       : item.position === "R"
                       ? "RIGHT"
                       : ""}
                   </td>
-                  <td className="whitespace-nowrappx-6 py-4">{item.date?.split("T")[0]}</td>
-                  <td className="whitespace-nowrappx-6 py-4">{item.paidType}</td>
-                  <td className="whitespace-nowrappx-6 py-4">{item.totalInvest}</td>
-                  <td className="whitespace-nowrappx-6 py-4">{item.firstInveDate}</td>
+                  <td className="whitespace-nowrap px-6 py-4">{item.date?.split("T")[0]}</td>
+                  <td className="whitespace-nowrap px-6 py-4">{item.paidType}</td>
+                  <td className="whitespace-nowrap px-6 py-4">{item.totalInvest}</td>
+                  <td className="whitespace-nowrap px-6 py-4">{item.firstInveDate}</td>
                 </tr>
               ))}
             </tbody>

@@ -124,7 +124,7 @@ export default function WithdrawalHistory() {
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
           {filteredData.length === 0 ? (
             <div>
-              <img alt="no data" src={gif1} className="m-auto" />
+              <img alt="no data" src={gif1} className="m-auto w-40" />
               <p className="text-center dark:text-gray-200 font-bold text-xl">
                 No Records !
               </p>
@@ -143,11 +143,11 @@ export default function WithdrawalHistory() {
               <tbody>
                 {filteredData.map((item, index) => (
                   <tr key={item.id} className={`text-black font-semibold dark:text-gray-200 border-b dark:border-gray-700 ${index % 2 === 0 ? "bg-white dark:bg-gray-900" : "bg-gray-200 dark:bg-gray-800"}`}>
-                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{index + 1}.</th>
-                    <td className="whitespace-nowrappx-4 py-4">{item.currency === null ? "₹ " : ""}{item.amount} {item.currency}</td>
-                    <td className="whitespace-nowrappx-6 py-4">{item.status}</td>
-                    <td className="whitespace-nowrappx-6 py-4 hidden md:table-cell">{item.date.split("T")[0]}</td>
-                    <td className="whitespace-nowrappx-6 py-4 flex justify-left items-center gap-2">
+                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  dark:text-white">{index + 1}.</th>
+                    <td className="whitespace-nowrap px-4 py-4">{item.currency === null ? "₹ " : ""}{item.amount} {item.currency}</td>
+                    <td className="whitespace-nowrap px-6 py-4">{item.status}</td>
+                    <td className="whitespace-nowrap px-6 py-4 hidden md:table-cell">{item.date.split("T")[0]}</td>
+                    <td className="whitespace-nowrap px-6 py-4 flex justify-left items-center gap-2">
                       <FaRegEye size={20} className="cursor-pointer" onClick={() => { showModal(index); setSingleData(item); }} />
                       {item.status === "Pending" && (
                         <MdCancel size={20} className="cursor-pointer text-red-500" onClick={() => handleCancelWithdrawalRequest(item.id)} />

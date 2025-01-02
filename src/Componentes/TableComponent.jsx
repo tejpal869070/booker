@@ -24,9 +24,9 @@ export default function TableComponent({ tableHead, tableData }) {
                 key={index}
                 className="odd:bg-white dark:text-gray-300 odd:dark:bg-gray-900 text-black font-medium even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
               >
-                <td className="whitespace-nowrappx-6 py-4">{index + 1}.</td>
+                <td className="whitespace-nowrap px-6 py-4">{index + 1}.</td>
                 {Object.entries(item).map(([key, value]) => (
-                  <td className="whitespace-nowrappx-6 py-4">{value}</td>
+                  <td className="whitespace-nowrap px-6 py-4">{value}</td>
                 ))}
               </tr>
             ))}

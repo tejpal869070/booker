@@ -249,13 +249,13 @@ export default function VIP() {
                   <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                     <th
                       scope="row"
-                      className="px-2 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                      className="px-2 py-3 font-medium text-gray-900 whitespace-nowrap  dark:text-white"
                     >
                       {index + 1}.
                     </th>
-                    <td className="whitespace-nowrappx-4 py-3 ">₹{item.amount}</td>
-                    <td className="whitespace-nowrappx-6 py-3">{item.type}</td>
-                    <td className="whitespace-nowrappx-6 py-3">{item.date}</td>
+                    <td className="whitespace-nowrap px-4 py-3 ">₹{item.amount}</td>
+                    <td className="whitespace-nowrap px-6 py-3">{item.type}</td>
+                    <td className="whitespace-nowrap px-6 py-3">{item.date}</td>
                   </tr>
                 ))}
               </tbody>

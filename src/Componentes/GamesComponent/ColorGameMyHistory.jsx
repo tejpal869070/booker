@@ -142,27 +142,27 @@ export default function ColorGameMyHistory({
                 >
                   <th
                     scope="row"
-                    className="px-6 py-[3px] font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    className="px-6 py-[3px] font-medium text-gray-900 whitespace-nowrap  dark:text-white"
                   >
                     {item.Period}
                   </th>
-                  <td className="whitespace-nowrappx-4 py-[3px] hidden md:table-cell  ">
+                  <td className="whitespace-nowrap px-4 py-[3px] hidden md:table-cell  ">
                     {item.price}
                   </td>
 
-                  <td className="whitespace-nowrappx-4 py-[3px] hidden md:table-cell">
+                  <td className="whitespace-nowrap px-4 py-[3px] hidden md:table-cell">
                     {item.type}
                   </td>
-                  <td className="whitespace-nowrappx-6 py-[3px] hidden md:table-cell">
+                  <td className="whitespace-nowrap px-6 py-[3px] hidden md:table-cell">
                     {item.value}
                   </td>
-                  <td className="whitespace-nowrappx-6 py-[3px] border-l-2  hidden md:flex flex-row justify-between items-center">
+                  <td className="whitespace-nowrap px-6 py-[3px] border-l-2  hidden md:flex flex-row justify-between items-center">
                     <p>{item.open_color}</p>{" "}
                     <p className="rounded-full p-1 bg-[#ffc989] dark:text-gray-900">
                       {item.number}
                     </p>
                   </td>
-                  <td className="whitespace-nowrappx-6 py-[3px]   md:hidden flex flex-row justify-center items-center">
+                  <td className="whitespace-nowrap px-6 py-[3px]   md:hidden flex flex-row justify-center items-center">
                     <p
                       className={`rounded-full  w-8  h-8  flex items-center justify-center  dark:text-gray-900 bg-gray-200`}
                     >

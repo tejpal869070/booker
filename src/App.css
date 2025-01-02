@@ -66,5 +66,5 @@
 
 
 td {
-  @apply whitespace-nowrap;
+  @apply whitespace-nowrap ;
 }
