@@ -86,7 +86,7 @@ export default function VIP() {
     <div className="mb-10 lg:mt-6 h-screen pb-10">
       <Slider {...settings}>
         {plans.map((item, index) => (
-          <div className="relative px-2 pb-4">
+          <div className="relative px-2 pb-4" key={index}>
             <img
               className="w-[95%] h-[12rem] lg:h-40 rounded-lg  absolute top-0"
               src={API.url + "assets/img/" + item.bgimage}
@@ -246,7 +246,7 @@ export default function VIP() {
               </thead>
               <tbody>
                 {data.map((item, index) => (
-                  <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                  <tr key={index} className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                     <th
                       scope="row"
                       className="px-2 py-3 font-medium text-gray-900 whitespace-nowrap  dark:text-white"
@@ -264,7 +264,7 @@ export default function VIP() {
         )
       ) : (
         rules.map((item, index) => (
-          <div className="px-4 rounded bg-indigo-400 mt-2 py-3">
+          <div key={index} className="px-4 rounded bg-indigo-400 mt-2 py-3">
             <p className="text-center px-4 bg-red-400 rounded-t-md py-1 text-gray-200 font-medium">
               {item.name}
             </p>

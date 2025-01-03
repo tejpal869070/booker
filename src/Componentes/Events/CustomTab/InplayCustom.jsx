@@ -37,7 +37,7 @@ export default function InplayCustom({ type }) {
     <div>
       <div className="flex flex-col gap-8">
         {gameTypeData.map((item, index) => (
-          <div className=" bg-[#ffce9e] py-2 rounded-lg ">
+          <div key={index} className=" bg-[#ffce9e] py-2 rounded-lg ">
             <p className="flex gap-2 pl-4 font-bold items-center border-b-2 border-gray pb-2">
               <img alt="imageer" src={item.img} className="w-6 h-6" />
               {item.name}

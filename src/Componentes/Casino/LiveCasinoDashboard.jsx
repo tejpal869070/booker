@@ -104,6 +104,7 @@ export default function LiveCasinoDashboard() {
               <div
                 className="cursor-pointer w-[46%] md:w-[23%] lg:w-[18%] hover:border-2 border-2 border-gray-700"
                 onClick={() => handleCasinoSelect(item)}
+                key={index}
               >
                 <img alt="banner" src={item.thumb} className="w-full" />
               </div>
@@ -114,6 +115,7 @@ export default function LiveCasinoDashboard() {
                 <div
                   className="cursor-pointer w-[46%] md:w-[23%] lg:w-[18%] border-gray-700 hover:border-gray-200 border-2 "
                   onClick={() => handleCasinoSelect(item3)}
+                  key={index3}
                 >
                   <img alt="banner" src={item3.thumb} className="w-full" />
                 </div>

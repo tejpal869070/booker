@@ -13,27 +13,27 @@ export default function AstroHome() {
   return (
     <div>
       {/* --------------Nav bar-------------------------------------------------------------- */}
-      <nav class="bg-[#fff6ea] border-gray-200 py-2.5 ">
-        <div class="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto">
-          <a href="#" class="flex items-center">
+      <nav className="bg-[#fff6ea] border-gray-200 py-2.5 ">
+        <div className="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto">
+          <a href="#" className="flex items-center">
             <img
               src={require("../assets/a/logo.png")}
-              class="h-20 mr-3 sm:h-14"
+              className="h-20 mr-3 sm:h-14"
               alt="Landwind Logo"
             />
           </a>
-          <div class="flex items-center lg:order-2">
-            <div class="hidden mt-2 mr-4 sm:inline-block">
+          <div className="flex items-center lg:order-2">
+            <div className="hidden mt-2 mr-4 sm:inline-block">
               <span></span>
             </div>
 
-            <a class="hidden md:block text-gray-100 bg-[#800000] cursor-pointer font-medium rounded-full text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 dark:bg-purple-600 dark:hover:bg-purple-700 focus:outline-none dark:focus:ring-purple-800">
+            <a className="hidden md:block text-gray-100 bg-[#800000] cursor-pointer font-medium rounded-full text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 dark:bg-purple-600 dark:hover:bg-purple-700 focus:outline-none dark:focus:ring-purple-800">
               Get Consultation
             </a>
             <button
               data-collapse-toggle="mobile-menu-2"
               type="button"
-              class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
               aria-controls="mobile-menu-2"
               aria-expanded="true"
               onClick={() => {
@@ -42,9 +42,9 @@ export default function AstroHome() {
                   .classList.toggle("hidden");
               }}
             >
-              <span class="sr-only">Open main menu</span>
+              <span className="sr-only">Open main menu</span>
               <svg
-                class="w-6 h-6"
+                className="w-6 h-6"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
@@ -56,7 +56,7 @@ export default function AstroHome() {
                 ></path>
               </svg>
               <svg
-                class="hidden w-6 h-6"
+                className="hidden w-6 h-6"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
@@ -70,14 +70,14 @@ export default function AstroHome() {
             </button>
           </div>
           <div
-            class="hidden items-center justify-between w-full lg:flex lg:w-auto lg:order-1"
+            className="hidden items-center justify-between w-full lg:flex lg:w-auto lg:order-1"
             id="mobile-menu-2"
           >
-            <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+            <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
               <li>
                 <a
                   href="#"
-                  class="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-gray-700 lg:dark:hover:bg-transparent dark:border-gray-700"
+                  className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-gray-700 lg:dark:hover:bg-transparent dark:border-gray-700"
                   aria-current="page"
                 >
                   Home
@@ -86,7 +86,7 @@ export default function AstroHome() {
               <li>
                 <a
                   href="#"
-                  class="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-gray-700 lg:dark:hover:bg-transparent dark:border-gray-700"
+                  className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-gray-700 lg:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   About
                 </a>
@@ -94,7 +94,7 @@ export default function AstroHome() {
               <li>
                 <a
                   href="#"
-                  class="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-gray-700 lg:dark:hover:bg-transparent dark:border-gray-700"
+                  className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-gray-700 lg:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   Gems
                 </a>
@@ -102,7 +102,7 @@ export default function AstroHome() {
               <li>
                 <a
                   href="#"
-                  class="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-gray-700 lg:dark:hover:bg-transparent dark:border-gray-700"
+                  className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-gray-700 lg:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   Horoscope
                 </a>
@@ -110,7 +110,7 @@ export default function AstroHome() {
               <li>
                 <a
                   href="#"
-                  class="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-gray-700 lg:dark:hover:bg-transparent dark:border-gray-700"
+                  className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-gray-700 lg:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   Blogs
                 </a>
@@ -118,7 +118,7 @@ export default function AstroHome() {
               <li>
                 <a
                   href="#"
-                  class="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                  className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   Contact
                 </a>
@@ -130,57 +130,57 @@ export default function AstroHome() {
 
       {/* ========================================--------------------------------------------- */}
 
-      <div class="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         <div
           id="default-carousel"
-          class="relative rounded-lg overflow-hidden shadow-lg"
+          className="relative rounded-lg overflow-hidden shadow-lg"
           data-carousel="static"
         >
           {/* large device---- */}
           <div
-            class="hidden md:block  relative h-80 md:h-96"
+            className="hidden md:block  relative h-80 md:h-96"
             data-carousel-inner
           >
             <img alt="banner" src={require("../assets/a/img1.jpg")} />
           </div>
 
           {/* mobile------ */}
-          <div class=" md:hidden relative  " data-carousel-inner>
+          <div className=" md:hidden relative  " data-carousel-inner>
             <img alt="banner" src={require("../assets/a/img8.jpg")} />
           </div>
         </div>
       </div>
 
       {/* ------------------------------------------------------------------------------------ */}
-      <section class="sm:mt-6 lg:mt-8 mt-12 max-w-7xl mx-auto   sm:px-6  ">
-        <div class="my-10 mx-auto max-w-7xl px-4 sm:mt-12   md:mt-16 lg:mt-20   xl:mt-28 flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row">
-          <div class="sm:text-center lg:text-left">
-            <h1 class="text-4xl tracking-tight font-extrabold text-gray-800 sm:text-5xl md:text-5xl">
-              <span class=" xl:inline">Unlock the Secrets of Your Stars </span>
-              <span class=" text-[#800000] xl:inline">
+      <section className="sm:mt-6 lg:mt-8 mt-12 max-w-7xl mx-auto   sm:px-6  ">
+        <div className="my-10 mx-auto max-w-7xl px-4 sm:mt-12   md:mt-16 lg:mt-20   xl:mt-28 flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row">
+          <div className="sm:text-center lg:text-left">
+            <h1 className="text-4xl tracking-tight font-extrabold text-gray-800 sm:text-5xl md:text-5xl">
+              <span className=" xl:inline">Unlock the Secrets of Your Stars </span>
+              <span className=" text-[#800000] xl:inline">
                 with Grahsalah Astrology
               </span>
             </h1>
-            <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+            <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
               We are dedicated to providing the most accurate and insightful
               astrology readings.We ensures you get the best guidance based on
               your unique birth chart. Trust us to offer reliable and
               personalized astrology services, helping you navigate life with
               clarity.
             </p>
-            <div class="mt-5 sm:mt-8  flex sm:justify-center gap-4 lg:justify-start">
-              <div class="rounded-md shadow">
+            <div className="mt-5 sm:mt-8  flex sm:justify-center gap-4 lg:justify-start">
+              <div className="rounded-md shadow">
                 <a
                   href="#"
-                  class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-[#800000]   md:py-4 md:text-lg md:px-10"
+                  className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-[#800000]   md:py-4 md:text-lg md:px-10"
                 >
                   Make Appointment
                 </a>
               </div>
-              <div class="  sm:mt-0 sm:ml-3">
+              <div className="  sm:mt-0 sm:ml-3">
                 <a
                   href="#"
-                  class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-gray-800 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10"
+                  className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-gray-800 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10"
                 >
                   Contact Now
                 </a>
@@ -188,9 +188,9 @@ export default function AstroHome() {
             </div>
           </div>
 
-          <div class="lg:inset-y-0 lg:right-0 lg:w-1/2 my-4">
+          <div className="lg:inset-y-0 lg:right-0 lg:w-1/2 my-4">
             <img
-              class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
+              className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
               src={require("../assets/a/img9.jpg")}
               alt=""
             />
@@ -199,85 +199,85 @@ export default function AstroHome() {
       </section>
 
       {/* -------------------------------------------------------------- */}
-      <div class="  p-4  pt-0">
-        <div class="max-w-7xl mx-auto   md:px-12 xl:px-6">
-          <div class="mt-16 grid divide-x divide-y  divide-gray-700 overflow-hidden  rounded-3xl border text-gray-600 border-gray-700 grid-cols-2 lg:grid-cols-4  lg:divide-y-0 xl:grid-cols-4">
-            <div class="group relative bg-white-200 transition hover:z-[1] hover:shadow-2xl  hover:shadow-gray-600/10">
-              <div class="relative space-y-4 py-12 p-4 lg:p-8">
+      <div className="  p-4  pt-0">
+        <div className="max-w-7xl mx-auto   md:px-12 xl:px-6">
+          <div className="mt-16 grid divide-x divide-y  divide-gray-700 overflow-hidden  rounded-3xl border text-gray-600 border-gray-700 grid-cols-2 lg:grid-cols-4  lg:divide-y-0 xl:grid-cols-4">
+            <div className="group relative bg-white-200 transition hover:z-[1] hover:shadow-2xl  hover:shadow-gray-600/10">
+              <div className="relative space-y-4 py-12 p-4 lg:p-8">
                 <img
                   src={require("../assets/a/img3.png")}
                   loading="lazy"
                   width="300"
                   height="300"
-                  class="w-16 h-16 rounded-full"
+                  className="w-16 h-16 rounded-full"
                   style={{ color: "transparent" }}
                 />
-                <div class="space-y-2">
-                  <h5 class="text-xl font-bold text-[#800000] transition group-hover:text-secondary">
+                <div className="space-y-2">
+                  <h5 className="text-xl font-bold text-[#800000] transition group-hover:text-secondary">
                     Xyz.com
                   </h5>
-                  <p class="text-gray-700 font-semibold">
+                  <p className="text-gray-700 font-semibold">
                     Platform to convert Domains into Content websites.
                   </p>
                 </div>
               </div>
             </div>
-            <div class="group relative bg-white-200 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10">
-              <div class="relative space-y-4 py-12 p-4 lg:p-8">
+            <div className="group relative bg-white-200 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10">
+              <div className="relative space-y-4 py-12 p-4 lg:p-8">
                 <img
                   src={require("../assets/a/img4.webp")}
                   loading="lazy"
                   width="300"
                   height="300"
-                  class="w-16 h-16 rounded-full"
+                  className="w-16 h-16 rounded-full"
                   style={{ color: "transparent" }}
                 />
-                <div class="space-y-2">
-                  <h5 class="text-xl font-bold text-[#800000] transition group-hover:text-secondary">
+                <div className="space-y-2">
+                  <h5 className="text-xl font-bold text-[#800000] transition group-hover:text-secondary">
                     ABC.com
                   </h5>
-                  <p class="text-gray-700 font-semibold">
+                  <p className="text-gray-700 font-semibold">
                     Platform to create dynamic widgets for websites.
                   </p>
                 </div>
               </div>
             </div>
-            <div class="group relative bg-white-200 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10">
-              <div class="relative space-y-4 py-12 p-4 lg:p-8">
+            <div className="group relative bg-white-200 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10">
+              <div className="relative space-y-4 py-12 p-4 lg:p-8">
                 <img
                   src={require("../assets/a/img5.png")}
                   loading="lazy"
                   width="300"
                   height="300"
-                  class="w-16 h-16 rounded-full"
+                  className="w-16 h-16 rounded-full"
                   style={{ color: "transparent" }}
                 />
-                <div class="space-y-2">
-                  <h5 class="text-xl font-bold text-[#800000] transition group-hover:text-secondary">
+                <div className="space-y-2">
+                  <h5 className="text-xl font-bold text-[#800000] transition group-hover:text-secondary">
                     ASD.com
                   </h5>
-                  <p class="text-gray-700 font-semibold">
+                  <p className="text-gray-700 font-semibold">
                     API SaaS Platform that provides API Suit to help you ship
                     fast.
                   </p>
                 </div>
               </div>
             </div>
-            <div class="group relative bg-white-200 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10">
-              <div class="relative space-y-4 py-12 p-4 lg:p-8">
+            <div className="group relative bg-white-200 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10">
+              <div className="relative space-y-4 py-12 p-4 lg:p-8">
                 <img
                   src={require("../assets/a/img6.png")}
                   loading="lazy"
                   width="300"
                   height="300"
-                  class="w-16 h-16 rounded-full"
+                  className="w-16 h-16 rounded-full"
                   style={{ color: "transparent" }}
                 />
-                <div class="space-y-2">
-                  <h5 class="text-xl font-bold text-[#800000] transition group-hover:text-secondary">
+                <div className="space-y-2">
+                  <h5 className="text-xl font-bold text-[#800000] transition group-hover:text-secondary">
                     TMK.co
                   </h5>
-                  <p class="text-gray-700 font-semibold">
+                  <p className="text-gray-700 font-semibold">
                     Chrome Extension that lets you add ChatGPT on any website
                   </p>
                 </div>
@@ -289,7 +289,7 @@ export default function AstroHome() {
 
       {/* ------------------------------------------------------------------------------------- */}
       <div className="flex flex-col justify-center items-center px-4">
-        {/* <div class="p-1 grid grid-cols-3 md:grid-cols-9 lg:grid-cold-9 gap-3 max-w-7xl">
+        {/* <div className="p-1 grid grid-cols-3 md:grid-cols-9 lg:grid-cold-9 gap-3 max-w-7xl">
           {plants2.map((plant, index) => (
             <div
               className={`flex-shrink-0 relative overflow-hidden bg-[#800000] rounded-lg max-w-xs shadow-lg`}
@@ -340,25 +340,25 @@ export default function AstroHome() {
             </div>
           ))}
         </div> */}
-        <h1 class="mx-auto my-16 max-w-4xl text-center     font-display text-5xl font-bold tracking-normal text-slate-900 sm:text-7xl">
+        <h1 className="mx-auto my-16 max-w-4xl text-center     font-display text-5xl font-bold tracking-normal text-slate-900 sm:text-7xl">
           Make your photos{" "}
-          <span class="relative whitespace-nowrap  text-[#800000]">
+          <span className="relative whitespace-nowrap  text-[#800000]">
             <svg
               aria-hidden="true"
               viewBox="0 0 418 42"
-              class="absolute top-2/3 left-0 h-[0.58em] w-full fill-orange-300/70"
+              className="absolute top-2/3 left-0 h-[0.58em] w-full fill-orange-300/70"
               preserveAspectRatio="none"
             >
               <path d="M203.371.916c-26.013-2.078-76.686 1.963-124.73 9.946L67.3 12.749C35.421 18.062 18.2 21.766 6.004 25.934 1.244 27.561.828 27.778.874 28.61c.07 1.214.828 1.121 9.595-1.176 9.072-2.377 17.15-3.92 39.246-7.496C123.565 7.986 157.869 4.492 195.942 5.046c7.461.108 19.25 1.696 19.17 2.582-.107 1.183-7.874 4.31-25.75 10.366-21.992 7.45-35.43 12.534-36.701 13.884-2.173 2.308-.202 4.407 4.442 4.734 2.654.187 3.263.157 15.593-.78 35.401-2.686 57.944-3.488 88.365-3.143 46.327.526 75.721 2.23 130.788 7.584 19.787 1.924 20.814 1.98 24.557 1.332l.066-.011c1.201-.203 1.53-1.825.399-2.335-2.911-1.31-4.893-1.604-22.048-3.261-57.509-5.556-87.871-7.36-132.059-7.842-23.239-.254-33.617-.116-50.627.674-11.629.54-42.371 2.494-46.696 2.967-2.359.259 8.133-3.625 26.504-9.81 23.239-7.825 27.934-10.149 28.304-14.005.417-4.348-3.529-6-16.878-7.066Z"></path>
             </svg>
-            <span class="relative">Pop</span>
+            <span className="relative">Pop</span>
           </span>
         </h1>
-        <div class="max-w-7xl mx-auto  flex flex-wrap justify-center gap-3    ">
+        <div className="max-w-7xl mx-auto  flex flex-wrap justify-center gap-3    ">
           {cards9.map((item, index) => (
             <div
               key={index}
-              class="bg-[#8b1e1e] w-[30%] md:w-[15%] shadow-lg rounded-xl flex flex-col items-center justify-center p-4 "
+              className="bg-[#8b1e1e] w-[30%] md:w-[15%] shadow-lg rounded-xl flex flex-col items-center justify-center p-4 "
             >
               <img alt="soncs" src={item.img} className="w-16" />
               <p className="text-center text-white">{item.title}</p>
@@ -369,49 +369,49 @@ export default function AstroHome() {
 
       {/* ------------------------------------------------------------------------------------- */}
       <div className="w-full m-auto flex justify-center ">
-        <div class="p-10 sm:p-10 sm:py-28 max-w-7xl  m-auto m-5 rounded-3xl    dark:text-white  bg-[#fff6ea] text-black flex items-center justify-center overflow-hidden  ">
-          <div class="w-full max-w-7xl px-4 sm:px-6 m-auto">
-            <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
-              <div class="relative flex items-center sm:m-10 px-4">
-                <div class="absolute -top-10 md:-top-20 -left-10 sm:w-32 sm:h-32 lg:w-64 lg:h-64 bg-yellow-500 rotate-12 rounded-lg border-yellow-700 border-b-4 border-r-8 max-sm:hidden">
+        <div className="p-10 sm:p-10 sm:py-28 max-w-7xl  m-auto m-5 rounded-3xl    dark:text-white  bg-[#fff6ea] text-black flex items-center justify-center overflow-hidden  ">
+          <div className="w-full max-w-7xl px-4 sm:px-6 m-auto">
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+              <div className="relative flex items-center sm:m-10 px-4">
+                <div className="absolute -top-10 md:-top-20 -left-10 sm:w-32 sm:h-32 lg:w-64 lg:h-64 bg-yellow-500 rotate-12 rounded-lg border-yellow-700 border-b-4 border-r-8 max-sm:hidden">
                   <img
                     alt="logo"
                     src={require("../assets/a/imh2.png")}
                     className="w-full"
                   />
                 </div>
-                <div class="relative z-10 bg-gray-800 dark:bg-gray-800 p-4 sm:p-6 -right-1/2 -translate-x-1/2 grow text-center shadow-2xl -rotate-2 rounded-xl text-nowrap border-slate-950 border-b-4 border-r-8">
-                  <h2 class="text-2xl sm:text-3xl font-bold uppercase text-gray-50 dark:text-gray-50">
+                <div className="relative z-10 bg-gray-800 dark:bg-gray-800 p-4 sm:p-6 -right-1/2 -translate-x-1/2 grow text-center shadow-2xl -rotate-2 rounded-xl text-nowrap border-slate-950 border-b-4 border-r-8">
+                  <h2 className="text-2xl sm:text-3xl font-bold uppercase text-gray-50 dark:text-gray-50">
                     Bold. Strong. Raw.
                   </h2>
-                  <p class="mt-1 text-sm sm:text-base font-light text-gray-400 dark:text-gray-400">
+                  <p className="mt-1 text-sm sm:text-base font-light text-gray-400 dark:text-gray-400">
                     Embrace minimalism with maximal impact.
                   </p>
                 </div>
               </div>
-              <div class="flex flex-col justify-center text-center md:text-left z-10">
-                <h1 class="text-4xl tracking-tight font-extrabold text-gray-800 sm:text-5xl md:text-5xl">
-                  <span class=" xl:inline">
+              <div className="flex flex-col justify-center text-center md:text-left z-10">
+                <h1 className="text-4xl tracking-tight font-extrabold text-gray-800 sm:text-5xl md:text-5xl">
+                  <span className=" xl:inline">
                     Unlock the Secrets of Your Stars{" "}
                   </span>
-                  <span class=" text-[#800000] xl:inline">
+                  <span className=" text-[#800000] xl:inline">
                     with Grahsalah Astrology
                   </span>
                 </h1>
-                <p class="mt-4 text-base sm:text-lg md:text-xl font-medium text-gray-400 dark:text-gray-400 text-gray-700 text-balance">
+                <p className="mt-4 text-base sm:text-lg md:text-xl font-medium text-gray-400 dark:text-gray-400 text-gray-700 text-balance">
                   Brutal aesthetics for a bold web presence. Build without
                   compromise.
                 </p>
-                <div class="mt-6 sm:mt-8 flex flex-wrap gap-4">
+                <div className="mt-6 sm:mt-8 flex flex-wrap gap-4">
                   <a
                     href="#get-started"
-                    class="rounded-sm p-3 grow text-center bg-[#800000] text-white font-bold uppercase text-sm tracking-widest hover:bg-yellow-600 transition"
+                    className="rounded-sm p-3 grow text-center bg-[#800000] text-white font-bold uppercase text-sm tracking-widest hover:bg-yellow-600 transition"
                   >
                     Get Started
                   </a>
                   <a
                     href="#learn-more"
-                    class="rounded-sm p-3 grow border text-center border-[#800000] text-[#800000] font-bold uppercase text-sm tracking-widest hover:bg-yellow-500 hover:text-black transition"
+                    className="rounded-sm p-3 grow border text-center border-[#800000] text-[#800000] font-bold uppercase text-sm tracking-widest hover:bg-yellow-500 hover:text-black transition"
                   >
                     Learn More
                   </a>
@@ -423,111 +423,111 @@ export default function AstroHome() {
       </div>
 
       {/* ------------------------------------------------------------- */}
-      <div class="mx-auto max-w-7xl px-5 py-16 md:px-10 md:py-16 bg-gradient-to-b from-blue-50 via-white to-blue-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-        <div class="mx-auto w-full max-w-3xl text-center">
-          <h2 class="text-4xl font-extrabold text-[#800000] dark:text-white md:text-5xl">
+      <div className="mx-auto max-w-7xl px-5 py-16 md:px-10 md:py-16 bg-gradient-to-b from-blue-50 via-white to-blue-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+        <div className="mx-auto w-full max-w-3xl text-center">
+          <h2 className="text-4xl font-extrabold text-[#800000] dark:text-white md:text-5xl">
             NeuroGraph AI Assistant
           </h2>
-          <div class="mx-auto mb-8 mt-4 max-w-[528px] md:mb-12 lg:mb-16">
-            <p class="text-lg text-gray-700 dark:text-gray-700 font-semibold">
+          <div className="mx-auto mb-8 mt-4 max-w-[528px] md:mb-12 lg:mb-16">
+            <p className="text-lg text-gray-700 dark:text-gray-700 font-semibold">
               NeuroGraph AI Assistant simplifies complex workflows by offering
               intelligent, automated insights to streamline your tasks.
             </p>
           </div>
         </div>
-        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8 md:grid-cols-3 lg:gap-12">
-          <div class="relative mb-8 flex flex-col rounded-2xl border border-blue-300 bg-white p-8 shadow-lg dark:border-gray-600 dark:bg-gray-800 lg:mb-4">
-            <div class="absolute -top-8 right-4 flex h-16 w-16 items-center justify-center rounded-full border border-blue-400 bg-blue-100 shadow-md dark:border-gray-500 dark:bg-gray-700 lg:right-8">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8 md:grid-cols-3 lg:gap-12">
+          <div className="relative mb-8 flex flex-col rounded-2xl border border-blue-300 bg-white p-8 shadow-lg dark:border-gray-600 dark:bg-gray-800 lg:mb-4">
+            <div className="absolute -top-8 right-4 flex h-16 w-16 items-center justify-center rounded-full border border-blue-400 bg-blue-100 shadow-md dark:border-gray-500 dark:bg-gray-700 lg:right-8">
               <img
                 src="https://www.svgrepo.com/show/530666/gene-sequence.svg"
                 alt="Icon"
-                class="h-12"
+                className="h-12"
               />
             </div>
-            <p class="mb-4 text-xl font-semibold text-blue-900 dark:text-white">
+            <p className="mb-4 text-xl font-semibold text-blue-900 dark:text-white">
               Task Automation
             </p>
-            <p class="text-gray-700 dark:text-gray-700 font-semibold">
+            <p className="text-gray-700 dark:text-gray-700 font-semibold">
               Automate repetitive tasks with NeuroGraph's intuitive and
               intelligent task manager.
             </p>
           </div>
-          <div class="relative mb-8 flex flex-col rounded-2xl border border-blue-300 bg-white p-8 shadow-lg dark:border-gray-600 dark:bg-gray-800 lg:mb-4">
-            <div class="absolute -top-8 right-4 flex h-16 w-16 items-center justify-center rounded-full border border-blue-400 bg-blue-100 shadow-md dark:border-gray-500 dark:bg-gray-700 lg:right-8">
+          <div className="relative mb-8 flex flex-col rounded-2xl border border-blue-300 bg-white p-8 shadow-lg dark:border-gray-600 dark:bg-gray-800 lg:mb-4">
+            <div className="absolute -top-8 right-4 flex h-16 w-16 items-center justify-center rounded-full border border-blue-400 bg-blue-100 shadow-md dark:border-gray-500 dark:bg-gray-700 lg:right-8">
               <img
                 src="https://www.svgrepo.com/show/530666/gene-sequence.svg"
                 alt="Icon"
-                class="h-12"
+                className="h-12"
               />
             </div>
-            <p class="mb-4 text-xl font-semibold text-blue-900 dark:text-white">
+            <p className="mb-4 text-xl font-semibold text-blue-900 dark:text-white">
               Data Analysis
             </p>
-            <p class="text-gray-700 dark:text-gray-700 font-semibold">
+            <p className="text-gray-700 dark:text-gray-700 font-semibold">
               Gain actionable insights from your data with NeuroGraph's
               AI-powered analysis.
             </p>
           </div>
-          <div class="relative mb-8 flex flex-col rounded-2xl border border-blue-300 bg-white p-8 shadow-lg dark:border-gray-600 dark:bg-gray-800 lg:mb-4">
-            <div class="absolute -top-8 right-4 flex h-16 w-16 items-center justify-center rounded-full border border-blue-400 bg-blue-100 shadow-md dark:border-gray-500 dark:bg-gray-700 lg:right-8">
+          <div className="relative mb-8 flex flex-col rounded-2xl border border-blue-300 bg-white p-8 shadow-lg dark:border-gray-600 dark:bg-gray-800 lg:mb-4">
+            <div className="absolute -top-8 right-4 flex h-16 w-16 items-center justify-center rounded-full border border-blue-400 bg-blue-100 shadow-md dark:border-gray-500 dark:bg-gray-700 lg:right-8">
               <img
                 src="https://www.svgrepo.com/show/530666/gene-sequence.svg"
                 alt="Icon"
-                class="h-12"
+                className="h-12"
               />
             </div>
-            <p class="mb-4 text-xl font-semibold text-blue-900 dark:text-white">
+            <p className="mb-4 text-xl font-semibold text-blue-900 dark:text-white">
               Personalized Recommendations
             </p>
-            <p class="text-gray-700 dark:text-gray-700 font-semibold">
+            <p className="text-gray-700 dark:text-gray-700 font-semibold">
               Receive tailored suggestions to improve productivity and
               efficiency in real time.
             </p>
           </div>
-          <div class="relative mb-8 flex flex-col rounded-2xl border border-blue-300 bg-white p-8 shadow-lg dark:border-gray-600 dark:bg-gray-800 lg:mb-4">
-            <div class="absolute -top-8 right-4 flex h-16 w-16 items-center justify-center rounded-full border border-blue-400 bg-blue-100 shadow-md dark:border-gray-500 dark:bg-gray-700 lg:right-8">
+          <div className="relative mb-8 flex flex-col rounded-2xl border border-blue-300 bg-white p-8 shadow-lg dark:border-gray-600 dark:bg-gray-800 lg:mb-4">
+            <div className="absolute -top-8 right-4 flex h-16 w-16 items-center justify-center rounded-full border border-blue-400 bg-blue-100 shadow-md dark:border-gray-500 dark:bg-gray-700 lg:right-8">
               <img
                 src="https://www.svgrepo.com/show/530666/gene-sequence.svg"
                 alt="Icon"
-                class="h-12"
+                className="h-12"
               />
             </div>
-            <p class="mb-4 text-xl font-semibold text-blue-900 dark:text-white">
+            <p className="mb-4 text-xl font-semibold text-blue-900 dark:text-white">
               Seamless Integrations
             </p>
-            <p class="text-gray-700 dark:text-gray-700 font-semibold">
+            <p className="text-gray-700 dark:text-gray-700 font-semibold">
               Connect NeuroGraph with your favorite tools for a unified
               workflow.
             </p>
           </div>
-          <div class="relative mb-8 flex flex-col rounded-2xl border border-blue-300 bg-white p-8 shadow-lg dark:border-gray-600 dark:bg-gray-800 lg:mb-4">
-            <div class="absolute -top-8 right-4 flex h-16 w-16 items-center justify-center rounded-full border border-blue-400 bg-blue-100 shadow-md dark:border-gray-500 dark:bg-gray-700 lg:right-8">
+          <div className="relative mb-8 flex flex-col rounded-2xl border border-blue-300 bg-white p-8 shadow-lg dark:border-gray-600 dark:bg-gray-800 lg:mb-4">
+            <div className="absolute -top-8 right-4 flex h-16 w-16 items-center justify-center rounded-full border border-blue-400 bg-blue-100 shadow-md dark:border-gray-500 dark:bg-gray-700 lg:right-8">
               <img
                 src="https://www.svgrepo.com/show/530666/gene-sequence.svg"
                 alt="Icon"
-                class="h-12"
+                className="h-12"
               />
             </div>
-            <p class="mb-4 text-xl font-semibold text-blue-900 dark:text-white">
+            <p className="mb-4 text-xl font-semibold text-blue-900 dark:text-white">
               Advanced Reporting
             </p>
-            <p class="text-gray-700 dark:text-gray-700 font-semibold">
+            <p className="text-gray-700 dark:text-gray-700 font-semibold">
               Generate detailed reports to track performance and identify
               trends.
             </p>
           </div>
-          <div class="relative mb-8 flex flex-col rounded-2xl border border-blue-300 bg-white p-8 shadow-lg dark:border-gray-600 dark:bg-gray-800 lg:mb-4">
-            <div class="absolute -top-8 right-4 flex h-16 w-16 items-center justify-center rounded-full border border-blue-400 bg-blue-100 shadow-md dark:border-gray-500 dark:bg-gray-700 lg:right-8">
+          <div className="relative mb-8 flex flex-col rounded-2xl border border-blue-300 bg-white p-8 shadow-lg dark:border-gray-600 dark:bg-gray-800 lg:mb-4">
+            <div className="absolute -top-8 right-4 flex h-16 w-16 items-center justify-center rounded-full border border-blue-400 bg-blue-100 shadow-md dark:border-gray-500 dark:bg-gray-700 lg:right-8">
               <img
                 src="https://www.svgrepo.com/show/530666/gene-sequence.svg"
                 alt="Icon"
-                class="h-12"
+                className="h-12"
               />
             </div>
-            <p class="mb-4 text-xl font-semibold text-blue-900 dark:text-white">
+            <p className="mb-4 text-xl font-semibold text-blue-900 dark:text-white">
               NeuroGraph API
             </p>
-            <p class="text-gray-700 dark:text-gray-700 font-semibold">
+            <p className="text-gray-700 dark:text-gray-700 font-semibold">
               Access robust APIs to embed NeuroGraph’s capabilities into your
               own applications.
             </p>
@@ -537,36 +537,36 @@ export default function AstroHome() {
 
       {/* --------------------------------------------------------------------------------------- */}
       <div className="flex flex-col items-center justify-center">
-        <main class="flex flex-1 w-full flex-col items-center justify-center text-center px-4  mt-6 ">
+        <main className="flex flex-1 w-full flex-col items-center justify-center text-center px-4  mt-6 ">
           <a
             href="#"
             target="_blank"
             rel="noreferrer"
-            class="border rounded-2xl py-1 px-4 text-slate-500 text-sm mb-5 hover:scale-105 transition duration-300 ease-in-out"
+            className="border rounded-2xl py-1 px-4 text-slate-500 text-sm mb-5 hover:scale-105 transition duration-300 ease-in-out"
           >
             Inspired by the amazing
-            <span class="font-semibold">restorePhotos</span> app
+            <span className="font-semibold">restorePhotos</span> app
           </a>
-          <h1 class="mx-auto max-w-4xl font-display text-5xl font-bold tracking-normal text-slate-900 sm:text-7xl">
+          <h1 className="mx-auto max-w-4xl font-display text-5xl font-bold tracking-normal text-slate-900 sm:text-7xl">
             Make your photos{" "}
-            <span class="relative whitespace-nowrap  text-orange-400">
+            <span className="relative whitespace-nowrap  text-orange-400">
               <svg
                 aria-hidden="true"
                 viewBox="0 0 418 42"
-                class="absolute top-2/3 left-0 h-[0.58em] w-full fill-orange-300/70"
+                className="absolute top-2/3 left-0 h-[0.58em] w-full fill-orange-300/70"
                 preserveAspectRatio="none"
               >
                 <path d="M203.371.916c-26.013-2.078-76.686 1.963-124.73 9.946L67.3 12.749C35.421 18.062 18.2 21.766 6.004 25.934 1.244 27.561.828 27.778.874 28.61c.07 1.214.828 1.121 9.595-1.176 9.072-2.377 17.15-3.92 39.246-7.496C123.565 7.986 157.869 4.492 195.942 5.046c7.461.108 19.25 1.696 19.17 2.582-.107 1.183-7.874 4.31-25.75 10.366-21.992 7.45-35.43 12.534-36.701 13.884-2.173 2.308-.202 4.407 4.442 4.734 2.654.187 3.263.157 15.593-.78 35.401-2.686 57.944-3.488 88.365-3.143 46.327.526 75.721 2.23 130.788 7.584 19.787 1.924 20.814 1.98 24.557 1.332l.066-.011c1.201-.203 1.53-1.825.399-2.335-2.911-1.31-4.893-1.604-22.048-3.261-57.509-5.556-87.871-7.36-132.059-7.842-23.239-.254-33.617-.116-50.627.674-11.629.54-42.371 2.494-46.696 2.967-2.359.259 8.133-3.625 26.504-9.81 23.239-7.825 27.934-10.149 28.304-14.005.417-4.348-3.529-6-16.878-7.066Z"></path>
               </svg>
-              <span class="relative">Pop</span>
+              <span className="relative">Pop</span>
             </span>
           </h1>
-          <p class="mx-auto mt-6 max-w-xl text-lg text-slate-700 leading-7">
+          <p className="mx-auto mt-6 max-w-xl text-lg text-slate-700 leading-7">
             Want to style up your life? your color of choice. 100% free – pop
             your photos today.
           </p>
         </main>
-        <div class="p-1 flex flex-wrap items-center justify-around max-w-7xl">
+        <div className="p-1 flex flex-wrap items-center justify-around max-w-7xl">
           {plants.map((plant, index) => (
             <div
               className={`flex-shrink-0 mb-4  relative overflow-hidden bg-[#309ac9ad] rounded-lg w-[45%] md:w-[20%]  shadow-lg`}
@@ -620,15 +620,15 @@ export default function AstroHome() {
       </div>
 
       {/* ---------------------------------------------------------------- */}
-      <div class="max-w-7xl mt-12 mx-auto rounded-3xl bg-gradient-to-r from-green-100 to-green-50  py-16 text-center overflow-hidden">
-        <div class="relative m-auto max-w-xl">
-          <div class="flex flex-row items-center justify-center text-yellow-500">
+      <div className="max-w-7xl mt-12 mx-auto rounded-3xl bg-gradient-to-r from-green-100 to-green-50  py-16 text-center overflow-hidden">
+        <div className="relative m-auto max-w-xl">
+          <div className="flex flex-row items-center justify-center text-yellow-500">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
               aria-hidden="true"
-              class="h-auto w-10 fill-current"
+              className="h-auto w-10 fill-current"
             >
               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
             </svg>
@@ -637,7 +637,7 @@ export default function AstroHome() {
               viewBox="0 0 20 20"
               fill="currentColor"
               aria-hidden="true"
-              class="h-auto w-10 fill-current"
+              className="h-auto w-10 fill-current"
             >
               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
             </svg>
@@ -646,7 +646,7 @@ export default function AstroHome() {
               viewBox="0 0 20 20"
               fill="currentColor"
               aria-hidden="true"
-              class="h-auto w-10 fill-current"
+              className="h-auto w-10 fill-current"
             >
               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
             </svg>
@@ -655,7 +655,7 @@ export default function AstroHome() {
               viewBox="0 0 20 20"
               fill="currentColor"
               aria-hidden="true"
-              class="h-auto w-10 fill-current"
+              className="h-auto w-10 fill-current"
             >
               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
             </svg>
@@ -664,25 +664,25 @@ export default function AstroHome() {
               viewBox="0 0 20 20"
               fill="currentColor"
               aria-hidden="true"
-              class="h-auto w-10 fill-current"
+              className="h-auto w-10 fill-current"
             >
               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
             </svg>
           </div>
           <a href="#" target="_blank">
-            <h2 class="mt-4 font-dm-sans text-mobile-h3 font-semibold leading-snug sm:text-mobile-h2 md:text-desktop-h2">
+            <h2 className="mt-4 font-dm-sans text-mobile-h3 font-semibold leading-snug sm:text-mobile-h2 md:text-desktop-h2">
               An
-              <span class="font-bold underline underline-offset-2">
+              <span className="font-bold underline underline-offset-2">
                 absolute 5/5
               </span>{" "}
               rating
             </h2>
           </a>
-          <p class="mt-4 font-dm-sans text-desktop-paragraph text-slate-body">
+          <p className="mt-4 font-dm-sans text-desktop-paragraph text-slate-body">
             Reviews are from paid customers and Product Hunt community
           </p>
           <svg
-            class="absolute top-48 lg:top-24 -left-2 lg:-left-10  h-36 fill-current text-slate-body  md:-left-14 md:h-44"
+            className="absolute top-48 lg:top-24 -left-2 lg:-left-10  h-36 fill-current text-slate-body  md:-left-14 md:h-44"
             viewBox="0 0 644 947"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -701,7 +701,7 @@ export default function AstroHome() {
             </defs>
           </svg>
           <svg
-            class="absolute top-48 lg:top-24 -right-2 lg:-right-10  h-36 fill-current text-slate-body  md:-right-14 md:h-44"
+            className="absolute top-48 lg:top-24 -right-2 lg:-right-10  h-36 fill-current text-slate-body  md:-right-14 md:h-44"
             viewBox="0 0 644 947"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -722,7 +722,7 @@ export default function AstroHome() {
           </svg>
         </div>
 
-        <div class="mt-6 flex flex-col items-center justify-center space-y-3">
+        <div className="mt-6 flex flex-col items-center justify-center space-y-3">
           <a href="#" target="_blank">
             <img
               src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=347156&amp;theme=light&amp;period=daily"
@@ -741,73 +741,73 @@ export default function AstroHome() {
       </div>
 
       {/* --------------------------------------------------------------------------------------- */}
-      <section id="testimonies" class="py-20 ">
-        <div class="max-w-6xl mx-8 md:mx-10 lg:mx-20 xl:mx-auto">
-          <div class="transition duration-500 ease-in-out transform scale-100 translate-x-0 translate-y-0 opacity-100">
-            <div class="mb-12 space-y-5 md:mb-16 md:text-center">
-              <div class="inline-block px-3 py-1 text-sm font-semibold text-indigo-100 rounded-lg md:text-center text-cn bg-[#202c47] bg-opacity-60 hover:cursor-pointer hover:bg-opacity-40">
+      <section id="testimonies" className="py-20 ">
+        <div className="max-w-6xl mx-8 md:mx-10 lg:mx-20 xl:mx-auto">
+          <div className="transition duration-500 ease-in-out transform scale-100 translate-x-0 translate-y-0 opacity-100">
+            <div className="mb-12 space-y-5 md:mb-16 md:text-center">
+              <div className="inline-block px-3 py-1 text-sm font-semibold text-indigo-100 rounded-lg md:text-center text-cn bg-[#202c47] bg-opacity-60 hover:cursor-pointer hover:bg-opacity-40">
                 Words from Others
               </div>
-              <h1 class="mb-5 text-3xl font-bold text-[#800000] md:text-center md:text-5xl">
+              <h1 className="mb-5 text-3xl font-bold text-[#800000] md:text-center md:text-5xl">
                 Is's not Just Us.
               </h1>
-              <p class="text-xl text-gray-700 font-semibold md:text-center md:text-2xl">
+              <p className="text-xl text-gray-700 font-semibold md:text-center md:text-2xl">
                 Here's what others have to say about us.
               </p>
             </div>
           </div>
 
-          <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-            <ul class="space-y-8">
-              <li class="text-sm leading-6">
-                <div class="relative group">
-                  {/* <div class="absolute transition rounded-lg opacity-25 -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 blur duration-400 group-hover:opacity-100 group-hover:duration-200"></div> */}
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+            <ul className="space-y-8">
+              <li className="text-sm leading-6">
+                <div className="relative group">
+                  {/* <div className="absolute transition rounded-lg opacity-25 -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 blur duration-400 group-hover:opacity-100 group-hover:duration-200"></div> */}
                   <a
                     href="https://twitter.com/kanyewest"
-                    class="cursor-pointer"
+                    className="cursor-pointer"
                   >
-                    <div class="relative p-6 space-y-6 leading-none rounded-lg bg-[#EDF6FF] ring-1 ring-gray-900/5">
-                      <div class="flex items-center space-x-4">
+                    <div className="relative p-6 space-y-6 leading-none rounded-lg bg-[#EDF6FF] ring-1 ring-gray-900/5">
+                      <div className="flex items-center space-x-4">
                         <img
                           src="https://pbs.twimg.com/profile_images/1276461929934942210/cqNhNk6v_400x400.jpg"
-                          class="w-12 h-12 bg-center bg-cover border rounded-full"
+                          className="w-12 h-12 bg-center bg-cover border rounded-full"
                           alt="Kanye West"
                         />
                         <div>
-                          <h3 class="text-lg font-semibold text-gray-700">
+                          <h3 className="text-lg font-semibold text-gray-700">
                             Kanye West
                           </h3>
-                          <p class="text-gray-500 text-md">
+                          <p className="text-gray-500 text-md">
                             Rapper &amp; Entrepreneur
                           </p>
                         </div>
                       </div>
-                      <p class="leading-normal text-gray-500 font-medium text-md">
+                      <p className="leading-normal text-gray-500 font-medium text-md">
                         Find God.
                       </p>
                     </div>
                   </a>
                 </div>
               </li>
-              <li class="text-sm leading-6">
-                <div class="relative group">
-                  {/* <div class="absolute transition rounded-lg opacity-25 -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 blur duration-400 group-hover:opacity-100 group-hover:duration-200"></div> */}
-                  <a href="https://twitter.com/tim_cook" class="cursor-pointer">
-                    <div class="relative p-6 space-y-6 leading-none rounded-lg bg-[#EDF6FF] ring-1 ring-gray-900/5">
-                      <div class="flex items-center space-x-4">
+              <li className="text-sm leading-6">
+                <div className="relative group">
+                  {/* <div className="absolute transition rounded-lg opacity-25 -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 blur duration-400 group-hover:opacity-100 group-hover:duration-200"></div> */}
+                  <a href="https://twitter.com/tim_cook" className="cursor-pointer">
+                    <div className="relative p-6 space-y-6 leading-none rounded-lg bg-[#EDF6FF] ring-1 ring-gray-900/5">
+                      <div className="flex items-center space-x-4">
                         <img
                           src="https://pbs.twimg.com/profile_images/1535420431766671360/Pwq-1eJc_400x400.jpg"
-                          class="w-12 h-12 bg-center bg-cover border rounded-full"
+                          className="w-12 h-12 bg-center bg-cover border rounded-full"
                           alt="Tim Cook"
                         />
                         <div>
-                          <h3 class="text-lg font-semibold text-gray-700">
+                          <h3 className="text-lg font-semibold text-gray-700">
                             Tim Cook
                           </h3>
-                          <p class="text-gray-500 text-md">CEO of Apple</p>
+                          <p className="text-gray-500 text-md">CEO of Apple</p>
                         </div>
                       </div>
-                      <p class="leading-normal text-gray-500 font-medium text-md">
+                      <p className="leading-normal text-gray-500 font-medium text-md">
                         Diam quis enim lobortis scelerisque fermentum dui
                         faucibus in ornare. Donec pretium vulputate sapien nec
                         sagittis aliquam malesuada bibendum.
@@ -816,55 +816,55 @@ export default function AstroHome() {
                   </a>
                 </div>
               </li>
-              <li class="text-sm leading-6">
-                <div class="relative group">
-                  {/* <div class="absolute transition rounded-lg opacity-25 -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 blur duration-400 group-hover:opacity-100 group-hover:duration-200"></div> */}
+              <li className="text-sm leading-6">
+                <div className="relative group">
+                  {/* <div className="absolute transition rounded-lg opacity-25 -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 blur duration-400 group-hover:opacity-100 group-hover:duration-200"></div> */}
                   <a
                     href="https://twitter.com/kanyewest"
-                    class="cursor-pointer"
+                    className="cursor-pointer"
                   >
-                    <div class="relative p-6 space-y-6 leading-none rounded-lg bg-[#EDF6FF] ring-1 ring-gray-900/5">
-                      <div class="flex items-center space-x-4">
+                    <div className="relative p-6 space-y-6 leading-none rounded-lg bg-[#EDF6FF] ring-1 ring-gray-900/5">
+                      <div className="flex items-center space-x-4">
                         <img
                           src="https://pbs.twimg.com/profile_images/1276461929934942210/cqNhNk6v_400x400.jpg"
-                          class="w-12 h-12 bg-center bg-cover border rounded-full"
+                          className="w-12 h-12 bg-center bg-cover border rounded-full"
                           alt="Kanye West"
                         />
                         <div>
-                          <h3 class="text-lg font-semibold text-gray-700">
+                          <h3 className="text-lg font-semibold text-gray-700">
                             Kanye West
                           </h3>
-                          <p class="text-gray-500 text-md">
+                          <p className="text-gray-500 text-md">
                             Rapper &amp; Entrepreneur
                           </p>
                         </div>
                       </div>
-                      <p class="leading-normal text-gray-500 font-medium text-md">
+                      <p className="leading-normal text-gray-500 font-medium text-md">
                         Find God.
                       </p>
                     </div>
                   </a>
                 </div>
               </li>
-              <li class="text-sm leading-6">
-                <div class="relative group">
-                  {/* <div class="absolute transition rounded-lg opacity-25 -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 blur duration-400 group-hover:opacity-100 group-hover:duration-200"></div> */}
-                  <a href="https://twitter.com/tim_cook" class="cursor-pointer">
-                    <div class="relative p-6 space-y-6 leading-none rounded-lg bg-[#EDF6FF] ring-1 ring-gray-900/5">
-                      <div class="flex items-center space-x-4">
+              <li className="text-sm leading-6">
+                <div className="relative group">
+                  {/* <div className="absolute transition rounded-lg opacity-25 -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 blur duration-400 group-hover:opacity-100 group-hover:duration-200"></div> */}
+                  <a href="https://twitter.com/tim_cook" className="cursor-pointer">
+                    <div className="relative p-6 space-y-6 leading-none rounded-lg bg-[#EDF6FF] ring-1 ring-gray-900/5">
+                      <div className="flex items-center space-x-4">
                         <img
                           src="https://pbs.twimg.com/profile_images/1535420431766671360/Pwq-1eJc_400x400.jpg"
-                          class="w-12 h-12 bg-center bg-cover border rounded-full"
+                          className="w-12 h-12 bg-center bg-cover border rounded-full"
                           alt="Tim Cook"
                         />
                         <div>
-                          <h3 class="text-lg font-semibold text-gray-700">
+                          <h3 className="text-lg font-semibold text-gray-700">
                             Tim Cook
                           </h3>
-                          <p class="text-gray-500 text-md">CEO of Apple</p>
+                          <p className="text-gray-500 text-md">CEO of Apple</p>
                         </div>
                       </div>
-                      <p class="leading-normal text-gray-500 font-medium text-md">
+                      <p className="leading-normal text-gray-500 font-medium text-md">
                         Diam quis enim lobortis scelerisque fermentum dui
                         faucibus in ornare. Donec pretium vulputate sapien nec
                         sagittis aliquam malesuada bibendum.
@@ -875,26 +875,26 @@ export default function AstroHome() {
               </li>
             </ul>
 
-            <ul class="hidden space-y-8 sm:block">
-              <li class="text-sm leading-6">
-                <div class="relative group">
-                  {/* <div class="absolute transition rounded-lg opacity-25 -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 blur duration-400 group-hover:opacity-100 group-hover:duration-200"></div> */}
-                  <a href="https://twitter.com/paraga" class="cursor-pointer">
-                    <div class="relative p-6 space-y-6 leading-none rounded-lg bg-[#EDF6FF] ring-1 ring-gray-900/5">
-                      <div class="flex items-center space-x-4">
+            <ul className="hidden space-y-8 sm:block">
+              <li className="text-sm leading-6">
+                <div className="relative group">
+                  {/* <div className="absolute transition rounded-lg opacity-25 -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 blur duration-400 group-hover:opacity-100 group-hover:duration-200"></div> */}
+                  <a href="https://twitter.com/paraga" className="cursor-pointer">
+                    <div className="relative p-6 space-y-6 leading-none rounded-lg bg-[#EDF6FF] ring-1 ring-gray-900/5">
+                      <div className="flex items-center space-x-4">
                         <img
                           src="https://pbs.twimg.com/profile_images/1375285353146327052/y6jeByyD_400x400.jpg"
-                          class="w-12 h-12 bg-center bg-cover border rounded-full"
+                          className="w-12 h-12 bg-center bg-cover border rounded-full"
                           alt="Parag Agrawal"
                         />
                         <div>
-                          <h3 class="text-lg font-semibold text-gray-700">
+                          <h3 className="text-lg font-semibold text-gray-700">
                             Parag Agrawal
                           </h3>
-                          <p class="text-gray-500 text-md">CEO of Twitter</p>
+                          <p className="text-gray-500 text-md">CEO of Twitter</p>
                         </div>
                       </div>
-                      <p class="leading-normal text-gray-500 font-medium text-md">
+                      <p className="leading-normal text-gray-500 font-medium text-md">
                         Enim neque volutpat ac tincidunt vitae semper. Mattis
                         aliquam faucibus purus in massa tempor. Neque vitae
                         tempus quam pellentesque nec. Turpis cursus in hac
@@ -904,25 +904,25 @@ export default function AstroHome() {
                   </a>
                 </div>
               </li>
-              <li class="text-sm leading-6">
-                <div class="relative group">
-                  {/* <div class="absolute transition rounded-lg opacity-25 -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 blur duration-400 group-hover:opacity-100 group-hover:duration-200"></div> */}
-                  <a href="https://twitter.com/tim_cook" class="cursor-pointer">
-                    <div class="relative p-6 space-y-6 leading-none rounded-lg bg-[#EDF6FF] ring-1 ring-gray-900/5">
-                      <div class="flex items-center space-x-4">
+              <li className="text-sm leading-6">
+                <div className="relative group">
+                  {/* <div className="absolute transition rounded-lg opacity-25 -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 blur duration-400 group-hover:opacity-100 group-hover:duration-200"></div> */}
+                  <a href="https://twitter.com/tim_cook" className="cursor-pointer">
+                    <div className="relative p-6 space-y-6 leading-none rounded-lg bg-[#EDF6FF] ring-1 ring-gray-900/5">
+                      <div className="flex items-center space-x-4">
                         <img
                           src="https://pbs.twimg.com/profile_images/1535420431766671360/Pwq-1eJc_400x400.jpg"
-                          class="w-12 h-12 bg-center bg-cover border rounded-full"
+                          className="w-12 h-12 bg-center bg-cover border rounded-full"
                           alt="Tim Cook"
                         />
                         <div>
-                          <h3 class="text-lg font-semibold text-gray-700">
+                          <h3 className="text-lg font-semibold text-gray-700">
                             Tim Cook
                           </h3>
-                          <p class="text-gray-500 text-md">CEO of Apple</p>
+                          <p className="text-gray-500 text-md">CEO of Apple</p>
                         </div>
                       </div>
-                      <p class="leading-normal text-gray-500 font-medium text-md">
+                      <p className="leading-normal text-gray-500 font-medium text-md">
                         Diam quis enim lobortis scelerisque fermentum dui
                         faucibus in ornare. Donec pretium vulputate sapien nec
                         sagittis aliquam malesuada bibendum.
@@ -931,25 +931,25 @@ export default function AstroHome() {
                   </a>
                 </div>
               </li>
-              <li class="text-sm leading-6">
-                <div class="relative group">
-                  {/* <div class="absolute transition rounded-lg opacity-25 -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 blur duration-400 group-hover:opacity-100 group-hover:duration-200"></div> */}
-                  <a href="https://twitter.com/paraga" class="cursor-pointer">
-                    <div class="relative p-6 space-y-6 leading-none rounded-lg bg-[#EDF6FF] ring-1 ring-gray-900/5">
-                      <div class="flex items-center space-x-4">
+              <li className="text-sm leading-6">
+                <div className="relative group">
+                  {/* <div className="absolute transition rounded-lg opacity-25 -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 blur duration-400 group-hover:opacity-100 group-hover:duration-200"></div> */}
+                  <a href="https://twitter.com/paraga" className="cursor-pointer">
+                    <div className="relative p-6 space-y-6 leading-none rounded-lg bg-[#EDF6FF] ring-1 ring-gray-900/5">
+                      <div className="flex items-center space-x-4">
                         <img
                           src="https://pbs.twimg.com/profile_images/1375285353146327052/y6jeByyD_400x400.jpg"
-                          class="w-12 h-12 bg-center bg-cover border rounded-full"
+                          className="w-12 h-12 bg-center bg-cover border rounded-full"
                           alt="Parag Agrawal"
                         />
                         <div>
-                          <h3 class="text-lg font-semibold text-gray-700">
+                          <h3 className="text-lg font-semibold text-gray-700">
                             Parag Agrawal
                           </h3>
-                          <p class="text-gray-500 text-md">CEO of Twitter</p>
+                          <p className="text-gray-500 text-md">CEO of Twitter</p>
                         </div>
                       </div>
-                      <p class="leading-normal text-gray-500 font-medium text-md">
+                      <p className="leading-normal text-gray-500 font-medium text-md">
                         Enim neque volutpat ac tincidunt vitae semper. Mattis
                         aliquam faucibus purus in massa tempor. Neque vitae
                         tempus quam pellentesque nec. Turpis cursus in hac
@@ -959,25 +959,25 @@ export default function AstroHome() {
                   </a>
                 </div>
               </li>
-              <li class="text-sm leading-6">
-                <div class="relative group">
-                  {/* <div class="absolute transition rounded-lg opacity-25 -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 blur duration-400 group-hover:opacity-100 group-hover:duration-200"></div> */}
-                  <a href="https://twitter.com/tim_cook" class="cursor-pointer">
-                    <div class="relative p-6 space-y-6 leading-none rounded-lg bg-[#EDF6FF] ring-1 ring-gray-900/5">
-                      <div class="flex items-center space-x-4">
+              <li className="text-sm leading-6">
+                <div className="relative group">
+                  {/* <div className="absolute transition rounded-lg opacity-25 -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 blur duration-400 group-hover:opacity-100 group-hover:duration-200"></div> */}
+                  <a href="https://twitter.com/tim_cook" className="cursor-pointer">
+                    <div className="relative p-6 space-y-6 leading-none rounded-lg bg-[#EDF6FF] ring-1 ring-gray-900/5">
+                      <div className="flex items-center space-x-4">
                         <img
                           src="https://pbs.twimg.com/profile_images/1535420431766671360/Pwq-1eJc_400x400.jpg"
-                          class="w-12 h-12 bg-center bg-cover border rounded-full"
+                          className="w-12 h-12 bg-center bg-cover border rounded-full"
                           alt="Tim Cook"
                         />
                         <div>
-                          <h3 class="text-lg font-semibold text-gray-700">
+                          <h3 className="text-lg font-semibold text-gray-700">
                             Tim Cook
                           </h3>
-                          <p class="text-gray-500 text-md">CEO of Apple</p>
+                          <p className="text-gray-500 text-md">CEO of Apple</p>
                         </div>
                       </div>
-                      <p class="leading-normal text-gray-500 font-medium text-md">
+                      <p className="leading-normal text-gray-500 font-medium text-md">
                         Diam quis enim lobortis scelerisque fermentum dui
                         faucibus in ornare. Donec pretium vulputate sapien nec
                         sagittis aliquam malesuada bibendum.
@@ -988,29 +988,29 @@ export default function AstroHome() {
               </li>
             </ul>
 
-            <ul class="hidden space-y-8 lg:block">
-              <li class="text-sm leading-6">
-                <div class="relative group">
-                  {/* <div class="absolute transition rounded-lg opacity-25 -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 blur duration-400 group-hover:opacity-100 group-hover:duration-200"></div> */}
+            <ul className="hidden space-y-8 lg:block">
+              <li className="text-sm leading-6">
+                <div className="relative group">
+                  {/* <div className="absolute transition rounded-lg opacity-25 -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 blur duration-400 group-hover:opacity-100 group-hover:duration-200"></div> */}
                   <a
                     href="https://twitter.com/satyanadella"
-                    class="cursor-pointer"
+                    className="cursor-pointer"
                   >
-                    <div class="relative p-6 space-y-6 leading-none rounded-lg bg-[#EDF6FF] ring-1 ring-gray-900/5">
-                      <div class="flex items-center space-x-4">
+                    <div className="relative p-6 space-y-6 leading-none rounded-lg bg-[#EDF6FF] ring-1 ring-gray-900/5">
+                      <div className="flex items-center space-x-4">
                         <img
                           src="https://pbs.twimg.com/profile_images/1221837516816306177/_Ld4un5A_400x400.jpg"
-                          class="w-12 h-12 bg-center bg-cover border rounded-full"
+                          className="w-12 h-12 bg-center bg-cover border rounded-full"
                           alt="Satya Nadella"
                         />
                         <div>
-                          <h3 class="text-lg font-semibold text-gray-700">
+                          <h3 className="text-lg font-semibold text-gray-700">
                             Satya Nadella
                           </h3>
-                          <p class="text-gray-500 text-md">CEO of Microsoft</p>
+                          <p className="text-gray-500 text-md">CEO of Microsoft</p>
                         </div>
                       </div>
-                      <p class="leading-normal text-gray-500 font-medium text-md">
+                      <p className="leading-normal text-gray-500 font-medium text-md">
                         Tortor dignissim convallis aenean et tortor at. At
                         ultrices mi tempus imperdiet nulla malesuada. Id cursus
                         metus aliquam eleifend mi. Quis ipsum suspendisse
@@ -1020,28 +1020,28 @@ export default function AstroHome() {
                   </a>
                 </div>
               </li>
-              <li class="text-sm leading-6">
-                <div class="relative group">
-                  {/* <div class="absolute transition rounded-lg opacity-25 -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 blur duration-400 group-hover:opacity-100 group-hover:duration-200"></div> */}
+              <li className="text-sm leading-6">
+                <div className="relative group">
+                  {/* <div className="absolute transition rounded-lg opacity-25 -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 blur duration-400 group-hover:opacity-100 group-hover:duration-200"></div> */}
                   <a
                     href="https://twitter.com/dan_schulman"
-                    class="cursor-pointer"
+                    className="cursor-pointer"
                   >
-                    <div class="relative p-6 space-y-6 leading-none rounded-lg bg-[#EDF6FF] ring-1 ring-gray-900/5">
-                      <div class="flex items-center space-x-4">
+                    <div className="relative p-6 space-y-6 leading-none rounded-lg bg-[#EDF6FF] ring-1 ring-gray-900/5">
+                      <div className="flex items-center space-x-4">
                         <img
                           src="https://pbs.twimg.com/profile_images/516916920482672641/3jCeLgFb_400x400.jpeg"
-                          class="w-12 h-12 bg-center bg-cover border rounded-full"
+                          className="w-12 h-12 bg-center bg-cover border rounded-full"
                           alt="Dan Schulman"
                         />
                         <div>
-                          <h3 class="text-lg font-semibold text-gray-700">
+                          <h3 className="text-lg font-semibold text-gray-700">
                             Dan Schulman
                           </h3>
-                          <p class="text-gray-500 text-md">CEO of PayPal</p>
+                          <p className="text-gray-500 text-md">CEO of PayPal</p>
                         </div>
                       </div>
-                      <p class="leading-normal text-gray-500 font-medium text-md">
+                      <p className="leading-normal text-gray-500 font-medium text-md">
                         Quam pellentesque nec nam aliquam sem et tortor
                         consequat id. Enim sit amet venenatis urna cursus.
                       </p>
@@ -1049,28 +1049,28 @@ export default function AstroHome() {
                   </a>
                 </div>
               </li>
-              <li class="text-sm leading-6">
-                <div class="relative group">
-                  {/* <div class="absolute transition rounded-lg opacity-25 -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 blur duration-400 group-hover:opacity-100 group-hover:duration-200"></div> */}
+              <li className="text-sm leading-6">
+                <div className="relative group">
+                  {/* <div className="absolute transition rounded-lg opacity-25 -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 blur duration-400 group-hover:opacity-100 group-hover:duration-200"></div> */}
                   <a
                     href="https://twitter.com/satyanadella"
-                    class="cursor-pointer"
+                    className="cursor-pointer"
                   >
-                    <div class="relative p-6 space-y-6 leading-none rounded-lg bg-[#EDF6FF] ring-1 ring-gray-900/5">
-                      <div class="flex items-center space-x-4">
+                    <div className="relative p-6 space-y-6 leading-none rounded-lg bg-[#EDF6FF] ring-1 ring-gray-900/5">
+                      <div className="flex items-center space-x-4">
                         <img
                           src="https://pbs.twimg.com/profile_images/1221837516816306177/_Ld4un5A_400x400.jpg"
-                          class="w-12 h-12 bg-center bg-cover border rounded-full"
+                          className="w-12 h-12 bg-center bg-cover border rounded-full"
                           alt="Satya Nadella"
                         />
                         <div>
-                          <h3 class="text-lg font-semibold text-gray-700">
+                          <h3 className="text-lg font-semibold text-gray-700">
                             Satya Nadella
                           </h3>
-                          <p class="text-gray-500 text-md">CEO of Microsoft</p>
+                          <p className="text-gray-500 text-md">CEO of Microsoft</p>
                         </div>
                       </div>
-                      <p class="leading-normal text-gray-500 font-medium text-md">
+                      <p className="leading-normal text-gray-500 font-medium text-md">
                         Tortor dignissim convallis aenean et tortor at. At
                         ultrices mi tempus imperdiet nulla malesuada. Id cursus
                         metus aliquam eleifend mi. Quis ipsum suspendisse
@@ -1080,28 +1080,28 @@ export default function AstroHome() {
                   </a>
                 </div>
               </li>
-              <li class="text-sm leading-6">
-                <div class="relative group">
-                  {/* <div class="absolute transition rounded-lg opacity-25 -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 blur duration-400 group-hover:opacity-100 group-hover:duration-200"></div> */}
+              <li className="text-sm leading-6">
+                <div className="relative group">
+                  {/* <div className="absolute transition rounded-lg opacity-25 -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 blur duration-400 group-hover:opacity-100 group-hover:duration-200"></div> */}
                   <a
                     href="https://twitter.com/dan_schulman"
-                    class="cursor-pointer"
+                    className="cursor-pointer"
                   >
-                    <div class="relative p-6 space-y-6 leading-none rounded-lg bg-[#EDF6FF] ring-1 ring-gray-900/5">
-                      <div class="flex items-center space-x-4">
+                    <div className="relative p-6 space-y-6 leading-none rounded-lg bg-[#EDF6FF] ring-1 ring-gray-900/5">
+                      <div className="flex items-center space-x-4">
                         <img
                           src="https://pbs.twimg.com/profile_images/516916920482672641/3jCeLgFb_400x400.jpeg"
-                          class="w-12 h-12 bg-center bg-cover border rounded-full"
+                          className="w-12 h-12 bg-center bg-cover border rounded-full"
                           alt="Dan Schulman"
                         />
                         <div>
-                          <h3 class="text-lg font-semibold text-gray-700">
+                          <h3 className="text-lg font-semibold text-gray-700">
                             Dan Schulman
                           </h3>
-                          <p class="text-gray-500 text-md">CEO of PayPal</p>
+                          <p className="text-gray-500 text-md">CEO of PayPal</p>
                         </div>
                       </div>
-                      <p class="leading-normal text-gray-500 font-medium text-md">
+                      <p className="leading-normal text-gray-500 font-medium text-md">
                         Quam pellentesque nec nam aliquam sem et tortor
                         consequat id. Enim sit amet venenatis urna cursus.
                       </p>
@@ -1146,35 +1146,35 @@ export default function AstroHome() {
       </section>
 
       {/* ------------------------------------------------------------------- */}
-      <div class="mt-8 bg-[#fff6ea] pt-9">
-        <div class="mx-auto w-full max-w-[1166px] px-4 xl:px-0">
-          <div class="flex flex-col justify-between sm:px-[18px] md:flex-row md:px-10">
-            <div class="md:w-[316px]">
-              <p class="text-[18px] font-medium text-gray-700">
+      <div className="mt-8 bg-[#fff6ea] pt-9">
+        <div className="mx-auto w-full max-w-[1166px] px-4 xl:px-0">
+          <div className="flex flex-col justify-between sm:px-[18px] md:flex-row md:px-10">
+            <div className="md:w-[316px]">
+              <p className="text-[18px] font-medium text-gray-700">
                 <img alt="logo" src={require("../assets/a/logo.png")} />
               </p>
-              <p class="mt-[18px] text-[15px] font-normal text-gray-700/[80%]">
+              <p className="mt-[18px] text-[15px] font-normal text-gray-700/[80%]">
                 Our mission is to help individuals navigate their life's journey
                 with wisdom, insight, and clarity through astrology. Whether you
                 are facing a difficult decision or simply seeking answers,
                 Grahsalah is your trusted source for accurate and meaningful
                 astrological guidance.
               </p>
-              <div class="mt-[18px] flex gap-4">
-                <a class="hover:scale-110" target="_blank" href="#">
+              <div className="mt-[18px] flex gap-4">
+                <a className="hover:scale-110" target="_blank" href="#">
                   <FaInstagram width="36" height="36" />
                 </a>
-                <a class="hover:scale-110" target="_blank" href="/">
+                <a className="hover:scale-110" target="_blank" href="/">
                   <FaInstagram width="36" height="36" />
                 </a>
-                <a class="hover:scale-110" target="_blank" href="/">
+                <a className="hover:scale-110" target="_blank" href="/">
                   <FaFacebook width="36" height="36" />
                 </a>
-                <a class="hover:scale-110" target="_blank" href="">
+                <a className="hover:scale-110" target="_blank" href="">
                   <FaFacebook width="36" height="36" />
                 </a>
                 <a
-                  class="hover:scale-110"
+                  className="hover:scale-110"
                   target="_blank"
                   href="https://www.youtube.com/"
                 >
@@ -1182,9 +1182,9 @@ export default function AstroHome() {
                 </a>
               </div>
             </div>
-            <div class="md:w-[316px]">
-              <div class="mt-[23px] flex">
-                <div class="flex h-[38px] w-[38px] items-center justify-center rounded-[75%]">
+            <div className="md:w-[316px]">
+              <div className="mt-[23px] flex">
+                <div className="flex h-[38px] w-[38px] items-center justify-center rounded-[75%]">
                   <svg
                     width="24"
                     height="24"
@@ -1198,20 +1198,20 @@ export default function AstroHome() {
                     ></path>
                   </svg>
                 </div>
-                <div class="ml-[18px]">
+                <div className="ml-[18px]">
                   <a
                     href="tel:+911800123444"
-                    class="font-Inter text-[14px] font-medium text-gray-700"
+                    className="font-Inter text-[14px] font-medium text-gray-700"
                   >
                     +91 1800123444
                   </a>
-                  <p class="font-Inter text-[12px] font-medium text-gray-700">
+                  <p className="font-Inter text-[12px] font-medium text-gray-700">
                     Support Number
                   </p>
                 </div>
               </div>
-              <div class="mt-[23px] flex">
-                <div class="flex h-[38px] w-[38px] items-center justify-center rounded-[75%]">
+              <div className="mt-[23px] flex">
+                <div className="flex h-[38px] w-[38px] items-center justify-center rounded-[75%]">
                   <svg
                     width="20"
                     height="15"
@@ -1225,20 +1225,20 @@ export default function AstroHome() {
                     ></path>
                   </svg>
                 </div>
-                <div class="ml-[18px]">
+                <div className="ml-[18px]">
                   <a
                     href="mailto:help@lorem.com"
-                    class="font-Inter text-[14px] font-medium text-gray-700"
+                    className="font-Inter text-[14px] font-medium text-gray-700"
                   >
                     help@lorem.com
                   </a>
-                  <p class="font-Inter text-[12px] font-medium text-gray-700">
+                  <p className="font-Inter text-[12px] font-medium text-gray-700">
                     Support Email
                   </p>
                 </div>
               </div>
-              <div class="mt-[23px] flex">
-                <div class="flex h-[38px] w-[38px] items-center justify-center rounded-[75%]">
+              <div className="mt-[23px] flex">
+                <div className="flex h-[38px] w-[38px] items-center justify-center rounded-[75%]">
                   <svg
                     width="18"
                     height="21"
@@ -1252,68 +1252,68 @@ export default function AstroHome() {
                     ></path>
                   </svg>
                 </div>
-                <div class="ml-[18px]">
+                <div className="ml-[18px]">
                   <a
                     href="mailto:help@lorem.com"
-                    class="font-Inter text-[14px] font-medium text-gray-700"
+                    className="font-Inter text-[14px] font-medium text-gray-700"
                   >
                     Sub Nerul, Mumbia, India, 123456
                   </a>
-                  <p class="font-Inter text-[12px] font-medium text-gray-700">
+                  <p className="font-Inter text-[12px] font-medium text-gray-700">
                     Address
                   </p>
                 </div>
               </div>
             </div>
-            <div class="mt-6 flex w-full flex-col justify-between text-gray-700 sm:flex-row md:mt-0 md:max-w-[341px]">
-              <div class="">
-                <p class="text-deutziawhite font-inter text-[18px] font-medium leading-normal">
+            <div className="mt-6 flex w-full flex-col justify-between text-gray-700 sm:flex-row md:mt-0 md:max-w-[341px]">
+              <div className="">
+                <p className="text-deutziawhite font-inter text-[18px] font-medium leading-normal">
                   Pages
                 </p>
                 <ul>
-                  <li class="mt-[15px]">
+                  <li className="mt-[15px]">
                     <a
-                      class="text-deutziawhite hover:text-deutziawhite/80 font-inter text-[15px] font-normal hover:font-semibold"
+                      className="text-deutziawhite hover:text-deutziawhite/80 font-inter text-[15px] font-normal hover:font-semibold"
                       href="/"
                     >
                       Home
                     </a>
                   </li>
-                  <li class="mt-[15px]">
+                  <li className="mt-[15px]">
                     <a
-                      class="text-deutziawhite hover:text-deutziawhite/80 font-inter text-[15px] font-normal hover:font-semibold"
+                      className="text-deutziawhite hover:text-deutziawhite/80 font-inter text-[15px] font-normal hover:font-semibold"
                       href="/our-tutors"
                     >
                       News
                     </a>
                   </li>
-                  <li class="mt-[15px]">
+                  <li className="mt-[15px]">
                     <a
-                      class="text-deutziawhite hover:text-deutziawhite/80 font-inter text-[15px] font-normal hover:font-semibold"
+                      className="text-deutziawhite hover:text-deutziawhite/80 font-inter text-[15px] font-normal hover:font-semibold"
                       href="/become-a-tutor"
                     >
                       Contact
                     </a>
                   </li>
-                  <li class="mt-[15px]">
+                  <li className="mt-[15px]">
                     <a
-                      class="text-deutziawhite hover:text-deutziawhite/80 font-inter text-[15px] font-normal hover:font-semibold"
+                      className="text-deutziawhite hover:text-deutziawhite/80 font-inter text-[15px] font-normal hover:font-semibold"
                       href="/plans-and-pricing"
                     >
                       Plans and pricing
                     </a>
                   </li>
-                  <li class="mt-[15px]">
+                  <li className="mt-[15px]">
                     <a
-                      class="text-deutziawhite hover:text-deutziawhite/80 font-inter text-[15px] font-normal hover:font-semibold"
+                      className="text-deutziawhite hover:text-deutziawhite/80 font-inter text-[15px] font-normal hover:font-semibold"
                       href="/terms-and-conditions"
                     >
                       Terms and conditions
                     </a>
                   </li>
-                  <li class="mt-[15px]">
+                  <li className="mt-[15px]">
                     <a
-                      class="text-deutziawhite hover:text-deutziawhite/80 font-inter text-[15px] font-normal hover:font-semibold"
+                      className="text-deutziawhite hover:text-deutziawhite/80 font-inter text-[15px] font-normal hover:font-semibold"
                       href="/privacy-policy"
                     >
                       Privcay policy
@@ -1321,11 +1321,11 @@ export default function AstroHome() {
                   </li>
                 </ul>
               </div>
-              <div class="mt-6 flex flex-col gap-4 sm:mt-0">
-                <p class="text-deutziawhite font-inter text-[18px] font-medium">
+              <div className="mt-6 flex flex-col gap-4 sm:mt-0">
+                <p className="text-deutziawhite font-inter text-[18px] font-medium">
                   Download the app
                 </p>
-                <div class="flex gap-4 sm:flex-col">
+                <div className="flex gap-4 sm:flex-col">
                   <a target="_blank" href="#">
                     <img
                       alt="facebook icon"
@@ -1354,9 +1354,9 @@ export default function AstroHome() {
               </div>
             </div>
           </div>
-          <hr class="mt-[30px] text-gray-700" />
-          <div class="flex items-center justify-center pb-8 pt-[9px] md:py-8">
-            <p class="text-[10px] font-normal text-gray-700 md:text-[12px]">
+          <hr className="mt-[30px] text-gray-700" />
+          <div className="flex items-center justify-center pb-8 pt-[9px] md:py-8">
+            <p className="text-[10px] font-normal text-gray-700 md:text-[12px]">
               © Copyright 2024 , All Rights Reserved by YOUR WEBSITES. PVT. LTD
             </p>
           </div>
@@ -1488,19 +1488,19 @@ const faqs = [
   },
 ];
 
-// <div class="bg-black py-32">
-// <div class="flex flex-col justify-center items-center">
-//   <div class="flex items-center justify-center rounded-full border border-zinc-600 px-2 py-[6px]">
-//     <div class="w-5 h-5 bg-zinc-900 rounded-full text-zinc-400 mr-2 p-[4px]">
+// <div className="bg-black py-32">
+// <div className="flex flex-col justify-center items-center">
+//   <div className="flex items-center justify-center rounded-full border border-zinc-600 px-2 py-[6px]">
+//     <div className="w-5 h-5 bg-zinc-900 rounded-full text-zinc-400 mr-2 p-[4px]">
 //       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4"><path d="M19 32c-7.732 0-14-6.268-14-14S11.268 4 19 4s14 6.268 14 14"></path><path d="M44 18H18v26h26z"></path></g></svg>
 //       </div>
-//       <div class="text-zinc-400 text-sm">
+//       <div className="text-zinc-400 text-sm">
 //         Why choose Augment?
 //       </div>
 //     </div>
-//     <div class="relative text-center mt-5 mb-12 text-5xl font-medium">
-//       <h1 class="relative text-white pb-3 leading-[65px] z-10 isolate">We Create The Best Customer<br>Experience For You</h1>
-//         <div class="absolute left-1/2 bottom-12 -translate-x-1/2 h-12 w-96 bg-blue-800 blur-[50px] z-[1] opacity-60">
+//     <div className="relative text-center mt-5 mb-12 text-5xl font-medium">
+//       <h1 className="relative text-white pb-3 leading-[65px] z-10 isolate">We Create The Best Customer<br>Experience For You</h1>
+//         <div className="absolute left-1/2 bottom-12 -translate-x-1/2 h-12 w-96 bg-blue-800 blur-[50px] z-[1] opacity-60">
 //         </div>
 //       </div>
 //     </div>

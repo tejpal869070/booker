@@ -182,10 +182,10 @@ export default function Hero1() {
             >
               <div
                 onClick={() => setIsWalletsOpen(true)}
-                class="flex justify-between"
+                className="flex justify-between"
               >
                 <HiMiniWallet className="" size={26} color="#92a0fd" />
-                <p class="blinking-btn hidden md:flex cursor-pointer px-2 bg-green-500 rounded-full text-sm md:text-xs text-white font-medium   justify-center items-center">
+                <p className="blinking-btn hidden md:flex cursor-pointer px-2 bg-green-500 rounded-full text-sm md:text-xs text-white font-medium   justify-center items-center">
                   EXCHANGE
                 </p>
               </div>
@@ -255,41 +255,41 @@ export default function Hero1() {
       )}
 
       {isWalletsOpen && (
-        <div class="animate-fade-down animate-duration-500 fixed top-0 left-0 w-full h-full flex justify-center items-center pt-10  backdrop-blur-[4px]   z-[9999]">
-          <div class=" text-white bg-gradient-to-r from-gray-700 rounded   to-slate-900 p-10 inline-block">
-            <div class="flex gap-6 items-center">
-              <section class="px-6 py-2 rounded border-2 border-white">
-                <p class="text-white font-semibold text-center text-2xl">
+        <div className="animate-fade-down animate-duration-500 fixed top-0 left-0 w-full h-full flex justify-center items-center pt-10  backdrop-blur-[4px]   z-[9999]">
+          <div className=" text-white bg-gradient-to-r from-gray-700 rounded   to-slate-900 p-10 inline-block">
+            <div className="flex gap-6 items-center">
+              <section className="px-6 py-2 rounded border-2 border-white">
+                <p className="text-white font-semibold text-center text-2xl">
                   Main Wallet
                 </p>
-                <p class="font-semibold text-xl text-center mt-2 pt-2 border-gray-400  text-white border-t-2">
-                  ₹{userData.wallet_balance}
+                <p className="font-semibold text-xl text-center mt-2 pt-2 border-gray-400  text-white border-t-2">
+                  ₹{Number(userData.wallet_balance).toFixed(2)}
                 </p>
               </section>
-              <section class="px-6 py-2 rounded border-2 border-white">
-                <p class="text-white font-semibold text-center text-2xl">
+              <section className="px-6 py-2 rounded border-2 border-white">
+                <p className="text-white font-semibold text-center text-2xl">
                   Game Wallet
                 </p>
-                <p class="font-semibold text-xl text-center mt-2 pt-2 border-gray-400  text-white border-t-2">
-                  ₹{userData.color_wallet_balnace}
+                <p className="font-semibold text-xl text-center mt-2 pt-2 border-gray-400  text-white border-t-2">
+                  ₹{Number(userData.color_wallet_balnace).toFixed(2)}
                 </p>
               </section>
             </div>
-            <div class="flex gap-6 items-center justify-around mt-2">
+            <div className="flex gap-6 items-center justify-around mt-2">
               <section
                 onClick={() => handleButtons(1)}
-                class="px-6 py-2 rounded-full cursor-pointer bg-green-400"
+                className="px-6 py-2 rounded-full cursor-pointer bg-green-400"
               >
-                <p class="text-white font-semibold flex justify-center items-center gap-2 text-center text-sm">
+                <p className="text-white font-semibold flex justify-center items-center gap-2 text-center text-sm">
                   Transfer To Game
                   <FaArrowCircleRight size={20} />
                 </p>
               </section>
               <section
                 onClick={() => handleButtons(2)}
-                class="px-6 py-2 rounded-full cursor-pointer bg-green-400"
+                className="px-6 py-2 rounded-full cursor-pointer bg-green-400"
               >
-                <p class="text-white font-semibold flex justify-center items-center gap-2 text-center text-sm">
+                <p className="text-white font-semibold flex justify-center items-center gap-2 text-center text-sm">
                   <FaArrowCircleLeft size={20} />
                   Transfer To Main
                 </p>

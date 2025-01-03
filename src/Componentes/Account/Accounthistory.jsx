@@ -126,6 +126,7 @@ export default function AccountHistory() {
                 {filteredData.map((item, index) => (
                   <tbody key={index}>
                     <tr
+                      key={index}
                       className={` text-black font-semibold dark:text-gray-200  border-b dark:border-gray-700 ${
                         index % 2 === 0
                           ? "bg-white dark:bg-gray-900"
@@ -138,9 +139,16 @@ export default function AccountHistory() {
                       >
                         {index + 1}.
                       </th>
-                      <td className="whitespace-nowrap px-4 py-4">{item.type}</td>
-                      <td className="whitespace-nowrap px-6 py-4">{item.date.split("T")[0]}</td>
-                      <td className="whitespace-nowrap px-6 py-4">₹{item.amount}</td>
+                      <td className="whitespace-nowrap px-4 py-4">
+                        {item.type}
+                      </td>
+                      <td className="whitespace-nowrap px-6 py-4">
+                        {item.date.split("T")[0]}
+                      </td>
+                      <td className="whitespace-nowrap px-6 py-4">
+                        {item.type === "Investment" ? "$" : "₹"}
+                        {item.amount}
+                      </td>
                       <td className="whitespace-nowrap px-6 py-4">
                         {item.description.split(" ").includes("To")
                           ? item.description.split(" ")[2]
@@ -151,8 +159,9 @@ export default function AccountHistory() {
                           ? item.description.split(" ")[2]
                           : ""}
                       </td>
-                      <td className="whitespace-nowrap px-6 py-4">₹{Number(item.balance).toFixed(2)}</td>
-
+                      <td className="whitespace-nowrap px-6 py-4">
+                        ₹{Number(item.balance).toFixed(2)}
+                      </td>
                     </tr>
                     {isVisible && selectedIndex === index ? (
                       <tr>

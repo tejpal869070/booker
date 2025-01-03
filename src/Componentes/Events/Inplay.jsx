@@ -34,7 +34,7 @@ export default function Inplay() {
       {/* Slider */}
       <Slider {...settings}>
         {images.map((item, index) => (
-          <div>
+          <div key={index}>
             <img alt="side" className="w-full h-50" src={item} />
           </div>
         ))}

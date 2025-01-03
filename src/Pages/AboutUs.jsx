@@ -4,20 +4,20 @@ export default function AboutUs() {
   return (
     <div>
       {/* ------------------------------------------------------- */}
-      <section class="py-10 relative xl:mr-0 lg:mr-5 mr-0">
-        <div class="w-full max-w-7xl px-4 md:px-5 lg:px-5 mx-auto">
-          <div class="w-full justify-start items-center xl:gap-12 gap-10 grid lg:grid-cols-2 grid-cols-1">
-            <div class="w-full flex-col justify-center lg:items-start items-center gap-10 inline-flex">
-              <div class="w-full flex-col justify-center items-start gap-8 flex">
-                <div class="flex-col justify-start lg:items-start items-center gap-4 flex">
-                  <h6 class="text-gray-400 text-base font-normal leading-relaxed">
+      <section className="py-10 relative xl:mr-0 lg:mr-5 mr-0">
+        <div className="w-full max-w-7xl px-4 md:px-5 lg:px-5 mx-auto">
+          <div className="w-full justify-start items-center xl:gap-12 gap-10 grid lg:grid-cols-2 grid-cols-1">
+            <div className="w-full flex-col justify-center lg:items-start items-center gap-10 inline-flex">
+              <div className="w-full flex-col justify-center items-start gap-8 flex">
+                <div className="flex-col justify-start lg:items-start items-center gap-4 flex">
+                  <h6 className="text-gray-400 text-base font-normal leading-relaxed">
                     About Us
                   </h6>
-                  <div class="w-full flex-col justify-start lg:items-start items-center gap-3 flex">
-                    <h2 class="text-indigo-700 text-4xl font-bold font-manrope leading-normal lg:text-start text-center">
+                  <div className="w-full flex-col justify-start lg:items-start items-center gap-3 flex">
+                    <h2 className="text-indigo-700 text-4xl font-bold font-manrope leading-normal lg:text-start text-center">
                       The Tale of Our Achievement Story
                     </h2>
-                    <p class="text-gray-500 text-base font-normal leading-relaxed lg:text-start text-center">
+                    <p className="text-gray-500 text-base font-normal leading-relaxed lg:text-start text-center">
                       Our achievement story is a testament to teamwork and
                       perseverance. Together, we've overcome challenges,
                       celebrated victories, and created a narrative of progress
@@ -25,51 +25,51 @@ export default function AboutUs() {
                     </p>
                   </div>
                 </div>
-                <div class="w-full flex-col justify-center items-start gap-6 flex">
-                  <div class="w-full justify-start items-center gap-8 grid  grid-cols-2  ">
-                    <div class="w-full h-full p-3.5 rounded-xl border border-gray-200 hover:border-gray-400 transition-all duration-700 ease-in-out flex-col justify-start items-start gap-2.5 inline-flex">
-                      <h4 class="text-gray-900 text-2xl font-bold font-manrope leading-9">
+                <div className="w-full flex-col justify-center items-start gap-6 flex">
+                  <div className="w-full justify-start items-center gap-8 grid  grid-cols-2  ">
+                    <div className="w-full h-full p-3.5 rounded-xl border border-gray-200 hover:border-gray-400 transition-all duration-700 ease-in-out flex-col justify-start items-start gap-2.5 inline-flex">
+                      <h4 className="text-gray-900 text-2xl font-bold font-manrope leading-9">
                         33+ Years
                       </h4>
-                      <p class="text-gray-500 text-base font-normal leading-relaxed">
+                      <p className="text-gray-500 text-base font-normal leading-relaxed">
                         Influencing Digital Landscapes Together
                       </p>
                     </div>
-                    <div class="w-full h-full p-3.5 rounded-xl border border-gray-200 hover:border-gray-400 transition-all duration-700 ease-in-out flex-col justify-start items-start gap-2.5 inline-flex">
-                      <h4 class="text-gray-900 text-2xl font-bold font-manrope leading-9">
+                    <div className="w-full h-full p-3.5 rounded-xl border border-gray-200 hover:border-gray-400 transition-all duration-700 ease-in-out flex-col justify-start items-start gap-2.5 inline-flex">
+                      <h4 className="text-gray-900 text-2xl font-bold font-manrope leading-9">
                         125+ Projects
                       </h4>
-                      <p class="text-gray-500 text-base font-normal leading-relaxed">
+                      <p className="text-gray-500 text-base font-normal leading-relaxed">
                         Excellence Achieved Through Success
                       </p>
                     </div>
                   </div>
-                  <div class="w-full h-full justify-start items-center gap-8 grid  grid-cols-2 ">
-                    <div class="w-full p-3.5 rounded-xl border border-gray-200 hover:border-gray-400 transition-all duration-700 ease-in-out flex-col justify-start items-start gap-2.5 inline-flex">
-                      <h4 class="text-gray-900 text-2xl font-bold font-manrope leading-9">
+                  <div className="w-full h-full justify-start items-center gap-8 grid  grid-cols-2 ">
+                    <div className="w-full p-3.5 rounded-xl border border-gray-200 hover:border-gray-400 transition-all duration-700 ease-in-out flex-col justify-start items-start gap-2.5 inline-flex">
+                      <h4 className="text-gray-900 text-2xl font-bold font-manrope leading-9">
                         26+ Awards
                       </h4>
-                      <p class="text-gray-500 text-base font-normal leading-relaxed">
+                      <p className="text-gray-500 text-base font-normal leading-relaxed">
                         Our Dedication to Innovation Wins Understanding
                       </p>
                     </div>
-                    <div class="w-full h-full p-3.5 rounded-xl border border-gray-200 hover:border-gray-400 transition-all duration-700 ease-in-out flex-col justify-start items-start gap-2.5 inline-flex">
-                      <h4 class="text-gray-900 text-2xl font-bold font-manrope leading-9">
+                    <div className="w-full h-full p-3.5 rounded-xl border border-gray-200 hover:border-gray-400 transition-all duration-700 ease-in-out flex-col justify-start items-start gap-2.5 inline-flex">
+                      <h4 className="text-gray-900 text-2xl font-bold font-manrope leading-9">
                         99% Happy Clients
                       </h4>
-                      <p class="text-gray-500 text-base font-normal leading-relaxed">
+                      <p className="text-gray-500 text-base font-normal leading-relaxed">
                         Mirrors our Focus on Client Satisfaction.
                       </p>
                     </div>
                   </div>
                 </div>
               </div>
-              <button class="sm:w-fit w-full group px-3.5 py-2 bg-indigo-50 hover:bg-indigo-100 rounded-lg shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05)] transition-all duration-700 ease-in-out justify-center items-center flex">
-                <span class="px-1.5 text-indigo-600 text-sm font-medium leading-6 group-hover:-translate-x-0.5 transition-all duration-700 ease-in-out">
+              <button className="sm:w-fit w-full group px-3.5 py-2 bg-indigo-50 hover:bg-indigo-100 rounded-lg shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05)] transition-all duration-700 ease-in-out justify-center items-center flex">
+                <span className="px-1.5 text-indigo-600 text-sm font-medium leading-6 group-hover:-translate-x-0.5 transition-all duration-700 ease-in-out">
                   Read More
                 </span>
                 <svg
-                  class="group-hover:translate-x-0.5 transition-all duration-700 ease-in-out"
+                  className="group-hover:translate-x-0.5 transition-all duration-700 ease-in-out"
                   xmlns="http://www.w3.org/2000/svg"
                   width="18"
                   height="18"
@@ -86,10 +86,10 @@ export default function AboutUs() {
                 </svg>
               </button>
             </div>
-            <div class="w-full lg:justify-start justify-center items-start flex">
-              <div class="sm:w-[564px] w-full sm:h-[646px] h-full sm:bg-gray-100 rounded-3xl sm:border border-gray-200 relative">
+            <div className="w-full lg:justify-start justify-center items-start flex">
+              <div className="sm:w-[564px] w-full sm:h-[646px] h-full sm:bg-gray-100 rounded-3xl sm:border border-gray-200 relative">
                 <img
-                  class="sm:mt-5 sm:ml-5 w-full h-full rounded-3xl object-cover"
+                  className="sm:mt-5 sm:ml-5 w-full h-full rounded-3xl object-cover"
                   src="https://pagedone.io/asset/uploads/1717742431.png"
                   alt="about Us image"
                 />
@@ -100,35 +100,35 @@ export default function AboutUs() {
       </section>
 
       {/* ---------------------------------------------------------- */}
-      <section class="w-full max-w-7xl px-4 md:px-5 lg:px-5 mx-auto overflow-hidden 0 pb-12   lg:pb-[90px] bg-white dark:bg-dark">
-        <div class="container mx-auto">
-          <div class="flex flex-wrap-reverse items-center justify-between -mx-4">
-            <div class="w-full px-4 lg:w-6/12">
-              <div class="flex items-center -mx-3 sm:-mx-4">
-                <div class="w-full px-3 sm:px-4 xl:w-1/2">
-                  <div class="py-3 sm:py-4">
+      <section className="w-full max-w-7xl px-4 md:px-5 lg:px-5 mx-auto overflow-hidden 0 pb-12   lg:pb-[90px] bg-white dark:bg-dark">
+        <div className="container mx-auto">
+          <div className="flex flex-wrap-reverse items-center justify-between -mx-4">
+            <div className="w-full px-4 lg:w-6/12">
+              <div className="flex items-center -mx-3 sm:-mx-4">
+                <div className="w-full px-3 sm:px-4 xl:w-1/2">
+                  <div className="py-3 sm:py-4">
                     <img
                       src="https://cdn.tailgrids.com/2.0/image/marketing/images/about/about-01/image-1.jpg"
                       alt=""
-                      class="w-full rounded-2xl"
+                      className="w-full rounded-2xl"
                     />
                   </div>
-                  <div class="py-3 sm:py-4">
+                  <div className="py-3 sm:py-4">
                     <img
                       src="https://cdn.tailgrids.com/2.0/image/marketing/images/about/about-01/image-2.jpg"
                       alt=""
-                      class="w-full rounded-2xl"
+                      className="w-full rounded-2xl"
                     />
                   </div>
                 </div>
-                <div class="w-full px-3 sm:px-4 xl:w-1/2">
-                  <div class="relative z-10 my-4">
+                <div className="w-full px-3 sm:px-4 xl:w-1/2">
+                  <div className="relative z-10 my-4">
                     <img
                       src="https://cdn.tailgrids.com/2.0/image/marketing/images/about/about-01/image-3.jpg"
                       alt=""
-                      class="w-full rounded-2xl"
+                      className="w-full rounded-2xl"
                     />
-                    <span class="absolute -right-7 -bottom-7 z-[-1]">
+                    <span className="absolute -right-7 -bottom-7 z-[-1]">
                       <svg
                         width="134"
                         height="106"
@@ -702,27 +702,27 @@ export default function AboutUs() {
                 </div>
               </div>
             </div>
-            <div class="w-full px-4 lg:w-1/2 xl:w-5/12">
-              <div class="mt-4 lg:mt-0">
-                <span class="block mb-4 text-lg font-semibold text-primary">
+            <div className="w-full px-4 lg:w-1/2 xl:w-5/12">
+              <div className="mt-4 lg:mt-0">
+                <span className="block mb-4 text-lg font-semibold text-primary">
                   Why Choose Us
                 </span>
-                <h2 class="mb-5 text-3xl font-bold text-dark dark:text-white sm:text-[40px]/[48px]">
+                <h2 className="mb-5 text-3xl font-bold text-dark dark:text-white sm:text-[40px]/[48px]">
                   Make your customers happy by giving services.
                 </h2>
-                <p class="mb-5 text-base text-body-color dark:text-dark-6">
+                <p className="mb-5 text-base text-body-color dark:text-dark-6">
                   It is a long established fact that a reader will be distracted
                   by the readable content of a page when looking at its layout.
                   The point of using Lorem Ipsum is that it has a more-or-less.
                 </p>
-                <p class="mb-8 text-base text-body-color dark:text-dark-6">
+                <p className="mb-8 text-base text-body-color dark:text-dark-6">
                   A domain name is one of the first steps to establishing your
                   brand. Secure a consistent brand image with a domain name that
                   matches your business.
                 </p>
                 {/* <a
                   href="javascript:void(0)"
-                  class="inline-flex items-center justify-center py-3 text-base font-medium text-center text-white border border-transparent rounded-md px-7 bg-[#800000] hover:bg-opacity-90"
+                  className="inline-flex items-center justify-center py-3 text-base font-medium text-center text-white border border-transparent rounded-md px-7 bg-[#800000] hover:bg-opacity-90"
                 >
                   Get Started
                 </a> */}
@@ -733,10 +733,10 @@ export default function AboutUs() {
       </section>
 
       {/* ------------------------------------------------------------ */}
-      <div class="bg-[#FFF6EA] py-10 max-w-7xl px-4 m-auto">
-        <div class="flex flex-col justify-center items-center">
-          <div class="flex items-center justify-center rounded-full border border-zinc-600 px-2 py-[6px]">
-            <div class="w-5 h-5 bg-zinc-900 rounded-full text-zinc-400 mr-2 p-[4px]">
+      <div className="bg-[#FFF6EA] py-10 max-w-7xl px-4 m-auto">
+        <div className="flex flex-col justify-center items-center">
+          <div className="flex items-center justify-center rounded-full border border-zinc-600 px-2 py-[6px]">
+            <div className="w-5 h-5 bg-zinc-900 rounded-full text-zinc-400 mr-2 p-[4px]">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
                 <g
                   fill="none"
@@ -749,24 +749,24 @@ export default function AboutUs() {
                 </g>
               </svg>
             </div>
-            <div class="text-black font-semibold text-sm">OUR VISION</div>
+            <div className="text-black font-semibold text-sm">OUR VISION</div>
           </div>
-          <div class="relative text-center mt-5 mb-12 text-5xl font-medium">
-            <h1 class="relative font-bold text-[#800000] pb-3 leading-[65px] z-10 isolate">
+          <div className="relative text-center mt-5 mb-12 text-5xl font-medium">
+            <h1 className="relative font-bold text-[#800000] pb-3 leading-[65px] z-10 isolate">
               We Create The Best Customer
               <br />
               Experience For You
             </h1>
-            <div class="absolute left-1/2 bottom-12 -translate-x-1/2 h-12 w-96 bg-blue-800 blur-[50px] z-[1] opacity-60"></div>
+            <div className="absolute left-1/2 bottom-12 -translate-x-1/2 h-12 w-96 bg-blue-800 blur-[50px] z-[1] opacity-60"></div>
           </div>
         </div>
       </div>
 
         {/* ------------------------------------------------------------ */}
-        <div class="bg-[#FFF6EA] py-10 max-w-7xl px-4 m-auto mt-6">
-        <div class="flex flex-col justify-center items-center">
-          <div class="flex items-center justify-center rounded-full border border-zinc-600 px-2 py-[6px]">
-            <div class="w-5 h-5 bg-zinc-900 rounded-full text-zinc-400 mr-2 p-[4px]">
+        <div className="bg-[#FFF6EA] py-10 max-w-7xl px-4 m-auto mt-6">
+        <div className="flex flex-col justify-center items-center">
+          <div className="flex items-center justify-center rounded-full border border-zinc-600 px-2 py-[6px]">
+            <div className="w-5 h-5 bg-zinc-900 rounded-full text-zinc-400 mr-2 p-[4px]">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
                 <g
                   fill="none"
@@ -779,29 +779,29 @@ export default function AboutUs() {
                 </g>
               </svg>
             </div>
-            <div class="text-black font-semibold text-sm">OUR MISSION</div>
+            <div className="text-black font-semibold text-sm">OUR MISSION</div>
           </div>
-          <div class="relative text-center mt-5 mb-12 text-5xl font-medium">
-            <h1 class="relative font-bold text-[#800000] pb-3 leading-[65px] z-10 isolate">
+          <div className="relative text-center mt-5 mb-12 text-5xl font-medium">
+            <h1 className="relative font-bold text-[#800000] pb-3 leading-[65px] z-10 isolate">
               We Create The Best Customer
               <br />
               Experience For You
             </h1>
-            <div class="absolute left-1/2 bottom-12 -translate-x-1/2 h-12 w-96 bg-blue-800 blur-[50px] z-[1] opacity-60"></div>
+            <div className="absolute left-1/2 bottom-12 -translate-x-1/2 h-12 w-96 bg-blue-800 blur-[50px] z-[1] opacity-60"></div>
           </div>
         </div>
       </div>
 
       {/* ---------------------------------------------------------------- */}
-      <div class="max-w-7xl mt-12 mx-auto rounded-3xl bg-gradient-to-r from-green-100 to-green-50  py-16 text-center overflow-hidden">
-        <div class="relative m-auto max-w-xl">
-          <div class="flex flex-row items-center justify-center text-yellow-500">
+      <div className="max-w-7xl mt-12 mx-auto rounded-3xl bg-gradient-to-r from-green-100 to-green-50  py-16 text-center overflow-hidden">
+        <div className="relative m-auto max-w-xl">
+          <div className="flex flex-row items-center justify-center text-yellow-500">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
               aria-hidden="true"
-              class="h-auto w-10 fill-current"
+              className="h-auto w-10 fill-current"
             >
               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
             </svg>
@@ -810,7 +810,7 @@ export default function AboutUs() {
               viewBox="0 0 20 20"
               fill="currentColor"
               aria-hidden="true"
-              class="h-auto w-10 fill-current"
+              className="h-auto w-10 fill-current"
             >
               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
             </svg>
@@ -819,7 +819,7 @@ export default function AboutUs() {
               viewBox="0 0 20 20"
               fill="currentColor"
               aria-hidden="true"
-              class="h-auto w-10 fill-current"
+              className="h-auto w-10 fill-current"
             >
               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
             </svg>
@@ -828,7 +828,7 @@ export default function AboutUs() {
               viewBox="0 0 20 20"
               fill="currentColor"
               aria-hidden="true"
-              class="h-auto w-10 fill-current"
+              className="h-auto w-10 fill-current"
             >
               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
             </svg>
@@ -837,25 +837,25 @@ export default function AboutUs() {
               viewBox="0 0 20 20"
               fill="currentColor"
               aria-hidden="true"
-              class="h-auto w-10 fill-current"
+              className="h-auto w-10 fill-current"
             >
               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
             </svg>
           </div>
           <a href="#" target="_blank">
-            <h2 class="mt-4 font-dm-sans text-mobile-h3 font-semibold leading-snug sm:text-mobile-h2 md:text-desktop-h2">
+            <h2 className="mt-4 font-dm-sans text-mobile-h3 font-semibold leading-snug sm:text-mobile-h2 md:text-desktop-h2">
               An
-              <span class="font-bold underline underline-offset-2">
+              <span className="font-bold underline underline-offset-2">
                 absolute 5/5
               </span>{" "}
               rating
             </h2>
           </a>
-          <p class="mt-4 font-dm-sans text-desktop-paragraph text-slate-body">
+          <p className="mt-4 font-dm-sans text-desktop-paragraph text-slate-body">
             Reviews are from paid customers and Product Hunt community
           </p>
           <svg
-            class="absolute top-48 lg:top-24 -left-2 lg:-left-10  h-36 fill-current text-slate-body  md:-left-14 md:h-44"
+            className="absolute top-48 lg:top-24 -left-2 lg:-left-10  h-36 fill-current text-slate-body  md:-left-14 md:h-44"
             viewBox="0 0 644 947"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -874,7 +874,7 @@ export default function AboutUs() {
             </defs>
           </svg>
           <svg
-            class="absolute top-48 lg:top-24 -right-2 lg:-right-10  h-36 fill-current text-slate-body  md:-right-14 md:h-44"
+            className="absolute top-48 lg:top-24 -right-2 lg:-right-10  h-36 fill-current text-slate-body  md:-right-14 md:h-44"
             viewBox="0 0 644 947"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -895,7 +895,7 @@ export default function AboutUs() {
           </svg>
         </div>
 
-        <div class="mt-6 flex flex-col items-center justify-center space-y-3">
+        <div className="mt-6 flex flex-col items-center justify-center space-y-3">
           <a href="#" target="_blank">
             <img
               src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=347156&amp;theme=light&amp;period=daily"
@@ -914,75 +914,75 @@ export default function AboutUs() {
       </div>
 
       {/* -------------------------------------------------------------- */}
-      <div class="max-w-7xl  mx-auto  mt-10 mb-20">
-        <div class="grid grid-cols-1 md:grid-cols-12 border">
-          <div class="bg-gray-900 md:col-span-4 p-10 text-white">
-            <p class="mt-4 text-sm leading-7 font-regular uppercase">Contact</p>
-            <h3 class="text-3xl sm:text-4xl leading-normal font-extrabold tracking-tight">
-              Get In <span class="text-indigo-600">Touch</span>
+      <div className="max-w-7xl  mx-auto  mt-10 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-12 border">
+          <div className="bg-gray-900 md:col-span-4 p-10 text-white">
+            <p className="mt-4 text-sm leading-7 font-regular uppercase">Contact</p>
+            <h3 className="text-3xl sm:text-4xl leading-normal font-extrabold tracking-tight">
+              Get In <span className="text-indigo-600">Touch</span>
             </h3>
-            <p class="mt-4 leading-7 text-gray-200">
+            <p className="mt-4 leading-7 text-gray-200">
               Lorem Ipsum is simply dummy text of the printing and typesetting
               industry. Lorem Ipsum has been the industry's standard dummy text
               ever since the 1500s.
             </p>
 
-            <div class="flex items-center mt-5">
-              <span class="text-sm">
+            <div className="flex items-center mt-5">
+              <span className="text-sm">
                 House #14, Street #12, Darulaman Road, Kabul, Afghanistan.
               </span>
             </div>
-            <div class="flex items-center mt-5">
-              <span class="text-sm">+93 749 99 65 50</span>
+            <div className="flex items-center mt-5">
+              <span className="text-sm">+93 749 99 65 50</span>
             </div>
-            <div class="flex items-center mt-5">
-              <span class="text-sm">24/7</span>
+            <div className="flex items-center mt-5">
+              <span className="text-sm">24/7</span>
             </div>
           </div>
-          <form class="md:col-span-8 p-10">
-            <div class="flex flex-wrap -mx-3 mb-6">
-              <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+          <form className="md:col-span-8 p-10">
+            <div className="flex flex-wrap -mx-3 mb-6">
+              <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                 <label
-                  class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                   for="grid-first-name"
                 >
                   First Name
                 </label>
                 <input
-                  class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                   id="grid-first-name"
                   type="text"
                   placeholder="Jane"
                 />
-                <p class="text-red-500 text-xs italic">
+                <p className="text-red-500 text-xs italic">
                   Please fill out this field.
                 </p>
               </div>
-              <div class="w-full md:w-1/2 px-3">
+              <div className="w-full md:w-1/2 px-3">
                 <label
-                  class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                   for="grid-last-name"
                 >
                   Last Name
                 </label>
                 <input
-                  class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   id="grid-last-name"
                   type="text"
                   placeholder="Doe"
                 />
               </div>
             </div>
-            <div class="flex flex-wrap -mx-3 mb-6">
-              <div class="w-full px-3">
+            <div className="flex flex-wrap -mx-3 mb-6">
+              <div className="w-full px-3">
                 <label
-                  class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                   for="grid-password"
                 >
                   Email Address
                 </label>
                 <input
-                  class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   id="grid-email"
                   type="email"
                   placeholder="********@*****.**"
@@ -990,28 +990,28 @@ export default function AboutUs() {
               </div>
             </div>
 
-            <div class="flex flex-wrap -mx-3 mb-6">
-              <div class="w-full px-3">
+            <div className="flex flex-wrap -mx-3 mb-6">
+              <div className="w-full px-3">
                 <label
-                  class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                   for="grid-password"
                 >
                   Your Message
                 </label>
                 <textarea
                   rows="10"
-                  class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 ></textarea>
               </div>
-              <div class="flex justify-between w-full px-3">
-                <div class="md:flex md:items-center">
-                  <label class="block text-gray-500 font-bold">
-                    <input class="mr-2 leading-tight" type="checkbox" />
-                    <span class="text-sm">Send me your newsletter!</span>
+              <div className="flex justify-between w-full px-3">
+                <div className="md:flex md:items-center">
+                  <label className="block text-gray-500 font-bold">
+                    <input className="mr-2 leading-tight" type="checkbox" />
+                    <span className="text-sm">Send me your newsletter!</span>
                   </label>
                 </div>
                 <button
-                  class="shadow bg-indigo-600 hover:bg-indigo-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-6 rounded"
+                  className="shadow bg-indigo-600 hover:bg-indigo-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-6 rounded"
                   type="submit"
                 >
                   Send Message

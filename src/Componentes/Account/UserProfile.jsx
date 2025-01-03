@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { GetUserDetails } from "../../Controllers/User/UserController";
 import { Loading1 } from "../Loading1";
 import ThemeToggle from "../../Controllers/ThemeToggle";
-import { FaAngleRight } from "react-icons/fa"; 
+import { FaAngleRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { ToastContainer, toast } from "react-toastify";
@@ -10,8 +10,6 @@ import { FaWallet } from "react-icons/fa";
 import { BsWalletFill } from "react-icons/bs";
 import { FaUserFriends } from "react-icons/fa";
 import { FaUserPlus } from "react-icons/fa6";
-
-
 
 export default function UserProfile() {
   const [user, setUser] = React.useState({});
@@ -62,6 +60,10 @@ export default function UserProfile() {
     sessionStorage.removeItem("userDetails");
     window.location.href = "/";
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   if (loading) {
     return (

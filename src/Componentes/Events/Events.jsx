@@ -36,6 +36,7 @@ export default function Events({ gameType }) {
           <button
             className="relative"
             onClick={() => setSelectedButton(item.value)}
+            key={index}
           >
             <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-black"></span>
             <span

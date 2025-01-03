@@ -126,10 +126,16 @@ export default function SendMoney() {
   if (success) {
     return (
       <div className="fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center bg-[#000000d1] bg-opacity-50 z-[9999]">
-        <img alt="success" src={successImg} />
-        <p className="text-2xl text-white font-semibold">
-          Transection Success.
-        </p>
+        <div className="p-4 rounded-lg bg-white">
+          <img
+            alt="success"
+            src={require("../../assets/photos/verifiedgif.gif")}
+            className="w-20 m-auto"
+          />
+          <p className="text-2xl text-center text-gray-700 mt-4 font-semibold">
+            Transection Success.
+          </p>
+        </div>
       </div>
     );
   }
@@ -155,7 +161,8 @@ export default function SendMoney() {
                   WALLET MONEY TRANSFER
                 </h1>
                 <p className=" mt-2 font-medium text-lg text-[green] mb-4">
-                  Account Balance: ₹{user && Number(user.wallet_balance).toFixed(2)}
+                  Account Balance: ₹
+                  {user && Number(user.wallet_balance).toFixed(2)}
                 </p>
               </div>
 

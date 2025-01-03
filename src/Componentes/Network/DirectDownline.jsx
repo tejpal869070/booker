@@ -74,12 +74,12 @@ export default function DirextDownline() {
           {data.length === 0 ? (
             <tbody>
               <tr>
-                <td colspan="8" className="text-center p-4">
+                <td colSpan="8" className="text-center p-4">
                   <div>
                     <img
                       alt="no data"
                       src={require("../../assets/photos/nodata.png")}
-                      className="m-auto"
+                      className="m-auto w-40"
                     />
                     <p className="text-center font-bold dark:text-white text-xl">
                       No Records !

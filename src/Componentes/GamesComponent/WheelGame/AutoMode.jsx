@@ -34,6 +34,9 @@ export default function AutoMode() {
   const [desiredSpins, setDesiredSpins] = useState(0);
   const [spinCount, setSpinCount] = useState(0);
 
+    const [user, setUser] = useState({});
+  
+
   // New state to track if a spin is in progress
   const [isSpinning, setIsSpinning] = useState(false);
 
@@ -183,6 +186,7 @@ export default function AutoMode() {
     formData.type = type;
     formData.amount = amount;
     formData.game_type = "Wheel";
+    formData.uid = user?.uid
 
     try {
       const response = await MinesGameUpdateWallet(formData);
@@ -204,6 +208,7 @@ export default function AutoMode() {
       const response = await GetUserDetails();
       if (response !== null) {
         const newBalance = Number(response[0].color_wallet_balnace);
+        setUser(response[0])
         setTotalBalance(newBalance);
         setStartingBalance(newBalance);
       } else {

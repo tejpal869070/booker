@@ -17,6 +17,8 @@ export default function ManualMode({ isBetPlacedFunction, isRecharged }) {
   const [isBetPlaced, setIsBetPlaced] = useState(false);
   const [bombFound, setBombFound] = useState(false);
   const [isCashOut, setCashOut] = useState(false);
+    const [user, setUser] = useState({});
+  
 
   // admin controller start------------------------------------------------------------------------------------------------------------
   const [totalGamePlayed, setTotalGamePlayed] = useState(0);
@@ -43,6 +45,7 @@ export default function ManualMode({ isBetPlacedFunction, isRecharged }) {
     const response = await GetUserDetails();
     if (response !== null) {
       setTotalBalance(Number(response[0].color_wallet_balnace));
+      setUser(response[0]);
     } else {
       window.location.href = "/";
     }
@@ -53,8 +56,9 @@ export default function ManualMode({ isBetPlacedFunction, isRecharged }) {
     formData.type = type;
     formData.amount = amount;
     formData.game_type = "Mines";
+    formData.uid = user?.uid;
 
-    try {
+    try { 
       const response = await MinesGameUpdateWallet(formData);
       if (response.status) {
       }
@@ -218,7 +222,7 @@ export default function ManualMode({ isBetPlacedFunction, isRecharged }) {
 
   // admin controller start------------------------------------------------------------------------------------------------------------
   const generateGameToBeLoss = () => {
-    const randomNum = Math.floor(Math.random() *6) + 1;
+    const randomNum = Math.floor(Math.random() *10) + 1;
     setGameNumberToLoss(randomNum); 
   };
   useEffect(() => {
@@ -231,7 +235,7 @@ export default function ManualMode({ isBetPlacedFunction, isRecharged }) {
     if (element) {
       ReactDOM.createRoot(element).render(
         <div className="relative">
-          <div class=" grid  grid-cols-5 gap-2 px-4 py-3  ">
+          <div className=" grid  grid-cols-5 gap-2 px-4 py-3  ">
             {mines.map((item, index) => (
               <button
                 onClick={() => handleCardClick(item)}
@@ -240,6 +244,7 @@ export default function ManualMode({ isBetPlacedFunction, isRecharged }) {
                   openedMines.includes(item.id) ||
                   openedMines.length === 25 - totalBombs
                 }
+                key={index}
                 className={`w-full h-16 flex justify-center items-center shadow-lg lg:h-28 bg-gray-300 rounded-xl `}
               >
                 {bombFound ? (

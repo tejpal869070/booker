@@ -4,11 +4,12 @@ import { Link } from "react-router-dom";
 export default function Games() {
   return (
     <div>
-      <div class="flex flex-wrap     py-3 gap-[1.3%]  ">
+      <div className="flex flex-wrap     py-3 gap-[1.3%]  ">
         {gameData.map((item, index) => (
           <Link
             to={item.to}
-            class="w-[32%] md:w-[19%] lg:w-[15%] mb-4   bg-gray-300 rounded-xl"
+            key={index}
+            className="w-[32%] md:w-[19%] lg:w-[15%] mb-4   bg-gray-300 rounded-xl"
           >
             <img alt="poster" src={item.image} className="rounded-xl"/>
           </Link>

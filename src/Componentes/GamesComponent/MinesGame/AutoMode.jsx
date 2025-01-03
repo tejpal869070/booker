@@ -6,7 +6,6 @@ import { minesProfitTable } from "../../../assets/Data/MinesData";
 import { GetUserDetails } from "../../../Controllers/User/UserController";
 import { AiOutlineAreaChart } from "react-icons/ai";
 import Graph from "./Graph";
-import { EncryptTimestamp } from "../../../Controllers/Auth/EncryptTimestamp";
 import { MinesGameUpdateWallet } from "../../../Controllers/User/GamesController";
 
 export default function AutoMode({ isBetPlacedFunction }) {
@@ -33,6 +32,7 @@ export default function AutoMode({ isBetPlacedFunction }) {
   const [isBetLossed, setBetLossed] = useState(false);
   const [isGraph, setIsGraph] = useState(false);
   const initialBetAmount = amount;
+  const [user, setUser] = useState({});
 
   const profitRef = useRef(profit);
 
@@ -52,6 +52,7 @@ export default function AutoMode({ isBetPlacedFunction }) {
     const response = await GetUserDetails();
     if (response !== null) {
       const newBalance = Number(response[0].color_wallet_balnace);
+      setUser(response[0]);
       setTotalBalance(newBalance);
       setStartingBalance(newBalance);
     } else {
@@ -64,6 +65,7 @@ export default function AutoMode({ isBetPlacedFunction }) {
     formData.type = type;
     formData.amount = amount;
     formData.game_type = "Mines";
+    formData.uid = user?.uid;
 
     try {
       const response = await MinesGameUpdateWallet(formData);
@@ -317,6 +319,7 @@ export default function AutoMode({ isBetPlacedFunction }) {
             {mines.map((item, index) => (
               <button
                 disabled={isAutoBetStart}
+                key={index}
                 onClick={() => handleCardClick(item)}
                 className={`w-full h-16 flex justify-center items-center shadow-lg lg:h-28 rounded-xl ${
                   userSelectedIndex.includes(item.id)

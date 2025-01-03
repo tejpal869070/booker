@@ -50,7 +50,7 @@ export default function InvestmentHistory() {
           <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
             {data && data.length === 0 ? (
               <div>
-                <img alt="no data" src={gif1} className="m-auto" />
+                <img alt="no data" src={gif1} className="m-auto w-40" />
                 <p className="text-center font-bold dark:text-white text-xl">
                   No Records !
                 </p>

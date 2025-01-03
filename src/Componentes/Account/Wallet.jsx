@@ -101,6 +101,10 @@ export default function Wallet() {
     userDataGet();
   }, []);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   if (loading) {
     return (
       <div className="w-screen h-screen flex items-center justify-center m-auto inset-0">

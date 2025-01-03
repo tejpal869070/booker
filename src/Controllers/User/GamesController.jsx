@@ -191,12 +191,18 @@ export const MinesGameUpdateWallet = async (formData) => {
     const amount = formData.amount;
     const type = formData.type;
     const game_type = formData.game_type; 
+    const uid = formData.uid
+    const timestampResponse = await axios.get('https://timeapi.io/api/time/current/zone?timeZone=UTC'); 
+    const date = timestampResponse.data.dateTime; 
+    const timestamp = new Date(date).getTime()
 
     const data =  {
       amount,
       type,
       game_type, 
-    };
+      uid,
+      timestamp
+    }; 
 
     const secretKey = process.env.REACT_APP_WALLET_UPDATE_KEY;
 

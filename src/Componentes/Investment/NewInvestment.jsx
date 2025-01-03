@@ -12,6 +12,7 @@ import gif1 from "../../assets/photos/growwealthgif.gif";
 import VerifyPin from "../VerifyPin";
 import { BiSolidDollarCircle } from "react-icons/bi";
 import { IoDocumentTextOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 export default function NewInvestment() {
   const [isOpen, setIsOpen] = useState(false);
@@ -88,11 +89,8 @@ export default function NewInvestment() {
         setLoading(false);
         setInvestmentPlan(PlansData[0].id);
         userDataGet();
-        setAmount(100);
+        setAmount(10);
         setPin("");
-        setTimeout(() => {
-          setSuccess(false);
-        }, 3500);
       } else {
         toast.error(response.response.data.message);
         setLoading(false);
@@ -127,7 +125,6 @@ export default function NewInvestment() {
       const selectedPlan = planDevisionByAmount.findIndex(
         (i) => Number(amount) <= Number(i)
       );
-      console.log(selectedPlan);
       if (selectedPlan !== -1) {
         setInvestmentPlan(PlansData[selectedPlan].id);
         setReturnPercentage(PlansData[selectedPlan].retrun_percentage);
@@ -143,15 +140,6 @@ export default function NewInvestment() {
       }
     }
   }, [amount, PlansData]);
-
-  if (success) {
-    return (
-      <div className="fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center bg-[#000000d1] bg-opacity-50 z-[9999]">
-        <img alt="success" src={successImg} />
-        <p className="text-2xl text-white font-semibold">Investment Success.</p>
-      </div>
-    );
-  }
 
   return (
     <div>
@@ -290,6 +278,35 @@ export default function NewInvestment() {
           onclose2={onclose2}
           successFunction={(pin) => successFunction(pin)}
         />
+      )}
+
+      {success && (
+        <div className="fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center bg-black/30 backdrop-blur-[2px] z-[9999]">
+          <div className="p-4 animate-jump-in rounded-lg bg-white flex flex-col justify-center items-center">
+            {" "}
+            <img
+              alt="success"
+              src={require("../../assets/photos/verifiedgif.gif")}
+              className="w-20"
+            />
+            <p className="text-2xl mt-2 text-gray-700 font-semibold">
+              Investment Success.
+            </p>
+            <div className="flex  gap-2 flex mt-4 items-center">
+              <button className="rounded bg-green-500 font-semibold text-white text-sm px-4 py-1">
+                <Link to={"/home?investment=investment-history"}>
+                  My Investment
+                </Link>
+              </button>
+              <button
+                onClick={() => setSuccess(false)}
+                className="rounded bg-green-500 font-semibold text-white text-sm px-4 py-1"
+              >
+                Make New
+              </button>
+            </div>
+          </div>
+        </div>
       )}
 
       {instructionOpen && (

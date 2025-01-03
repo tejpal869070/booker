@@ -135,9 +135,9 @@ export default function ColorGameMyHistory({
 
           {data &&
             data.map((item, index) => (
-              <tbody className=" ">
+              <tbody className=" " key={index}>
                 <tr
-                  key={index}
+                   
                   className={`  border-b-2 border-gray-300 dark:bg-gray-800 dark:border-gray-700  `}
                 >
                   <th

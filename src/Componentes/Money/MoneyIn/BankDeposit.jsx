@@ -9,7 +9,10 @@ import { Loading1 } from "../../Loading1";
 import CryptoDeposit from "./CryptoDeposit";
 import gif1 from "../../../assets/photos/bankdepositgif.gif";
 import DepositMethod from "./DepositMethod";
-import successImg from "../../../assets/photos/success1-1--unscreen.gif";
+import { BsBank2 } from "react-icons/bs";
+import { FaBitcoin } from "react-icons/fa6";
+
+
 
 export default function BankDeposit() {
   const inputClasses =
@@ -130,19 +133,20 @@ export default function BankDeposit() {
         <div className="flex    gap-6 mt-6">
           <p className="relative cursor-pointer" onClick={() => setTab(1)}>
             <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-black dark:bg-gray-300"></span>
-            <span className="fold-bold relative inline-block h-full w-full rounded border-2 border-black dark:border-gray-700 bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900">
-              BANK DEPOSIT
+            <span className="flex justify-center items-center  gap-1 fold-bold relative inline-block h-full w-full rounded border-2 border-black dark:border-gray-700 bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900">
+            <BsBank2 />BANK DEPOSIT
             </span>
           </p>
           <p className="relative cursor-pointer" onClick={() => setTab(2)}>
             <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-black dark:bg-gray-300"></span>
-            <span className="fold-bold relative inline-block h-full w-full rounded border-2 border-black dark:border-gray-700 bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900">
-              CRYPTO DEPOSIT
+            <span className="flex justify-center items-center  gap-1  fold-bold relative inline-block h-full w-full rounded border-2 border-black dark:border-gray-700 bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900">
+            <FaBitcoin />
+            CRYPTO DEPOSIT
             </span>
           </p>
         </div>
         {tab === 1 ? (
-          <div className="  mt-6 flex flex-col items-center justify-center  ">
+          <div className="   mt-6 flex flex-col items-center justify-center  ">
             <div className="bg-[#e1e6ff] dark:bg-[#868ba3fc] text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden">
               <div className="md:flex flex-row-reverse w-full">
                 <div className="w-full  md:w-1/2 bg-indigo-200  p-2">
@@ -222,10 +226,17 @@ export default function BankDeposit() {
                           <option>---Select Deposit---</option>
                           {paymentMethods &&
                             paymentMethods.map((item, index) => (
-                              <option value={item.id}>
+                              <option
+                                value={item.id}
+                                className={`${
+                                  (index + 2) % 2 === 0
+                                    ? "bg-white"
+                                    : "bg-gray-200"
+                                }`}
+                              >
                                 {item.type === "UPI"
                                   ? item.upi_id
-                                  : `Bank Account: ${item.ac_no},  ${item.ac_holder_name}`}
+                                  : `Name: ${item.name}, Acc.No.: ${item.ac_no}, IFSC: ${item.ifsc_code}, Bank: ${item.bank_name}`}
                               </option>
                             ))}
                         </select>

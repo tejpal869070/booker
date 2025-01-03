@@ -127,7 +127,7 @@ export default function CryptoDeposit({ data }) {
     return (
       <div className="fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center bg-[#000000d1] bg-opacity-50 z-[9999]">
         <img alt="success" src={successImg} />
-        <p className="text-2xl text-white font-semibold">
+        <p className="text-2xl text-white mt-1 font-semibold">
           Deposit Request Sent Successfully !.
         </p>
       </div>
@@ -136,10 +136,10 @@ export default function CryptoDeposit({ data }) {
 
   return (
     <div>
-      <div className="w-full    mt-6   border-b-4 rounded-lg shadow-lg   flex flex-col">
-        <div className="bg-[#e1e6ff] dark:bg-[#868ba3fc] text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden">
-          <div className="md:flex flex-row-reverse w-full">
-            <div className="hidden md:block w-1/2 bg-indigo-200  p-2">
+      <div className="     mt-6    border-b-4 rounded-lg shadow-lg   flex flex-col">
+        <div className="bg-[#e1e6ff] dark:bg-[#868ba3fc]   text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden">
+          <div className="md:flex flex-row-reverse  ">
+            <div className="w-full md:w-1/2   bg-indigo-200  p-2">
               <img alt="animation" className="w-full h-full " src={gif1} />
             </div>
             <div className="w-full md:w-1/2 py-10 px-5 md:px-10">
@@ -152,7 +152,7 @@ export default function CryptoDeposit({ data }) {
                 </h1>
                 <div className="flex gap-2 items-center">
                   <p className="w-[90%] overflow-hidden shadow-xl flex justify-between items-center focus:animate-none   inline-flex text-md font-medium bg-indigo-900 mt-1 px-4   py-2 rounded-lg tracking-wide text-white">
-                    <p className="w-[90%] overflow-hidden">
+                    <p className="w-[90%] overflow-hidden line-clamp-1">
                       {data && data.address}{" "}
                     </p>
                     <div className="">

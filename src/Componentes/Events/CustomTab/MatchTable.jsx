@@ -7,7 +7,7 @@ export default function MatchTable({ data }) {
         <p className="text-center py-1 font-semibold">No Record Found</p> 
       ) : (
         data.map((item, index) => (
-          <div className="flex items-center border-b-2 border-gray py-1">
+          <div key={index} className="flex items-center border-b-2 border-gray py-1">
             <div className="w-[60%] md:w-1/2 pl-4">
               <p className="font-semibold">{item.name}</p>
               <p className="text-[14px] text-[green] font-semibold">{item.type}</p>

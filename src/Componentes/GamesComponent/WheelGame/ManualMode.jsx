@@ -17,6 +17,8 @@ export default function ManualMode() {
   const [currentRotation, setCurrentRotation] = useState(0);
   const [isWin, setWin] = useState(false);
   const [winAmount, setWinAmount] = useState(); 
+    const [user, setUser] = useState({});
+  
  
 
   const amountRef = useRef(amount);
@@ -98,6 +100,7 @@ export default function ManualMode() {
     formData.type = type;
     formData.amount = amount;
     formData.game_type = "Wheel";
+    formData.uid = user?.uid;
 
     try {
       const response = await MinesGameUpdateWallet(formData);
@@ -119,6 +122,7 @@ export default function ManualMode() {
       const response = await GetUserDetails();
       if (response !== null) {
         setTotalBalance(Number(response[0].color_wallet_balnace));
+        setUser(response[0])
       } else {
         window.location.href = "/";
       }
