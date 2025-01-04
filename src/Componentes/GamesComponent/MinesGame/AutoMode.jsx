@@ -158,30 +158,21 @@ export default function AutoMode({ isBetPlacedFunction }) {
         setTotalBalance((prevBalance) => prevBalance - amountRef.current);
       }
     } else if (type === "add") {
-      await updateWalletBalance(
-        "add",
-        amountRef.current *
-          minesProfitTable.find((item) => item.totalBomb === totalBombs).profit[
-            userSelectedIndex.length - 1
-          ]?.profit
-      );
       const calculatedProfit = minesProfitTable.find(
         (item) => item.totalBomb === totalBombs
       ).profit[userSelectedIndex.length - 1]?.profit;
 
-      setProfit(
-        minesProfitTable.find((item) => item.totalBomb === totalBombs).profit[
-          userSelectedIndex.length - 1
-        ]?.profit
-      );
-      setTotalBalance(
-        (prevBalance) => prevBalance + amountRef.current * calculatedProfit
-      );
+      const profitAmount = amountRef.current * calculatedProfit;
+
+      await updateWalletBalance("add", profitAmount);
+
+      setProfit(calculatedProfit);
+      setTotalBalance((prevBalance) => prevBalance + profitAmount);
     }
   };
 
   const handleAutoStart = () => {
-    if (stopLoss < amountRef.current && stopLoss > 0) {
+    if (stopLoss > 0 && stopLoss < amountRef.current) {
       toast.error(
         "The stop-loss target cannot be lower than the current bet amount."
       );
@@ -242,8 +233,7 @@ export default function AutoMode({ isBetPlacedFunction }) {
 
   const stopAutoBet = () => {
     setStartingBalance(balanceRef.current);
-    setAutoBetStart(false);
-    setUserSelectedIndex([]);
+    setAutoBetStart(false); 
     generateRandom();
     setAllOpen(false);
     setBetWin(false);

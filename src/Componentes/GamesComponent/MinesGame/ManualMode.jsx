@@ -222,7 +222,7 @@ export default function ManualMode({ isBetPlacedFunction, isRecharged }) {
 
   // admin controller start------------------------------------------------------------------------------------------------------------
   const generateGameToBeLoss = () => {
-    const randomNum = Math.floor(Math.random() *10) + 1;
+    const randomNum = Math.floor(Math.random() *5) + 1;
     setGameNumberToLoss(randomNum); 
   };
   useEffect(() => {

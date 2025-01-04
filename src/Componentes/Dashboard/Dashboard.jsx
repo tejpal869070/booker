@@ -33,7 +33,7 @@ export default function Dashboard() {
     {
       id: 2,
       title: "My Investment",
-      value: user && `₹${user.my_investment || 0}`,
+      value: user && `$${user.my_investment || 0}`,
       link : "/home?investment=investment-history",
       icons: <FaWallet size={20} />,
     },
@@ -82,7 +82,7 @@ export default function Dashboard() {
     {
       id: 3,
       title: "Total Business",
-      value: "₹11,500",
+      value: "₹0",
       link : "",
       icons: <PiHandWithdrawFill size={24} />,
     },

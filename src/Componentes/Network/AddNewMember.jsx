@@ -157,7 +157,7 @@ const AddNewMember = () => {
                 Phone Number
               </label>
               <div className="relative">
-                <FaPhone className="absolute top-3 left-3 text-gray-400" />
+                <FaPhone className="absolute top-3 rotate-90 left-3 text-gray-400" />
                 <input
                   type="tel"
                   id="phone"
