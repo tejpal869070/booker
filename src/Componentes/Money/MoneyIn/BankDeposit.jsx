@@ -243,8 +243,8 @@ export default function BankDeposit() {
                       </div>
                       <div className="flex align-center w-full items-center mt-4 col-span-12 sm:col-span-8">
                         {image !== null ? (
-                          <p className="w-full overflow-hidden shadow-sm bg-gray-200 border-2 px-2.5 py-2.5 pr-[22px] border-gray-700 dark:bg-gray-400 text-gray-900 font-medium  rounded-xl focus:ring-cyan-600 focus:border-cyan-600 block  ">
-                            <p className="w-[95%] overflow-hidden">
+                          <p className="w-full overflow-hidden line-clamp-1	 shadow-sm bg-gray-200 border-2 px-2.5 py-2.5 pr-[22px] border-gray-700 dark:bg-gray-400 text-gray-900 font-medium  rounded-xl focus:ring-cyan-600 focus:border-cyan-600 block  ">
+                            <p className="w-[95%] overflow-hidden line-clamp-1	">
                               {image.name}
                             </p>
                           </p>

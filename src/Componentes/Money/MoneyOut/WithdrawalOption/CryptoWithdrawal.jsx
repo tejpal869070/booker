@@ -169,7 +169,7 @@ export default function CryptoWithdrawal() {
                 />
                 <p className="text-gray-800 font-medium text-sm">
                   Rs. {(amount * Number(user.currency_rate)).toFixed(2)} Will Be
-                  deducted{" "}
+                  deduct{" "}
                 </p>
               </div>
             </div>

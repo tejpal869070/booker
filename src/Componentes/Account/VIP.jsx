@@ -128,15 +128,15 @@ export default function VIP() {
                 </p>
                 <p className="text-sm lg:text-[12px]">
                   
-                  {Number(item.minimumrebetamount)  - Number(user?.wagering) > 0 ? `Require ₹ ${Number(item.minimumrebetamount).toFixed(2)   -  Number(user?.wagering).toFixed(2)} ` : "Upgraded" } 
+                  {Number(item.minimumrebetamount)  - Number(user?.wagering) > 0 ? `Require ₹ ${(Number(item.minimumrebetamount)   -  Number(user?.wagering)).toFixed(2)} ` : "Upgraded" } 
                   
                 </p>
               </div>
             </div>
-            <div className="relative   bg-gray-900 rounded w-[98%] m-auto">
+            <div className="relative   bg-gray-900 rounded w-[98%]  m-auto">
               <div className="mt-6">
                 <ul>
-                  <li className="flex gap-2 py-2">
+                  <li className="flex gap-2 py-2 px-2">
                     <div className="flex justify-center items-center p-2 rounded-xl border shadow-lg">
                       <img
                         alt="icons"
@@ -154,7 +154,7 @@ export default function VIP() {
                       <p>Will receive only 1 time</p>
                     </div>
                   </li>
-                  <li className="flex gap-2 py-2">
+                  <li className="flex gap-2 py-2 px-2">
                     <div className="flex justify-center items-center p-2 rounded-xl border shadow-lg">
                       <img
                         alt="icons"
@@ -172,7 +172,7 @@ export default function VIP() {
                       <p>Will receive on 1st of every month</p>
                     </div>
                   </li>
-                  <li className="flex gap-2 py-2">
+                  <li className="flex gap-2 py-2 px-2">
                     <div className="flex justify-center items-center p-2 rounded-xl border shadow-lg">
                       <img
                         alt="icons"

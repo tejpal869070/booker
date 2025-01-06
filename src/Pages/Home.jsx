@@ -825,7 +825,7 @@ export default function Home() {
                     className={`${dropdownClassList}`}
                     onClick={handleHideSideBar}
                   >
-                    Refferer Income
+                    Referral income
                   </Link>
                 </li>
                 <li className="ml-11">

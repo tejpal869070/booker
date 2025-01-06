@@ -587,3 +587,32 @@ export const GetAllCasinoGames = async (formData) => {
     throw error;
   }
 };
+
+
+
+
+export const GetReffer = async () => {
+  const postData = {
+    mobile: mobile,
+  };
+
+  const axiosConfig = {
+    headers: {
+      Authorization: `Bearer ${bearerToken}`,
+    },
+  };
+  try {
+    const response = await axios.post(
+      `${API.url}user/get-reffer`,
+      postData,
+      axiosConfig
+    );
+    if (response.data.status) {
+      return response.data.data.reverse();
+    } else {
+      return null;
+    }
+  } catch (error) {
+    return null;
+  }
+};
