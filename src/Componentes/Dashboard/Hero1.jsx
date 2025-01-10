@@ -190,6 +190,9 @@ export default function Hero1() {
                 </p>
               </div>
               <p className="font-bold dark:text-gray-300">Total Balance</p>
+              <p className="text-[9px] font-medium dark:text-gray-200">
+                ( Main + Game Wallet)
+              </p>
               <p className="text-2xl font-bold text-black dark:text-gray-300">
                 ₹
                 {(

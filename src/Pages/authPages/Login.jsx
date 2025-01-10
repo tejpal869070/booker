@@ -60,8 +60,6 @@ export default function Login() {
     }
   };
 
-  
-
   return (
     <div
       className="min-h-screen  bg-fixed  bg-no-repeat bg-cover bg-black     py-6 flex flex-col justify-center px-6 lg:px-0"

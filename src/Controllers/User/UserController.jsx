@@ -616,3 +616,30 @@ export const GetReffer = async () => {
     return null;
   }
 };
+
+
+export const GetRoi = async () => {
+  const postData = {
+    mobile: mobile,
+  };
+
+  const axiosConfig = {
+    headers: {
+      Authorization: `Bearer ${bearerToken}`,
+    },
+  };
+  try {
+    const response = await axios.post(
+      `${API.url}user/get-roi`,
+      postData,
+      axiosConfig
+    );
+    if (response.data.status) {
+      return response.data.data.reverse();
+    } else {
+      return null;
+    }
+  } catch (error) {
+    return null;
+  }
+};
