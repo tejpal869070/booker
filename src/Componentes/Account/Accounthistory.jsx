@@ -146,7 +146,7 @@ export default function AccountHistory() {
                         {item.date.split("T")[0]}
                       </td>
                       <td className="whitespace-nowrap px-6 py-4">
-                        {item.type === "Investment" ? "$" : "₹"}
+                        {item.type === "Investment" || item.type === "Investment Return"  ? "$ " : "₹ "}
                         {item.amount}
                       </td>
                       <td className="whitespace-nowrap px-6 py-4">

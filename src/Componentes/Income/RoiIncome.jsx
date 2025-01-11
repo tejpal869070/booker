@@ -57,7 +57,7 @@ export default function RoiIncome() {
   return (
     <div className="min-h-screen">
       <p className="font-bold text-xl mb-6 dark:text-white">
-        Income Manager {">"} Reffer Income
+        Income Manager {">"} ROI Income
       </p>
       <DateSelector />
       <div>
