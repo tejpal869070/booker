@@ -7,6 +7,7 @@ import Plinko from "../Componentes/Casino/Plinko";
 import WheelGame from "../Componentes/Casino/WheelGame";
 import LiveCasinoDashboard from "../Componentes/Casino/LiveCasinoDashboard";
 import CasinoLobby from "../Componentes/Casino/CasinoLobby";
+import Limbo from "../Componentes/Casino/Limbo";
 
 export default function LiveCasino() {
   const location = useLocation();
@@ -33,6 +34,8 @@ export default function LiveCasino() {
     return <div>{<WheelGame />}</div>;
   } else if (paramsData && paramsData.game === "casino") {
     return <div>{<LiveCasinoDashboard />}</div>;
+  } else if (paramsData && paramsData.game === "limbo") {
+    return <div>{<Limbo />}</div>;
   } else if (paramsData && paramsData.game === "casino-lobby") {
     return <div>{<CasinoLobby />}</div>;
   } else {
@@ -40,6 +43,7 @@ export default function LiveCasino() {
       <div>
         <iframe
           src="https://www.crazygames.com/embed/ragdoll-archers"
+          title="onloneGame"
           style={{ width: "80vw", height: "90vh" }}
           frameborder="0"
           allow="gamepad *;"
