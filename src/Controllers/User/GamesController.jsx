@@ -1,4 +1,4 @@
-import axios from "axios"; 
+import axios from "axios";
 import { API } from "../Api";
 import CryptoJS from "crypto-js";
 
@@ -190,23 +190,26 @@ export const MinesGameUpdateWallet = async (formData) => {
   try {
     const amount = formData.amount;
     const type = formData.type;
-    const game_type = formData.game_type; 
-    const uid = formData.uid
-    const timestampResponse = await axios.get('https://timeapi.io/api/time/current/zone?timeZone=UTC'); 
-    const date = timestampResponse.data.dateTime; 
-    const timestamp = new Date(date).getTime()
+    const game_type = formData.game_type;
+    const uid = formData.uid;
+    const timestampResponse = await GetServerCurrentTime();
+    const date = timestampResponse;
+    const timestamp = new Date(date).getTime();
 
-    const data =  {
+    const data = {
       amount,
       type,
-      game_type, 
+      game_type,
       uid,
-      timestamp
-    }; 
+      timestamp,
+    };
 
     const secretKey = process.env.REACT_APP_WALLET_UPDATE_KEY;
 
-    const encodedData = CryptoJS.AES.encrypt(JSON.stringify(data), secretKey).toString();
+    const encodedData = CryptoJS.AES.encrypt(
+      JSON.stringify(data),
+      secretKey
+    ).toString();
 
     const postData = {
       mobile: mobile,
@@ -226,6 +229,17 @@ export const MinesGameUpdateWallet = async (formData) => {
     );
 
     return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const GetServerCurrentTime = async () => {
+  try {
+    const response = await axios.post(`${API.url}user/get-current-time `);
+    if (response.data.status) {
+      return response?.data?.current_time;
+    }
   } catch (error) {
     throw error;
   }

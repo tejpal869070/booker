@@ -21,14 +21,16 @@ export default function Manual() {
   };
 
   const amountRef = useRef(amount);
+  useEffect(() => {
+    amountRef.current = amount;
+  }, [amount]);
 
   const handleBetPlace = () => {
     if (amount < 1) {
       toast.error("Min. amount is ₹1", {
         position: "top-center",
       });
-      return
-      ;
+      return;
     } else if (target < 1.01) {
       toast.error("Target should be greater than 1.01", {
         position: "top-center",
@@ -45,48 +47,46 @@ export default function Manual() {
     const randomNumber = Math.floor(Math.random() * 100) + 1;
   };
 
-  useEffect(() => {
-    amountRef.current = amount;
-  }, [amount]);
+  
 
-  useEffect(() => {
-    const element = document.getElementById("limboBoard");
-    if (element) {
-      ReactDOM.createRoot(element).render(
-        <div className="min-h-[60vh] relative">
-          <HistoryTop history={history} />
-          <div className="mt-20  flex justify-center  items-center w-full h-full">
-            <p className="text-8xl text-center font-semibold text-[#00e701]">
-              {/* {randomNumber.toFixed(2)}x */}
-              <CountUp end={randomNumber} decimals={2} duration={1} />x
-            </p>
-          </div>
-          <div className="absolute bottom-0 flex justify-between items-center w-full bg-gray-700 rounded p-2 ">
-            <div className="w-[50%]">
-              <p className="text-sm text-gray-300 mb-1 font-medium">
-                Target Multipiler
-              </p>
-              <input
-                value={target}
-                onChange={(e) => setTarget(e.target.value)}
-                className="w-[95%] pl-2 text-gray-200 text-sm py-1 bg-gray-900 border-gray-500 border-2 rounded outline-none focus:border-0"
-              />
-            </div>
-            <div className="w-[50%]">
-              <p className="text-sm text-gray-300 mb-1 font-medium">
-                Win Chance
-              </p>
-              <input
-                value={winChance}
-                onChange={(e) => setWinChance(e.target.value)}
-                className="w-[95%] pl-2 text-gray-200 text-sm py-1 bg-gray-900 border-gray-500 border-2 rounded outline-none focus:border-0"
-              />
-            </div>
-          </div>
-        </div>
-      );
-    }
-  }, [randomNumber, history]);
+  // useEffect(() => {
+  //   const element = document.getElementById("limboBoard");
+  //   if (element) {
+  //     ReactDOM.createRoot(element).render(
+  //       <div className="min-h-[60vh] relative">
+  //         <HistoryTop history={history} />
+  //         <div className="mt-20  flex justify-center  items-center w-full h-full">
+  //           <p className="text-8xl text-center font-semibold text-[#00e701]">
+  //             {/* {randomNumber.toFixed(2)}x */}
+  //             <CountUp end={randomNumber} decimals={2} duration={1} />x
+  //           </p>
+  //         </div>
+  //         <div className="absolute bottom-0 flex justify-between items-center w-full bg-gray-700 rounded p-2 ">
+  //           <div className="w-[50%]">
+  //             <p className="text-sm text-gray-300 mb-1 font-medium">
+  //               Target Multipiler
+  //             </p>
+  //             <input
+  //               value={target}
+  //               onChange={(e) => setTarget(e.target.value)}
+  //               className="w-[95%] pl-2 text-gray-200 text-sm py-1 bg-gray-900 border-gray-500 border-2 rounded outline-none focus:border-0"
+  //             />
+  //           </div>
+  //           <div className="w-[50%]">
+  //             <p className="text-sm text-gray-300 mb-1 font-medium">
+  //               Win Chance
+  //             </p>
+  //             <input
+  //               value={winChance}
+  //               onChange={(e) => setWinChance(e.target.value)}
+  //               className="w-[95%] pl-2 text-gray-200 text-sm py-1 bg-gray-900 border-gray-500 border-2 rounded outline-none focus:border-0"
+  //             />
+  //           </div>
+  //         </div>
+  //       </div>
+  //     );
+  //   }
+  // }, [randomNumber, history]);
 
   return (
     <div>

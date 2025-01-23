@@ -322,11 +322,13 @@ export default function AutoMode({ isBetPlacedFunction }) {
                     <img
                       className="m-auto w-12 animate-jump-in animate-duration-400"
                       src={require("../../../assets/photos/diamond.png")}
+                      alt="imagggse"
                     />
                   ) : (
                     <img
                       className="m-auto w-16 animate-jump-in animate-duration-400"
                       src={require("../../../assets/photos/time-bomb.png")}
+                      alt="imagggse"
                     />
                   )
                 ) : (
