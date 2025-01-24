@@ -938,7 +938,7 @@ export default function Home() {
       </div>
 
       {/* Content */}
-      <div className="bg-no-repeat bg-cover bg-fixed dark:bg-black ">
+      <div className="bg-no-repeat bg-cover bg-fixed dark:bg-gray-900 ">
         <div className="p-2 md:p-8 sm:ml-64  pb-24 md:pt-24  ">
           <InnerSection />
         </div>

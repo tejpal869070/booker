@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { useState } from "react";
 import AutoMode from "../GamesComponent/MinesGame/AutoMode";
 import Manual from "../GamesComponent/Limbo/Manual";
@@ -26,6 +26,8 @@ export default function Limbo() {
   const [totalBets, setTotalBets] = useState(0);
   const [user, setUser] = useState();
   const [isWin, setWin] = useState();
+  const [playedGames, setPlayedGames] = useState(0);
+  const [gameToWin, setGameToWin] = useState(0);
 
   const handleClick = (type) => {
     setSelected(type);
@@ -59,23 +61,41 @@ export default function Limbo() {
       });
       return;
     }
+    setPlayedGames(playedGames + 1);
     setAutoBetStart(true);
     await updateWalletBalance("deduct", amount);
     setRandomNumber(1);
-    const randomNumber = (Math.random() * 2 + 1).toFixed(2);
-    setRandomNumber(parseFloat(randomNumber));
-    setHistory((prevData) => [...prevData, randomNumber]);
-    if (randomNumber >= target) {
-      await updateWalletBalance("add", amount * target);
-      console.log(amount * target);
-      setWin(true);
+    // generate number------------------------------------------------------------
+
+    if (playedGames === gameToWin) {
+      const randomNumber = (
+        Math.random() * Number(target) +
+        Number(target)
+      ).toFixed(2);
+      setRandomNumber(parseFloat(randomNumber));
+      setHistory((prevData) => [...prevData, { target, randomNumber }]);
+      setPlayedGames(0);
+      updateBalanceShow(randomNumber);
+      generateGameToWin();
     } else {
-      toast.warn("loss");
-      setWin(false);
+      const randomNumber = 1 + Math.random() * (target - 1);
+      setRandomNumber(parseFloat(randomNumber.toFixed(2)));
+      setHistory((prevData) => [...prevData, { target, randomNumber }]);
+      updateBalanceShow(randomNumber);
     }
+
     setTimeout(() => {
       setAutoBetStart(false);
     }, 1000);
+  };
+
+  const updateBalanceShow = async (randomNumber) => {
+    if (Number(randomNumber) >= Number(target)) {
+      await updateWalletBalance("add", amount * target);
+      setWin(true);
+    } else {
+      setWin(false);
+    }
   };
 
   // update wallet balance online---------------------------------------------
@@ -121,6 +141,15 @@ export default function Limbo() {
   useEffect(() => {
     userDataGet();
   }, []);
+
+  const generateGameToWin = useCallback(() => {
+    const gameToWin = Math.floor(Math.random() * (Number(target) + 1)) + 1;
+    setGameToWin(gameToWin);
+  }, [target]);
+
+  useEffect(() => {
+    generateGameToWin();
+  }, [generateGameToWin, target]);
 
   return (
     <div className="min-h-screen ">
@@ -277,7 +306,7 @@ export default function Limbo() {
                 <button
                   // onClick={() => handleAutoStart()}
                   // disabled={userSelectedIndex.length === 0}
-                  className={`w-full rounded font-semibold text-lg text-[#2f2e2e] py-2 mt-3 bg-gray-400  `}
+                  className={`w-full rounded font-semibold text-lg text-[#2f2e2e] py-2 mt-3 bg-[#20e701]  `}
                 >
                   Start Auto Bet
                 </button>
@@ -372,7 +401,11 @@ export default function Limbo() {
           <div className="min-h-[60vh] relative">
             <HistoryTop history={history} />
             <div className="mt-20  flex justify-center  items-center w-full h-full">
-              <p className={`text-8xl text-center font-semibold ${isWin ? "text-[#00e701]" : "text-red-500"}`}> 
+              <p
+                className={`text-8xl text-center font-semibold ${
+                  isWin ? "text-[#00e701]" : "text-red-500"
+                }`}
+              >
                 {/* {randomNumber.toFixed(2)}x */}
                 <CountUp end={randomNumber} decimals={2} duration={1} />x
               </p>
@@ -385,6 +418,7 @@ export default function Limbo() {
                 <input
                   value={target}
                   type="number"
+                  disabled={isAutoBetStart}
                   onChange={(e) => setTarget(e.target.value)}
                   className="w-[95%] pl-2 text-gray-200 text-sm py-1 bg-gray-900 border-gray-500 border-2 rounded outline-none focus:border-0"
                 />
@@ -397,7 +431,6 @@ export default function Limbo() {
                   value={winChance}
                   type="number"
                   disabled
-                  onChange={(e) => setWinChance(e.target.value)}
                   className="w-[95%] pl-2 text-gray-200 text-sm py-1 bg-gray-900 border-gray-500 border-2 rounded outline-none focus:border-0"
                 />
               </div>

@@ -44,6 +44,11 @@ const gameData = [
     to: { pathname: "/home", search: "?game=wheel" },
   },
   {
+    id: 3,
+    image: require("../../assets/photos/limbo.png"),
+    to: { pathname: "/home", search: "?game=limbo" },
+  },
+  {
     id: 4,
     image: require("../../assets/photos/aviator.png"),
     to: { pathname: "/home", search: "?game=casino-lobby&data=eyJwcm92aWRlckNvZGUiOiJQRyIsImdhbWVDb2RlIjoiQVRSIn0%3D" },
