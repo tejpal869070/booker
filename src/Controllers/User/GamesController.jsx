@@ -244,3 +244,27 @@ export const GetServerCurrentTime = async () => {
     throw error;
   }
 };
+
+export const GetGameHistoryByType = async (type) => {
+  try {
+    const postData = {
+      mobile: mobile,
+      type: type,
+    };
+    const axiosConfig = {
+      headers: {
+        Authorization: `Bearer ${bearerToken}`,
+      },
+    };
+    const response = await axios.post(
+      `${API.url}user/get-game-statement `,
+      postData,
+      axiosConfig
+    );
+    if (response.data.status) {
+      return response?.data?.data;
+    }
+  } catch (error) {
+    return [];
+  }
+};

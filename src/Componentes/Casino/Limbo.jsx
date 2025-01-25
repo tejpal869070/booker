@@ -8,6 +8,7 @@ import CountUp from "react-countup";
 import HistoryTop from "../GamesComponent/Limbo/HistoryTop";
 import { GetUserDetails } from "../../Controllers/User/UserController";
 import { MinesGameUpdateWallet } from "../../Controllers/User/GamesController";
+import GameHistory from "../GamesComponent/Limbo/GameHistory";
 
 export default function Limbo() {
   const [selected, setSelected] = useState("Manual");
@@ -19,6 +20,7 @@ export default function Limbo() {
   const [history, setHistory] = useState([]);
   const [winChance, setWinChance] = useState();
   const [isAutoBetStart, setAutoBetStart] = useState(false);
+  const [isManualBetStart, setManualBetStart] = useState(false);
   const [stopLoss, setStopLoss] = useState(0);
   const [stopProfit, setStopProfit] = useState(0);
   const [increaseOnWin, setIncreaseOnWin] = useState(0);
@@ -28,9 +30,11 @@ export default function Limbo() {
   const [isWin, setWin] = useState();
   const [playedGames, setPlayedGames] = useState(0);
   const [gameToWin, setGameToWin] = useState(0);
+  const intervalId = useRef(null);
 
   const handleClick = (type) => {
     setSelected(type);
+    setPlayedGames(0);
   };
 
   const doubleTheAmount = () => {
@@ -50,23 +54,46 @@ export default function Limbo() {
   };
 
   const handleBetPlace = async () => {
-    if (amount < 1) {
-      toast.error("Min. amount is ₹1", {
+    if (selected === "Manual") {
+      await betFunction();
+    } else {
+      intervalId.current = setInterval(async () => {
+        await betFunction();
+        if (Number(playedGames) === Number(totalBets)) {
+          stopAutoBet();
+          clearInterval(intervalId.current);
+        }
+
+        console.log(playedGames, totalBets);
+      }, 2000);
+    }
+  };
+
+  const stopAutoBet = () => {
+    setAutoBetStart(false);
+    setPlayedGames(0);
+    clearInterval(intervalId.current);
+  };
+
+  const betFunction = async () => {
+    if (amount < 1 || target < 1.01) {
+      toast.error("Min. amount is ₹1 & target is 1.01", {
         position: "top-center",
       });
+      stopAutoBet();
       return;
-    } else if (target < 1.01) {
-      toast.error("Target should be greater than 1.01", {
+    } else if (amount > totlaBalance) {
+      toast.error("Insufficient balance", {
         position: "top-center",
       });
+      stopAutoBet();
       return;
     }
     setPlayedGames(playedGames + 1);
+    setManualBetStart(true);
     setAutoBetStart(true);
     await updateWalletBalance("deduct", amount);
     setRandomNumber(1);
-    // generate number------------------------------------------------------------
-
     if (playedGames === gameToWin) {
       const randomNumber = (
         Math.random() * Number(target) +
@@ -83,8 +110,8 @@ export default function Limbo() {
       setHistory((prevData) => [...prevData, { target, randomNumber }]);
       updateBalanceShow(randomNumber);
     }
-
     setTimeout(() => {
+      setManualBetStart(false);
       setAutoBetStart(false);
     }, 1000);
   };
@@ -151,16 +178,22 @@ export default function Limbo() {
     generateGameToWin();
   }, [generateGameToWin, target]);
 
+  useEffect(() => {
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [intervalId]);
+
   return (
     <div className="min-h-screen ">
       <ToastContainer />
       {/* {isFlashPopup && <FlashPopup handleClose={handleClose} />} */}
-      <div className="flex flex-wrap-reverse m-auto  max-w-[421px] md:max-w-[500px] lg:max-w-5xl">
+      <div className="flex flex-wrap-reverse m-auto rounded-lg overflow-hidden  max-w-[421px] md:max-w-[500px] lg:max-w-5xl">
         <div className="w-[100%]  lg:w-[30%]  p-6 h-screen/2 bg-gray-500">
           <div className="w-full flex space-x-2 bg-gray-800 rounded-full px-2 py-3">
             <button
               onClick={() => handleClick("Manual")}
-              disabled={isBetPlaced}
+              disabled={isAutoBetStart || isManualBetStart}
               className={`relative w-1/2 px-6 py-2 rounded-full overflow-hidden  font-medium   transition-all  ${
                 selected === "Manual"
                   ? "bg-blue-500 text-gray-100"
@@ -177,9 +210,10 @@ export default function Limbo() {
             </button>
 
             <button
-              onClick={() => handleClick("Auto")}
-              disabled={isBetPlaced}
-              className={`relative w-1/2 px-6 py-2 rounded-full overflow-hidden  font-medium transition-all  ${
+              // onClick={() => handleClick("Auto")}
+              // disabled={isAutoBetStart || isManualBetStart}
+              disabled
+              className={`cursor-not-allowed relative w-1/2 px-6 py-2 rounded-full overflow-hidden  font-medium transition-all  ${
                 selected === "Auto"
                   ? "bg-blue-500 text-gray-100"
                   : "bg-gray-300 text-gray-900"
@@ -241,7 +275,7 @@ export default function Limbo() {
               />
               <button
                 onClick={() => handleBetPlace()}
-                disabled={isAutoBetStart}
+                disabled={isManualBetStart}
                 className="w-full rounded bg-[#20e701] font-semibold text-lg text-gray-700 py-2 mt-3"
               >
                 Place Bet
@@ -297,15 +331,15 @@ export default function Limbo() {
 
               {isAutoBetStart ? (
                 <button
-                  // onClick={() => stopAutoBet()}
+                  onClick={() => stopAutoBet()}
                   className={`w-full rounded font-semibold text-lg text-white py-2 mt-3 bg-green-400`}
                 >
                   Stop Auto Bet
                 </button>
               ) : (
                 <button
-                  // onClick={() => handleAutoStart()}
-                  // disabled={userSelectedIndex.length === 0}
+                  onClick={() => handleBetPlace()}
+                  disabled={target < 1.01 || amount < 1}
                   className={`w-full rounded font-semibold text-lg text-[#2f2e2e] py-2 mt-3 bg-[#20e701]  `}
                 >
                   Start Auto Bet
@@ -418,7 +452,7 @@ export default function Limbo() {
                 <input
                   value={target}
                   type="number"
-                  disabled={isAutoBetStart}
+                  disabled={isAutoBetStart || isManualBetStart}
                   onChange={(e) => setTarget(e.target.value)}
                   className="w-[95%] pl-2 text-gray-200 text-sm py-1 bg-gray-900 border-gray-500 border-2 rounded outline-none focus:border-0"
                 />
@@ -438,42 +472,9 @@ export default function Limbo() {
           </div>
         </div>
       </div>
+      <div className="m-auto mt-6  max-w-[421px] md:max-w-[500px] lg:max-w-5xl">
+        <GameHistory />{" "}
+      </div>
     </div>
   );
 }
-
-// export const Board = ({ randomNumber, history }) => {
-//   return (
-//     <div>
-//       <div className="min-h-[60vh] relative">
-//         <HistoryTop history={history} />
-//         <div className="mt-20  flex justify-center  items-center w-full h-full">
-//           <p className="text-8xl text-center font-semibold text-[#00e701]">
-//             {/* {randomNumber.toFixed(2)}x */}
-//             <CountUp end={randomNumber} decimals={2} duration={1} />x
-//           </p>
-//         </div>
-//         <div className="absolute bottom-0 flex justify-between items-center w-full bg-gray-700 rounded p-2 ">
-//           <div className="w-[50%]">
-//             <p className="text-sm text-gray-300 mb-1 font-medium">
-//               Target Multipiler
-//             </p>
-//             <input
-//               // value={target}
-//               // onChange={(e) => setTarget(e.target.value)}
-//               className="w-[95%] pl-2 text-gray-200 text-sm py-1 bg-gray-900 border-gray-500 border-2 rounded outline-none focus:border-0"
-//             />
-//           </div>
-//           <div className="w-[50%]">
-//             <p className="text-sm text-gray-300 mb-1 font-medium">Win Chance</p>
-//             <input
-//               // value={winChance}
-//               // onChange={(e) => setWinChance(e.target.value)}
-//               className="w-[95%] pl-2 text-gray-200 text-sm py-1 bg-gray-900 border-gray-500 border-2 rounded outline-none focus:border-0"
-//             />
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
