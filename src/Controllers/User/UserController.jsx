@@ -304,7 +304,7 @@ export const AddCryptoWithdrawalRequest = async (formData, pin) => {
 export const RemoveWithdrawalRequest = async (id) => {
   const postData = {
     mobile: mobile,
-    id: id, 
+    id: id,
   };
 
   const axiosConfig = {
@@ -588,9 +588,6 @@ export const GetAllCasinoGames = async (formData) => {
   }
 };
 
-
-
-
 export const GetReffer = async () => {
   const postData = {
     mobile: mobile,
@@ -617,7 +614,6 @@ export const GetReffer = async () => {
   }
 };
 
-
 export const GetRoi = async () => {
   const postData = {
     mobile: mobile,
@@ -641,5 +637,31 @@ export const GetRoi = async () => {
     }
   } catch (error) {
     return null;
+  }
+};
+
+export const GetLevelIncome = async () => {
+  const postData = {
+    mobile: mobile,
+  };
+
+  const axiosConfig = {
+    headers: {
+      Authorization: `Bearer ${bearerToken}`,
+    },
+  };
+  try {
+    const response = await axios.post(
+      `${API.url}user/get-level-income`,
+      postData,
+      axiosConfig
+    );
+    if (response.data.status) {
+      return response.data.data.reverse();
+    } else {
+      return [];
+    }
+  } catch (error) {
+    return [];
   }
 };

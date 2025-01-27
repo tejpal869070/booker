@@ -1,35 +1,21 @@
 import React, { useEffect, useState } from "react";
 import DateSelector from "./DateSelector";
-import { GetRoi } from "../../Controllers/User/UserController";
+import { GetLevelIncome } from "../../Controllers/User/UserController";
 import { useLocation } from "react-router-dom";
 
-export default function RoiIncome() {
+export default function LevelIncome() {
   const [tableData, setTableData] = useState([]);
   const location = useLocation();
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
   const [filteredData, setFilteredData] = useState([]);
 
-  const tableHead = [
-    "S.No.",
-    "INVESTED AMOUNT",
-    "PAYOUT",
-    "TOTAL PAYOUT",
-    "Date",
-  ];
+  const tableHead = ["S.No.", "USER", "position", "LEVEL", "PAYOUT", "Date"];
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await GetRoi();
-      if (response !== null) {
-        const updatedData = response?.map((item) => {
-          const { id, reffer_by, reffer_code, ...rest } = item;
-          return rest;
-        });
-        setTableData(updatedData);
-      } else {
-        setTableData([]);
-      }
+      const response = await GetLevelIncome();
+      setTableData(response);
     };
 
     fetchData();
@@ -60,12 +46,10 @@ export default function RoiIncome() {
     }
   }, [startDate, endDate, tableData]);
 
-  console.log(filteredData);
-
   return (
     <div className="min-h-screen">
       <p className="font-bold text-xl mb-6 dark:text-white">
-        Income Manager {">"} ROI Income
+        Income Manager {">"} Level Income
       </p>
       <DateSelector />
       <div>
@@ -105,13 +89,16 @@ export default function RoiIncome() {
                     <td className="whitespace-nowrap px-6 py-4">{index + 1}</td>
 
                     <td className="whitespace-nowrap px-6 py-4">
-                      $ {item.investment_amount}
+                      {item.user_name}
                     </td>
                     <td className="whitespace-nowrap px-6 py-4">
-                      $ {item.today_return}
+                      {item.position}
                     </td>
                     <td className="whitespace-nowrap px-6 py-4">
-                      $ {item.total_return_amount}
+                      {item.level}
+                    </td>
+                    <td className="whitespace-nowrap px-6 py-4">
+                      ${item.retrun_amount}
                     </td>
                     <td className="whitespace-nowrap px-6 py-4">
                       {item.date.split("T")[0]}

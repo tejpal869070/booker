@@ -204,6 +204,17 @@ export default function UserProfile() {
               </span>
             </Link>
             <Link
+              to={"/home?income=level-income"}
+              className="flex items-center py-3 text-lg"
+            >
+              <span className="text-gray-800 dark:text-gray-300 font-semibold">
+                Level Income
+              </span>
+              <span className="ml-auto flex items-center justify-center gap-2 dark:text-gray-200 font-semibold">
+                <FaAngleRight />
+              </span>
+            </Link>
+            <Link
               to={{
                 pathname: "/home",
                 search: `?network=member-tree&uid=${user?.uid}`,

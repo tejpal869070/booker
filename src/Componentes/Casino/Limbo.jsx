@@ -431,8 +431,8 @@ export default function Limbo() {
             </div>
           )}
         </div>
-        <div className=" relative w-[100%]  lg:w-[70%]  px-6 py-2 h-screen/2 bg-[#0F212E]">
-          <div className="min-h-[60vh] relative">
+        <div className=" relative w-[100%]  lg:w-[70%]  px-6 py-2 h-screen/2 bg-gray-600">
+          <div className="min-h-[40vh] md:min-h-[60vh] relative">
             <HistoryTop history={history} />
             <div className="mt-20  flex justify-center  items-center w-full h-full">
               <p
@@ -472,9 +472,9 @@ export default function Limbo() {
           </div>
         </div>
       </div>
-      <div className="m-auto mt-6  max-w-[421px] md:max-w-[500px] lg:max-w-5xl">
-        <GameHistory />{" "}
-      </div>
+      {/* <div className="m-auto mt-6  max-w-[421px] md:max-w-[500px] lg:max-w-5xl">
+        <GameHistory type={"limbo"} />{" "}
+      </div> */}
     </div>
   );
 }

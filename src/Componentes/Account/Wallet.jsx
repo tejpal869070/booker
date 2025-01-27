@@ -16,6 +16,9 @@ import VerifyPin from "../VerifyPin";
 import { ToastContainer, toast } from "react-toastify";
 import { MainGameWalletMoneyTransfer } from "../../Controllers/User/GamesController";
 import { IoGameController } from "react-icons/io5";
+import { FaUsers } from "react-icons/fa";
+import { PiUserListFill } from "react-icons/pi";
+
 
 export default function Wallet() {
   const [user, setUser] = React.useState({});
@@ -289,6 +292,21 @@ const links = [
     label: "Investment",
     icons: <TbMoneybag fill="white" size={26} className="dark:text-white" />,
     linkTo: "/home?investment=new-investment",
+  },
+  {
+    label: "ROI Income",
+    icons: <TbMoneybag fill="white" size={26} className="dark:text-white" />,
+    linkTo: "/home?income=roi-income",
+  },
+  {
+    label: "Reffer Income",
+    icons: <FaUsers fill="white" size={26} className="dark:text-white" />,
+    linkTo: "/home?income=refferer-income",
+  },
+  {
+    label: "Level Income",
+    icons: <PiUserListFill fill="white" size={26} className="dark:text-white" />,
+    linkTo: "/home?income=level-income",
   },
   {
     label: "Deposit History",

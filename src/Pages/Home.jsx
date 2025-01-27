@@ -830,6 +830,18 @@ export default function Home() {
                 </li>
                 <li className="ml-11">
                   <Link
+                    to={{
+                      pathname: "/home",
+                      search: `?income=level-income`,
+                    }}
+                    className={`${dropdownClassList}`}
+                    onClick={handleHideSideBar}
+                  >
+                    Level income
+                  </Link>
+                </li>
+                <li className="ml-11">
+                  <Link
                     to={{ pathname: "/home", search: `?income=roi-income` }}
                     className={`${dropdownClassList}`}
                     onClick={handleHideSideBar}
