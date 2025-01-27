@@ -226,8 +226,23 @@ export default function Hero1() {
         </div>
       </div>
 
+      <div className="md:hidden">
+        <img
+          alt="banner"
+          src={require("../../assets/photos/referbanner.jpg")}
+          className="rounded-md mt-2 "
+        />
+      </div>
+
       {/* Games */}
       <Games />
+      <div className=" hidden md:block">
+        <img
+          alt="banner"
+          src={require("../../assets/photos/referbanner.jpg")}
+          className="rounded-md mt-2 "
+        />
+      </div>
 
       {/* quick options */}
       <p className="text-2xl   pb-4 dark:text-gray-200 font-bold ">
