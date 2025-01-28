@@ -59,8 +59,7 @@ export default function RoiIncome() {
       setFilteredData(filteredData);
     }
   }, [startDate, endDate, tableData]);
-
-  console.log(filteredData);
+ 
 
   return (
     <div className="min-h-screen">

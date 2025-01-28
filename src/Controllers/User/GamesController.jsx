@@ -192,6 +192,7 @@ export const MinesGameUpdateWallet = async (formData) => {
     const type = formData.type;
     const game_type = formData.game_type;
     const uid = formData.uid;
+    const details = formData.details || {};
     const timestampResponse = await GetServerCurrentTime();
     const date = timestampResponse;
     const timestamp = new Date(date).getTime();
@@ -202,6 +203,7 @@ export const MinesGameUpdateWallet = async (formData) => {
       game_type,
       uid,
       timestamp,
+      details,
     };
 
     const secretKey = process.env.REACT_APP_WALLET_UPDATE_KEY;

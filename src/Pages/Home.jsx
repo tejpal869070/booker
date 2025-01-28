@@ -401,15 +401,15 @@ export default function Home() {
                     Casino
                   </Link>
                 </li>
-                {/* <li className="ml-11">
+                <li className="ml-11">
                   <Link
-                    to={{ pathname: "/home", search: `?game=aviator` }}
+                    to={{ pathname: "/home", search: `?game=limbo` }}
                     className={`${dropdownClassList}`}
                     onClick={handleHideSideBar}
                   >
-                    Aviator
+                    Limbo
                   </Link>
-                </li> */}
+                </li>
               </ul>
             </li>
             <li className="side-bar-list">

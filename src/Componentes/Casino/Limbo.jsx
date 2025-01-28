@@ -1,7 +1,5 @@
 import React, { useCallback, useEffect, useRef } from "react";
-import { useState } from "react";
-import AutoMode from "../GamesComponent/MinesGame/AutoMode";
-import Manual from "../GamesComponent/Limbo/Manual";
+import { useState } from "react"; 
 // import Board from "../GamesComponent/Limbo/Board";
 import { toast, ToastContainer } from "react-toastify";
 import CountUp from "react-countup";
@@ -11,8 +9,7 @@ import { MinesGameUpdateWallet } from "../../Controllers/User/GamesController";
 import GameHistory from "../GamesComponent/Limbo/GameHistory";
 
 export default function Limbo() {
-  const [selected, setSelected] = useState("Manual");
-  const [isBetPlaced, setIsBetPlaced] = useState();
+  const [selected, setSelected] = useState("Manual"); 
   const [amount, setAmount] = useState(100);
   const [totlaBalance, setTotalBalance] = useState();
   const [randomNumber, setRandomNumber] = useState();
@@ -31,6 +28,7 @@ export default function Limbo() {
   const [playedGames, setPlayedGames] = useState(0);
   const [gameToWin, setGameToWin] = useState(0);
   const intervalId = useRef(null);
+  const [refreshHistory, setRefreshHistory] = useState(false);
 
   const handleClick = (type) => {
     setSelected(type);
@@ -45,13 +43,7 @@ export default function Limbo() {
     }
   };
 
-  const isBetPlacedFunction = (betPlaced) => {
-    if (betPlaced) {
-      setIsBetPlaced(true);
-    } else {
-      setIsBetPlaced(false);
-    }
-  };
+   
 
   const handleBetPlace = async () => {
     if (selected === "Manual") {
@@ -62,9 +54,7 @@ export default function Limbo() {
         if (Number(playedGames) === Number(totalBets)) {
           stopAutoBet();
           clearInterval(intervalId.current);
-        }
-
-        console.log(playedGames, totalBets);
+        } 
       }, 2000);
     }
   };
@@ -123,6 +113,11 @@ export default function Limbo() {
     } else {
       setWin(false);
     }
+    refreshHistoryFunction();
+  };
+
+  const refreshHistoryFunction = () => {
+    setRefreshHistory((pre) => !pre);
   };
 
   // update wallet balance online---------------------------------------------
@@ -132,6 +127,7 @@ export default function Limbo() {
     formData.amount = amount;
     formData.game_type = "Limbo";
     formData.uid = user?.uid;
+    formData.details = { limboTarget: target }; 
 
     try {
       const response = await MinesGameUpdateWallet(formData);
@@ -170,7 +166,7 @@ export default function Limbo() {
   }, []);
 
   const generateGameToWin = useCallback(() => {
-    const gameToWin = Math.floor(Math.random() * (Number(target) + 1)) + 1;
+    const gameToWin = Math.floor(Math.random() * Number(target)) + 1;
     setGameToWin(gameToWin);
   }, [target]);
 
@@ -233,7 +229,7 @@ export default function Limbo() {
             <div>
               <div className="flex justify-between dark:text-gray-200">
                 <p className="lg:text-sm font-medium">Bet Amount</p>
-                <p>₹{totlaBalance}</p>
+                <p>₹{Number(totlaBalance).toFixed(2)}</p>
               </div>
               <div className="flex relative items-center">
                 <input
@@ -472,9 +468,9 @@ export default function Limbo() {
           </div>
         </div>
       </div>
-      {/* <div className="m-auto mt-6  max-w-[421px] md:max-w-[500px] lg:max-w-5xl">
-        <GameHistory type={"limbo"} />{" "}
-      </div> */}
+      <div className="m-auto mt-6  max-w-[421px] md:max-w-[500px] lg:max-w-5xl">
+        <GameHistory type={"limbo"} refreshHistory={refreshHistory} />{" "}
+      </div>
     </div>
   );
 }
