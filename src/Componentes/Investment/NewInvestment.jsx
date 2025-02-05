@@ -141,6 +141,10 @@ export default function NewInvestment() {
     }
   }, [amount, PlansData]);
 
+  useEffect(() => {
+    setAmount(Number(PlansData[investmentPlan - 1]?.amount_start) || 10);
+  }, [investmentPlan, PlansData]);
+
   return (
     <div>
       <div className="   flex items-center justify-center  ">
@@ -210,15 +214,15 @@ export default function NewInvestment() {
                     >
                       Amount
                     </label>
-                    <div className="flex">
-                      <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
-                        <i className="mdi mdi-lock-outline text-gray-400 text-lg"></i>
+                    <div className="flex relative ">
+                      <div className="absolute h-full flex justify-center items-center z-10 pl-2 text-center pointer-events-none flex items-center justify-center">
+                        <p className="font-semibold text-green-500">$</p>
                       </div>
                       <input
                         type="number"
                         value={amount}
                         onChange={(e) => setAmount(e.target.value)}
-                        className="w-full -ml-10  pr-3 py-2 rounded-lg text-black font-medium border-2 border-gray-200 outline-none focus:border-indigo-500"
+                        className="w-full  pl-4  pr-3 py-2 rounded-lg text-green-500 font-medium border-2 border-gray-200 outline-none focus:border-indigo-500"
                       />
                     </div>
                     <p className="text-gray-700 text-xs italic">

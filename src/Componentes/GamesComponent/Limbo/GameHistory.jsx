@@ -3,7 +3,7 @@ import { GetGameHistoryByType } from "../../../Controllers/User/GamesController"
 
 export default function GameHistory({ type, refreshHistory }) {
   const [data, setData] = useState([]);
-  const [reverseData, setReverseData] = useState([])
+  const [reverseData, setReverseData] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       const response = await GetGameHistoryByType(type);
@@ -12,9 +12,9 @@ export default function GameHistory({ type, refreshHistory }) {
     fetchData();
   }, [type, refreshHistory]);
 
-  useEffect(()=>{
-    setReverseData(data.reverse())
-  },[data])
+  useEffect(() => {
+    setReverseData(data.reverse());
+  }, [data]);
 
   return (
     <div>
@@ -36,8 +36,8 @@ export default function GameHistory({ type, refreshHistory }) {
               </th>
               {/* <th scope="col" class="px-6 py-3">
                 Multiplier
-              </th> */}
-              {/* <th scope="col" class="px-6 py-3">
+              </th>
+              <th scope="col" class="px-6 py-3">
                 Payout
               </th> */}
             </tr>

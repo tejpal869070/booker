@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FcPortraitMode } from "react-icons/fc";
 import { IoLogOut } from "react-icons/io5";
 import { FaMoneyBillTransfer } from "react-icons/fa6";
@@ -14,13 +14,32 @@ import ThemeToggle from "../Controllers/ThemeToggle";
 import { Loading1 } from "../Componentes/Loading1";
 import CreatePin from "../Componentes/Dashboard/CratePin";
 import Logo from "../assets/photos/mainlogo.png";
+
+import { GiReceiveMoney, GiPayMoney } from "react-icons/gi";
+import { BsSafe2Fill } from "react-icons/bs";
+import { IoGameControllerSharp } from "react-icons/io5";
+
 // import Logo from "../assets/photos/mylogo2.png";
 
 import { RiVipDiamondFill } from "react-icons/ri";
+import { MdCancel } from "react-icons/md";
+import { FaArrowCircleLeft, FaArrowCircleRight } from "react-icons/fa";
+import VerifyPin from "../Componentes/VerifyPin";
+import { toast } from "react-toastify";
+import { MainGameWalletMoneyTransfer } from "../Controllers/User/GamesController";
 
 export default function Home() {
-  const [user, setUser] = React.useState({});
+  const [user, setuser] = React.useState({});
   const [loading, setLoading] = useState(true);
+  const [isWalletsOpen, setIsWalletsOpen] = useState(false);
+  const [type, setType] = useState();
+  const [transferToAmount, setTransferToAmount] = useState();
+  const [amountHave, setAmountHave] = useState();
+  const [error, setError] = useState("");
+  const [isVerifyOpen, setVerifyOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen2, setIsOpen2] = useState(false);
+
   const dropdownClassList =
     "flex w-full p-2 pl-0 text-gray-900 rounded-lg group dark:text-black dark:hover:text-black  hover:bg-[#919ffdfc]  hover:animate-fade-right hover:animate-once hover:justify-center hover:animate-duration-[400ms]";
 
@@ -59,20 +78,29 @@ export default function Home() {
     window.location.href = "/";
   };
 
-  const userDataGet = async () => {
+  const userGet = async () => {
     const response = await GetUserDetails();
     if (response !== null) {
-      setUser(response[0]);
+      setuser(response[0]);
       sessionStorage.setItem("userDetails", JSON.stringify(response[0]));
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    userDataGet();
+    userGet();
   }, []);
 
-  const [isOpen, setIsOpen] = useState(false);
+  const handleButtons = (id) => {
+    setIsOpen2(true);
+    setType(id);
+    if (id === 1) {
+      setAmountHave(user.wallet_balance);
+    } else {
+      setAmountHave(user.color_wallet_balnace);
+    }
+  };
+
   const dropdownRef = useRef(null);
 
   // Toggle dropdown visibility
@@ -90,7 +118,52 @@ export default function Home() {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [isWalletsOpen]);
+
+  const formData = {
+    amount: transferToAmount,
+    type: type,
+  };
+
+  const successFunction = async (pin) => {
+    try {
+      const response = await MainGameWalletMoneyTransfer(formData, pin);
+      if (response.status) {
+        userGet();
+        setTransferToAmount(0);
+        setIsOpen2(false);
+        window.location.reload();
+      } else {
+        toast.error(`Please Try Again !`, {
+          position: "top-center",
+        });
+      }
+    } catch (error) {
+      if (error.response.status === 302) {
+        toast.error(`${error.response.data.message}`, {
+          position: "top-center",
+        });
+      } else {
+        toast.error(`Something Went Wrong !`, {
+          position: "top-center",
+        });
+      }
+    }
+  };
+
+  const openVerifyPin = () => {
+    if (transferToAmount > Number(amountHave)) {
+      setError("Amount Exceed");
+    } else if (transferToAmount < 100 || transferToAmount === undefined) {
+      setError("Minimum Amount is 100");
+    } else {
+      setVerifyOpen(true);
+    }
+  };
+
+  const onclose2 = () => {
+    setVerifyOpen(false);
+  };
 
   if (loading) {
     return (
@@ -105,16 +178,35 @@ export default function Home() {
       <div className="md:hidden w-full z-[999]  pt-2 pb-2 flex items-center justify-center "></div>
       <nav className="hidden md:block bg-gradient-to-r from-blue-800 to-indigo-900 z-10 border-b-2 border-gray-200 dark:bg-gray-900 fixed w-full">
         <div className="  flex flex-wrap items-center justify-between mx-auto p-4">
-          {/* <Link
-            to={{ pathname: "/home", search: `?dashboard` }}
-            className="flex items-center space-x-3 rtl:space-x-reverse sm:pl-64"
-          >
-            <img src={Logo} className="h-8" alt="bLogo" />
-             
-          </Link> */}
           <div className="sm:pl-64" />
-          <div className="flex gap-4 items-center">
-            <div className="hidden lg:block">
+          <div className="flex gap-4 items-center justify-end">
+            <Link
+              to={"/home?money=usdt-deposit"}
+              className="cursor-pointer flex justify-center items-center gap-2 px-2 py-0.5 text-sm font-semibold rounded-full top-blinking-btn"
+            >
+              <GiPayMoney /> Deposit
+            </Link>
+            <Link
+              to={"/home?money=withdrawal"}
+              className="cursor-pointer flex justify-center items-center gap-2 px-2 py-0.5 text-sm font-semibold rounded-full top-blinking-btn"
+            >
+              <GiReceiveMoney /> Withdrawal
+            </Link>
+            <Link
+              to={"/home?investment=new-investment"}
+              className="cursor-pointer flex justify-center items-center gap-2 px-2 py-0.5 text-sm font-semibold rounded-full bg-gray-200"
+            >
+              <BsSafe2Fill /> Investment
+            </Link>
+            <button
+              onClick={() => setIsWalletsOpen(true)}
+              id="recharge-button"
+              className="cursor-pointer flex justify-center items-center gap-2 px-2 py-0.5 text-sm font-semibold rounded-full bg-gray-200"
+            >
+              <IoGameControllerSharp /> Recharge Game Wallet
+            </button>
+
+            <div className="hidden md:block">
               <ThemeToggle onNav={true} />
             </div>
             <div className="flex  lg:flex-col items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
@@ -958,6 +1050,136 @@ export default function Home() {
 
       {/* Create pin */}
       {user && user?.user_pin === "N" && <CreatePin />}
+
+      {isWalletsOpen && (
+        <div className="animate-fade-down animate-duration-500 fixed top-0 left-0 w-full h-full flex justify-center items-center pt-10  backdrop-blur-[4px]   z-[9999]">
+          <div className=" text-white bg-gradient-to-r from-gray-700 rounded   to-slate-900 p-10 inline-block">
+            <div className="flex gap-6 items-center">
+              <section className="px-6 py-2 rounded border-2 border-white">
+                <p className="text-white font-semibold text-center text-2xl">
+                  Main Wallet
+                </p>
+                <p className="font-semibold text-xl text-center mt-2 pt-2 border-gray-400  text-white border-t-2">
+                  ₹{Number(user.wallet_balance).toFixed(2)}
+                </p>
+              </section>
+              <section className="px-6 py-2 rounded border-2 border-white">
+                <p className="text-white font-semibold text-center text-2xl">
+                  Game Wallet
+                </p>
+                <p className="font-semibold text-xl text-center mt-2 pt-2 border-gray-400  text-white border-t-2">
+                  ₹{Number(user.color_wallet_balnace).toFixed(2)}
+                </p>
+              </section>
+            </div>
+            <div className="flex gap-6 items-center justify-around mt-2">
+              <button
+                onClick={() => handleButtons(1)}
+                className="px-6 py-2 rounded-full cursor-pointer bg-green-400"
+              >
+                <p className="text-white font-semibold flex justify-center items-center gap-2 text-center text-sm">
+                  Transfer To Game
+                  <FaArrowCircleRight size={20} />
+                </p>
+              </button>
+              <button
+                onClick={() => handleButtons(2)}
+                className="px-6 py-2 rounded-full cursor-pointer bg-green-400"
+              >
+                <p className="text-white font-semibold flex justify-center items-center gap-2 text-center text-sm">
+                  <FaArrowCircleLeft size={20} />
+                  Transfer To Main
+                </p>
+              </button>
+            </div>
+            <MdCancel
+              onClick={() => setIsWalletsOpen(false)}
+              size={22}
+              className="m-auto mt-6 cursor-pointer"
+            />
+          </div>
+        </div>
+      )}
+
+      {/* popup */}
+      {isOpen2 && (
+        <div className="animate-fade-down animate-duration-500 fixed top-0 left-0 w-full h-full flex justify-center pt-10  backdrop-blur-md   z-[9999]">
+          <div className=" text-white bg-gradient-to-r from-gray-700 rounded h-[60vh] to-slate-900 p-10 inline-block">
+            <p className="text-xl font-medium text-center text-gray-200 border-b pb-2">
+              Transfer From <br />{" "}
+              {type === 1
+                ? "Main Wallet To Game Wallet"
+                : "Game Wallet To Main Wallet"}
+            </p>
+            <p className="mt-6">
+              Your {type === 1 ? "Main Wallet Balance" : "Game Wallet Balance"}
+              {"  "}
+              {"  "}
+              <span className="text-lg font-bold">
+                ₹{" "}
+                {type === 1
+                  ? Number(user.wallet_balance).toFixed(2)
+                  : Number(user.color_wallet_balnace).toFixed(2)}
+              </span>
+            </p>{" "}
+            <div className="max-w-sm mt-4">
+              <label
+                for="input-label"
+                className="block text-sm text-gray-300 font-medium mb-2 dark:text-white"
+              >
+                Transfer To {type === 1 ? "Game Wallet" : "Main Wallet"}
+              </label>
+              <input
+                type="number"
+                id="input-label"
+                className="py-2 px-4 block text-gray-200 bg-gray-700 w-full border-x-0 border-t-0 border-b-2   text-md       dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                placeholder=" "
+                value={transferToAmount}
+                onChange={(e) => setTransferToAmount(e.target.value)}
+              />
+              {error && <p className="text-red-500 italic text-sm">{error}</p>}
+              <button
+                onClick={openVerifyPin}
+                className="m-auto w-full mt-4 relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group"
+              >
+                <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M14 5l7 7m0 0l-7 7m7-7H3"
+                    ></path>
+                  </svg>
+                </span>
+                <span className="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease">
+                  Transfer
+                </span>
+                <span className="relative invisible">Button Text</span>
+              </button>
+            </div>
+            {/* close button */}
+            <MdCancel
+              size={30}
+              onClick={() => setIsOpen2(false)}
+              className="cursor-pointer text-center m-auto mt-6"
+            />
+          </div>
+        </div>
+      )}
+
+      {isVerifyOpen && (
+        <VerifyPin
+          onclose2={onclose2}
+          successFunction={(pin) => successFunction(pin)}
+        />
+      )}
     </div>
   );
 }

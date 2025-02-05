@@ -665,3 +665,29 @@ export const GetLevelIncome = async () => {
     return [];
   }
 };
+
+export const GetMatchingIncome = async () => {
+  const postData = {
+    mobile: mobile,
+  };
+
+  const axiosConfig = {
+    headers: {
+      Authorization: `Bearer ${bearerToken}`,
+    },
+  };
+  try {
+    const response = await axios.post(
+      `${API.url}user/get-matching-income`,
+      postData,
+      axiosConfig
+    );
+    if (response.data.status) {
+      return response.data.data.reverse();
+    } else {
+      return [];
+    }
+  } catch (error) {
+    return [];
+  }
+};

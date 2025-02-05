@@ -18,7 +18,8 @@ import { MainGameWalletMoneyTransfer } from "../../Controllers/User/GamesControl
 import { IoGameController } from "react-icons/io5";
 import { FaUsers } from "react-icons/fa";
 import { PiUserListFill } from "react-icons/pi";
-
+import { BsFillSafeFill } from "react-icons/bs";
+import { FaCircleChevronRight } from "react-icons/fa6";
 
 export default function Wallet() {
   const [user, setUser] = React.useState({});
@@ -135,7 +136,7 @@ export default function Wallet() {
             Total Balance
           </p>
 
-          <div className="flex justify-between w-full px-4 mt-6">
+          <div className="flex justify-between w-full px-2 mt-6">
             <div className="flex w-[45%] flex-col justify-center items-center rounded-lg  p-4 px-6  bg-[#3F98F6]">
               <p className="font-semibold text-2xl text-white">
                 ₹{user && Number(user.wallet_balance).toFixed(2)}
@@ -151,10 +152,10 @@ export default function Wallet() {
           </div>
 
           {/* balance transfer */}
-          <div className="flex justify-between w-full px-4 mt-1 ">
+          <div className="flex justify-between w-full px-2 mt-1 ">
             <button
               onClick={() => handleButtons(1)}
-              className="flex w-[45%] flex-col justify-center items-center rounded-full  py-2 px-1.5  bg-white"
+              className="flex w-[45%] flex-col justify-center items-center rounded-md  py-2 px-1.5  bg-white"
             >
               <p className="text-sm text-gray-800 font-semibold flex justify-center items-center gap-2">
                 Transfer To Game <FaAngleRight />
@@ -162,7 +163,7 @@ export default function Wallet() {
             </button>
             <button
               onClick={() => handleButtons(2)}
-              className="flex w-[45%] flex-col justify-center items-center rounded-full  py-2 px-1.5  bg-white"
+              className="flex w-[45%] flex-col justify-center items-center rounded-md  py-2 px-1.5  bg-white"
             >
               <p className="text-sm text-gray-800 font-semibold flex justify-center items-center gap-2">
                 <FaAngleLeft /> Transfer To Main
@@ -170,7 +171,28 @@ export default function Wallet() {
             </button>
           </div>
 
-          <div className="flex flex-wrap   mt-6">
+          <Link
+            to={"/home?investment=new-investment"}
+            className="flex justify-between px-2 items-center gap-2 mx-2 bg-indigo-200 rounded-md  mt-4 py-1"
+          >
+            <div>
+              <BsFillSafeFill
+                className="dark:text-gray-200"
+                color="#d7971d"
+                size={40}
+              />
+            </div>
+            <p className="dark:text-green-500 font-medium">
+              Earn 0.1% to 5% daily interest on investment with us
+            </p>
+            <FaCircleChevronRight
+              className="dark:text-gray-200"
+              size={30}
+              color="black"
+            />
+          </Link>
+
+          <div className="flex flex-wrap   mt-2">
             {links.map((item, index) => (
               <Link
                 key={index}
@@ -299,14 +321,22 @@ const links = [
     linkTo: "/home?income=roi-income",
   },
   {
+    label: "Level Income",
+    icons: (
+      <PiUserListFill fill="white" size={26} className="dark:text-white" />
+    ),
+    linkTo: "/home?income=level-income",
+  },
+  {
     label: "Reffer Income",
     icons: <FaUsers fill="white" size={26} className="dark:text-white" />,
     linkTo: "/home?income=refferer-income",
   },
+
   {
-    label: "Level Income",
-    icons: <PiUserListFill fill="white" size={26} className="dark:text-white" />,
-    linkTo: "/home?income=level-income",
+    label: "Matching Income",
+    icons: <FaWallet size={26} className="dark:text-white" />,
+    linkTo: "/home?income=matching-income",
   },
   {
     label: "Deposit History",

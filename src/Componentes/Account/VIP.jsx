@@ -86,7 +86,7 @@ export default function VIP() {
     <div className="mb-10 lg:mt-6 h-screen pb-10">
       <Slider {...settings}>
         {plans.map((item, index) => (
-          <div className="relative px-2 pb-4" key={index}>
+          <div className="relative px-2  pb-4" key={index}>
             <img
               className="w-[95%] h-[12rem] lg:h-40 rounded-lg  absolute top-0"
               src={API.url + "assets/img/" + item.bgimage}
@@ -124,7 +124,7 @@ export default function VIP() {
               <div className="flex justify-between mt-1.5">
                 <p className="text-sm lg:text-[10px] rounded-xl flex items-center justify-center font-medium px-3  bg-gradient-to-r from-blue-200 to-cyan-200 text-gray-700">
                   {/* {user?.wagering}/{item.minimumrebetamount} */}
-                  {Number(user?.wagering) >= Number(item.minimumrebetamount) ? <MdVerified size={20} color="green"/> : `${user?.wagering}/${item.minimumrebetamount}`}
+                  {Number(user?.wagering) >= Number(item.minimumrebetamount) ? <MdVerified size={20} color="green"/> : `${Number(user?.wagering).toFixed(2)}/${item.minimumrebetamount}`}
                 </p>
                 <p className="text-sm lg:text-[12px]">
                   
@@ -245,7 +245,7 @@ export default function VIP() {
                 </tr>
               </thead>
               <tbody>
-                {data.map((item, index) => (
+                {/* {data.map((item, index) => (
                   <tr key={index} className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                     <th
                       scope="row"
@@ -257,7 +257,7 @@ export default function VIP() {
                     <td className="whitespace-nowrap px-6 py-3">{item.type}</td>
                     <td className="whitespace-nowrap px-6 py-3">{item.date}</td>
                   </tr>
-                ))}
+                ))} */}
               </tbody>
             </table>
           </div>

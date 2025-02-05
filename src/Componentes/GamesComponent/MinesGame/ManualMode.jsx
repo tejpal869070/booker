@@ -5,7 +5,7 @@ import { GetUserDetails } from "../../../Controllers/User/UserController";
 import { MinesGameUpdateWallet } from "../../../Controllers/User/GamesController";
 import { ToastContainer, toast } from "react-toastify";
 import { minesProfitTable } from "../../../assets/Data/MinesData";
-import { EncryptTimestamp } from "../../../Controllers/Auth/EncryptTimestamp";
+import { IoReloadCircle } from "react-icons/io5";
 
 export default function ManualMode({ isBetPlacedFunction, isRecharged }) {
   const [amount, setAmount] = useState(100);
@@ -17,8 +17,7 @@ export default function ManualMode({ isBetPlacedFunction, isRecharged }) {
   const [isBetPlaced, setIsBetPlaced] = useState(false);
   const [bombFound, setBombFound] = useState(false);
   const [isCashOut, setCashOut] = useState(false);
-    const [user, setUser] = useState({});
-  
+  const [user, setUser] = useState({});
 
   // admin controller start------------------------------------------------------------------------------------------------------------
   const [totalGamePlayed, setTotalGamePlayed] = useState(0);
@@ -58,7 +57,7 @@ export default function ManualMode({ isBetPlacedFunction, isRecharged }) {
     formData.game_type = "Mines";
     formData.uid = user?.uid;
 
-    try { 
+    try {
       const response = await MinesGameUpdateWallet(formData);
       if (response.status) {
       }
@@ -98,9 +97,9 @@ export default function ManualMode({ isBetPlacedFunction, isRecharged }) {
       return;
     }
     // admin controller start------------------------------------------------------------------------------------------------------------
-    setTotalGamePlayed((pre) => pre + 1); 
-    if (totalGamePlayed+1  === gameNumberToLoss) {
-      setThisGameLoss(true); 
+    setTotalGamePlayed((pre) => pre + 1);
+    if (totalGamePlayed + 1 === gameNumberToLoss) {
+      setThisGameLoss(true);
     }
     // admin controller end------------------------------------------------------------------------------------------------------------
     setIsBetPlaced(true);
@@ -148,17 +147,22 @@ export default function ManualMode({ isBetPlacedFunction, isRecharged }) {
         diamondIndexeRef.current = newDiamondIndex;
       } else {
         if (!bombIndexRef.current.includes(item.id)) {
-          const currentBombIndexs = bombIndexRef.current; 
-          const lastBombRemoved = currentBombIndexs.pop()
+          const currentBombIndexs = bombIndexRef.current;
+          const lastBombRemoved = currentBombIndexs.pop();
           bombIndexRef.current = [...currentBombIndexs, item.id];
-          diamondIndexeRef.current = diamondIndexeRef.current.filter((i)=> i != item.id);
-          diamondIndexeRef.current = [...diamondIndexeRef.current, lastBombRemoved]
+          diamondIndexeRef.current = diamondIndexeRef.current.filter(
+            (i) => i != item.id
+          );
+          diamondIndexeRef.current = [
+            ...diamondIndexeRef.current,
+            lastBombRemoved,
+          ];
         }
       }
     }
     // admin controller end------------------------------------------------------------------------------------------------------------
     setOpenedMines((pre) => [...pre, item.id]);
-    if (bombIndexRef.current.includes(item.id)) { 
+    if (bombIndexRef.current.includes(item.id)) {
       setBombFound(true);
       setIsBetPlaced(false);
       const audio = new Audio(require("../../../assets/audio/blast1.mp3"));
@@ -222,8 +226,8 @@ export default function ManualMode({ isBetPlacedFunction, isRecharged }) {
 
   // admin controller start------------------------------------------------------------------------------------------------------------
   const generateGameToBeLoss = () => {
-    const randomNum = Math.floor(Math.random() *5) + 1;
-    setGameNumberToLoss(randomNum); 
+    const randomNum = Math.floor(Math.random() * 5) + 1;
+    setGameNumberToLoss(randomNum);
   };
   useEffect(() => {
     generateGameToBeLoss();
@@ -250,11 +254,13 @@ export default function ManualMode({ isBetPlacedFunction, isRecharged }) {
                 {bombFound ? (
                   diamondIndexeRef.current.includes(item.id) ? (
                     <img
+                      alt="sdjbf"
                       className="m-auto w-12 animate-rotate-y animate-once animate-duration-[3000ms]"
                       src={require("../../../assets/photos/diamond.png")}
                     />
                   ) : (
                     <img
+                      alt="sdjbf"
                       className="m-auto w-16 animate-wiggle animate-infinite"
                       src={require("../../../assets/photos/time-bomb.png")}
                     />
@@ -262,12 +268,14 @@ export default function ManualMode({ isBetPlacedFunction, isRecharged }) {
                 ) : openedMines.includes(item.id) &&
                   diamondIndexeRef.current.includes(item.id) ? (
                   <img
+                    alt="sdjbf"
                     className="m-auto w-12 "
                     src={require("../../../assets/photos/diamond.png")}
                   />
                 ) : openedMines.includes(item.id) &&
                   bombIndexRef.current.includes(item.id) ? (
                   <img
+                    alt="sdjbf"
                     className="m-auto w-12"
                     src={require("../../../assets/photos/time-bomb.png")}
                   />
@@ -319,8 +327,8 @@ export default function ManualMode({ isBetPlacedFunction, isRecharged }) {
               <p className="font-medium">
                 Balance:{" "}
                 <span className="text-lg lg:text-md text-green-400">
-                  ₹{totlaBalance}
-                </span>
+                  ₹{Number(totlaBalance).toFixed(2)}
+                </span>{" "}
               </p>
             </div>
             <div className="flex justify-between">
@@ -342,7 +350,14 @@ export default function ManualMode({ isBetPlacedFunction, isRecharged }) {
           <div>
             <div className="flex justify-between dark:text-gray-200">
               <p className="lg:text-sm font-medium">Bet Amount</p>
-              <p>₹{totlaBalance}</p>
+              <p className="flex gap-1 justify-center items-center">
+                ₹{Number(totlaBalance).toFixed(2)}{" "}
+                <IoReloadCircle
+                  className="cursor-pointer"
+                  size={19}
+                  onClick={() => GetUserDetails()}
+                />
+              </p>
             </div>
             <div className="flex relative items-center">
               <input

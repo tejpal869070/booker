@@ -182,7 +182,7 @@ export default function Hero1() {
             >
               <div
                 onClick={() => setIsWalletsOpen(true)}
-                className="flex justify-between"
+                className="flex justify-between recharge-button"
               >
                 <HiMiniWallet className="" size={26} color="#92a0fd" />
                 <p className="blinking-btn hidden md:flex cursor-pointer px-2 bg-green-500 rounded-full text-sm md:text-xs text-white font-medium   justify-center items-center">

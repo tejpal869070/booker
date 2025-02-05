@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef } from "react";
-import { useState } from "react"; 
+import { useState } from "react";
 // import Board from "../GamesComponent/Limbo/Board";
 import { toast, ToastContainer } from "react-toastify";
 import CountUp from "react-countup";
@@ -9,7 +9,7 @@ import { MinesGameUpdateWallet } from "../../Controllers/User/GamesController";
 import GameHistory from "../GamesComponent/Limbo/GameHistory";
 
 export default function Limbo() {
-  const [selected, setSelected] = useState("Manual"); 
+  const [selected, setSelected] = useState("Manual");
   const [amount, setAmount] = useState(100);
   const [totlaBalance, setTotalBalance] = useState();
   const [randomNumber, setRandomNumber] = useState();
@@ -43,8 +43,6 @@ export default function Limbo() {
     }
   };
 
-   
-
   const handleBetPlace = async () => {
     if (selected === "Manual") {
       await betFunction();
@@ -54,7 +52,7 @@ export default function Limbo() {
         if (Number(playedGames) === Number(totalBets)) {
           stopAutoBet();
           clearInterval(intervalId.current);
-        } 
+        }
       }, 2000);
     }
   };
@@ -127,7 +125,7 @@ export default function Limbo() {
     formData.amount = amount;
     formData.game_type = "Limbo";
     formData.uid = user?.uid;
-    formData.details = { limboTarget: target }; 
+    formData.details = { limboTarget: target };
 
     try {
       const response = await MinesGameUpdateWallet(formData);
@@ -234,7 +232,7 @@ export default function Limbo() {
               <div className="flex relative items-center">
                 <input
                   className="w-full text-gray-800 rounded border-2  border-gray-200 px-2 py-1  focus:outline-none font-semibold text-lg"
-                  placeholder="Enter Amount "
+                  placeholder="Enter Amount"
                   value={amount}
                   type="number"
                   onChange={(e) => setAmount(e.target.value)}
@@ -252,12 +250,12 @@ export default function Limbo() {
                   >
                     1/2
                   </button>
-                  <button
+                  <buton
                     onClick={() => doubleTheAmount()}
                     className="px-1.5  py-2 bg-gray-500 text-gray-200 border-l-2 text-sm  font-medium border-gray-200"
                   >
                     2x
-                  </button>
+                  </buton>
                 </div>
               </div>
               <p className="mt-3 lg:mt-2 lg:text-sm dark:text-gray-200 font-medium">

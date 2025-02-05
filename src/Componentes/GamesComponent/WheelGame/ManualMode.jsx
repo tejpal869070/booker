@@ -16,10 +16,8 @@ export default function ManualMode() {
   const [gameStarted, setGameStarted] = useState(false);
   const [currentRotation, setCurrentRotation] = useState(0);
   const [isWin, setWin] = useState(false);
-  const [winAmount, setWinAmount] = useState(); 
-    const [user, setUser] = useState({});
-  
- 
+  const [winAmount, setWinAmount] = useState();
+  const [user, setUser] = useState({});
 
   const amountRef = useRef(amount);
 
@@ -34,8 +32,6 @@ export default function ManualMode() {
   const selectGameType = (e) => {
     setGameType(e.target.value);
   };
-
-   
 
   const handleSpinFunction = (amount) => {
     const audio = new Audio(require("../../../assets/audio/spin-232536.mp3"));
@@ -82,11 +78,27 @@ export default function ManualMode() {
     }
   };
 
-  const handleSpinClick = async () => {
+  const handleSpinClick = async () => { 
     if (amountRef.current > totalBalance || amountRef.current === 0) {
-      toast.warn("Insufficient Balance", {
-        position: "top-center",
-      });
+      toast.warn(
+        <div className="flex justify-center items-center py-4 flex-col gap-2">
+          <p>Insufficient Balance</p>
+          <button
+            className="px-2 py-1 rounded-md bg-black text-gray-200"
+            onClick={() => {
+              const rechargeId = document.getElementById("recharge-button");
+              if (rechargeId) {
+                rechargeId.click();
+              }
+            }}
+          >
+            Recharge Game Wallet
+          </button>
+        </div>,
+        {
+          position: "top-center",
+        }
+      );
       return;
     }
     handleSpinFunction(amountRef.current);
@@ -106,7 +118,7 @@ export default function ManualMode() {
       const response = await MinesGameUpdateWallet(formData);
       if (response && response.status) {
       }
-    } catch (error) { 
+    } catch (error) {
       if (error?.response?.status === 302) {
         toast.error(error.response.data.message, {
           position: "top-center",
@@ -122,7 +134,7 @@ export default function ManualMode() {
       const response = await GetUserDetails();
       if (response !== null) {
         setTotalBalance(Number(response[0].color_wallet_balnace));
-        setUser(response[0])
+        setUser(response[0]);
       } else {
         window.location.href = "/";
       }
@@ -165,7 +177,6 @@ export default function ManualMode() {
       return () => clearTimeout(timer);
     }
   }, [transitionEnabled]);
- 
 
   return (
     <div>

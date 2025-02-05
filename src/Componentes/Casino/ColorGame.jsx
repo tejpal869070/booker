@@ -29,7 +29,7 @@ export default function ColorGame() {
   const [transferToAmount, setTransferToAmount] = useState();
   const [amountHave, setAmountHave] = useState();
   const [success, setSuccess] = useState(false);
-  const [isVerifyOpen, setVerifyOpen] = useState(false); 
+  const [isVerifyOpen, setVerifyOpen] = useState(false);
 
   const fetchGameTypes = async () => {
     try {
@@ -43,7 +43,7 @@ export default function ColorGame() {
         icon: "error",
         buttons: {
           confirm: "OK",
-        }, 
+        },
         dangerMode: true,
       }).then((willRedirect) => {
         if (willRedirect) {
@@ -54,7 +54,7 @@ export default function ColorGame() {
   };
 
   const userDataGet = async () => {
-    setLoading(true)
+    setLoading(true);
     const response = await GetUserDetails();
     if (response !== null) {
       setUser(response[0]);
@@ -146,39 +146,38 @@ export default function ColorGame() {
     );
   }
 
-  
-
   return (
     <div className="h-screen">
       <div className=" hidden md:flex   gap-6 mb-4 flex-wrap  ">
-        <p className="relative " href="#">
-          <p className="fold-bold border-2 border-black dark:border-gray-400 relative z-[2] inline-block h-full w-full rounded  bg-indigo-100 dark:bg-indigo-100 text-gray-700 px-3 py-1 text-base font-bold text-black transition duration-100  ">
-            <RiColorFilterFill size={28} color="black" />
-            Game Balance : ₹{Number(user.color_wallet_balnace).toFixed(2)}
-          </p>
-          <div className="absolute w-full h-full bg-black dark:bg-gray-200 animate-pulse animate-duration-1000 top-1 left-1 z-[1] rounded "/>
-        </p>
-        <div className="flex flex-col justify-between dark:text-gray-200 font-semibold">
-          <button
-            onClick={() => handleButtons(2)}
-            className="flex items-center gap-2 cursor-pointer text-[#1116ff] dark:text-[#ffff54] animate-pulse animate-duration-1000"
-          >
-            Transfer To Main <FaHandPointRight />
-          </button>
-          <button
-            onClick={() => handleButtons(1)}
-            className="flex items-center gap-2 cursor-pointer text-[#1116ff] dark:text-[#ffff54] animate-pulse animate-duration-1000"
-          >
-            <FaHandPointLeft />
-            Transfer To Game
-          </button>
-        </div>
         <p className="relative " href="#">
           <p className="fold-bold border-2 border-black dark:border-gray-400 relative z-[2] inline-block h-full w-full rounded     bg-indigo-100 dark:bg-indigo-100 text-gray-700 px-3 py-1 text-base font-bold text-black transition duration-100  ">
             <BiSolidWallet size={28} color="black" /> Main Balance : ₹
             {Number(user.wallet_balance).toFixed(2)}
           </p>
-          <div className="absolute w-full h-full bg-black dark:bg-gray-200 animate-pulse animate-duration-1000 top-1 left-1 z-[1] rounded "/>
+          <div className="absolute w-full h-full bg-black dark:bg-gray-200 animate-pulse animate-duration-1000 top-1 left-1 z-[1] rounded " />
+        </p>
+        <div className="flex flex-col justify-between dark:text-gray-200 font-semibold">
+          <button
+            onClick={() => handleButtons(1)}
+            className="flex items-center gap-2 cursor-pointer text-[#1116ff] dark:text-[#ffff54] animate-pulse animate-duration-1000"
+          >
+            Transfer To Game <FaHandPointRight />
+          </button>
+          <button
+            onClick={() => handleButtons(2)}
+            className="flex items-center gap-2 cursor-pointer text-[#1116ff] dark:text-[#ffff54] animate-pulse animate-duration-1000"
+          >
+            <FaHandPointLeft />
+            Transfer To Main
+          </button>
+        </div>
+
+        <p className="relative " href="#">
+          <p className="fold-bold border-2 border-black dark:border-gray-400 relative z-[2] inline-block h-full w-full rounded  bg-indigo-100 dark:bg-indigo-100 text-gray-700 px-3 py-1 text-base font-bold text-black transition duration-100  ">
+            <RiColorFilterFill size={28} color="black" />
+            Game Balance : ₹{Number(user.color_wallet_balnace).toFixed(2)}
+          </p>
+          <div className="absolute w-full h-full bg-black dark:bg-gray-200 animate-pulse animate-duration-1000 top-1 left-1 z-[1] rounded " />
         </p>
       </div>
 
@@ -186,12 +185,15 @@ export default function ColorGame() {
         <p className="relative w-[45%]" href="#">
           <p className="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-indigo-100 dark:bg-indigo-100 text-gray-700 px-3 py-1 text-base font-bold text-black transition duration-100  ">
             <RiColorFilterFill size={28} color="black" />
-            Game Balance : <br/> <p className="text-xl">₹{Number(user.color_wallet_balnace).toFixed(2)}</p>
+            Game Balance : <br />{" "}
+            <p className="text-xl">
+              ₹{Number(user.color_wallet_balnace).toFixed(2)}
+            </p>
           </p>
         </p>
         <p className="relative w-[45%]" href="#">
           <p className="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-indigo-100 dark:bg-indigo-100 text-gray-700 px-3 py-1 text-base font-bold text-black transition duration-100  ">
-            <BiSolidWallet size={28} color="black" /> Main Balance : 
+            <BiSolidWallet size={28} color="black" /> Main Balance :
             <p className="text-xl">₹{Number(user.wallet_balance).toFixed(2)}</p>
           </p>
         </p>
@@ -253,7 +255,10 @@ export default function ColorGame() {
               {"  "}
               {"  "}
               <span className="text-lg font-bold">
-                ₹  {type === 1 ? Number(user.wallet_balance).toFixed(2) : Number(user.color_wallet_balnace).toFixed(2)}
+                ₹{" "}
+                {type === 1
+                  ? Number(user.wallet_balance).toFixed(2)
+                  : Number(user.color_wallet_balnace).toFixed(2)}
               </span>
             </p>{" "}
             <div className="max-w-sm mt-4">

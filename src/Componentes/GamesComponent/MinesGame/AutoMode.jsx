@@ -182,7 +182,7 @@ export default function AutoMode({ isBetPlacedFunction }) {
     let currentBet = 0;
 
     const startBetting = () => {
-      if (stopProfit > 0 || stopLoss > 0 || totalBets == 0) {
+      if (stopProfit > 0 || stopLoss > 0 || totalBets === 0) {
         const infiniteBetting = () => {
           if (balanceRef.current < amountRef.current) {
             stopAutoBet();

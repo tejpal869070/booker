@@ -14,7 +14,7 @@ export default function GameTypeSelector({ gameStarted }) {
 
   return (
     <div>
-      <div className="w-full flex space-x-2 bg-gray-800 rounded-full px-2 py-3">
+      <div className="w-full flex space-x-2 bg-gray-800 rounded-full px-2 py-2">
         <Link
           to={{
             pathname: "/home",
