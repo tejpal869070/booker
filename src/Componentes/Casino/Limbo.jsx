@@ -71,9 +71,25 @@ export default function Limbo() {
       stopAutoBet();
       return;
     } else if (amount > totlaBalance) {
-      toast.error("Insufficient balance", {
-        position: "top-center",
-      });
+      toast.warn(
+        <div className="flex justify-center items-center py-4 flex-col gap-2">
+          <p>Insufficient Balance</p>
+          <button
+            className="px-2 py-1 rounded-md bg-black text-gray-200"
+            onClick={() => {
+              const rechargeId = document.getElementById("recharge-button");
+              if (rechargeId) {
+                rechargeId.click();
+              }
+            }}
+          >
+            Recharge Game Wallet
+          </button>
+        </div>,
+        {
+          position: "top-center",
+        }
+      );
       stopAutoBet();
       return;
     }

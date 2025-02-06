@@ -13,7 +13,7 @@ import gif1 from "../../../../assets/photos/withdrawgif.gif";
 import VerifyPin from "../../../VerifyPin";
 
 const inputClasses =
-  "shadow-sm bg-gray-50 font-medium border border-gray-300 dark:bg-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5";
+  "shadow-sm bg-gray-50 font-medium border border-gray-300 dark:bg-gray-200 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5";
 
 export default function BankWithDrawal() {
   const [user, setUser] = React.useState({});

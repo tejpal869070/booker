@@ -16,7 +16,7 @@ import { FaBitcoin } from "react-icons/fa6";
 
 export default function BankDeposit() {
   const inputClasses =
-    "shadow-sm bg-gray-50 font-medium border border-gray-300 dark:bg-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5";
+    "shadow-sm bg-gray-50 font-medium border border-gray-300 dark:bg-gray-200 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5";
 
   const [tab, setTab] = useState(1);
   const [paymentMethods, setPaymentMethods] = useState([]);

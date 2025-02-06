@@ -186,7 +186,26 @@ export default function AutoMode({ isBetPlacedFunction }) {
         const infiniteBetting = () => {
           if (balanceRef.current < amountRef.current) {
             stopAutoBet();
-            toast.warn("Insufficient funds");
+            toast.warn(
+              <div className="flex justify-center items-center py-4 flex-col gap-2">
+                <p>Insufficient Balance</p>
+                <button
+                  className="px-2 py-1 rounded-md bg-black text-gray-200"
+                  onClick={() => {
+                    const rechargeId =
+                      document.getElementById("recharge-button");
+                    if (rechargeId) {
+                      rechargeId.click();
+                    }
+                  }}
+                >
+                  Recharge Game Wallet
+                </button>
+              </div>,
+              {
+                position: "top-center",
+              }
+            );
             return;
           }
           setWegeredAmount((pre) => pre + amountRef.current);
@@ -212,7 +231,26 @@ export default function AutoMode({ isBetPlacedFunction }) {
         const startRegularBetting = () => {
           if (balanceRef.current < amountRef.current) {
             stopAutoBet();
-            toast.warn("Insufficient funds");
+            toast.warn(
+              <div className="flex justify-center items-center py-4 flex-col gap-2">
+                <p>Insufficient Balance</p>
+                <button
+                  className="px-2 py-1 rounded-md bg-black text-gray-200"
+                  onClick={() => {
+                    const rechargeId =
+                      document.getElementById("recharge-button");
+                    if (rechargeId) {
+                      rechargeId.click();
+                    }
+                  }}
+                >
+                  Recharge Game Wallet
+                </button>
+              </div>,
+              {
+                position: "top-center",
+              }
+            );
             return;
           }
           if (currentBet < totalBets) {
@@ -233,7 +271,7 @@ export default function AutoMode({ isBetPlacedFunction }) {
 
   const stopAutoBet = () => {
     setStartingBalance(balanceRef.current);
-    setAutoBetStart(false); 
+    setAutoBetStart(false);
     generateRandom();
     setAllOpen(false);
     setBetWin(false);

@@ -253,7 +253,18 @@ export default function NewInvestment() {
                 <div className="flex justify-between  mt-4  gap-6  ">
                   <button
                     className="relative"
-                    onClick={() => setVerifyPinPop(true)}
+                    onClick={() => {
+                      if (
+                        Number(amount) <
+                        Number(user.wallet_balance) / Number(user.currency_rate)
+                      ) {
+                        setVerifyPinPop(true);
+                      } else {
+                        toast.warn("Insufficient balance.", {
+                          position: "top-center",
+                        });
+                      }
+                    }}
                     disabled={amount < 1}
                   >
                     <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-black dark:bg-gray-500"></span>

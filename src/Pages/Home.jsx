@@ -199,7 +199,10 @@ export default function Home() {
               <BsSafe2Fill /> Investment
             </Link>
             <button
-              onClick={() => setIsWalletsOpen(true)}
+              onClick={async () => {
+                await userGet();
+                setIsWalletsOpen(true);
+              }}
               id="recharge-button"
               className="cursor-pointer flex justify-center items-center gap-2 px-2 py-0.5 text-sm font-semibold rounded-full bg-gray-200"
             >

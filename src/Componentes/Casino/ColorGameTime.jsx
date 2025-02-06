@@ -12,7 +12,7 @@ import {
   ColorGameNumbers,
 } from "../../Controllers/User/GamesController";
 import swal from "sweetalert";
-import { Loading1 } from "../Loading1"; 
+import { Loading1 } from "../Loading1";
 import { GetUserDetails } from "../../Controllers/User/UserController";
 import offer1 from "../../assets/photos/offer1.jpg";
 import offer2 from "../../assets/photos/offer2.jpg";
@@ -157,7 +157,7 @@ export default function ColorGame({ gameType }) {
   const countdownFunction = (seconds) => {
     setIsCountDown(true);
     setIsPopupOpen(false);
-    setRemainingSecond(seconds); 
+    setRemainingSecond(seconds);
   };
 
   const userDataGet = async () => {
@@ -166,10 +166,10 @@ export default function ColorGame({ gameType }) {
       const response = await GetUserDetails();
       if (response !== null && response.length > 0) {
         setUser(response[0]);
-      } else { 
+      } else {
         setUser(null); // Optionally reset user state
       }
-    } catch (error) { 
+    } catch (error) {
       // Optionally handle error state or notify the user
     } finally {
       setUserLoading(false);
@@ -228,7 +228,7 @@ export default function ColorGame({ gameType }) {
             )}
           </div>
           <p className="font-medium dark:text-gray-200 text-medium pr-4">
-            Balance : ₹ {user && user.color_wallet_balnace}
+            Balance : ₹ {user && Number(user.color_wallet_balnace).toFixed(2)}
           </p>
         </div>
 

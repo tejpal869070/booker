@@ -34,8 +34,7 @@ export default function AutoMode() {
   const [desiredSpins, setDesiredSpins] = useState(0);
   const [spinCount, setSpinCount] = useState(0);
 
-    const [user, setUser] = useState({});
-  
+  const [user, setUser] = useState({});
 
   // New state to track if a spin is in progress
   const [isSpinning, setIsSpinning] = useState(false);
@@ -120,9 +119,25 @@ export default function AutoMode() {
       stopAutoSpin();
       return;
     } else if (amountRef.current > currentBalance || amountRef.current === 0) {
-      toast.warn("Insufficient Balance", {
-        position: "top-center",
-      });
+      toast.warn(
+        <div className="flex justify-center items-center py-4 flex-col gap-2">
+          <p>Insufficient Balance</p>
+          <button
+            className="px-2 py-1 rounded-md bg-black text-gray-200"
+            onClick={() => {
+              const rechargeId = document.getElementById("recharge-button");
+              if (rechargeId) {
+                rechargeId.click();
+              }
+            }}
+          >
+            Recharge Game Wallet
+          </button>
+        </div>,
+        {
+          position: "top-center",
+        }
+      );
       stopAutoSpin();
       return;
     } else if (
@@ -186,7 +201,7 @@ export default function AutoMode() {
     formData.type = type;
     formData.amount = amount;
     formData.game_type = "Wheel";
-    formData.uid = user?.uid
+    formData.uid = user?.uid;
 
     try {
       const response = await MinesGameUpdateWallet(formData);
@@ -208,7 +223,7 @@ export default function AutoMode() {
       const response = await GetUserDetails();
       if (response !== null) {
         const newBalance = Number(response[0].color_wallet_balnace);
-        setUser(response[0])
+        setUser(response[0]);
         setTotalBalance(newBalance);
         setStartingBalance(newBalance);
       } else {

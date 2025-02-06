@@ -83,12 +83,24 @@ export default function VIP() {
   }
 
   return (
-    <div className="mb-10 lg:mt-6 h-screen pb-10">
+    <div className="mb-10  h-screen pb-10">
+      <div className="w-full  flex w-full justify-between bg-white rounded-md mb-2 px-2 py-1">
+        <div>
+          <p className="font-semibold text-gray-700">Total Wagering</p>
+          <p className="font-semibold text-lg text-green-500">
+            ₹{Number(user?.wagering).toFixed(2)}
+          </p>
+        </div>
+        <button className="px-4 text-lg py-1 rounded bg-green-600 font-semibold text-gray-200 ">Claim Reward</button>
+      </div>
       <Slider {...settings}>
         {plans.map((item, index) => (
-          <div className="relative px-2  pb-4" key={index}>
+          <div
+            className="relative px-2 bg-gray-500 rounded-md border-gray-100 border-x-2 border-y-0 pt-2 pb-2"
+            key={index}
+          >
             <img
-              className="w-[95%] h-[12rem] lg:h-40 rounded-lg  absolute top-0"
+              className="w-[95%] h-[12rem] lg:h-40 rounded-lg  absolute top-2"
               src={API.url + "assets/img/" + item.bgimage}
               alt="baner"
             />
@@ -107,7 +119,15 @@ export default function VIP() {
                 {item.title}
               </p>
               <ProgressBar
-                completed={Math.max(0, Math.min((Number(user?.wagering).toFixed(2) / Number(item.minimumrebetamount)) * 100, 100).toFixed(2)) }
+                completed={Math.max(
+                  0,
+                  Math.min(
+                    (Number(user?.wagering).toFixed(2) /
+                      Number(item.minimumrebetamount)) *
+                      100,
+                    100
+                  ).toFixed(2)
+                )}
                 maxCompleted={100}
                 height="15px"
                 labelSize="11px"
@@ -124,12 +144,20 @@ export default function VIP() {
               <div className="flex justify-between mt-1.5">
                 <p className="text-sm lg:text-[10px] rounded-xl flex items-center justify-center font-medium px-3  bg-gradient-to-r from-blue-200 to-cyan-200 text-gray-700">
                   {/* {user?.wagering}/{item.minimumrebetamount} */}
-                  {Number(user?.wagering) >= Number(item.minimumrebetamount) ? <MdVerified size={20} color="green"/> : `${Number(user?.wagering).toFixed(2)}/${item.minimumrebetamount}`}
+                  {Number(user?.wagering) >= Number(item.minimumrebetamount) ? (
+                    <MdVerified size={20} color="green" />
+                  ) : (
+                    `${Number(user?.wagering).toFixed(2)}/${
+                      item.minimumrebetamount
+                    }`
+                  )}
                 </p>
                 <p className="text-sm lg:text-[12px]">
-                  
-                  {Number(item.minimumrebetamount)  - Number(user?.wagering) > 0 ? `Require ₹ ${(Number(item.minimumrebetamount)   -  Number(user?.wagering)).toFixed(2)} ` : "Upgraded" } 
-                  
+                  {Number(item.minimumrebetamount) - Number(user?.wagering) > 0
+                    ? `Require ₹ ${(
+                        Number(item.minimumrebetamount) - Number(user?.wagering)
+                      ).toFixed(2)} `
+                    : "Upgraded"}
                 </p>
               </div>
             </div>
@@ -188,11 +216,16 @@ export default function VIP() {
                 </ul>
               </div>
             </div>
+            {Number(item.id) === Number(user?.wagring_id) && (
+              <div className="w-[98%] m-auto mt-2 rounded-md bg-[#27cb94] py-2 cursor-pointer  text-center font-semibold text-gray-100 ">
+                Claim Reward
+              </div>
+            )}
           </div>
         ))}
       </Slider>
 
-      <div className="relative   w-full flex bg-indigo-400 rounded px-2 lg:px-4 py-6">
+      <div className="relative mt-4  w-full flex bg-indigo-400 rounded px-2 lg:px-4 py-6">
         <button
           onClick={() => setTab(1)}
           className={`w-1/2 text-center dark:text-gray-200 py-3 ${
