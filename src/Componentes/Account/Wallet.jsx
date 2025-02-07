@@ -122,17 +122,22 @@ export default function Wallet() {
       <ToastContainer />
       <div className=" h-screen">
         <div className="m-2 border-2 rounded-lg dark:bg-gray-700  ">
-          <p className="text-center text-3xl font-bold text-[#8F9DFA] border-b-2 border-indigo-400 py-2">
+          <p className="text-center text-xl font-bold text-[#8F9DFA]  py-2">
             Wallet
           </p>
-          <p className="text-2xl font-bold text-center mt-6 dark:text-gray-200 ">
+          <img
+            alt="wallet icon"
+            src={require("../../assets/photos/walleticon.png")}
+            className="m-auto w-16 h-16"
+          />
+          <p className="text-2xl font-bold text-center mt-2 dark:text-gray-200 ">
             ₹
             {user &&
               (
                 Number(user.wallet_balance) + Number(user.color_wallet_balnace)
               ).toFixed(2)}
           </p>
-          <p className="text-center text-sm  text-gray-400 -mt-1">
+          <p className="text-center text-sm  text-gray-400 -mt-1 pb-4 border-b-2 border-indigo-400">
             Total Balance
           </p>
 
@@ -176,14 +181,14 @@ export default function Wallet() {
             className="flex justify-between px-2 items-center gap-2 mx-2 bg-indigo-200 rounded-md  mt-4 py-1"
           >
             <div>
-              <BsFillSafeFill
-                className="dark:text-gray-200"
-                color="#d7971d"
-                size={40}
+              <img
+                alt="sudgf"
+                src={require("../../assets/photos/investment.png")}
+                className="w-12"
               />
             </div>
             <p className="dark:text-green-500 font-medium">
-              Earn 0.1% to 5% daily interest on investment with us
+              Earn upto 5% daily interest on investment with us
             </p>
             <FaCircleChevronRight
               className="dark:text-gray-200"

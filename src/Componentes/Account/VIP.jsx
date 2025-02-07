@@ -84,14 +84,16 @@ export default function VIP() {
 
   return (
     <div className="mb-10  h-screen pb-10">
-      <div className="w-full  flex w-full justify-between bg-white rounded-md mb-2 px-2 py-1">
+      <div className="w-full  flex w-full justify-between bg-gray-200 rounded-md mb-2 px-2 py-1">
         <div>
           <p className="font-semibold text-gray-700">Total Wagering</p>
           <p className="font-semibold text-lg text-green-500">
             ₹{Number(user?.wagering).toFixed(2)}
           </p>
         </div>
-        <button className="px-4 text-lg py-1 rounded bg-green-600 font-semibold text-gray-200 ">Claim Reward</button>
+        <button className="px-4 text-lg py-1 rounded bg-green-600 font-semibold text-gray-200 ">
+          Claim Reward
+        </button>
       </div>
       <Slider {...settings}>
         {plans.map((item, index) => (

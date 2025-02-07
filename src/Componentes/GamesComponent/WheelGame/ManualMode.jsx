@@ -78,7 +78,7 @@ export default function ManualMode() {
     }
   };
 
-  const handleSpinClick = async () => { 
+  const handleSpinClick = async () => {
     if (amountRef.current > totalBalance || amountRef.current === 0) {
       toast.warn(
         <div className="flex justify-center items-center py-4 flex-col gap-2">
@@ -180,11 +180,13 @@ export default function ManualMode() {
 
   return (
     <div>
-      <div className="flex flex-wrap-reverse">
-        <div className="w-[100%] md:w-[35%] lg:w-[25%] p-6 h-screen/2 bg-gray-500">
-          <GameTypeSelector gameStarted={gameStarted} />
-          <div>
-            <ToastContainer />
+      <ToastContainer />
+      <div className="flex m-auto max-w-[421px] md:max-w-[500px] lg:max-w-5xl  flex-wrap-reverse">
+        <div className="w-[100%] flex flex-col-reverse lg:flex-col  lg:w-[30%]  p-6 h-screen/2 bg-gray-500">
+          <div className="mt-4 lg:mt-0">
+            <GameTypeSelector gameStarted={gameStarted} />
+          </div>
+          <div className="flex flex-col-reverse lg:flex-col">
             <div>
               <div className="flex justify-between dark:text-gray-200">
                 <p className="lg:text-sm font-medium">Bet Amount</p>
@@ -231,7 +233,7 @@ export default function ManualMode() {
               </select>
             </div>
             <button
-              className="mt-8 px-6 py-3 bg-[#20E701] w-full text-[#05080A] text-lg font-semibold rounded-lg  transition"
+              className="mt-2 lg:mt-8 px-6 py-3 bg-[#20E701] w-full text-[#05080A] text-lg font-semibold rounded-lg  transition"
               onClick={() => handleSpinClick()}
               disabled={gameStarted}
             >
@@ -239,9 +241,7 @@ export default function ManualMode() {
             </button>
           </div>
         </div>
-        <div
-          id="wheelBoard"
-          className=" relative w-[100%] md:w-[65%] lg:w-[75%] p-6 h-screen/2 bg-[#0F212E]"
+        <div id="wheelBoard" className=" relative  w-[100%]  lg:w-[70%] p-6 h-screen/2 bg-[#0F212E]"
         >
           <div className="flex justify-center items-center">
             <div className="relative flex flex-col items-center mt-10">

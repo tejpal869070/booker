@@ -136,7 +136,8 @@ export default function Hero1() {
               Joining: {userData && userData?.date?.split("T")[0]}
             </p>
             <div className="flex flex-wrap   gap-4 mt-4">
-              <div
+              <button
+                id="referButton"
                 className="relative cursor-pointer"
                 onClick={openSocialShare}
               >
@@ -144,7 +145,7 @@ export default function Hero1() {
                 <span className="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900">
                   Referral
                 </span>
-              </div>
+              </button>
               <Link
                 className="relative"
                 to={{
@@ -226,7 +227,15 @@ export default function Hero1() {
         </div>
       </div>
 
-      <div className="md:hidden">
+      <div
+        className="md:hidden cursor-pointer"
+        onClick={() => {
+          const referClickId = document.getElementById("referButton");
+          if (referClickId) {
+            referClickId.click();
+          }
+        }}
+      >
         <img
           alt="banner"
           src={require("../../assets/photos/referbanner.jpg")}
@@ -236,7 +245,15 @@ export default function Hero1() {
 
       {/* Games */}
       <Games />
-      <div className=" hidden md:block">
+      <div
+        className=" hidden md:block cursor-pointer"
+        onClick={() => {
+          const referClickId = document.getElementById("referButton");
+          if (referClickId) {
+            referClickId.click();
+          }
+        }}
+      >
         <img
           alt="banner"
           src={require("../../assets/photos/referbanner.jpg")}
