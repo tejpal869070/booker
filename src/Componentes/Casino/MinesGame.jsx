@@ -1,14 +1,18 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useState } from "react";
 import ManualMode from "../GamesComponent/MinesGame/ManualMode";
 import AutoMode from "../GamesComponent/MinesGame/AutoMode";
-import { FlashPopup } from "../GamesComponent/RechargePopup";
+import GameHistory from "../GamesComponent/Limbo/GameHistory";
 
 export default function MinesGame() {
   const [selected, setSelected] = useState("Manual");
   const [isBetPlaced, setIsBetPlaced] = useState();
-  const [isFlashPopup, setFlashPopup] = useState(true);
   const [isRecharged, setRecharged] = useState(false);
+  const [refreshHistory, setRefreshHistory] = useState(false);
+
+  const refreshHistoryFunction = () => {
+    setRefreshHistory((pre) => !pre);
+  };
 
   const handleClick = (type) => {
     setSelected(type);
@@ -17,14 +21,9 @@ export default function MinesGame() {
   const isBetPlacedFunction = (betPlaced) => {
     if (betPlaced) {
       setIsBetPlaced(true);
-    } else { 
+    } else {
       setIsBetPlaced(false);
     }
-  };
-
-  const handleClose = () => {
-    setFlashPopup(false);
-    setRecharged((pre) => !pre);
   };
 
   return (
@@ -76,12 +75,14 @@ export default function MinesGame() {
                 isBetPlacedFunction(isBetPlaced)
               }
               isRecharged={isRecharged}
+              refreshHistoryFunction={refreshHistoryFunction}
             />
           ) : (
             <AutoMode
               isBetPlacedFunction={(isBetPlaced) =>
                 isBetPlacedFunction(isBetPlaced)
               }
+              refreshHistoryFunction={refreshHistoryFunction}
             />
           )}
         </div>
@@ -89,6 +90,9 @@ export default function MinesGame() {
           id="boxBoard"
           className=" relative w-[100%]  lg:w-[70%]  p-6 h-screen/2 bg-[#0F212E]"
         ></div>
+      </div>
+      <div className="m-auto mt-6  max-w-[421px] md:max-w-[500px] lg:max-w-5xl">
+        <GameHistory type={"mines"} refreshHistory={refreshHistory} />
       </div>
     </div>
   );

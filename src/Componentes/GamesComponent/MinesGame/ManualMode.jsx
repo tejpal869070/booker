@@ -7,7 +7,11 @@ import { ToastContainer, toast } from "react-toastify";
 import { minesProfitTable } from "../../../assets/Data/MinesData";
 import { IoReloadCircle } from "react-icons/io5";
 
-export default function ManualMode({ isBetPlacedFunction, isRecharged }) {
+export default function ManualMode({
+  isBetPlacedFunction,
+  isRecharged,
+  refreshHistoryFunction,
+}) {
   const [amount, setAmount] = useState(100);
   const [totalBombs, setTotalBombs] = useState(1);
   const [totlaBalance, setTotalBalance] = useState();
@@ -60,6 +64,7 @@ export default function ManualMode({ isBetPlacedFunction, isRecharged }) {
     try {
       const response = await MinesGameUpdateWallet(formData);
       if (response.status) {
+        refreshHistoryFunction();
       }
     } catch (error) {
       if (error?.response?.status === 302) {
@@ -122,6 +127,7 @@ export default function ManualMode({ isBetPlacedFunction, isRecharged }) {
     // admin controller end------------------------------------------------------------------------------------------------------------
     setIsBetPlaced(true);
     updateWalletBalance("deduct", amount);
+
     setTotalBalance((pre) => pre - amount);
   };
 

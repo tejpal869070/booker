@@ -74,10 +74,10 @@ export default function UserProfile() {
   }
 
   return (
-    <div className="dark:bg-black min:h-screen pb-40">
+    <div className="dark:bg-black min:h-screen px-2 pb-40">
       <ToastContainer />
-      <div className="  px-2">
-        <div className="rounded-lg   bg-white dark:bg-gray-800 px-2 pt-8 pb-10 shadow-lg">
+      <div className="   ">
+        <div className="rounded-lg      pt-8 pb-10 shadow-lg">
           <div className="flex gap-4">
             <div className="relative     rounded-full">
               <span className="absolute right-0 m-3 h-3 w-3 rounded-full bg-green-500 ring-2 ring-green-300 ring-offset-2"></span>

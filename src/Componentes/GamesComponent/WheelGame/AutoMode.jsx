@@ -7,7 +7,7 @@ import { GetUserDetails } from "../../../Controllers/User/UserController";
 import { AiOutlineAreaChart } from "react-icons/ai";
 import Graph from "../MinesGame/Graph";
 
-export default function AutoMode() {
+export default function AutoMode({ refreshHistoryFunction }) {
   const [amount, setAmount] = useState(100);
   const [totalBalance, setTotalBalance] = useState(0);
   const [gameType, setGameType] = useState("low");
@@ -164,6 +164,7 @@ export default function AutoMode() {
       handleSpinFunction(amountRef.current);
       setTotalBalance((pre) => pre - amountRef.current);
       updateWalletBalance("deduct", amountRef.current);
+      refreshHistoryFunction();
     }
   };
 
@@ -265,6 +266,7 @@ export default function AutoMode() {
             "add",
             amountRef.current * selectedColor?.profit
           );
+          refreshHistoryFunction();
         } else {
           if (increaseOnLoss > 0) {
             setAmount((pre) => pre + (pre * Number(increaseOnLoss)) / 100);
@@ -315,7 +317,7 @@ export default function AutoMode() {
             <GameTypeSelector gameStarted={autoSpin} />
           </div>
           <div className="flex flex-col">
-            <div className="order-3 lg:order-1">
+            <div className="order-2 lg:order-1">
               <div>
                 <div className="flex justify-between dark:text-gray-200">
                   <p className="lg:text-sm font-medium">Bet Amount</p>
@@ -375,7 +377,6 @@ export default function AutoMode() {
                 />
               </div>
             </div>
-
             <button
               className={`mt-4 order-1 lg:order-2 px-6 py-3 ${
                 autoSpin ? "bg-red-500" : "bg-blue-500"
@@ -390,7 +391,7 @@ export default function AutoMode() {
             >
               {autoSpin ? "Stop Auto Bet" : "Start Auto Bet"}
             </button>
-            <div className="order-2 lg:order-3">
+            <div className="order-3 lg:order-3">
               <div>
                 <p className="lg:text-sm text-gray-200 font-medium mt-1 mb-1">
                   Stop On Profit

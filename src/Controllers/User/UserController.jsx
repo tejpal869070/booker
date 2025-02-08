@@ -691,3 +691,27 @@ export const GetMatchingIncome = async () => {
     return [];
   }
 };
+
+export const ClaimReward = async () => {
+  const postData = {
+    mobile: mobile,
+  };
+
+  const axiosConfig = {
+    headers: {
+      Authorization: `Bearer ${bearerToken}`,
+    },
+  };
+  try {
+    const response = await axios.post(
+      `${API.url}user/claim-reward`,
+      postData,
+      axiosConfig
+    );
+    if (response.status) {
+      return response?.data?.amount;
+    }
+  } catch (error) {
+    throw error;
+  }
+};

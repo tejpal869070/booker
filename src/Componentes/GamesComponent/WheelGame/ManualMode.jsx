@@ -5,7 +5,7 @@ import { WheelData } from "../../../assets/Data/WheelData";
 import { MinesGameUpdateWallet } from "../../../Controllers/User/GamesController";
 import { GetUserDetails } from "../../../Controllers/User/UserController";
 
-export default function ManualMode() {
+export default function ManualMode({ refreshHistoryFunction }) {
   const [amount, setAmount] = useState(100);
   const [totalBalance, setTotalBalance] = useState(0);
   const [gameType, setGameType] = useState("low");
@@ -101,9 +101,15 @@ export default function ManualMode() {
       );
       return;
     }
-    handleSpinFunction(amountRef.current);
-    setTotalBalance((pre) => pre - amountRef.current);
-    updateWalletBalance("deduct", amountRef.current);
+    const walletResponse = await updateWalletBalance(
+      "deduct",
+      amountRef.current
+    );
+    if (walletResponse) {
+      handleSpinFunction(amountRef.current);
+      setTotalBalance((pre) => pre - amountRef.current);
+      refreshHistoryFunction();
+    }
   };
 
   // update wallet balance online---------------------------------------------
@@ -117,14 +123,17 @@ export default function ManualMode() {
     try {
       const response = await MinesGameUpdateWallet(formData);
       if (response && response.status) {
+        return true;
       }
     } catch (error) {
       if (error?.response?.status === 302) {
         toast.error(error.response.data.message, {
           position: "top-center",
         });
+        return false;
       } else {
         toast.error("Server Error");
+        return false;
       }
     }
   };
@@ -162,6 +171,7 @@ export default function ManualMode() {
             "add",
             amountRef.current * selectedColor?.profit
           );
+          refreshHistoryFunction();
         }
       }
     };
@@ -241,14 +251,16 @@ export default function ManualMode() {
             </button>
           </div>
         </div>
-        <div id="wheelBoard" className=" relative  w-[100%]  lg:w-[70%] p-6 h-screen/2 bg-[#0F212E]"
+        <div
+          id="wheelBoard"
+          className=" relative  w-[100%]  lg:w-[70%] p-6 h-screen/2 bg-[#0F212E]"
         >
           <div className="flex justify-center items-center">
             <div className="relative flex flex-col items-center mt-10">
               {/* Pin */}
               <div
                 className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24"
-                style={{ zIndex: 10 }}
+                style={{ zIndex: 5 }}
               >
                 <img
                   alt="pin"

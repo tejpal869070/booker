@@ -8,7 +8,10 @@ import { AiOutlineAreaChart } from "react-icons/ai";
 import Graph from "./Graph";
 import { MinesGameUpdateWallet } from "../../../Controllers/User/GamesController";
 
-export default function AutoMode({ isBetPlacedFunction }) {
+export default function AutoMode({
+  isBetPlacedFunction,
+  refreshHistoryFunction,
+}) {
   const [totalBombs, setTotalBombs] = useState(1);
   const [amount, setAmount] = useState(100);
   const [totlaBalance, setTotalBalance] = useState();
@@ -70,6 +73,7 @@ export default function AutoMode({ isBetPlacedFunction }) {
     try {
       const response = await MinesGameUpdateWallet(formData);
       if (response.status) {
+        refreshHistoryFunction();
       }
     } catch (error) {
       if (error?.response?.status === 302) {
