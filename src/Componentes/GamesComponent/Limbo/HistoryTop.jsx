@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 export default function HistoryTop({ history }) { 
   return (
@@ -6,10 +6,17 @@ export default function HistoryTop({ history }) {
       {history &&
         history.length &&
         history.map((item, index) => (
-          <div className={ `px-4 py-1 text-sm flex justify-center items-center font-medium rounded-full ${Number(item.target) <= Number(item.randomNumber) ? "bg-green-500  text-gray-200" : "bg-gray-200 text-gray-800" }`}>
+          <div
+            className={`px-4 py-1 text-sm flex justify-center items-center font-medium rounded-full ${
+              Number(item.target).toFixed(2) <=
+              Number(item.randomNumber).toFixed(2)
+                ? "bg-green-500  text-gray-200"
+                : "bg-gray-200 text-gray-800"
+            }`}
+          >
             {Number(item.randomNumber).toFixed(2)}x
           </div>
-        ))} 
+        ))}
     </div>
   );
 }

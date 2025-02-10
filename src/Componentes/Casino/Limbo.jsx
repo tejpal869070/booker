@@ -10,7 +10,7 @@ import GameHistory from "../GamesComponent/Limbo/GameHistory";
 
 export default function Limbo() {
   const [selected, setSelected] = useState("Manual");
-  const [amount, setAmount] = useState(100);
+  const [amount, setAmount] = useState(1);
   const [totlaBalance, setTotalBalance] = useState();
   const [randomNumber, setRandomNumber] = useState();
   const [target, setTarget] = useState(1.01);
@@ -29,6 +29,9 @@ export default function Limbo() {
   const [gameToWin, setGameToWin] = useState(0);
   const intervalId = useRef(null);
   const [refreshHistory, setRefreshHistory] = useState(false);
+  const autoBetRef = useRef(null);
+  const totalBalanceRef = useRef(totlaBalance);
+  const playedGamesRef = useRef(playedGames);
 
   const handleClick = (type) => {
     setSelected(type);
@@ -47,23 +50,47 @@ export default function Limbo() {
     if (selected === "Manual") {
       await betFunction();
     } else {
-      intervalId.current = setInterval(async () => {
-        await betFunction();
-        if (Number(playedGames) === Number(totalBets)) {
-          stopAutoBet();
-          clearInterval(intervalId.current);
-        }
-      }, 2000);
+      if (totalBalanceRef.current < amount) {
+        toast.warn("Inufficient balance");
+      } else {
+        autoBetFunction();
+      }
     }
   };
+
+  const autoBetFunction = async () => {
+    await betFunction();
+    autoBetRef.current = setInterval(async () => {
+      await betFunction();
+    }, 2500);
+  };
+  // clearInterval(autoBetRef.current);
 
   const stopAutoBet = () => {
     setAutoBetStart(false);
     setPlayedGames(0);
-    clearInterval(intervalId.current);
+    clearInterval(autoBetRef.current);
   };
 
   const betFunction = async () => {
+    if (selected === "Manual") {
+      mainBetFunction();
+    } else {
+      if (totalBets === 0 || totalBets === undefined) {
+        mainBetFunction();
+      } else {  
+        if (Number(totalBets) === Number(playedGamesRef.current)) {
+          stopAutoBet();
+          console.log("this twowowwo")
+        } else {
+          mainBetFunction();
+          console.log("this one")
+        }
+      }
+    }
+  };
+
+  const mainBetFunction = async () => {
     if (amount < 1 || target < 1.01) {
       toast.error("Min. amount is ₹1 & target is 1.01", {
         position: "top-center",
@@ -93,9 +120,11 @@ export default function Limbo() {
       stopAutoBet();
       return;
     }
-    setPlayedGames(playedGames + 1);
+    if (selected === "Auto") {
+      setAutoBetStart(true);
+    }
+    setPlayedGames((pre) => pre + 1);
     setManualBetStart(true);
-    setAutoBetStart(true);
     await updateWalletBalance("deduct", amount);
     setRandomNumber(1);
     if (playedGames === gameToWin) {
@@ -105,7 +134,7 @@ export default function Limbo() {
       ).toFixed(2);
       setRandomNumber(parseFloat(randomNumber));
       setHistory((prevData) => [...prevData, { target, randomNumber }]);
-      setPlayedGames(0);
+      // setPlayedGames(0);
       updateBalanceShow(randomNumber);
       generateGameToWin();
     } else {
@@ -116,12 +145,15 @@ export default function Limbo() {
     }
     setTimeout(() => {
       setManualBetStart(false);
-      setAutoBetStart(false);
     }, 1000);
   };
 
+  useEffect(() => {
+    console.log(playedGames);
+  }, [playedGames]);
+
   const updateBalanceShow = async (randomNumber) => {
-    if (Number(randomNumber) >= Number(target)) {
+    if (Number(randomNumber).toFixed(2) >= Number(target).toFixed(2)) {
       await updateWalletBalance("add", amount * target);
       setWin(true);
     } else {
@@ -185,6 +217,10 @@ export default function Limbo() {
   }, [target]);
 
   useEffect(() => {
+    setPlayedGames(0);
+  }, [selected]);
+
+  useEffect(() => {
     generateGameToWin();
   }, [generateGameToWin, target]);
 
@@ -193,6 +229,20 @@ export default function Limbo() {
       clearInterval(intervalId);
     };
   }, [intervalId]);
+
+  useEffect(() => {
+    totalBalanceRef.current = totlaBalance;
+  }, [totlaBalance]);
+
+  useEffect(() => {
+    playedGamesRef.current = playedGames;
+  }, [playedGames]);
+
+  useEffect(() => {
+    return () => {
+      clearInterval(autoBetRef.current); // Clear the interval on unmount
+    };
+  }, []);
 
   return (
     <div className="min-h-screen ">
@@ -220,10 +270,9 @@ export default function Limbo() {
             </button>
 
             <button
-              // onClick={() => handleClick("Auto")}
-              // disabled={isAutoBetStart || isManualBetStart}
-              disabled
-              className={`cursor-not-allowed relative w-1/2 px-6 py-2 rounded-full overflow-hidden  font-medium transition-all  ${
+              onClick={() => handleClick("Auto")}
+              disabled={isAutoBetStart || isManualBetStart}
+              className={`  relative w-1/2 px-6 py-2 rounded-full overflow-hidden  font-medium transition-all  ${
                 selected === "Auto"
                   ? "bg-blue-500 text-gray-100"
                   : "bg-gray-300 text-gray-900"
@@ -333,8 +382,8 @@ export default function Limbo() {
                   className="w-full rounded border px-2 py-1 outline-none font-semibold text-lg bg-[#0F212E] text-[#f7efe8]"
                   placeholder="Enter Bets Number "
                   value={totalBets}
+                  disabled={isAutoBetStart}
                   type="number"
-                  // disabled={isAutoBetStart}
                   onChange={(e) => setTotalBets(e.target.value)}
                 />
               )}
