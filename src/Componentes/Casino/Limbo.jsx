@@ -7,6 +7,8 @@ import HistoryTop from "../GamesComponent/Limbo/HistoryTop";
 import { GetUserDetails } from "../../Controllers/User/UserController";
 import { MinesGameUpdateWallet } from "../../Controllers/User/GamesController";
 import GameHistory from "../GamesComponent/Limbo/GameHistory";
+import { AiOutlineAreaChart } from "react-icons/ai";
+import Graph from "../GamesComponent/MinesGame/Graph";
 
 export default function Limbo() {
   const [selected, setSelected] = useState("Manual");
@@ -32,6 +34,14 @@ export default function Limbo() {
   const autoBetRef = useRef(null);
   const totalBalanceRef = useRef(totlaBalance);
   const playedGamesRef = useRef(playedGames);
+  const [startingBalance, setStartingBalance] = useState(totlaBalance);
+  const [isGraph, setIsGraph] = useState(false);
+
+  // graph datat
+  const [wageredAmount, setWegeredAmount] = useState(0);
+  const [graphProfit, setGraphProfit] = useState(0);
+  const [totalWin, setTotalWin] = useState(0);
+  const [totalLoss, setTotalLoss] = useState(0);
 
   const handleClick = (type) => {
     setSelected(type);
@@ -52,6 +62,10 @@ export default function Limbo() {
     } else {
       if (totalBalanceRef.current < amount) {
         toast.warn("Inufficient balance");
+      } else if (stopLoss > 0 && stopLoss < amountRef.current) {
+        toast.error(
+          "The stop-loss target cannot be lower than the current bet amount."
+        );
       } else {
         autoBetFunction();
       }
@@ -70,21 +84,27 @@ export default function Limbo() {
     setAutoBetStart(false);
     setPlayedGames(0);
     clearInterval(autoBetRef.current);
+    setStartingBalance(totalBalanceRef.current);
+    
   };
 
   const betFunction = async () => {
+    const currentBalance = totalBalanceRef.current;
     if (selected === "Manual") {
       mainBetFunction();
     } else {
       if (totalBets === 0 || totalBets === undefined) {
         mainBetFunction();
-      } else {  
-        if (Number(totalBets) === Number(playedGamesRef.current)) {
+      } else {
+        console.log(currentBalance, stopLoss)
+        if (Number(totalBets) === Number(playedGamesRef.current)) { 
+          stopAutoBet(); 
+        } else if ( currentBalance >= Number(startingBalance) + Number(stopProfit) && Number(stopProfit) > 0 ) {
           stopAutoBet();
-          console.log("this twowowwo")
+        } else if ( currentBalance <= Number(startingBalance) - Number(stopLoss) &&  Number(stopLoss) > 0  ) {
+          stopAutoBet();
         } else {
           mainBetFunction();
-          console.log("this one")
         }
       }
     }
@@ -123,11 +143,12 @@ export default function Limbo() {
     if (selected === "Auto") {
       setAutoBetStart(true);
     }
+    setWegeredAmount((pre) => pre + amountRef.current);
     setPlayedGames((pre) => pre + 1);
     setManualBetStart(true);
-    await updateWalletBalance("deduct", amount);
+    await updateWalletBalance("deduct", amountRef.current);
     setRandomNumber(1);
-    if (playedGames === gameToWin) {
+    if (playedGames >= gameToWin) {
       const randomNumber = (
         Math.random() * Number(target) +
         Number(target)
@@ -148,16 +169,22 @@ export default function Limbo() {
     }, 1000);
   };
 
-  useEffect(() => {
-    console.log(playedGames);
-  }, [playedGames]);
-
   const updateBalanceShow = async (randomNumber) => {
     if (Number(randomNumber).toFixed(2) >= Number(target).toFixed(2)) {
-      await updateWalletBalance("add", amount * target);
+      await updateWalletBalance("add", amountRef.current * target);
+      setTotalWin((pre) => pre + 1);
+      setGraphProfit((pre) => pre + amount * target - amount);
       setWin(true);
+      if (increaseOnWin > 0) {
+        setAmount((pre) => pre + (pre * Number(increaseOnWin)) / 100);
+      }
     } else {
       setWin(false);
+      setGraphProfit((pre) => pre - amount);
+      setTotalLoss((pre) => pre + 1);
+      if (increaseOnLoss > 0) {
+        setAmount((pre) => pre + (pre * Number(increaseOnLoss)) / 100);
+      }
     }
     refreshHistoryFunction();
   };
@@ -184,8 +211,10 @@ export default function Limbo() {
         toast.error(error.response.data.message, {
           position: "top-center",
         });
+        stopAutoBet();
       } else {
         toast.error("Server Error");
+        stopAutoBet();
       }
     } finally {
       userDataGet();
@@ -202,6 +231,8 @@ export default function Limbo() {
     if (response !== null) {
       setTotalBalance(Number(response[0].color_wallet_balnace));
       setUser(response[0]);
+      const newBalance = Number(response[0].color_wallet_balnace);
+      setStartingBalance(newBalance);
     } else {
       window.location.href = "/";
     }
@@ -487,6 +518,14 @@ export default function Limbo() {
                   </p>
                 </div>
               </div>
+              <div className="flex items-center justify-between px-4 py-2 mt-1 rounded bg-gray-900">
+                <AiOutlineAreaChart
+                  size={24}
+                  color="white"
+                  className="cursor-pointer"
+                  onClick={() => setIsGraph((pre) => !pre)}
+                />
+              </div>
             </div>
           )}
         </div>
@@ -534,6 +573,22 @@ export default function Limbo() {
       <div className="m-auto mt-6  max-w-[421px] md:max-w-[500px] lg:max-w-5xl">
         <GameHistory type={"limbo"} refreshHistory={refreshHistory} />{" "}
       </div>
+
+      {isGraph && (
+        <Graph
+          wageredAmount={wageredAmount}
+          graphProfit={graphProfit}
+          totalWin={totalWin}
+          totalLoss={totalLoss}
+          handleClose={() => setIsGraph(false)}
+          resetGraph={() => {
+            setWegeredAmount(0);
+            setGraphProfit(0);
+            setTotalWin(0);
+            setTotalLoss(0);
+          }}
+        />
+      )}
     </div>
   );
 }
