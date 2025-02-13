@@ -110,7 +110,7 @@ export default function RoiIncome() {
                       $ {item.today_return}
                     </td>
                     <td className="whitespace-nowrap px-6 py-4">
-                      $ {item.total_return_amount}
+                      $ {Number(item.total_return_amount).toFixed(2)}
                     </td>
                     <td className="whitespace-nowrap px-6 py-4">
                       {item.date.split("T")[0]}

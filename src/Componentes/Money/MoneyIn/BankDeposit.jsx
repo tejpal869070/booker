@@ -84,7 +84,7 @@ export default function BankDeposit() {
         setAmount("");
         setUtr("");
         setImage(null);
-        setSepositId();
+        setSepositId(-1);
       } else {
         toast.error("Something Went Wrong");
         setCreating(false);
@@ -219,6 +219,7 @@ export default function BankDeposit() {
                           onChange={(e) => setSepositId(e.target.value)}
                           type="text"
                           name="product-name"
+                          value={deposit_id}
                           id="product-name"
                           className={`${inputClasses}`}
                           required=""

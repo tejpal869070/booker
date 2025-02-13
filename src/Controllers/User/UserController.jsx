@@ -692,9 +692,10 @@ export const GetMatchingIncome = async () => {
   }
 };
 
-export const ClaimReward = async () => {
+export const ClaimReward = async (type) => {
   const postData = {
     mobile: mobile,
+    type: type,
   };
 
   const axiosConfig = {

@@ -8,7 +8,7 @@ import DeveloperMode from "./Controllers/DeveloperMode";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <div className="dark:bg-black">
+    <div className="dark:bg-[#1a2c38]">
       {/* <DeveloperMode /> */}
       <App />
     </div>
