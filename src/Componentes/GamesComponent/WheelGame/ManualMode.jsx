@@ -222,7 +222,7 @@ export default function ManualMode({ refreshHistoryFunction }) {
                   <button
                     onClick={() => doubleTheAmount()}
                     disabled={gameStarted}
-                    className="px-1.5  py-1.5 bg-gray-500 text-gray-200 border-l-2 text-sm  font-medium border-gray-200"
+                    className="px-1.5  py-1.5 bg-gray-500 text-gray-200 border-l-2 text-sm cursor-pointer font-medium border-gray-200"
                   >
                     2x
                   </button>

@@ -405,7 +405,7 @@ export default function ManualMode({
                 </button>
                 <button
                   onClick={() => doubleTheAmount()}
-                  className="px-1.5  py-2 bg-gray-500 text-gray-200 border-l-2 text-sm  font-medium border-gray-200"
+                  className="px-1.5  py-2 bg-gray-500 text-gray-200 border-l-2 text-sm cursor-pointer font-medium border-gray-200"
                 >
                   2x
                 </button>

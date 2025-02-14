@@ -38,10 +38,10 @@ export default function CasinoLobby() {
           await userDataGet();
 
           const response = await CasinoAuth(formData);
-          const launchUrl = response?.response?.launchURL; 
+          const launchUrl = response?.response?.launchURL;
           setLaunchUrl(launchUrl);
         } catch (err) {
-          window.alert("Something Went Wrong")
+          window.alert("Something Went Wrong");
         } finally {
           setLoading(false);
         }
@@ -66,9 +66,10 @@ export default function CasinoLobby() {
       {launchUrl && (
         <iframe
           src={launchUrl}
-          frameBorder="0" 
+          frameBorder="0"
           className="w-full min-h-screen"
           allowFullScreen
+          title="noneee"
         />
       )}
     </div>

@@ -85,7 +85,6 @@ export default function Limbo() {
     setPlayedGames(0);
     clearInterval(autoBetRef.current);
     setStartingBalance(totalBalanceRef.current);
-    
   };
 
   const betFunction = async () => {
@@ -335,6 +334,7 @@ export default function Limbo() {
                   className="w-full text-gray-800 rounded border-2  border-gray-200 px-2 py-1  focus:outline-none font-semibold text-lg"
                   placeholder="Enter Amount"
                   value={amount}
+                  disabled={isManualBetStart}
                   type="number"
                   onChange={(e) => setAmount(e.target.value)}
                 />
@@ -353,7 +353,7 @@ export default function Limbo() {
                   </button>
                   <buton
                     onClick={() => doubleTheAmount()}
-                    className="px-1.5  py-2 bg-gray-500 text-gray-200 border-l-2 text-sm  font-medium border-gray-200"
+                    className="px-1.5  py-2 bg-gray-500 text-gray-200 border-l-2 text-sm  cursor-pointer font-medium border-gray-200"
                   >
                     2x
                   </buton>
@@ -400,7 +400,7 @@ export default function Limbo() {
                   </button>
                   <button
                     onClick={() => doubleTheAmount()}
-                    className="px-1.5  py-1.5 bg-gray-500 text-gray-200 border-l-2 text-sm  font-medium border-gray-200"
+                    className="px-1.5  py-1.5 bg-gray-500 text-gray-200 border-l-2 text-sm cursor-pointer  font-medium border-gray-200"
                   >
                     2x
                   </button>

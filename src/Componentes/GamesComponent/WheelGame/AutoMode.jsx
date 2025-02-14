@@ -343,7 +343,7 @@ export default function AutoMode({ refreshHistoryFunction }) {
                     <button
                       onClick={() => doubleTheAmount()}
                       disabled={autoSpin}
-                      className="px-1.5 py-1.5 bg-gray-500 text-gray-200 border-l-2 text-sm font-medium border-gray-200"
+                      className="px-1.5 py-1.5 bg-gray-500 text-gray-200 border-l-2 cursor-pointer text-sm font-medium border-gray-200"
                     >
                       2x
                     </button>

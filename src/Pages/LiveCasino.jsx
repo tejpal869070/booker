@@ -8,6 +8,7 @@ import WheelGame from "../Componentes/Casino/WheelGame";
 import LiveCasinoDashboard from "../Componentes/Casino/LiveCasinoDashboard";
 import CasinoLobby from "../Componentes/Casino/CasinoLobby";
 import Limbo from "../Componentes/Casino/Limbo";
+import DragonTower from "../Componentes/Casino/DragonTower";
 
 export default function LiveCasino() {
   const location = useLocation();
@@ -36,6 +37,8 @@ export default function LiveCasino() {
     return <div>{<LiveCasinoDashboard />}</div>;
   } else if (paramsData && paramsData.game === "limbo") {
     return <div>{<Limbo />}</div>;
+  } else if (paramsData && paramsData.game === "dragon-tower") {
+    return <div>{<DragonTower />}</div>;
   } else if (paramsData && paramsData.game === "casino-lobby") {
     return <div>{<CasinoLobby />}</div>;
   } else {
