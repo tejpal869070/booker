@@ -4,6 +4,30 @@ import bg2 from "../../assets/photos/dragon-bg2.jpg";
 
 import { IoReloadCircle } from "react-icons/io5";
 
+class EggImg extends React.Component {
+  render() {
+    return (
+      <img
+        alt="egg"
+        className="m-auto h-[45px] absolute left-0 right-0 bottom-1"
+        src={require("../../assets/photos/egg.png")}
+      />
+    );
+  }
+}
+
+class FireEgg extends React.Component {
+  render() {
+    return (
+      <img
+        alt="fireegg"
+        className="m-auto h-[45px] absolute left-0 right-0 bottom-1"
+        src={require("../../assets/photos/fire-lgg.gif")}
+      />
+    );
+  }
+}
+
 export default function DragonTower() {
   const [selected, setSelected] = useState("Manual");
   const [amount, setAmount] = useState(100);
@@ -12,6 +36,11 @@ export default function DragonTower() {
   const [level, setLevel] = useState("easy");
   const [randomNumbers, setRandomNumbers] = useState([]);
   const [rows, setRows] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+  const [towerData, setTowerData] = useState([]);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [openableTower, setOpenableTower] = useState(1);
+  const [openedTower, setOpenedTower] = useState([]);
+  const [isBombFound, setBombFound] = useState(false);
 
   const handleClick = (type) => {
     setSelected(type);
@@ -30,16 +59,14 @@ export default function DragonTower() {
     }
   };
 
-  useEffect(() => {
-    // generate random number----------
-    const generateRandomNumbers = () => {
-      const numbers = [];
-      for (let i = 0; i < 9; i++) {
-        numbers.push(Math.floor(Math.random() * cols) + 1);
-      }
-      setRandomNumbers(numbers);
-    };
+  // tower click function
+  const handleTowerClick = (towerID, openId) => {
+    console.log(towerID, openId);
+    setOpenableTower(towerData+1);
+    setOpenedTower([...openedTower, towerID]);
+  };
 
+  useEffect(() => {
     // select game level---------------
     if (level === "easy") {
       setCols(4);
@@ -48,8 +75,31 @@ export default function DragonTower() {
     } else if (level === "hard") {
       setCols(2);
     }
-    generateRandomNumbers();
   }, [level, cols]);
+
+  // generate random number----------
+  useEffect(() => {
+    const generateRandomNumbers = () => {
+      const numbers = [];
+      for (let i = 0; i < 9; i++) {
+        numbers.push(Math.floor(Math.random() * cols) + 1);
+      }
+      setRandomNumbers(numbers);
+    };
+    generateRandomNumbers();
+  }, [cols]);
+
+  //set bomb ---------------------------
+  useEffect(() => {
+    const result = rows
+      .map((item, index) => ({
+        towerID: item,
+        bombID: randomNumbers[index],
+      }))
+      .reverse();
+    console.log(result);
+    setTowerData(result);
+  }, [cols, rows, randomNumbers]);
 
   return (
     <div>
@@ -107,6 +157,7 @@ export default function DragonTower() {
                 className="w-full rounded border-2 border-[#2f4553] px-2 py-2  outline-none font-semibold bg-[#0f212e] text-gray-100 text-sm"
                 placeholder="Enter Amount "
                 value={amount}
+                disabled={isPlaying}
                 onChange={(e) => setAmount(e.target.value)}
               />
               <div className="absolute right-0.5 ">
@@ -130,11 +181,12 @@ export default function DragonTower() {
                 </button>
               </div>
             </div>
-            <p className="mt-3 lg:mt-2 lg:text-xs dark:text-gray-200 font-medium">
+            <p className="mt-3 lg:mt-2 lg:text-xs dark:text-gray-200 font-me dium">
               Difficulty
             </p>
             <select
               onChange={(e) => setLevel(e.target.value)}
+              disabled={isPlaying}
               className="w-full rounded border-2 mt-0.5 border-[#2f4553] px-2  py-2 focus:outline-none  outline-none font-semibold bg-[#0f212e] text-gray-100 text-sm"
             >
               <option value="easy">Easy</option>
@@ -160,21 +212,36 @@ export default function DragonTower() {
             src={require("../../assets/photos/dragon1.png")}
           />
           <div className="bg-[#56687a] p-2 w-[70%] m-auto rounded-lg">
-            {randomNumbers.map((item, index) => (
-              <div key={index} className="flex justify-around">
-                {Array.from({ length: cols }).map((_, innerIndex) => (
-                  <button
-                    key={innerIndex}
-                    className={`mb-2 h-10 rounded w-[${Math.floor(
-                      100 / cols - 1
-                    )}%]`}
-                    style={{
-                      backgroundImage: `url(${bg2})`,
-                    }}
-                  ></button>
-                ))}
-              </div>
-            ))}
+            {towerData &&
+              towerData.map((item, index) => (
+                <div key={index} className="flex justify-around">
+                  {Array.from({ length: cols }).map((item2, innerIndex) => (
+                    <button
+                      key={innerIndex}
+                      className={`mb-3 relative h-10 rounded w-[${Math.floor(
+                        100 / cols - 1
+                      )}%]`}
+                      style={{
+                        backgroundImage: `url(${bg2})`,
+                      }}
+                      onClick={() =>
+                        handleTowerClick(index + 1, innerIndex + 1)
+                      }
+                      disabled={openableTower !== index + 1}
+                    >
+                      {!isBombFound && openedTower.includes(index + 1) ? (
+                        item.bombID === innerIndex + 1 ? (
+                          <FireEgg />
+                        ) : (
+                          <EggImg />
+                        )
+                      ) : (
+                        ""
+                      )}
+                    </button>
+                  ))}
+                </div>
+              ))}
           </div>
         </div>
       </div>
