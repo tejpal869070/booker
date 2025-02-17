@@ -1,8 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import bg1 from "../../assets/photos/dragon-bg-3.jpg";
-import bg2 from "../../assets/photos/dragon-bg2.jpg";
+import bg2 from "../../assets/photos/1.svg";
 
 import { IoReloadCircle } from "react-icons/io5";
+import { GetUserDetails } from "../../Controllers/User/UserController";
+import { MinesGameUpdateWallet } from "../../Controllers/User/GamesController";
+import { toast, ToastContainer } from "react-toastify";
+import { DragonTowerData } from "../../assets/Data/DragonTowerData";
+import GameHistory from "../GamesComponent/Limbo/GameHistory";
 
 class EggImg extends React.Component {
   render() {
@@ -15,7 +20,6 @@ class EggImg extends React.Component {
     );
   }
 }
-
 class FireEgg extends React.Component {
   render() {
     return (
@@ -28,9 +32,28 @@ class FireEgg extends React.Component {
   }
 }
 
+class WinPopup extends React.Component {
+  render() {
+    const { amount, profit } = this.props;
+    return (
+      <div className="absolute animate-jump-in top-0 w-full h-full flex justify-center items-center">
+        <img
+          alt="success"
+          src={require("../../assets/photos/winimg.png")}
+          className="w-80"
+        />
+        <p className="absolute mt-20 font-bold text-2xl text-[#13b70a]">
+          ₹{Number(amount * profit).toFixed(2)}
+        </p>
+      </div>
+    );
+  }
+}
+
 export default function DragonTower() {
   const [selected, setSelected] = useState("Manual");
-  const [amount, setAmount] = useState(100);
+  const [user, setUser] = useState({});
+  const [amount, setAmount] = useState(10);
   const [totlaBalance, setTotalBalance] = useState();
   const [cols, setCols] = useState(4);
   const [level, setLevel] = useState("easy");
@@ -38,9 +61,18 @@ export default function DragonTower() {
   const [rows, setRows] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9]);
   const [towerData, setTowerData] = useState([]);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [openableTower, setOpenableTower] = useState(1);
-  const [openedTower, setOpenedTower] = useState([]);
+  const [openedTowerData, setOpenedTowerData] = useState([]);
   const [isBombFound, setBombFound] = useState(false);
+  const [openableTower, setOpenableTower] = useState(1);
+  const [profitTable, setProfitTable] = useState([]);
+  const [profit, setProfit] = useState(1.0);
+  const [refreshHistory, setRefreshHistory] = useState(false);
+  const [isWon, setWon] = useState(false);
+
+  // refresh game history---------------------------------------
+  const refreshHistoryFunction = () => {
+    setRefreshHistory((pre) => !pre);
+  };
 
   const handleClick = (type) => {
     setSelected(type);
@@ -59,15 +91,100 @@ export default function DragonTower() {
     }
   };
 
-  // tower click function
-  const handleTowerClick = (towerID, openId) => {
-    console.log(towerID, openId);
-    setOpenableTower(towerData+1);
-    setOpenedTower([...openedTower, towerID]);
+  // bet function----------------------------------------------------
+  const handleBet = async () => {
+    if (amount < 10) {
+      toast.warn("Minimum bet is ₹10", { position: "top-center" });
+      return;
+    } else if (totlaBalance < amount) {
+      toast.error("Insufficient balance", { position: "top-center" });
+      return;
+    }
+    const walletResponse = await updateWalletBalance("deduct", amount);
+    if (walletResponse) {
+      setIsPlaying(true);
+      return;
+    }
   };
 
+  // cashout function----------------------------------------------
+  const handleCashout = async () => {
+    if (isPlaying) {
+      await updateWalletBalance("add", amount * profit);
+      setBombFound(true);
+      setWon(true);
+      resetGame();
+    }
+  };
+
+  // tower click function----------------------------------------------
+  const handleTowerClick = (item, innerIndex) => {
+    if (item.bombID === innerIndex) {
+      setBombFound(true);
+      resetGame();
+      return;
+    }
+    const newTowerData = {
+      towerID: item.towerID,
+      bombID: item.bombID,
+      openedBox: innerIndex,
+    };
+    setOpenedTowerData((prevState) => [...prevState, newTowerData]);
+    setOpenableTower(openableTower + 1);
+    // setp profit--------
+    const checkProfit = profitTable.find(
+      (item) => item.id === openedTowerData.length + 1
+    );
+    if (checkProfit) {
+      setProfit(checkProfit?.multiplier);
+    }
+  };
+
+  // reset game on cashout, on loss--------------------------------------------
+  const resetGame = () => {
+    setOpenableTower(0);
+    setIsPlaying(false);
+    setTimeout(() => {
+      setBombFound(false);
+      setOpenableTower(1);
+      setOpenedTowerData([]);
+      generateRandomNumbers();
+      setProfit(0);
+      setWon(false);
+    }, 3000);
+  };
+
+  // update wallet balance online---------------------------------------------
+  const formData = {};
+  const updateWalletBalance = async (type, amount) => {
+    formData.type = type;
+    formData.amount = amount;
+    formData.game_type = "Dragon Tower";
+    formData.uid = user?.uid;
+    // formData.details = { limboTarget: target };
+
+    try {
+      const response = await MinesGameUpdateWallet(formData);
+      if (response && response.status) {
+        refreshHistoryFunction();
+        return true;
+      }
+    } catch (error) {
+      if (error?.response?.status === 302) {
+        toast.error(error.response.data.message, {
+          position: "top-center",
+        });
+      } else {
+        toast.error("Server Error");
+      }
+      return false;
+    } finally {
+      userDataGet();
+    }
+  };
+
+  // select game level-------------------------------------------
   useEffect(() => {
-    // select game level---------------
     if (level === "easy") {
       setCols(4);
     } else if (level === "medium") {
@@ -77,19 +194,19 @@ export default function DragonTower() {
     }
   }, [level, cols]);
 
-  // generate random number----------
+  // generate random number--------------------------------------
+  const generateRandomNumbers = () => {
+    const numbers = [];
+    for (let i = 0; i < 9; i++) {
+      numbers.push(Math.floor(Math.random() * cols) + 1);
+    }
+    setRandomNumbers(numbers);
+  };
   useEffect(() => {
-    const generateRandomNumbers = () => {
-      const numbers = [];
-      for (let i = 0; i < 9; i++) {
-        numbers.push(Math.floor(Math.random() * cols) + 1);
-      }
-      setRandomNumbers(numbers);
-    };
     generateRandomNumbers();
   }, [cols]);
 
-  //set bomb ---------------------------
+  //set bomb -------------------------------------------------------
   useEffect(() => {
     const result = rows
       .map((item, index) => ({
@@ -97,15 +214,59 @@ export default function DragonTower() {
         bombID: randomNumbers[index],
       }))
       .reverse();
-    console.log(result);
     setTowerData(result);
   }, [cols, rows, randomNumbers]);
 
+  // get user details---------------------------------------------
+  const userDataGet = async () => {
+    const response = await GetUserDetails();
+    if (response !== null) {
+      setTotalBalance(Number(response[0].color_wallet_balnace));
+      setUser(response[0]);
+    } else {
+      window.location.href = "/";
+    }
+  };
+
+  useEffect(() => {
+    userDataGet();
+  }, []);
+
+  // game profit table-------------------------------------------------
+  useEffect(() => {
+    const result = DragonTowerData.find(
+      (item) => item.type === level
+    )?.multiplierData;
+    setProfitTable(result);
+  }, [level]);
+
+  // win game if max profit-------------------------------------------------
+  useEffect(() => {
+    if (openedTowerData.length === 9) {
+      handleCashout();
+    }
+  }, [openedTowerData]);
+
+  useEffect(() => {
+    const gameAudio = new Audio(require("../../assets/audio/game-sound.mp3"));
+    gameAudio.loop = true; 
+    gameAudio.play().catch((error) => {
+      console.error("Audio playback failed:", error);
+    });
+
+    // Cleanup function to stop the audio when the component unmounts
+    return () => {
+      gameAudio.pause();
+      gameAudio.currentTime = 0;  
+    };
+  }, []);
+
   return (
     <div>
+      <ToastContainer />
       <div className="flex flex-wrap-reverse m-auto  max-w-[421px] md:max-w-[500px] lg:max-w-5xl">
-        <div className="w-[100%]  lg:w-[30%]  p-6 h-screen/2 bg-[#213743]">
-          <div className="w-full flex space-x-2 bg-gray-800 rounded-full px-2 py-2">
+        <div className="w-[100%] flex flex-col-reverse lg:flex-col  lg:w-[30%]  p-6 h-screen/2 bg-[#213743] ">
+          <div className="w-full flex space-x-2 bg-gray-800 rounded-full px-2 py-2 lg mt-2">
             <button
               onClick={() => handleClick("Manual")}
               className={`relative w-full px-6 py-2 rounded-full overflow-hidden  font-medium   transition-all  ${
@@ -141,15 +302,10 @@ export default function DragonTower() {
             </button> */}
           </div>
           <div>
-            <div className="flex mt-1 justify-between dark:text-gray-200">
+            <div className="flex mt-1 justify-between text-gray-200">
               <p className="lg:text-xs font-medium">Bet Amount</p>
-              <p className="lg:text-xs flex gap-1 justify-center items-center">
+              <p className="lg:text-xs  ">
                 ₹{Number(totlaBalance).toFixed(2)}{" "}
-                <IoReloadCircle
-                  className="cursor-pointer"
-                  size={17}
-                  //   onClick={() => GetUserDetails()}
-                />
               </p>
             </div>
             <div className="flex relative mt-0.5 items-center">
@@ -170,18 +326,20 @@ export default function DragonTower() {
                     }
                   }}
                   className="px-1.5  py-2 bg-[#2f4553] text-gray-200   text-xs  font-medium  "
+                  disabled={isPlaying}
                 >
                   1/2
                 </button>
                 <button
                   onClick={() => doubleTheAmount()}
                   className="px-1.5  py-2 bg-[#2f4553] text-gray-200 border-l-2 text-xs cursor-pointer font-medium border-gray-200"
+                  disabled={isPlaying}
                 >
                   2x
                 </button>
               </div>
             </div>
-            <p className="mt-3 lg:mt-2 lg:text-xs dark:text-gray-200 font-me dium">
+            <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">
               Difficulty
             </p>
             <select
@@ -194,9 +352,34 @@ export default function DragonTower() {
               <option value="hard">Hard</option>
             </select>
           </div>
-          <button className="w-full rounded bg-[#20e701] font-semibold py-2 text-sm mt-3">
-            Bet
-          </button>
+          {isPlaying ? (
+            <div>
+              <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">
+                Total Profit ({Number(profit).toFixed(2)}x)
+              </p>
+              <input
+                className="w-full mt-0.5 rounded border-2 border-[#2f4553] px-2 py-2  outline-none font-semibold bg-[#0f212e] text-gray-100 text-sm"
+                placeholder="Profit"
+                disabled
+                value={Number(amount * profit).toFixed(2)}
+              />
+              <button
+                onClick={() => handleCashout()}
+                // disable cashout while opened is 0
+                disabled={openedTowerData.length === 0}
+                className="w-full rounded bg-[#20e701] font-semibold py-2 text-sm mt-3"
+              >
+                Cashout
+              </button>
+            </div>
+          ) : (
+            <button
+              onClick={() => handleBet()}
+              className="w-full rounded bg-[#20e701] font-semibold py-2 text-sm mt-3"
+            >
+              Bet
+            </button>
+          )}
         </div>
         <div
           id=""
@@ -211,40 +394,70 @@ export default function DragonTower() {
             className="m-auto h-20"
             src={require("../../assets/photos/dragon1.png")}
           />
-          <div className="bg-[#56687a] p-2 w-[70%] m-auto rounded-lg">
+          <div
+            className={`relative bg-[#182433] p-2 w-[100%] lg:w-[80%] m-auto rounded-lg border-8 border-[#56687a] ${
+              !isPlaying && "cursor-not-allowed"
+            }`}
+          >
             {towerData &&
               towerData.map((item, index) => (
                 <div key={index} className="flex justify-around">
                   {Array.from({ length: cols }).map((item2, innerIndex) => (
                     <button
                       key={innerIndex}
-                      className={`mb-3 relative h-10 rounded w-[${Math.floor(
-                        100 / cols - 1
-                      )}%]`}
+                      className={`mb-3 relative h-10 bg-contain rounded ${
+                        openableTower === item.towerID
+                          ? "bg-[#20e701]  "
+                          : "bg-[#213743]"
+                      } ${
+                        level === "easy"
+                          ? "w-[24%]"
+                          : level === "medium"
+                          ? "w-[32%]"
+                          : "w-[49%]"
+                      }`}
                       style={{
                         backgroundImage: `url(${bg2})`,
                       }}
-                      onClick={() =>
-                        handleTowerClick(index + 1, innerIndex + 1)
-                      }
-                      disabled={openableTower !== index + 1}
+                      disabled={!isPlaying || item.towerID !== openableTower}
+                      onClick={() => handleTowerClick(item, innerIndex + 1)}
                     >
-                      {!isBombFound && openedTower.includes(index + 1) ? (
+                      {/* Images */}
+                      {isBombFound ? (
                         item.bombID === innerIndex + 1 ? (
                           <FireEgg />
                         ) : (
                           <EggImg />
                         )
-                      ) : (
-                        ""
-                      )}
+                      ) : openedTowerData.some(
+                          (i) =>
+                            i.towerID === item.towerID &&
+                            i.openedBox === innerIndex + 1
+                        ) ? (
+                        <EggImg />
+                      ) : null}
                     </button>
                   ))}
                 </div>
               ))}
+
+            {isWon && <WinPopup amount={amount} profit={profit} />}
           </div>
         </div>
+      </div>
+      <div className="m-auto mt-6  max-w-[421px] md:max-w-[500px] lg:max-w-5xl">
+        <GameHistory type={"Dragon Tower"} refreshHistory={refreshHistory} />{" "}
       </div>
     </div>
   );
 }
+
+// {!isBombFound && openedTower.includes(index + 1) ? (
+//   item.bombID === innerIndex + 1 ? (
+//     <FireEgg />
+//   ) : (
+//     <EggImg />
+//   )
+// ) : (
+//   ""
+// )}

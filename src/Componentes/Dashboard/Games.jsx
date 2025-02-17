@@ -8,8 +8,7 @@ export default function Games() {
     const allCasinoGames = async () => {
       try {
         const response = await GetAllCasinoGames();
-        setGames(response?.data?.games);
-        console.log(response?.data?.games);
+        setGames(response?.data?.games); 
       } catch (error) {
         window.alert("Something Went Wrong.");
       }
@@ -78,6 +77,11 @@ const gameData = [
     id: 3,
     image: require("../../assets/photos/limbo.png"),
     to: { pathname: "/home", search: "?game=limbo" },
+  },
+  {
+    id: 3,
+    image: require("../../assets/photos/dragon-tower.png"),
+    to: { pathname: "/home", search: "?game=dragon-tower" },
   },
   {
     id: 4,
