@@ -4,6 +4,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { WheelData } from "../../../assets/Data/WheelData";
 import { MinesGameUpdateWallet } from "../../../Controllers/User/GamesController";
 import { GetUserDetails } from "../../../Controllers/User/UserController";
+import bg1 from "../../../assets/photos/game-bg-2.jpg";
 
 export default function ManualMode({ refreshHistoryFunction }) {
   const [amount, setAmount] = useState(100);
@@ -192,19 +193,23 @@ export default function ManualMode({ refreshHistoryFunction }) {
     <div>
       <ToastContainer />
       <div className="flex m-auto max-w-[421px] md:max-w-[500px] lg:max-w-5xl  flex-wrap-reverse">
-        <div className="w-[100%] flex flex-col-reverse lg:flex-col  lg:w-[30%]  p-6 h-screen/2 bg-gray-500">
+        <div className="w-[100%] flex flex-col-reverse lg:flex-col  lg:w-[30%]  p-6 h-screen/2 bg-[#213743]">
           <div className="mt-4 lg:mt-0">
             <GameTypeSelector gameStarted={gameStarted} />
           </div>
           <div className="flex flex-col-reverse lg:flex-col">
             <div>
               <div className="flex justify-between dark:text-gray-200">
-                <p className="lg:text-sm font-medium">Bet Amount</p>
-                <p>₹{Number(totalBalance).toFixed(2)}</p>
+                <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">
+                  Bet Amount
+                </p>
+                <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">
+                  ₹{Number(totalBalance).toFixed(2)}
+                </p>
               </div>
               <div className="flex relative items-center">
                 <input
-                  className="w-full rounded border px-2 py-1  outline-none font-semibold text-lg"
+                  className="w-full rounded border-2 border-[#2f4553] px-2 py-2  outline-none font-semibold bg-[#0f212e] text-gray-100 text-sm"
                   placeholder="Enter Amount "
                   type="number"
                   value={amount}
@@ -228,14 +233,14 @@ export default function ManualMode({ refreshHistoryFunction }) {
                   </button>
                 </div>
               </div>
-              <p className="lg:text-sm font-medium  dark:text-gray-200 mt-3">
+              <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">
                 Risk
               </p>
               <select
                 value={gameType}
                 disabled={gameStarted}
                 onChange={(e) => selectGameType(e)} // Changed to onChange
-                className="w-full rounded border px-2 py-1  outline-none font-semibold text-lg"
+                className="w-full rounded border-2 border-[#2f4553] px-2 py-2  outline-none font-semibold bg-[#0f212e] text-gray-100 text-sm"
               >
                 <option value="low">Low</option>
                 <option value="medium">Medium</option>
@@ -243,7 +248,7 @@ export default function ManualMode({ refreshHistoryFunction }) {
               </select>
             </div>
             <button
-              className="mt-2 lg:mt-8 px-6 py-3 bg-[#20E701] w-full text-[#05080A] text-lg font-semibold rounded-lg  transition"
+              className="w-full rounded bg-[#20e701] font-semibold py-2 text-sm mt-3"
               onClick={() => handleSpinClick()}
               disabled={gameStarted}
             >
@@ -253,7 +258,8 @@ export default function ManualMode({ refreshHistoryFunction }) {
         </div>
         <div
           id="wheelBoard"
-          className=" relative  w-[100%]  lg:w-[70%] p-6 h-screen/2 bg-[#0F212E]"
+          className=" relative  w-[100%]  lg:w-[70%] p-6 h-screen/2  bg-cover bg-center"
+          style={{ backgroundImage: `url(${bg1})` }}
         >
           <div className="flex justify-center items-center">
             <div className="relative flex flex-col items-center mt-10">
@@ -267,7 +273,7 @@ export default function ManualMode({ refreshHistoryFunction }) {
                   src={require("../../../assets/photos/pin.gif")}
                 />
               </div>
-              <div className="border-[20px] border-[#263742] rounded-full mt-4">
+              <div className="border-[20px] border-[#263742] rounded-full mt-4 shadow-lg">
                 <div
                   className={`relative flex justify-center items-center w-[300px] md:w-[450px] h-[300px] md:h-[450px]  rounded-full`}
                   style={{

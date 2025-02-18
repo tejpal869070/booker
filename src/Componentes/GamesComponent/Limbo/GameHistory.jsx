@@ -26,14 +26,15 @@ export default function GameHistory({ type, refreshHistory }) {
                 Game
               </th>
               <th scope="col" class="px-6 py-3">
+                Amount
+              </th>
+              <th scope="col" class="px-6 py-3">
                 Date & Time
               </th>
               <th scope="col" class="px-6 py-3">
                 Type
               </th>
-              <th scope="col" class="px-6 py-3">
-                Amount
-              </th>
+
               {/* <th scope="col" class="px-6 py-3">
                 Multiplier
               </th>
@@ -55,11 +56,6 @@ export default function GameHistory({ type, refreshHistory }) {
                   >
                     {item.game_type}
                   </th>
-                  <td class="px-6 py-2">
-                    {item.date?.split("T")[0]}{" "}
-                    {item.date?.split("T")[1].split(".")[0]} UTC
-                  </td>
-                  <td class="px-6 py-2">{item.bet_type}</td>
                   <td
                     class={`px-6 py-2 font-semibold ${
                       item.bet_type === "Add Bet"
@@ -69,6 +65,12 @@ export default function GameHistory({ type, refreshHistory }) {
                   >
                     ₹ {Number(item.bet_balance).toFixed(2)}
                   </td>
+                  <td class="px-6 py-2">
+                    {item.date?.split("T")[0]}{" "}
+                    {item.date?.split("T")[1].split(".")[0]} UTC
+                  </td>
+                  <td class="px-6 py-2">{item.bet_type}</td>
+                  
                   {/* <td class="px-6 py-2">$2999</td> */}
                   {/* <td class="px-6 py-2">
                     <a

@@ -1,14 +1,28 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { GetAllCasinoGames } from "../../Controllers/User/UserController";
 
 export default function Games() {
   const [games, setGames] = React.useState([]);
+  const navigate = useNavigate();
+
+  const formData = {};
+  const handleCasinoSelect = async (item) => {
+    formData.providerCode = item.providerCode;
+    formData.gameCode = item.code;
+    const formDataString = JSON.stringify(formData);
+    const encodedFormData = btoa(formDataString);
+
+    const encodedParam = encodeURIComponent(encodedFormData);
+
+    navigate(`?game=casino-lobby&data=${encodedParam}`);
+  };
+
   useEffect(() => {
     const allCasinoGames = async () => {
       try {
         const response = await GetAllCasinoGames();
-        setGames(response?.data?.games); 
+        setGames(response?.data?.games);
       } catch (error) {
         window.alert("Something Went Wrong.");
       }
@@ -48,7 +62,11 @@ export default function Games() {
           games
             .filter((item) => item.providerName === "Supernowa")
             .map((item, index) => (
-              <div key={index} className="w-[48%] md:w-[23%] lg:w-[15%] mb-2 bg-black/30">
+              <div
+                key={index}
+                onClick={() => handleCasinoSelect(item)}
+                className="w-[48%] md:w-[23%] lg:w-[15%] mb-2 bg-black/30 cursor-pointer"
+              >
                 <img alt="banner" src={item.thumb} className="w-full" />
               </div>
             ))}

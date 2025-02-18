@@ -3,7 +3,6 @@ import {
   AddWithdrawalRequest,
   GetUserDetails,
   SendRequestForChangeAccount,
-  UpdateUserDetails,
 } from "../../../../Controllers/User/UserController";
 import { Loading1 } from "../../../Loading1";
 import { ToastContainer, toast } from "react-toastify";
@@ -11,6 +10,8 @@ import successImg from "../../../../assets/photos/success1-1--unscreen.gif";
 import swal from "sweetalert";
 import gif1 from "../../../../assets/photos/withdrawgif.gif";
 import VerifyPin from "../../../VerifyPin";
+import { RiBankFill } from "react-icons/ri";
+import { BsBank2 } from "react-icons/bs";
 
 const inputClasses =
   "shadow-sm bg-gray-50 font-medium border border-gray-300 dark:bg-gray-200 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5";
@@ -53,7 +54,7 @@ export default function BankWithDrawal() {
   };
 
   // if user want to update bank account second time
-  const changeBankAccount = async () => { 
+  const changeBankAccount = async () => {
     setAccountChanging(true);
     if (ac_name === null || ac_name === undefined || ac_name.length < 4) {
       toast.error("Invalid Beneficary Name", {
@@ -113,7 +114,7 @@ export default function BankWithDrawal() {
         setReason("");
         userDataGet();
         setAccountChanging(false);
-        setEditing(false)
+        setEditing(false);
       } else {
         toast.error("Failed to Update Bank Details", {
           position: "bottom-right",
@@ -243,218 +244,265 @@ export default function BankWithDrawal() {
               </p>
 
               <p className="  font-medium text-lg text-[#20e701] mb-6">
-                Account Balance: ₹{user && Number(user.wallet_balance).toFixed(2)}
+                Account Balance: ₹
+                {user && Number(user.wallet_balance).toFixed(2)}
               </p>
 
-              <div>
-                <div className="grid grid-cols-6 gap-6">
-                  <div className="col-span-6 sm:col-span-3">
-                    <label
-                      for="product-name"
-                      className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-800"
+              {(user?.bank_status === "N" && !editing) ? (
+                <button
+                  onClick={() => setEditing(true)}
+                  className="flex justify-center items-center gap-2 flex-col w-full py-2 text-center font-semibold bg-gray-200 rounded"
+                >
+                  <BsBank2 size={20} />
+                  Add Bank Account
+                </button>
+              ) : (
+                <div>
+                  <div className="grid grid-cols-6 gap-6">
+                    {/* bank aacount */}
+                    <div
+                      className={`flex items-center gap-4 bg-gray-200 inline px-4 py-2 rounded col-span-12 ${
+                        user.bank_status === "Y" ? "block" : "hidden"
+                      } ${editing && "hidden"}`}
                     >
-                      Beneficary Name *
-                    </label>
-                    <input
-                      type="text"
-                      name="product-name"
-                      id="product-name"
-                      className={`${inputClasses} ${
-                        !editing ? "cursor-not-allowed" : ""
+                      <div className="flex flex-col items-center justify-center border-r-2 border-black pr-4">
+                        <RiBankFill />
+                        {bank_name}
+                      </div>
+                      <div>
+                        <p>Account No. {ac_no}</p>
+                      </div>
+                    </div>
+                    <div
+                      className={`col-span-6 sm:col-span-3 ${
+                        !editing && "hidden"
                       }`}
-                      placeholder=""
-                      disabled={!editing}
-                      value={ac_name}
-                      onChange={(e) => setAccName(e.target.value)}
-                    />
-                  </div>
-                  <div className="col-span-6 sm:col-span-3">
-                    <label
-                      for="category"
-                      className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-800"
                     >
-                      Account Number *
-                    </label>
-                    <input
-                      type="number"
-                      name="category"
-                      id="category"
-                      className={`${inputClasses} ${
-                        !editing ? "cursor-not-allowed" : ""
+                      <label
+                        for="product-name"
+                        className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-800"
+                      >
+                        Beneficary Name *
+                      </label>
+                      <input
+                        type="text"
+                        name="product-name"
+                        id="product-name"
+                        className={`${inputClasses} ${
+                          !editing ? "cursor-not-allowed" : ""
+                        }`}
+                        placeholder=""
+                        disabled={!editing}
+                        value={ac_name}
+                        onChange={(e) => setAccName(e.target.value)}
+                      />
+                    </div>
+                    <div
+                      className={`col-span-6 sm:col-span-3 ${
+                        !editing && "hidden"
                       }`}
-                      placeholder=""
-                      disabled={!editing}
-                      required
-                      value={ac_no}
-                      onChange={(e) => setAccNo(e.target.value)}
-                    />
-                  </div>
-                  <div className="col-span-6 sm:col-span-3">
-                    <label
-                      for="brand"
-                      className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-800"
                     >
-                      Bank Name *
-                    </label>
-                    <input
-                      type="text"
-                      name="brand"
-                      id="brand"
-                      className={`${inputClasses} ${
-                        !editing ? "cursor-not-allowed" : ""
+                      <label
+                        for="category"
+                        className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-800"
+                      >
+                        Account Number *
+                      </label>
+                      <input
+                        type="number"
+                        name="category"
+                        id="category"
+                        className={`${inputClasses} ${
+                          !editing ? "cursor-not-allowed" : ""
+                        }`}
+                        placeholder=""
+                        disabled={!editing}
+                        required
+                        value={ac_no}
+                        onChange={(e) => setAccNo(e.target.value)}
+                      />
+                    </div>
+                    <div
+                      className={`col-span-6 sm:col-span-3 ${
+                        !editing && "hidden"
                       }`}
-                      placeholder=""
-                      disabled={!editing}
-                      required
-                      value={bank_name}
-                      onChange={(e) => setBankName(e.target.value)}
-                    />
-                  </div>
+                    >
+                      <label
+                        for="brand"
+                        className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-800"
+                      >
+                        Bank Name *
+                      </label>
+                      <input
+                        type="text"
+                        name="brand"
+                        id="brand"
+                        className={`${inputClasses} ${
+                          !editing ? "cursor-not-allowed" : ""
+                        }`}
+                        placeholder=""
+                        disabled={!editing}
+                        required
+                        value={bank_name}
+                        onChange={(e) => setBankName(e.target.value)}
+                      />
+                    </div>
 
-                  <div className="col-span-6 sm:col-span-3">
-                    <label
-                      for="product-details"
-                      className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-800"
-                    >
-                      IFSC Code *
-                    </label>
-                    <input
-                      type="text"
-                      name="price"
-                      id="price"
-                      className={`${inputClasses} ${
-                        !editing ? "cursor-not-allowed" : ""
+                    <div
+                      className={`col-span-6 sm:col-span-3 ${
+                        !editing && "hidden"
                       }`}
-                      placeholder=""
-                      disabled={!editing}
-                      required
-                      value={ifsc_code}
-                      onChange={(e) => setIfsc(e.target.value)}
-                    />
-                  </div>
+                    >
+                      <label
+                        for="product-details"
+                        className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-800"
+                      >
+                        IFSC Code *
+                      </label>
+                      <input
+                        type="text"
+                        name="price"
+                        id="price"
+                        className={`${inputClasses} ${
+                          !editing ? "cursor-not-allowed" : ""
+                        }`}
+                        placeholder=""
+                        disabled={!editing}
+                        required
+                        value={ifsc_code}
+                        onChange={(e) => setIfsc(e.target.value)}
+                      />
+                    </div>
 
-                  <div
-                    className={`col-span-6 sm:col-span-3 ${
-                      editing ? "hidden" : ""
-                    }`}
-                  >
-                    <label
-                      for="product-details"
-                      className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-800"
+                    <div
+                      className={`col-span-6 sm:col-span-3 ${
+                        !editing && "hidden"
+                      }`}
                     >
-                      Withdrawal Amount *
-                    </label>
-                    <input
-                      type="text"
-                      name="price"
-                      id="price"
-                      placeholder=""
-                      className={`${inputClasses}`}
-                      value={amount}
-                      onChange={(e) => setAmount(e.target.value)}
-                    />
-                  </div>
+                      <label
+                        for="product-details"
+                        className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-800"
+                      >
+                        Account Type *
+                      </label>
+                      <select
+                        name="price"
+                        id="price"
+                        className={`${inputClasses}`}
+                        value={ac_type}
+                        disabled={!editing}
+                        onChange={(e) => setAccType(e.target.value)}
+                      >
+                        <option value="Saving">Saving</option>
+                        <option value="Current">Current</option>
+                      </select>
+                    </div>
 
-                  <div className="col-span-3">
-                    <label
-                      for="product-details"
-                      className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-800"
+                    <div
+                      className={`col-span-12 sm:col-span-12 ${
+                        editing ? "hidden" : ""
+                      }`}
                     >
-                      Account Type *
-                    </label>
-                    <select
-                      name="price"
-                      id="price"
-                      className={`${inputClasses}`}
-                      value={ac_type}
-                      disabled={!editing}
-                      onChange={(e) => setAccType(e.target.value)}
+                      <label
+                        for="product-details"
+                        className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-800"
+                      >
+                        Withdrawal Amount * (Min ₹100)
+                      </label>
+                      <input
+                        type="text"
+                        name="price"
+                        id="price"
+                        placeholder=""
+                        className={`${inputClasses}`}
+                        value={amount}
+                        onChange={(e) => setAmount(e.target.value)}
+                      />
+                    </div>
+
+                    <div
+                      className={`col-span-6 sm:col-span-3 ${
+                        !editing || user.bank_status === "N" ? "hidden" : ""
+                      }`}
                     >
-                      <option value="Saving">Saving</option>
-                      <option value="Current">Current</option>
-                    </select>
+                      <label
+                        for="product-details"
+                        className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-800"
+                      >
+                        Reason for Updation
+                      </label>
+                      <input
+                        type="text"
+                        name="price"
+                        id="price"
+                        placeholder="I want to change because"
+                        className={`${inputClasses}`}
+                        value={reason}
+                        disabled={!editing}
+                        onChange={(e) => setReason(e.target.value)}
+                      />
+                    </div>
                   </div>
-                  <div
-                    className={`col-span-6 sm:col-span-3 ${
-                      !editing || user.bank_status === "N" ? "hidden" : ""
-                    }`}
-                  >
-                    <label
-                      for="product-details"
-                      className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-800"
-                    >
-                      Reason for Updation
-                    </label>
-                    <input
-                      type="text"
-                      name="price"
-                      id="price"
-                      placeholder="I want to change because"
-                      className={`${inputClasses}`}
-                      value={reason}
-                      disabled={!editing}
-                      onChange={(e) => setReason(e.target.value)}
-                    />
-                  </div>
+                  {editing ? (
+                    <div className="flex flex-wrap justify-between w-full gap-6 mt-6">
+                      <button className="relative" onClick={changeBankAccount}>
+                        <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-black dark:bg-gray-400"></span>
+                        <span className="fold-bold relative inline-block h-full w-full rounded border-2 border-black dark:border-gray-500 bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900">
+                          {accountChanging ? "Changing..." : "Send For Update"}
+                        </span>
+                      </button>
+                      <button
+                        onClick={() => {
+                          setEditing(false);
+                          userDataGet();
+                        }}
+                        className="relative"
+                      >
+                        <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-gray-700 dark:bg-gray-400"></span>
+                        <span className="fold-bold relative inline-block h-full w-full rounded border-2 border-black dark:border-gray-500 bg-black px-3 py-1 text-base font-bold text-white transition duration-100 hover:bg-gray-900 hover:text-yellow-500">
+                          CLOSE
+                        </span>
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="flex  justify-center gap-6 mt-6">
+                      <button
+                        onClick={() => setIsOpen(true)}
+                        className="relative"
+                        disabled={
+                          (user && user.ac_no === null) ||
+                          user.ac_name === null ||
+                          user.bank_name === null ||
+                          user.ifsc_code === null ||
+                          user.ac_no === undefined ||
+                          user.ac_name === undefined ||
+                          user.bank_name === undefined ||
+                          user.ifsc_code === undefined ||
+                          amount < 100 || amount > Number(user.wallet_balance)
+                        }
+                      >
+                        <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-black dark:bg-gray-400"></span>
+                        <span className="fold-bold relative inline-block h-full w-full rounded border-2 border-black dark:border-gray-500 bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900">
+                          {withdrawaing ? (
+                            <Loading1 width={28} />
+                          ) : (
+                            "CONFIRM WITHDRAWAL"
+                          )}
+                        </span>
+                      </button>
+                      <button
+                        className="relative"
+                        onClick={() => setEditing(true)}
+                      >
+                        <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-black dark:bg-gray-400"></span>
+                        <span className="fold-bold relative inline-block h-full w-full rounded border-2 border-black dark:border-gray-500 bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900">
+                          EDIT BANK DETAILS
+                        </span>
+                      </button>
+                    </div>
+                  )}
                 </div>
-                {editing ? (
-                  <div className="flex flex-wrap justify-between w-full gap-6 mt-6">
-                    <button className="relative" onClick={changeBankAccount}>
-                      <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-black dark:bg-gray-400"></span>
-                      <span className="fold-bold relative inline-block h-full w-full rounded border-2 border-black dark:border-gray-500 bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900">
-                        {accountChanging ? "Changing..." : "Send For Update"}
-                      </span>
-                    </button>
-                    <button
-                      onClick={() => {
-                        setEditing(false);
-                        userDataGet();
-                      }}
-                      className="relative"
-                    >
-                      <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-gray-700 dark:bg-gray-400"></span>
-                      <span className="fold-bold relative inline-block h-full w-full rounded border-2 border-black dark:border-gray-500 bg-black px-3 py-1 text-base font-bold text-white transition duration-100 hover:bg-gray-900 hover:text-yellow-500">
-                        CLOSE
-                      </span>
-                    </button>
-                  </div>
-                ) : (
-                  <div className="flex flex-wrap justify-center gap-6 mt-6">
-                    <button
-                      onClick={() => setIsOpen(true)}
-                      className="relative"
-                      disabled={
-                        (user && user.ac_no === null) ||
-                        user.ac_name === null ||
-                        user.bank_name === null ||
-                        user.ifsc_code === null ||
-                        user.ac_no === undefined ||
-                        user.ac_name === undefined ||
-                        user.bank_name === undefined ||
-                        user.ifsc_code === undefined
-                      }
-                    >
-                      <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-black dark:bg-gray-400"></span>
-                      <span className="fold-bold relative inline-block h-full w-full rounded border-2 border-black dark:border-gray-500 bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900">
-                        {withdrawaing ? (
-                          <Loading1 width={28} />
-                        ) : (
-                          "CONFIRM WITHDRAWAL"
-                        )}
-                      </span>
-                    </button>
-                    <button
-                      className="relative"
-                      onClick={() => setEditing(true)}
-                    >
-                      <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-black dark:bg-gray-400"></span>
-                      <span className="fold-bold relative inline-block h-full w-full rounded border-2 border-black dark:border-gray-500 bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900">
-                        EDIT BANK DETAILS
-                      </span>
-                    </button>
-                  </div>
-                )}
-              </div>
+              )}
             </div>
           </div>
         </div>

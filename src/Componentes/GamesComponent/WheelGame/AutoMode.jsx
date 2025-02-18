@@ -6,6 +6,8 @@ import { MinesGameUpdateWallet } from "../../../Controllers/User/GamesController
 import { GetUserDetails } from "../../../Controllers/User/UserController";
 import { AiOutlineAreaChart } from "react-icons/ai";
 import Graph from "../MinesGame/Graph";
+import bg1 from "../../../assets/photos/game-bg-2.jpg";
+
 
 export default function AutoMode({ refreshHistoryFunction }) {
   const [amount, setAmount] = useState(100);
@@ -312,7 +314,7 @@ export default function AutoMode({ refreshHistoryFunction }) {
     <div>
       <ToastContainer />
       <div className="flex m-auto max-w-[421px] md:max-w-[500px] lg:max-w-5xl  flex-wrap-reverse">
-        <div className="w-[100%] flex flex-col-reverse lg:flex-col  lg:w-[30%]    p-6 h-screen/2 bg-gray-500">
+        <div className="w-[100%] flex flex-col-reverse lg:flex-col  lg:w-[30%]    p-6 h-screen/2 bg-[#213743]">
           <div className="mt-4 lg:mt-0">
             <GameTypeSelector gameStarted={autoSpin} />
           </div>
@@ -320,12 +322,12 @@ export default function AutoMode({ refreshHistoryFunction }) {
             <div className="order-2 lg:order-1">
               <div>
                 <div className="flex justify-between dark:text-gray-200">
-                  <p className="lg:text-sm font-medium">Bet Amount</p>
-                  <p>₹{Number(totalBalance).toFixed(2)}</p>
+                  <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">Bet Amount</p>
+                  <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">₹{Number(totalBalance).toFixed(2)}</p>
                 </div>
                 <div className="flex relative items-center">
                   <input
-                    className="w-full rounded border px-2 py-1 outline-none font-semibold text-lg"
+                    className="w-full rounded border-2 border-[#2f4553] px-2 py-2  outline-none font-semibold bg-[#0f212e] text-gray-100 text-sm"
                     placeholder="Enter Amount "
                     type="number"
                     value={amount}
@@ -349,14 +351,14 @@ export default function AutoMode({ refreshHistoryFunction }) {
                     </button>
                   </div>
                 </div>
-                <p className="lg:text-sm font-medium dark:text-gray-200 mt-3">
+                <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">
                   Risk
                 </p>
                 <select
                   value={gameType}
                   disabled={autoSpin}
                   onChange={(e) => selectGameType(e)} // Changed to onChange
-                  className="w-full rounded border px-2 py-1 outline-none font-semibold text-lg"
+                  className="w-full rounded border-2 border-[#2f4553] px-2 py-2  outline-none font-semibold bg-[#0f212e] text-gray-100 text-sm"
                 >
                   <option value="low">Low</option>
                   <option value="medium">Medium</option>
@@ -364,11 +366,11 @@ export default function AutoMode({ refreshHistoryFunction }) {
                 </select>
               </div>
               <div>
-                <p className="lg:text-sm text-gray-200 font-medium mt-1 mb-1">
+                <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">
                   Desired Spins (0 for infinite)
                 </p>
                 <input
-                  className="w-full rounded border px-2 py-1 outline-none font-semibold text-lg"
+                  className="w-full rounded border-2 border-[#2f4553] px-2 py-2  outline-none font-semibold bg-[#0f212e] text-gray-100 text-sm"
                   placeholder="Enter number of spins"
                   type="number"
                   value={desiredSpins}
@@ -380,7 +382,7 @@ export default function AutoMode({ refreshHistoryFunction }) {
             <button
               className={`mt-4 order-1 lg:order-2 px-6 py-3 ${
                 autoSpin ? "bg-red-500" : "bg-blue-500"
-              } w-full text-white text-lg font-semibold rounded-lg transition`}
+              } w-full rounded bg-[#20e701] font-semibold py-2 text-sm mt-3`}
               onClick={() => {
                 if (autoSpin) {
                   stopAutoSpin();
@@ -393,11 +395,11 @@ export default function AutoMode({ refreshHistoryFunction }) {
             </button>
             <div className="order-3 lg:order-3">
               <div>
-                <p className="lg:text-sm text-gray-200 font-medium mt-1 mb-1">
+                <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">
                   Stop On Profit
                 </p>
                 <input
-                  className="w-full rounded border px-2 py-1 outline-none font-semibold text-lg"
+                  className="w-full rounded border-2 border-[#2f4553] px-2 py-2  outline-none font-semibold bg-[#0f212e] text-gray-100 text-sm"
                   placeholder="0.0000"
                   type="number"
                   disabled={autoSpin}
@@ -406,11 +408,11 @@ export default function AutoMode({ refreshHistoryFunction }) {
                 />
               </div>
               <div>
-                <p className="lg:text-sm text-gray-200 font-medium mt-1 mb-1">
+                <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">
                   Stop On Loss
                 </p>
                 <input
-                  className="w-full rounded border px-2 py-1 outline-none font-semibold text-lg"
+                  className="w-full rounded border-2 border-[#2f4553] px-2 py-2  outline-none font-semibold bg-[#0f212e] text-gray-100 text-sm"
                   placeholder="0.0000"
                   type="number"
                   disabled={autoSpin}
@@ -419,12 +421,12 @@ export default function AutoMode({ refreshHistoryFunction }) {
                 />
               </div>
               <div>
-                <p className="lg:text-sm text-gray-200 font-medium mt-1 mb-1">
+                <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">
                   Increase on WIN
                 </p>
                 <div className="relative">
                   <input
-                    className="w-full rounded border px-2 py-1 outline-none font-semibold text-lg"
+                    className="w-full rounded border-2 border-[#2f4553] px-2 py-2  outline-none font-semibold bg-[#0f212e] text-gray-100 text-sm"
                     placeholder="0.0000"
                     type="number"
                     disabled={autoSpin}
@@ -437,12 +439,12 @@ export default function AutoMode({ refreshHistoryFunction }) {
                 </div>
               </div>
               <div>
-                <p className="lg:text-sm text-gray-200 font-medium mt-1 mb-1">
+                <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">
                   Increase on LOSS
                 </p>
                 <div className="relative">
                   <input
-                    className="w-full rounded border px-2 py-1 outline-none font-semibold text-lg"
+                    className="w-full rounded border-2 border-[#2f4553] px-2 py-2  outline-none font-semibold bg-[#0f212e] text-gray-100 text-sm"
                     placeholder="0.0000"
                     type="number"
                     disabled={autoSpin}
@@ -467,7 +469,9 @@ export default function AutoMode({ refreshHistoryFunction }) {
         </div>
         <div
           id="wheelBoard"
-          className="relative  w-[100%]  lg:w-[70%] p-6 h-screen/2 bg-[#0F212E]"
+          className="relative  w-[100%]  lg:w-[70%] p-6 h-screen/2 bg-[#0F212E] bg-cover bg-center "
+          style={{ backgroundImage: `url(${bg1})` }}
+
         >
           <div className="flex justify-center items-center">
             <div className="relative flex flex-col items-center mt-10">
@@ -481,7 +485,7 @@ export default function AutoMode({ refreshHistoryFunction }) {
                   src={require("../../../assets/photos/pin.gif")}
                 />
               </div>
-              <div className="border-[20px] border-[#263742] rounded-full mt-4">
+              <div className="border-[20px] border-[#263742] rounded-full mt-4 shadow-lg">
                 <div
                   className={`relative flex justify-center items-center w-[300px] md:w-[450px] h-[300px] md:h-[450px] rounded-full`}
                   style={{

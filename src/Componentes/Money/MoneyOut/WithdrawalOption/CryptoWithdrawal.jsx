@@ -39,24 +39,24 @@ export default function CryptoWithdrawal() {
       if (response.status) {
         setProcessing(false);
         setSuccess(true);
-        userDataGet()
+        userDataGet();
         setTimeout(() => {
           setSuccess(false);
         }, 3500);
         setAddress("");
         setAmount(10);
       } else {
-        toast.error("Something Went Wrong !", {
+        toast.warn("Something Went Wrong !", {
           position: "bottom-right",
         });
         setProcessing(false);
       }
     } catch (error) {
-      if (error?.response?.status === 302) { 
+      if (error?.response?.status === 302) {
         swal("Error!", `${error.response.data.message}`, "error");
         setProcessing(false);
       } else {
-        toast.error("Server Error !", {
+        toast.warn("Server Error !", {
           position: "bottom-right",
         });
         setProcessing(false);
@@ -66,17 +66,28 @@ export default function CryptoWithdrawal() {
 
   const handle1 = async () => {
     if (amount < 10) {
-      toast.error("Minimum Withdrawal is 10", {
+      toast.warn("Minimum Withdrawal is 10", {
         position: "bottom-right",
       });
       return;
     } else if (address.length < 10) {
-      toast.error("Invalid Address", {
+      toast.warn("Invalid Address", {
         position: "bottom-right",
       });
       return;
+    } else if (
+      Number(amount) >
+      Number(user.wallet_balance) / Number(user.currency_rate)
+    ) {
+      toast.warn("Insufficient Balance", {
+        position: "bottom-right",
+      });
     }
     setIsOpen(true);
+    console.log(
+      Number(amount),
+      Number(user.wallet_balance) / Number(user.currency_rate)
+    );
   };
 
   const userDataGet = async () => {
@@ -107,7 +118,9 @@ export default function CryptoWithdrawal() {
     return (
       <div className="fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center bg-[#000000d1] bg-opacity-50 z-[999999]">
         <img alt="success" src={successImg} />
-        <p className="text-2xl text-white font-semibold">Crypto Withdrawal Scuucess.</p>
+        <p className="text-2xl text-white font-semibold">
+          Crypto Withdrawal Scuucess.
+        </p>
       </div>
     );
   }

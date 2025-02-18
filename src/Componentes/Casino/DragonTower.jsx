@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import bg1 from "../../assets/photos/dragon-bg-3.jpg";
 import bg2 from "../../assets/photos/1.svg";
-
-import { IoReloadCircle } from "react-icons/io5";
+import { HiMiniSpeakerWave, HiMiniSpeakerXMark } from "react-icons/hi2";
 import { GetUserDetails } from "../../Controllers/User/UserController";
 import { MinesGameUpdateWallet } from "../../Controllers/User/GamesController";
 import { toast, ToastContainer } from "react-toastify";
@@ -68,6 +67,7 @@ export default function DragonTower() {
   const [profit, setProfit] = useState(1.0);
   const [refreshHistory, setRefreshHistory] = useState(false);
   const [isWon, setWon] = useState(false);
+  const [isSound, setSound] = useState(true);
 
   // refresh game history---------------------------------------
   const refreshHistoryFunction = () => {
@@ -161,7 +161,7 @@ export default function DragonTower() {
     formData.amount = amount;
     formData.game_type = "Dragon Tower";
     formData.uid = user?.uid;
-    // formData.details = { limboTarget: target };
+    formData.details = { dragonCashout: profit };
 
     try {
       const response = await MinesGameUpdateWallet(formData);
@@ -247,19 +247,26 @@ export default function DragonTower() {
     }
   }, [openedTowerData]);
 
+  // game sound----------------------------------------------
   useEffect(() => {
     const gameAudio = new Audio(require("../../assets/audio/game-sound.mp3"));
-    gameAudio.loop = true; 
-    gameAudio.play().catch((error) => {
-      console.error("Audio playback failed:", error);
-    });
+    gameAudio.loop = true;
 
-    // Cleanup function to stop the audio when the component unmounts
+    if (isSound) {
+      gameAudio.play().catch((error) => {
+        console.error("Audio playback failed:", error);
+      });
+    } else {
+      gameAudio.pause();
+      gameAudio.currentTime = 0;
+    }
+
+    // Cleanup function to stop the audio when the component unmounts or isSound changes
     return () => {
       gameAudio.pause();
-      gameAudio.currentTime = 0;  
+      gameAudio.currentTime = 0;
     };
-  }, []);
+  }, [isSound]);
 
   return (
     <div>
@@ -341,7 +348,7 @@ export default function DragonTower() {
             </div>
             <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">
               Difficulty
-            </p>
+            </p> 
             <select
               onChange={(e) => setLevel(e.target.value)}
               disabled={isPlaying}
@@ -375,6 +382,7 @@ export default function DragonTower() {
           ) : (
             <button
               onClick={() => handleBet()}
+              disabled={isBombFound}
               className="w-full rounded bg-[#20e701] font-semibold py-2 text-sm mt-3"
             >
               Bet
@@ -388,6 +396,25 @@ export default function DragonTower() {
             backgroundImage: `url(${bg1})`,
           }}
         >
+          {/* sound */}
+          <div
+            className="absolute top-1 left-1"
+            onClick={() => setSound((pre) => !pre)}
+          >
+            {isSound ? (
+              <HiMiniSpeakerWave
+                size={20}
+                color="white"
+                className="cursor-pointer bg-red-500 rounded-full p-0.5"
+              />
+            ) : (
+              <HiMiniSpeakerXMark
+                size={20}
+                color="white"
+                className="cursor-pointer bg-red-500 rounded-full p-0.5"
+              />
+            )}
+          </div>
           {/* dragon img */}
           <img
             alt="dragon"

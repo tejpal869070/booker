@@ -9,6 +9,7 @@ import { MinesGameUpdateWallet } from "../../Controllers/User/GamesController";
 import GameHistory from "../GamesComponent/Limbo/GameHistory";
 import { AiOutlineAreaChart } from "react-icons/ai";
 import Graph from "../GamesComponent/MinesGame/Graph";
+import bg1 from "../../assets/photos/game-bg-1.png";
 
 export default function Limbo() {
   const [selected, setSelected] = useState("Manual");
@@ -94,12 +95,18 @@ export default function Limbo() {
     } else {
       if (totalBets === 0 || totalBets === undefined) {
         mainBetFunction();
-      } else { 
-        if (Number(totalBets) === Number(playedGamesRef.current)) { 
-          stopAutoBet(); 
-        } else if ( currentBalance >= Number(startingBalance) + Number(stopProfit) && Number(stopProfit) > 0 ) {
+      } else {
+        if (Number(totalBets) === Number(playedGamesRef.current)) {
           stopAutoBet();
-        } else if ( currentBalance <= Number(startingBalance) - Number(stopLoss) &&  Number(stopLoss) > 0  ) {
+        } else if (
+          currentBalance >= Number(startingBalance) + Number(stopProfit) &&
+          Number(stopProfit) > 0
+        ) {
+          stopAutoBet();
+        } else if (
+          currentBalance <= Number(startingBalance) - Number(stopLoss) &&
+          Number(stopLoss) > 0
+        ) {
           stopAutoBet();
         } else {
           mainBetFunction();
@@ -147,12 +154,15 @@ export default function Limbo() {
     await updateWalletBalance("deduct", amountRef.current);
     setRandomNumber(1);
     if (playedGames >= gameToWin) {
-      const randomNumber = ( Math.random() * Number(target) +  Number(target) ).toFixed(2);
+      const randomNumber = (
+        Math.random() * Number(target) +
+        Number(target)
+      ).toFixed(2);
       setRandomNumber(parseFloat(randomNumber));
       setHistory((prevData) => [...prevData, { target, randomNumber }]);
-       if(selected==="Manual"){
-        setPlayedGames(0)
-       }
+      if (selected === "Manual") {
+        setPlayedGames(0);
+      }
       updateBalanceShow(randomNumber);
       generateGameToWin();
     } else {
@@ -222,7 +232,7 @@ export default function Limbo() {
   useEffect(() => {
     amountRef.current = amount;
   }, [amount]);
- 
+
   const userDataGet = async () => {
     const response = await GetUserDetails();
     if (response !== null) {
@@ -246,12 +256,12 @@ export default function Limbo() {
 
   useEffect(() => {
     setPlayedGames(0);
-    setTotalBets(0)
-    setStopLoss(0)
-    setStopProfit(0)
-    setIncreaseOnLoss(0)
-    setIncreaseOnWin(0)
-    setAmount(1)
+    setTotalBets(0);
+    setStopLoss(0);
+    setStopProfit(0);
+    setIncreaseOnLoss(0);
+    setIncreaseOnWin(0);
+    setAmount(1);
   }, [selected]);
 
   useEffect(() => {
@@ -283,12 +293,12 @@ export default function Limbo() {
       <ToastContainer />
       {/* {isFlashPopup && <FlashPopup handleClose={handleClose} />} */}
       <div className="flex flex-wrap-reverse m-auto rounded-lg overflow-hidden  max-w-[421px] md:max-w-[500px] lg:max-w-5xl">
-        <div className="w-[100%]  lg:w-[30%]  p-6 h-screen/2 bg-gray-500">
+        <div className="w-[100%]  lg:w-[30%]  p-6 h-screen/2 bg-[#213743]">
           <div className="w-full flex space-x-2 bg-gray-800 rounded-full px-2 py-2">
             <button
               onClick={() => handleClick("Manual")}
               disabled={isAutoBetStart || isManualBetStart}
-              className={`relative w-1/2 px-6 py-2 rounded-full overflow-hidden  font-medium   transition-all  ${
+              className={`relative w-full px-6 py-2 rounded-full overflow-hidden  font-medium   transition-all  ${
                 selected === "Manual"
                   ? "bg-blue-500 text-gray-100"
                   : "bg-gray-300 text-gray-900"
@@ -303,9 +313,9 @@ export default function Limbo() {
               Manual
             </button>
 
-            <button
-              // onClick={() => handleClick("Auto")}
-              // disabled={isAutoBetStart || isManualBetStart}
+            {/* <button
+              onClick={() => handleClick("Auto")}
+              disabled={isAutoBetStart || isManualBetStart}
               disabled
               className={` cursor-not-allowed relative w-1/2 px-6 py-2 rounded-full overflow-hidden  font-medium transition-all  ${
                 selected === "Auto"
@@ -320,7 +330,7 @@ export default function Limbo() {
             } origin-left`}
               />
               Auto
-            </button>
+            </button> */}
           </div>
 
           {selected === "Manual" ? (
@@ -331,7 +341,7 @@ export default function Limbo() {
               </div>
               <div className="flex relative items-center">
                 <input
-                  className="w-full text-gray-800 rounded border-2  border-gray-200 px-2 py-1  focus:outline-none font-semibold text-lg"
+                  className="w-full rounded border-2 border-[#2f4553] px-2 py-2  outline-none font-semibold bg-[#0f212e] text-gray-100 text-sm"
                   placeholder="Enter Amount"
                   value={amount}
                   disabled={isManualBetStart}
@@ -347,13 +357,13 @@ export default function Limbo() {
                         setAmount(1);
                       }
                     }}
-                    className="px-1.5  py-2 bg-gray-500 text-gray-200   text-sm  font-medium  "
+                    className="px-1.5  py-2 bg-[#2f4553] text-gray-200   text-xs  font-medium border-r-2"
                   >
                     1/2
                   </button>
                   <buton
                     onClick={() => doubleTheAmount()}
-                    className="px-1.5  py-2 bg-gray-500 text-gray-200 border-l-2 text-sm  cursor-pointer font-medium border-gray-200"
+                    className="px-1.5  py-2 bg-[#2f4553] text-gray-200   text-xs  font-medium"
                   >
                     2x
                   </buton>
@@ -363,7 +373,7 @@ export default function Limbo() {
                 Profit On Win
               </p>
               <input
-                className="w-full text-gray-200 rounded border px-2 py-0.5  outline-none font-semibold text-lg"
+                className="w-full rounded border-2 border-[#2f4553] px-2 py-2  outline-none font-semibold bg-[#0f212e] text-gray-100 text-sm"
                 placeholder="Enter Amount "
                 disabled
                 value={(amount * target - amount).toFixed(2)}
@@ -371,7 +381,7 @@ export default function Limbo() {
               <button
                 onClick={() => handleBetPlace()}
                 disabled={isManualBetStart}
-                className="w-full rounded bg-[#20e701] font-semibold text-lg text-gray-700 py-2 mt-3"
+                className="w-full rounded bg-[#20e701] font-semibold py-2 text-sm mt-3"
               >
                 Place Bet
               </button>
@@ -534,7 +544,10 @@ export default function Limbo() {
             </div>
           )}
         </div>
-        <div className=" relative w-[100%]  lg:w-[70%]  px-6 py-2 h-screen/2 bg-gray-600">
+        <div
+          className=" relative w-[100%]  lg:w-[70%] bg-cover bg-no-repeat  px-6 py-2 h-screen/2  "
+          style={{ backgroundImage: `url(${bg1})` }}
+        >
           <div className="min-h-[40vh] md:min-h-[60vh] relative">
             <HistoryTop history={history} />
             <div className="mt-20  flex justify-center  items-center w-full h-full">
