@@ -273,14 +273,14 @@ export default function ManualMode({
                   openedMines.length === 25 - totalBombs
                 }
                 key={index}
-                className={`w-full h-16 flex justify-center items-center shadow-lg lg:h-28 bg-gray-300 rounded-xl `}
+                className={`w-full h-16 flex justify-center items-center shadow-lg lg:h-28  rounded-xl  ${openedMines.includes(item.id) ? "bg-[#071824]" : "bg-[#2f4553] border-b-4 border-[#213743]"}`}
               >
                 {bombFound ? (
                   diamondIndexeRef.current.includes(item.id) ? (
                     <img
                       alt="sdjbf"
-                      className="m-auto w-12 animate-rotate-y animate-once animate-duration-[3000ms]"
-                      src={require("../../../assets/photos/diamond.png")}
+                      className="m-auto w-12 lg:w-16 animate-rotate-y animate-once animate-duration-[3000ms]"
+                      src={require("../../../assets/photos/diamond-png.png")}
                     />
                   ) : (
                     <img
@@ -293,17 +293,19 @@ export default function ManualMode({
                   diamondIndexeRef.current.includes(item.id) ? (
                   <img
                     alt="sdjbf"
-                    className="m-auto w-12 "
-                    src={require("../../../assets/photos/diamond.png")}
+                    className={`m-auto w-12 lg:w-16 animate-jump-in`}
+                    src={require("../../../assets/photos/diamond-png.png")}
                   />
                 ) : openedMines.includes(item.id) &&
                   bombIndexRef.current.includes(item.id) ? (
                   <img
                     alt="sdjbf"
-                    className="m-auto w-12"
+                    className="m-auto w-16"
                     src={require("../../../assets/photos/time-bomb.png")}
                   />
-                ) : null}
+                ) : (
+                  <div className="m-auto w-12 bg-[#2f4553]" />
+                )}
               </button>
             ))}
           </div>
@@ -342,26 +344,26 @@ export default function ManualMode({
         {isBetPlaced ? (
           <div className="mt-4">
             <div className="flex justify-between">
-              <p className="font-medium">
+              <p className="mt-1 lg:text-xs text-gray-200 font-medium">
                 Bombs:{" "}
-                <span className="text-lg lg:text-md text-red-400">
+                <span className="lg:text-xs text-red-400">
                   {totalBombs}
                 </span>
               </p>{" "}
-              <p className="font-medium">
+              <p className="mt-1 lg:text-xs text-gray-200 font-medium">
                 Balance:{" "}
-                <span className="text-lg lg:text-md text-green-400">
+                <span className="lg:text-xs text-green-400">
                   ₹{Number(totlaBalance).toFixed(2)}
                 </span>{" "}
               </p>
             </div>
             <div className="flex justify-between">
-              <p className="font-medium">
-                Bet Amt.: <span className="text-lg lg:text-md">₹{amount}</span>
+              <p className="mt-1 lg:text-xs text-gray-200 font-medium">
+                Bet Amt.: <span className="lg:text-xs">₹{amount}</span>
               </p>{" "}
-              <p className="font-medium">
+              <p className="mt-1 lg:text-xs text-gray-200 font-medium">
                 Profit:{" "}
-                <span className="text-lg lg:text-md text-green-400">
+                <span className="lg:text-xs text-green-400">
                   x
                   {minesProfitTable.find(
                     (item) => item.totalBomb === totalBombs
@@ -373,19 +375,16 @@ export default function ManualMode({
         ) : (
           <div>
             <div className="flex justify-between dark:text-gray-200">
-              <p className="lg:text-sm font-medium">Bet Amount</p>
-              <p className="flex gap-1 justify-center items-center">
+              <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">
+                Bet Amount
+              </p>
+              <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">
                 ₹{Number(totlaBalance).toFixed(2)}{" "}
-                <IoReloadCircle
-                  className="cursor-pointer"
-                  size={19}
-                  onClick={() => GetUserDetails()}
-                />
               </p>
             </div>
             <div className="flex relative items-center">
               <input
-                className="w-full rounded border px-2 py-1  outline-none font-semibold text-lg"
+                className="w-full rounded border-2 border-[#2f4553] px-2 py-2  outline-none font-semibold bg-[#0f212e] text-gray-100 text-sm"
                 placeholder="Enter Amount "
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
@@ -399,19 +398,19 @@ export default function ManualMode({
                       setAmount(1);
                     }
                   }}
-                  className="px-1.5  py-2 bg-gray-500 text-gray-200   text-sm  font-medium  "
+                  className="px-1.5  py-1.5 bg-gray-500 text-gray-200   text-sm  font-medium"
                 >
                   1/2
                 </button>
                 <button
                   onClick={() => doubleTheAmount()}
-                  className="px-1.5  py-2 bg-gray-500 text-gray-200 border-l-2 text-sm cursor-pointer font-medium border-gray-200"
+                  className="px-1.5  py-1.5 bg-gray-500 text-gray-200 border-l-2 text-sm cursor-pointer font-medium border-gray-200"
                 >
                   2x
                 </button>
               </div>
             </div>
-            <p className="mt-3 lg:mt-2 lg:text-sm dark:text-gray-200 font-medium">
+            <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">
               Bombs
             </p>
             <div className="flex justify-between  ">
@@ -442,11 +441,11 @@ export default function ManualMode({
           <button
             onClick={() => handleCashOut()}
             disabled={openedMines.length === 0}
-            className="w-full rounded bg-green-400 font-semibold text-lg text-white py-2 mt-3"
+            className="w-full rounded      text-gray-700 py-2 mt-3     bg-[#20e701] font-bold py-2 text-xs mt-3"
           >
             <div>
               <p>CASHOUT</p>
-              <p className="px-6 py-0.5  rounded-lg bg-gray-800 text-center inline">
+              <p className="px-6 py-0.5 mt-1 rounded-lg bg-gray-800 text-gray-200 text-center  inline-block">
                 ₹
                 {(
                   Number(amount) *
@@ -461,7 +460,7 @@ export default function ManualMode({
           <button
             disabled={isBetPlaced || openedMines.length > 0} // it is already disabled id isBetPlaced is true
             onClick={() => handleBetPlace()}
-            className="w-full rounded bg-green-400 font-semibold text-lg text-white py-2 mt-3"
+            className="w-full rounded bg-[#20e701] font-semibold py-2 text-sm mt-3"
           >
             Place Bet
           </button>

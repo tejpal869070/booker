@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import bg1 from "../../assets/photos/stadium.jpg";
+import bg1 from "../../assets/photos/stadium2.jpg";
 import { ToastContainer, toast } from "react-toastify";
 import { IoEyeOff } from "react-icons/io5";
 import { FaEye } from "react-icons/fa";
 import { Loading1 } from "../../Componentes/Loading1";
-import { CheckToken, userLogin } from "../../Controllers/Auth/AuthController";
+import { userLogin } from "../../Controllers/Auth/AuthController";
+import { FaUserCircle } from "react-icons/fa";
+import { MdOutlineSecurity } from "react-icons/md";
+
 
 export default function Login() {
   const [creating, setCreating] = useState(false);
@@ -68,44 +71,51 @@ export default function Login() {
       }}
     >
       <div className="relative py-3   sm:max-w-xl sm:mx-auto">
-        <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-sky-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6  rounded-3xl"></div>
-        <div className="relative px-4 py-10 bg-white shadow-lg  rounded-3xl sm:p-20">
+        {/* <div className="absolute inset-0 backdrop-blur-sm bg-cyan-400  shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6  rounded-3xl"></div> */}
+        <div className="relative px-4 py-8 bg-white/30 backdrop-blur-sm shadow-lg  rounded-3xl sm:p-20 animate-fade-right">
           <div className="max-w-md mx-auto">
             <div>
-              <h1 className="text-2xl font-semibold">Login</h1>
+              <img
+                src={require("../../assets/photos/mainlogo.png")}
+                alt="logo"
+                className="w-40 m-auto"
+              />
+              <h1 className="text-xl font-bold text-center">LOGIN</h1>
             </div>
             <div className="divide-y divide-gray-200">
               <form onSubmit={handleLogin}>
                 <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
                   <div className="relative">
+                    <FaUserCircle size={20} className="  absolute top-2.5 left-2"/>
                     <input
                       id="Mobile"
                       name="Mobile"
                       type="text"
                       value={mobile}
                       onChange={(e) => setMobile(e.target.value)}
-                      className="peer  h-10 w-full border-b-2 border-0 border-gray-300 text-gray-900 focus:border-b-2 focus:border-gray-500 focus:outline-none"
+                      className="peer pl-10 rounded  h-10 w-full border-b-2 border-0 border-gray-300 text-gray-900 focus:border-b-2 focus:border-gray-500 focus:outline-none"
                       placeholder="Mobile / Email"
                     />
                   </div>
                   <div className="relative flex items-center">
+                  <MdOutlineSecurity size={20} className="  absolute top-2.5 left-2"/>
                     <input
                       id="password"
                       name="password"
                       type={showPassword ? "text" : "password"}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="peer  h-10 w-full border-b-2 border-0 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
+                      className="peer rounded pl-10 h-10 w-full border-b-2 border-0 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
                       placeholder="Password"
                     />
                     {showPassword ? (
                       <FaEye
-                        className="mt-3 ml-[-25px] cursor-pointer"
+                        className="mt-1 ml-[-25px] cursor-pointer"
                         onClick={ShowPassword}
                       />
                     ) : (
                       <IoEyeOff
-                        className="mt-3 ml-[-25px] cursor-pointer"
+                        className="mt-1 ml-[-25px] cursor-pointer"
                         onClick={ShowPassword}
                       />
                     )}
@@ -117,20 +127,20 @@ export default function Login() {
                       disabled={creating}
                     >
                       <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-black"></span>
-                      <span className="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900">
+                      <span className="fold-bold relative inline-block h-full w-full rounded border-2 border-black   px-3 py-1 text-base font-bold text-black transition duration-100  bg-yellow-400 hover:text-gray-900">
                         {creating ? <Loading1 width={30} /> : "LOGIN"}
                       </span>
                     </button>
                   </div>
-                  <p className="text-sm">
+                  <p className="text-sm text-gray-900 font-semibold">
                     Don't have an account?{" "}
-                    <Link to={"/register"} className="underlined text-[blue]">
+                    <Link to={"/register"} className="underlined text-blue-500">
                       Register Now
                     </Link>
                   </p>
                   <Link
                     to={"/forget-password"}
-                    className="text-sm font-semibold cursor-pointer"
+                    className="text-sm font-semibold text-red-200 cursor-pointer"
                   >
                     Forgot Password ?
                   </Link>

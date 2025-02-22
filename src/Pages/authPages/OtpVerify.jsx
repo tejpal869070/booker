@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import OtpInput from "react-otp-input";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import bg1 from "../../assets/photos/stadium.jpg";
+import bg1 from "../../assets/photos/stadium2.jpg";
 import {
   SendOtp,
   userRegistration,
@@ -85,7 +85,7 @@ export default function OtpVerify({ goBack, formData }) {
       toast.error("Something went wrong !", {
         position: "top-center",
       });
-      setOtpSending(false);
+      setOtpSending(false); 
     }
   };
 
@@ -96,9 +96,8 @@ export default function OtpVerify({ goBack, formData }) {
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${bg1})`,
       }}
     >
-      <div className="relative py-3 sm:max-w-xl sm:mx-auto">
-        <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-sky-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
-        <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-10">
+      <div className="relative py-3 sm:max-w-xl sm:mx-auto"> 
+        <div className="relative px-4 py-10 bg-white/30 backdrop-blur-sm shadow-lg rounded-3xl sm:p-10">
           <div className="mb-4 text-center">
             <h1 className="text-2xl font-semibold ">Enter OTP</h1>
             <p className="text-sm mt-2 text-center">

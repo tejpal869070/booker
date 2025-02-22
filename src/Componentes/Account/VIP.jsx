@@ -5,6 +5,7 @@ import { FaCrown } from "react-icons/fa6";
 import { MdVerified } from "react-icons/md";
 import {
   ClaimReward,
+  GetAccountAllStatement,
   GetUserDetails,
   GetVipPlans,
 } from "../../Controllers/User/UserController";
@@ -21,6 +22,9 @@ export default function VIP() {
   const [claimming, setClaimming] = useState(false);
   const [rewardedAmount, setRewarededAmount] = useState(0);
   const [isSuccess, setSuccess] = useState(false);
+  const [history, setHistory] = useState([]);
+
+  console.log(history);
 
   const settings = {
     dots: true,
@@ -85,7 +89,7 @@ export default function VIP() {
       setTimeout(() => {
         setSuccess(false);
       }, 1500);
-      userDataGet()
+      userDataGet();
     } catch (error) {
       toast.info(error?.response?.data?.message || "server error");
     } finally {
@@ -93,9 +97,31 @@ export default function VIP() {
     }
   };
 
+  const formData = {
+    type: "VIP",
+  };
+  const getAllStatement = async () => {
+    try {
+      const response = await GetAccountAllStatement(formData);
+      if (response.status) {
+        setHistory(response?.data?.reverse());
+        setLoading(false);
+      } else {
+        window.alert("Something Went Wrong.");
+        setHistory([]);
+        setLoading(false);
+      }
+    } catch (error) {
+      window.alert("Something Went Wrong.");
+      setHistory([]);
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     getVipPlans();
     userDataGet();
+    getAllStatement();
   }, []);
 
   if (loading) {
@@ -369,19 +395,29 @@ export default function VIP() {
                 </tr>
               </thead>
               <tbody>
-                {/* {data.map((item, index) => (
-                  <tr key={index} className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                    <th
-                      scope="row"
-                      className="px-2 py-3 font-medium text-gray-900 whitespace-nowrap  dark:text-white"
+                {history &&
+                  history?.map((item, index) => (
+                    <tr
+                      key={index}
+                      className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
                     >
-                      {index + 1}.
-                    </th>
-                    <td className="whitespace-nowrap px-4 py-3 ">₹{item.amount}</td>
-                    <td className="whitespace-nowrap px-6 py-3">{item.type}</td>
-                    <td className="whitespace-nowrap px-6 py-3">{item.date}</td>
-                  </tr>
-                ))} */}
+                      <th
+                        scope="row"
+                        className="px-2 py-3 font-medium text-gray-900 whitespace-nowrap  dark:text-white"
+                      >
+                        {index + 1}.
+                      </th>
+                      <td className="whitespace-nowrap px-4 py-3 ">
+                        ₹{item.amount}
+                      </td>
+                      <td className="whitespace-nowrap px-6 py-3">
+                        {item.type}
+                      </td>
+                      <td className="whitespace-nowrap px-6 py-3">
+                        {item.date?.split("T")[0]}
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>
@@ -444,6 +480,6 @@ const rules = [
     id: 2,
     name: "Monthly Reward",
     description:
-      "VIP members can earn the highest level of VIP rewards once a month.Can only be received once a month. Prizes cannot be accumulated. And any unclaimed rewards will be refreshed on the next settlement day. When receiving the highest level of monthly rewards this month Monthly Rewards earned in this month will be deducted e.g. when VIP1 earns 500 and upgrades to VIP2 to receive monthly rewards 500 will be deducted.",
+      "VIP members can earn the highest level of VIP rewards once a month.Can only be received once a month. Prizes cannot be accumulated. And any unclaimed rewards will be refreshed on the next settlement day. When receiving the highest level of monthly rewards this month Monthly Rewards earned in this month will be deducted e.g.",
   },
 ];

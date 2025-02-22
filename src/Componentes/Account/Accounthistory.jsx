@@ -34,11 +34,13 @@ export default function AccountHistory() {
         setLoading(false);
       } else {
         window.alert("Something Went Wrong.");
+        console.log("dfsdgyugds")
         setData([]);
         setLoading(false);
       }
     } catch (error) {
       window.alert("Something Went Wrong.");
+      console.log(error)
       setData([]);
       setLoading(false);
     }
@@ -93,7 +95,7 @@ export default function AccountHistory() {
           <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-6">
             {filteredData && filteredData.length === 0 ? (
               <div>
-                <img alt="no data" src={gif1} className="m-auto" />
+                <img alt="no data" src={gif1} className="m-auto w-40" />
                 <p className="text-center font-bold text-xl">No Records !</p>
               </div>
             ) : (

@@ -15,7 +15,7 @@ export default function ManualMode({ refreshHistoryFunction }) {
   const [selectedColor, setSelectedColor] = useState(null);
   const [transitionEnabled, setTransitionEnabled] = useState(true);
   const [gameStarted, setGameStarted] = useState(false);
-  const [currentRotation, setCurrentRotation] = useState(0);
+  const [currentRotation, setCurrentRotation] = useState(0); 
   const [isWin, setWin] = useState(false);
   const [winAmount, setWinAmount] = useState();
   const [user, setUser] = useState({});

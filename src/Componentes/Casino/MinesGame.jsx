@@ -3,6 +3,7 @@ import { useState } from "react";
 import ManualMode from "../GamesComponent/MinesGame/ManualMode";
 import AutoMode from "../GamesComponent/MinesGame/AutoMode";
 import GameHistory from "../GamesComponent/Limbo/GameHistory";
+import bg1 from "../../assets/photos/game-bg-3.jpg"
 
 export default function MinesGame() {
   const [selected, setSelected] = useState("Manual");
@@ -30,7 +31,7 @@ export default function MinesGame() {
     <div className="min-h-screen ">
       {/* {isFlashPopup && <FlashPopup handleClose={handleClose} />} */}
       <div className="flex flex-wrap-reverse m-auto  max-w-[421px] md:max-w-[500px] lg:max-w-5xl">
-        <div className="w-[100%]  lg:w-[30%]  p-6 h-screen/2 bg-gray-500">
+        <div className="w-[100%]  lg:w-[30%]  p-6 h-screen/2 bg-[#213743]">
           <div className="w-full flex space-x-2 bg-gray-800 rounded-full px-2 py-2">
             <button
               onClick={() => handleClick("Manual")}
@@ -86,7 +87,9 @@ export default function MinesGame() {
             />
           )}
         </div>
-        <div  id="boxBoard"  className=" relative w-[100%]  lg:w-[70%]  p-6 h-screen/2 bg-[#0F212E]"
+        <div
+          id="boxBoard"
+          className=" relative w-[100%]  lg:w-[70%]  p-6 h-screen/2  bg-[#0f212e]" 
         ></div>
       </div>
       <div className="m-auto mt-6  max-w-[421px] md:max-w-[500px] lg:max-w-5xl">

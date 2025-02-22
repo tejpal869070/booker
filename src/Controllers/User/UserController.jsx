@@ -22,8 +22,8 @@ export const GetUserDetails = async () => {
       axiosConfig
     );
 
-    if (response.data.status) {
-      return response.data.data;
+    if (response?.data?.status) {
+      return response?.data?.data;
     } else {
       return null;
     }
@@ -352,10 +352,13 @@ export const AddCryptoDepositRequest = async (formData) => {
   }
 };
 
-export const GetAccountAllStatement = async () => {
+export const GetAccountAllStatement = async (formData) => {
   const postData = {
     mobile: mobile,
   };
+  if (formData?.type) {
+    postData.type = formData.type;
+  }
 
   const axiosConfig = {
     headers: {

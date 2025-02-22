@@ -353,17 +353,13 @@ export default function AutoMode({
                 disabled={isAutoBetStart}
                 key={index}
                 onClick={() => handleCardClick(item)}
-                className={`w-full h-16 flex justify-center items-center shadow-lg lg:h-28 rounded-xl ${
-                  userSelectedIndex.includes(item.id)
-                    ? "bg-[#9000FF] border-b-4 border-[#7100C7]"
-                    : "bg-gray-300"
-                }  `}
+                className={`w-full h-16 flex justify-center items-center shadow-lg lg:h-28 rounded-xl ${  userSelectedIndex.includes(item.id) ? "bg-[#9000FF] border-b-4 border-[#7100C7]" : "bg-[#2f4553] border-b-4 border-[#213743]" }  `}
               >
                 {isAllOpen ? (
                   diamndIndex.includes(item.id) ? (
                     <img
-                      className="m-auto w-12 animate-jump-in animate-duration-400"
-                      src={require("../../../assets/photos/diamond.png")}
+                      className="m-auto w-12 lg:w-16 animate-jump-in animate-duration-400"
+                      src={require("../../../assets/photos/diamond-png.png")}
                       alt="imagggse"
                     />
                   ) : (
@@ -380,7 +376,7 @@ export default function AutoMode({
             ))}
           </div>
           {betWin && (
-            <div className="absolute top-0 w-full h-full backdrop-blur-[1px] bg-black/10 flex justify-center items-center">
+            <div className="absolute top-0 w-full h-full   flex justify-center items-center">
               <div>
                 <div className="rounded-lg animate-jump-in p-4 border-2 bg-[#16242C] w-40 py-4 px-6 border-[#28A73C] flex flex-col gap-2 justify-center items-center">
                   <p className="text-center text-[#20E701] font-semibold text-lg lg:text-3xl">
@@ -418,12 +414,12 @@ export default function AutoMode({
       <ToastContainer />
       <div>
         <div className="flex justify-between dark:text-gray-200">
-          <p className="lg:text-sm font-medium">Bet Amount</p>
-          <p>₹{Number(totlaBalance).toFixed(2)}</p>
+          <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">Bet Amount</p>
+          <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">₹{Number(totlaBalance).toFixed(2)}</p>
         </div>
         <div className="flex relative items-center">
           <input
-            className="w-full rounded border px-2 py-1 outline-none font-semibold text-lg bg-[#0F212E] text-[#f7efe8]"
+            className="w-full rounded border-2 border-[#2f4553] px-2 py-2  outline-none font-semibold bg-[#0f212e] text-gray-100 text-sm"
             placeholder="Enter Amount "
             value={isAutoBetStart ? Number(amount).toFixed(2) : amount}
             onChange={(e) => setAmount(Number(e.target.value))}
@@ -445,16 +441,16 @@ export default function AutoMode({
             </button>
           </div>
         </div>
-        <p className="lg:text-sm text-gray-200 font-medium mt-1">
+        <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">
           Number Of Bets
         </p>
         {stopLoss > 0 || stopProfit > 0 ? (
-          <p className="w-full rounded border px-2 py-1 outline-none font-semibold text-lg bg-[#0F212E] text-[#f7efe8]">
+          <p className="w-full rounded border-2 border-[#2f4553] px-2 py-2  outline-none font-semibold bg-[#0f212e] text-gray-100 text-sm">
             ♾️
           </p>
         ) : (
           <input
-            className="w-full rounded border px-2 py-1 outline-none font-semibold text-lg bg-[#0F212E] text-[#f7efe8]"
+            className="w-full rounded border-2 border-[#2f4553] px-2 py-2  outline-none font-semibold bg-[#0f212e] text-gray-100 text-sm"
             placeholder="Enter Bets Number "
             value={totalBets}
             type="number"
@@ -463,7 +459,7 @@ export default function AutoMode({
           />
         )}
 
-        <p className="mt-3 lg:mt-2 lg:text-sm dark:text-gray-200 font-medium">
+        <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">
           Bombs
         </p>
         <div className="flex justify-between ">
@@ -507,8 +503,8 @@ export default function AutoMode({
           <button
             onClick={() => handleAutoStart()}
             disabled={userSelectedIndex.length === 0}
-            className={`w-full rounded font-semibold text-lg text-[#2f2e2e] py-2 mt-3 ${
-              userSelectedIndex.length > 0 ? "bg-[#61ed4b]" : "bg-gray-400"
+            className={`w-full rounded  font-semibold py-2 text-sm mt-3      text-[#2f2e2e] py-2 mt-3 ${
+              userSelectedIndex.length > 0 ? "bg-[#20e701]" : "bg-gray-400"
             }`}
           >
             Start Auto Bet
@@ -517,11 +513,11 @@ export default function AutoMode({
       </div>
 
       <div>
-        <p className="lg:text-sm text-gray-200 font-medium mt-1 mb-1">
+        <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">
           Stop On Profit
         </p>
         <input
-          className="w-full rounded border px-2 py-1 outline-none font-semibold text-lg bg-[#0F212E] text-[#f7efe8]"
+          className="w-full rounded border-2 border-[#2f4553] px-2 py-2  outline-none font-semibold bg-[#0f212e] text-gray-100 text-sm"
           placeholder="0.0000"
           type="number"
           value={stopProfit}
@@ -535,11 +531,11 @@ export default function AutoMode({
         />
       </div>
       <div>
-        <p className="lg:text-sm text-gray-200 font-medium mt-1 mb-1">
+        <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">
           Stop On Loss
         </p>
         <input
-          className="w-full rounded border px-2 py-1 outline-none font-semibold text-lg bg-[#0F212E] text-[#f7efe8]"
+          className="w-full rounded border-2 border-[#2f4553] px-2 py-2  outline-none font-semibold bg-[#0f212e] text-gray-100 text-sm"
           placeholder="0.0000"
           value={stopLoss}
           type="number"
@@ -553,12 +549,12 @@ export default function AutoMode({
         />
       </div>
       <div>
-        <p className="lg:text-sm text-gray-200 font-medium mt-1 mb-1">
+        <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">
           Increase on WIN
         </p>
         <div className="relative">
           <input
-            className="w-full rounded border px-2 py-1 outline-none font-semibold text-lg bg-[#0F212E] text-[#f7efe8]"
+            className="w-full rounded border-2 border-[#2f4553] px-2 py-2  outline-none font-semibold bg-[#0f212e] text-gray-100 text-sm"
             placeholder="0.0000"
             type="number"
             value={increaseOnWin}
@@ -576,12 +572,12 @@ export default function AutoMode({
         </div>
       </div>
       <div>
-        <p className="lg:text-sm text-gray-200 font-medium mt-1 mb-1">
+        <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">
           Increase on LOSS
         </p>
         <div className="relative">
           <input
-            className="w-full rounded border px-2 py-1 outline-none font-semibold text-lg bg-[#0F212E] text-[#f7efe8]"
+            className="w-full rounded border-2 border-[#2f4553] px-2 py-2  outline-none font-semibold bg-[#0f212e] text-gray-100 text-sm"
             placeholder="0.0000"
             type="number"
             value={increaseOnLoss}

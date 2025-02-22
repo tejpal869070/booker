@@ -13,7 +13,7 @@ export default function GameHistory({ type, refreshHistory }) {
   }, [type, refreshHistory]);
 
   useEffect(() => {
-    setReverseData(data.reverse());
+    setReverseData(data?.reverse());
   }, [data]);
 
   return (
@@ -45,7 +45,7 @@ export default function GameHistory({ type, refreshHistory }) {
           </thead>
           <tbody>
             {data &&
-              reverseData.map((item, index) => (
+              reverseData?.map((item, index) => (
                 <tr
                   key={index}
                   class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200"

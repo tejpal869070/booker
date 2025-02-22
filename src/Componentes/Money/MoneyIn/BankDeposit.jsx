@@ -12,8 +12,6 @@ import DepositMethod from "./DepositMethod";
 import { BsBank2 } from "react-icons/bs";
 import { FaBitcoin } from "react-icons/fa6";
 
-
-
 export default function BankDeposit() {
   const inputClasses =
     "shadow-sm bg-gray-50 font-medium border border-gray-300 dark:bg-gray-200 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5";
@@ -134,14 +132,15 @@ export default function BankDeposit() {
           <p className="relative cursor-pointer" onClick={() => setTab(1)}>
             <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-black dark:bg-gray-300"></span>
             <span className="flex justify-center items-center  gap-1 fold-bold relative inline-block h-full w-full rounded border-2 border-black dark:border-gray-700 bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900">
-            <BsBank2 />BANK DEPOSIT
+              <BsBank2 />
+              BANK DEPOSIT
             </span>
           </p>
           <p className="relative cursor-pointer" onClick={() => setTab(2)}>
             <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-black dark:bg-gray-300"></span>
             <span className="flex justify-center items-center  gap-1  fold-bold relative inline-block h-full w-full rounded border-2 border-black dark:border-gray-700 bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900">
-            <FaBitcoin />
-            CRYPTO DEPOSIT
+              <FaBitcoin />
+              CRYPTO DEPOSIT
             </span>
           </p>
         </div>
@@ -251,10 +250,11 @@ export default function BankDeposit() {
                           </p>
                         ) : (
                           <input
-                            className="shadow-sm w-full  bg-gray-50 border pr-[22px] border-gray-300 dark:bg-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block  px-2.5"
+                            className="shadow-sm w-full bg-gray-50 border pr-[22px] border-gray-300 dark:bg-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block px-2.5"
                             name="product-name"
                             id="product-name"
                             type="file"
+                            accept=".jpg, .jpeg, .png"
                             onChange={(e) =>
                               setImage(e.target.files[0]) || null
                             }
