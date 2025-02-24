@@ -120,8 +120,11 @@ export default function ManualMode({ refreshHistoryFunction }) {
     formData.amount = amount;
     formData.game_type = "Wheel";
     formData.uid = user?.uid;
+    formData.details = {
+      multiplier : selectedColor?.profit
+    }
 
-    try {
+    try { 
       const response = await MinesGameUpdateWallet(formData);
       if (response && response.status) {
         return true;

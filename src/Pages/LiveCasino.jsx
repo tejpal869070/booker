@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
 import ColorGame from "../Componentes/Casino/ColorGame";
 import Aviator from "../Componentes/Casino/Aviator";
@@ -9,9 +9,12 @@ import LiveCasinoDashboard from "../Componentes/Casino/LiveCasinoDashboard";
 import CasinoLobby from "../Componentes/Casino/CasinoLobby";
 import Limbo from "../Componentes/Casino/Limbo";
 import DragonTower from "../Componentes/Casino/DragonTower";
+import GameLoading from "../Componentes/GameLoading";
 
 export default function LiveCasino() {
   const location = useLocation();
+  const [preload, setPreload] = useState(false);
+  const [gameComponent, setGameComponent] = useState(null);
 
   // get path and query to display content in inner section
   const paramsData = useMemo(() => {
@@ -23,35 +26,55 @@ export default function LiveCasino() {
     return data;
   }, [location.search]);
 
-  if (paramsData && paramsData.game === "color-game") {
-    return <div>{<ColorGame />}</div>;
-  } else if (paramsData && paramsData.game === "mines") {
-    return <div>{<MinesGame />}</div>;
-  } else if (paramsData && paramsData.game === "aviator") {
-    return <div>{<Aviator />}</div>;
-  } else if (paramsData && paramsData.game === "plinko") {
-    return <div>{<Plinko />}</div>;
-  } else if (paramsData && paramsData.game === "wheel") {
-    return <div>{<WheelGame />}</div>;
-  } else if (paramsData && paramsData.game === "casino") {
-    return <div>{<LiveCasinoDashboard />}</div>;
-  } else if (paramsData && paramsData.game === "limbo") {
-    return <div>{<Limbo />}</div>;
-  } else if (paramsData && paramsData.game === "dragon-tower") {
-    return <div>{<DragonTower />}</div>;
-  } else if (paramsData && paramsData.game === "casino-lobby") {
-    return <div>{<CasinoLobby />}</div>;
-  } else {
-    return (
-      <div>
-        <iframe
-          src="https://www.crazygames.com/embed/ragdoll-archers"
-          title="onloneGame"
-          style={{ width: "80vw", height: "90vh" }}
-          frameborder="0"
-          allow="gamepad *;"
-        ></iframe>
-      </div>
-    );
-  }
+  useEffect(() => {
+    if (paramsData && paramsData.game) {
+      setPreload(true);
+      const timeoutId = setTimeout(() => {
+        setPreload(false);
+        const renderGameComponent = () => {
+          if (paramsData && paramsData.game === "color-game") {
+            setGameComponent(<ColorGame />);
+          } else if (paramsData && paramsData.game === "mines") {
+            setGameComponent(<MinesGame />);
+          } else if (paramsData && paramsData.game === "wheel") {
+            setGameComponent(<WheelGame />);
+          } else if (paramsData && paramsData.game === "casino") {
+            setGameComponent(<LiveCasinoDashboard />);
+          } else if (paramsData && paramsData.game === "limbo") {
+            setGameComponent(<Limbo />);
+          } else if (paramsData && paramsData.game === "dragon-tower") {
+            setGameComponent(<DragonTower />);
+          } else if (paramsData && paramsData.game === "casino-lobby") {
+            setGameComponent(<CasinoLobby />);
+          } else {
+            setGameComponent(
+              <div>
+                <iframe
+                  src="https://www.crazygames.com/embed/ragdoll-archers"
+                  title="onloneGame"
+                  style={{ width: "80vw", height: "90vh" }}
+                  frameborder="0"
+                  allow="gamepad *;"
+                ></iframe>
+              </div>
+            );
+          }
+        };
+        renderGameComponent();
+      }, 1500);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [paramsData]);
+
+  return (
+    <div>
+      {preload ? (
+        <div>
+          <GameLoading />
+        </div>
+      ) : (
+        gameComponent
+      )}
+    </div>
+  );
 }

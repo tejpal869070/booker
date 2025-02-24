@@ -194,7 +194,7 @@ export default function AutoMode({ refreshHistoryFunction }) {
 
   useEffect(() => {
     return () => {
-      stopAutoSpin();
+      stopAutoSpin(); 
     };
   }, []);
 
@@ -205,6 +205,9 @@ export default function AutoMode({ refreshHistoryFunction }) {
     formData.amount = amount;
     formData.game_type = "Wheel";
     formData.uid = user?.uid;
+    formData.details = {
+      multiplier : selectedColor?.profit
+    }
 
     try {
       const response = await MinesGameUpdateWallet(formData);
