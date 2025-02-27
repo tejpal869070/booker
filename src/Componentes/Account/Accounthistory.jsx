@@ -33,14 +33,12 @@ export default function AccountHistory() {
         setData(response.data.reverse());
         setLoading(false);
       } else {
-        window.alert("Something Went Wrong.");
-        console.log("dfsdgyugds")
+        window.alert("Something Went Wrong."); 
         setData([]);
         setLoading(false);
       }
     } catch (error) {
-      window.alert("Something Went Wrong.");
-      console.log(error)
+      window.alert("Something Went Wrong."); 
       setData([]);
       setLoading(false);
     }

@@ -84,10 +84,7 @@ export default function CryptoWithdrawal() {
       });
     }
     setIsOpen(true);
-    console.log(
-      Number(amount),
-      Number(user.wallet_balance) / Number(user.currency_rate)
-    );
+     
   };
 
   const userDataGet = async () => {

@@ -156,7 +156,7 @@ export default function GameWalletHistory() {
                       <td className="whitespace-nowrap px-6 py-2">{item.date?.split("T")[0]}</td>
                       <td
                         className={`px-6 py-2 ${
-                          item.bet_type === "Win Bet" ||
+                          item.bet_type === "Win Bet" || item.game_type ==="Received" ||
                           (item.transaction_type === "credit" &&
                             (item.bet_type === "win" ||
                               item.bet_type === "bonus" ||
@@ -169,7 +169,7 @@ export default function GameWalletHistory() {
                             : "text-red-600"
                         }`}
                       >
-                        {item.bet_type === "Win Bet" ||
+                        {item.bet_type === "Win Bet" || item.game_type ==="Received" ||
                         (item.transaction_type === "credit" &&
                           (item.bet_type === "win" ||
                             item.bet_type === "bonus" ||

@@ -23,8 +23,7 @@ export default function VIP() {
   const [rewardedAmount, setRewarededAmount] = useState(0);
   const [isSuccess, setSuccess] = useState(false);
   const [history, setHistory] = useState([]);
-
-  console.log(history);
+ 
 
   const settings = {
     dots: true,
@@ -88,6 +87,7 @@ export default function VIP() {
       setSuccess(true);
       setTimeout(() => {
         setSuccess(false);
+        getAllStatement()
       }, 1500);
       userDataGet();
     } catch (error) {

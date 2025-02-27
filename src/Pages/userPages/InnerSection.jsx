@@ -19,7 +19,6 @@ import ReferIncome from "../../Componentes/Income/ReferIncome";
 import RoiIncome from "../../Componentes/Income/RoiIncome";
 import Inplay from "../../Componentes/Events/Inplay";
 import Events from "../../Componentes/Events/Events";
-import LiveCasino from "../LiveCasino";
 import ColorGameTime from "../../Componentes/Casino/ColorGameTime";
 import ChangePin from "../../Componentes/Account/ChangePin";
 import UserProfile from "../../Componentes/Account/UserProfile";
@@ -27,6 +26,7 @@ import Wallet from "../../Componentes/Account/Wallet";
 import VIP from "../../Componentes/Account/VIP";
 import GameWalletHistory from "../../Componentes/Account/GameWalletHistory";
 import LevelIncome from "../../Componentes/Income/LevelIncome";
+import LiveCasino from "../LiveCasino";
 
 export default function InnerSection() {
   const location = useLocation();

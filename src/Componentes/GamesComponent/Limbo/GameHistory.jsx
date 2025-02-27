@@ -13,7 +13,7 @@ export default function GameHistory({ type, refreshHistory }) {
   }, [type, refreshHistory]);
 
   useEffect(() => {
-    setReverseData(data?.reverse());
+    setReverseData(data);
   }, [data]);
 
   return (

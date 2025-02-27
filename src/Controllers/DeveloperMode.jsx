@@ -16,7 +16,11 @@ const DeveloperMode = () => {
       }
 
       // Checking for specific console behavior (detecting overrides)
-      const devToolsDetected = /(?:chrome|firefox|edge) devtools/i.test(navigator.userAgent);
+      const devToolsDetected = /(?:chrome|firefox|edge) devtools/i.test(navigator.userAgent); 
+
+
+      
+
 
       // If we detect dev tools, trigger the action
       if (devToolsOpened || devToolsDetected) {
