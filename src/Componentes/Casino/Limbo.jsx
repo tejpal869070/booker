@@ -545,7 +545,7 @@ export default function Limbo() {
           )}
         </div>
         <div
-          className=" relative w-[100%]  lg:w-[70%] bg-cover bg-no-repeat  px-6 py-2 h-screen/2  "
+          className=" relative w-[100%]  lg:w-[70%] bg-cover bg-no-repeat bg-center   px-6 py-2 h-screen/2  "
           style={{ backgroundImage: `url(${bg1})` }}
         >
           <div className="min-h-[40vh] md:min-h-[60vh] relative">
