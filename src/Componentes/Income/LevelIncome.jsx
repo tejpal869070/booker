@@ -101,7 +101,7 @@ export default function LevelIncome() {
                       ${item.retrun_amount}
                     </td>
                     <td className="whitespace-nowrap px-6 py-4">
-                      {item.date.split(" ")[0]}
+                      {item.date.split("T")[0]}
                     </td>
                   </tr>
                 ))}

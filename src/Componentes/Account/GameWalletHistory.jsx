@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import gif1 from "../../assets/photos/nodata.png";
 import { GetGameWalletStatement } from "../../Controllers/User/UserController";
 import DateSelector from "../Income/DateSelector";
-import { Loading1 } from "../Loading1";
+import { Loading1, Loading3 } from "../Loading1";
 import { useLocation } from "react-router-dom";
 import { FaArrowCircleLeft } from "react-icons/fa";
 import { FaArrowCircleRight } from "react-icons/fa";
@@ -87,7 +87,7 @@ export default function GameWalletHistory() {
   if (loading) {
     return (
       <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-50 z-[9999]">
-        <Loading1 />
+        <Loading3 />
       </div>
     );
   }
@@ -153,7 +153,7 @@ export default function GameWalletHistory() {
                         {item.id}.
                       </th>
                       {/* <td className="whitespace-nowrap px-4 py-2">{item.type}</td> */}
-                      <td className="whitespace-nowrap px-6 py-2">{item.date?.split(" ")[0]}</td>
+                      <td className="whitespace-nowrap px-6 py-2">{item.date.split("T")[0]}</td>
                       <td
                         className={`px-6 py-2 ${
                           item.bet_type === "Win Bet" || item.game_type ==="Received" ||

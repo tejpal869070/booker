@@ -4,7 +4,7 @@ import { MdGeneratingTokens } from "react-icons/md";
 import SocialShare from "../Account/SocialShare";
 import { Link } from "react-router-dom";
 import { GetUserDetails } from "../../Controllers/User/UserController";
-import { Loading1 } from "../Loading1";
+import { Loading1, Loading3 } from "../Loading1";
 import { GiReceiveMoney } from "react-icons/gi";
 import { HiClipboardDocumentList } from "react-icons/hi2";
 import { FcConferenceCall } from "react-icons/fc";
@@ -114,8 +114,8 @@ export default function Hero1() {
 
   if (loading) {
     return (
-      <div className="absolute inset-0 bg-[#1c1c1cc4] z-[99999]  w-screen h-screen flex items-center justify-center m-auto inset-0">
-        <Loading1 />
+      <div className="absolute inset-0   z-[99999]  w-screen h-screen flex items-center justify-center m-auto inset-0">
+        <Loading3 />
       </div>
     );
   }
@@ -133,7 +133,7 @@ export default function Hero1() {
               Congratulations {userData && userData.uname}! 🎉
             </h1>
             <p className="text-sm mt-2 text-gray-100">
-              Joining: {userData && userData?.date?.split(" ")[0]}
+              Joining: {userData && userData?.date.split("T")[0]}
             </p>
             <div className="flex flex-wrap   gap-4 mt-4">
               <button

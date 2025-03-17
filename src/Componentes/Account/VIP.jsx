@@ -10,7 +10,7 @@ import {
   GetVipPlans,
 } from "../../Controllers/User/UserController";
 import { API } from "../../Controllers/Api";
-import { Loading1 } from "../Loading1";
+import { Loading1, Loading3 } from "../Loading1";
 import bg1 from "../../assets/photos/viptopbg.jpg";
 import { toast } from "react-toastify";
 
@@ -127,7 +127,7 @@ export default function VIP() {
   if (loading) {
     return (
       <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-50 z-[9999]">
-        <Loading1 />
+        <Loading3 />
       </div>
     );
   }
@@ -414,7 +414,7 @@ export default function VIP() {
                         {item.type}
                       </td>
                       <td className="whitespace-nowrap px-6 py-3">
-                        {item.date?.split(" ")[0]}
+                        {item.date.split("T")[0]}
                       </td>
                     </tr>
                   ))}

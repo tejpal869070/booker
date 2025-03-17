@@ -23,6 +23,7 @@ export default function ForgetPassword() {
   const [verifyOtp, setVerifyOtp] = useState(false);
   const [otpSuccess, setOtpSuccess] = useState(false);
   const [changingPassword, setChangingPassword] = useState(false);
+  const [showOtp, setShowOtp] = useState("");
 
   const formData = {
     email: email,
@@ -47,11 +48,12 @@ export default function ForgetPassword() {
       if (otpResponse.status) {
         setError("");
         setOtpSent(true);
+        setShowOtp(otpResponse.data[0].otp);
       } else {
         setError("Server Error !");
       }
-    } catch (error) { 
-      setError("An unexpected error occurred.");  
+    } catch (error) {
+      setError("An unexpected error occurred.");
     } finally {
       setLoading(false);
     }
@@ -130,6 +132,7 @@ export default function ForgetPassword() {
       if (otpResponse.status) {
         setError("");
         toast.success("OTP Sent.");
+        setShowOtp(otpResponse.data[0].otp);
       } else {
         setError("Server Error !");
       }
@@ -197,8 +200,11 @@ export default function ForgetPassword() {
                     onSubmit={handleVerifyOtp}
                   >
                     <div className="flex flex-col">
-                      <p className="mb-4  text-lg font-bold text-gray-700">
+                      <p className="   text-lg font-bold text-gray-700">
                         Enter OTP
+                      </p>
+                      <p className="mb-4 text-sm">
+                        Your OTP is {showOtp && `  ${showOtp} `}
                       </p>
 
                       <OTPInput

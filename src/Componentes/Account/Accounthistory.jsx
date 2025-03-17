@@ -4,7 +4,7 @@ import AccountHistoryPeriod from "./AccountHistoryPeriod";
 import gif1 from "../../assets/photos/nodata.png";
 import { GetAccountAllStatement } from "../../Controllers/User/UserController";
 import DateSelector from "../Income/DateSelector";
-import { Loading1 } from "../Loading1";
+import { Loading1, Loading3 } from "../Loading1";
 import { useLocation } from "react-router-dom";
 
 export default function AccountHistory() {
@@ -33,12 +33,12 @@ export default function AccountHistory() {
         setData(response.data.reverse());
         setLoading(false);
       } else {
-        window.alert("Something Went Wrong."); 
+        window.alert("Something Went Wrong.");
         setData([]);
         setLoading(false);
       }
     } catch (error) {
-      window.alert("Something Went Wrong."); 
+      window.alert("Something Went Wrong.");
       setData([]);
       setLoading(false);
     }
@@ -76,7 +76,7 @@ export default function AccountHistory() {
   if (loading) {
     return (
       <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-50 z-[9999]">
-        <Loading1 />
+        <Loading3 />
       </div>
     );
   }
@@ -85,12 +85,12 @@ export default function AccountHistory() {
     <div className="relative min-h-screen">
       <div className=" ">
         <div>
-          <h1 className="mb-6 font-bold text-lg dark:text-white ">
-            Account {">"}Account History
+          <h1 className="mb-6 font-bold text-lg dark:text-white text-center md:text-left">
+            Account History
           </h1>
           {/* <AccountHistoryPeriod /> */}
           <DateSelector />
-          <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-6">
+          <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-6 hidden md:block">
             {filteredData && filteredData.length === 0 ? (
               <div>
                 <img alt="no data" src={gif1} className="m-auto w-40" />
@@ -119,7 +119,7 @@ export default function AccountHistory() {
                       Received From
                     </th>
                     <th scope="col" className="px-6 py-3">
-                      Remaining Balance
+                      Updated Balance
                     </th>
                   </tr>
                 </thead>
@@ -143,10 +143,13 @@ export default function AccountHistory() {
                         {item.type}
                       </td>
                       <td className="whitespace-nowrap px-6 py-4">
-                        {item.date.split(" ")[0]}
+                        {item.date.split("T")[0]}
                       </td>
                       <td className="whitespace-nowrap px-6 py-4">
-                        {item.type === "Investment" || item.type === "Investment Return"  ? "$ " : "₹ "}
+                        {item.type === "Investment" ||
+                        item.type === "Investment Return"
+                          ? "$ "
+                          : "₹ "}
                         {item.amount}
                       </td>
                       <td className="whitespace-nowrap px-6 py-4">
@@ -176,6 +179,59 @@ export default function AccountHistory() {
                 ))}
               </table>
             )}
+          </div>
+
+          <div className="flex flex-col md:hidden">
+            {filteredData?.map((item, index) => (
+              <div className="rounded  shadow-lg bg-gray-800 p-3 mb-4">
+                <section className="border-b-[0.5px] border-gray-600 pb-2  flex justify-between items-center font-semibold  ">
+                  <p className="px-2 bg-indigo-500 inline text-gray-200 rounded py-1">
+                    {item.type}
+                  </p>
+                  <p className="text-green-500 ">Completed</p>
+                </section>
+                <div className="pt-2 font-thin flex flex-col gap-1">
+                  <section className="flex justify-between items-center font-bold  ">
+                    <p className="text-gray-400 font-normal">Amount</p>
+                    <p className="text-[#FEAA57]">
+                      {item.type === "Investment" ||
+                      item.type === "Investment Return"
+                        ? "$ "
+                        : "₹ "}
+                      {item.amount}
+                    </p>
+                  </section>
+                  <section className="flex justify-between items-center font-bold  ">
+                    <p className="text-gray-400 font-normal">Time</p>
+                    <p className="text-gray-200 font-normal">
+                      {item.date.split("T")[0]}
+                    </p>
+                  </section>
+                  <section className="flex justify-between items-center font-bold  ">
+                    <p className="text-gray-400 font-normal">Sent To</p>
+                    <p className="text-gray-200 font-normal">
+                      {item.description.split(" ").includes("To")
+                        ? item.description.split(" ")[2]
+                        : ""}
+                    </p>
+                  </section>
+                  <section className="flex justify-between items-center font-bold  ">
+                    <p className="text-gray-400 font-normal">Received From </p>
+                    <p className="text-gray-200 font-normal">
+                      {item.description.split(" ").includes("from")
+                        ? item.description.split(" ")[2]
+                        : ""}
+                    </p>
+                  </section>
+                  <section className="flex justify-between items-center font-bold  ">
+                    <p className="text-gray-400 font-normal">Updated Balance</p>
+                    <p className="text-gray-200 font-normal">
+                      ₹{Number(item.balance).toFixed(2)}
+                    </p>
+                  </section>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

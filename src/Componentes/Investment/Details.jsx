@@ -57,7 +57,7 @@ export default function Details({ onClose, singleData }) {
 
           <div className={`${classes1}`}>
             <p>Start Date :</p>
-            <p>{singleData.date.split(" ")[0]}</p>
+            <p>{singleData.date.split("T")[0]}</p>
           </div>
 
           <div className={`${classes1}`}>

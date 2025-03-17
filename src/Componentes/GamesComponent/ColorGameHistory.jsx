@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ColorGameAllResult } from "../../Controllers/User/GamesController";
 import swal from "sweetalert";
-import { Loading1 } from "../Loading1";
+import { Loading1, Loading3 } from "../Loading1";
 
 export default function ColorGameHistory({
   gameType,
@@ -40,13 +40,13 @@ export default function ColorGameHistory({
     getGameHistory(gameType);
   }, [gameType, refreshHistory, isCountDown]);
 
-  // if (loading) {
-  //   return (
-  //     <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-50 z-[9999]">
-  //       <Loading1 />
-  //     </div>
-  //   );
-  // }
+  if (loading) {
+    return (
+      <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-50 z-[9999]">
+        <Loading3 />
+      </div>
+    );
+  }
 
   return (
     <div>

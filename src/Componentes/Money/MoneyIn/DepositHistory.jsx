@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { GetUserPaymentHistory } from "../../../Controllers/User/UserController";
 import { FaEye } from "react-icons/fa";
-import { Loading1 } from "../../Loading1";
+import { Loading1, Loading3 } from "../../Loading1";
 import gif1 from "../../../assets/photos/nodata.png";
 import DateSelector from "../../Income/DateSelector";
 import { useLocation } from "react-router-dom";
@@ -65,21 +65,21 @@ export default function DepositHistory() {
 
   if (loading) {
     return (
-      <div>
-        <Loading1 />
+      <div className="fixed min-h-screen backdrop-blur-[1px] top-0 left-0 w-full h-full flex justify-center items-center   z-[9999]">
+        <Loading3 />
       </div>
     );
   }
 
   return (
-    <div className=" ">
+    <div className=" min-h-screen">
       <div>
-        <h1 className="mb-6 font-bold text-lg dark:text-gray-100">
-          Money In {">"}Deposit History
+        <h1 className="mb-6 font-bold text-lg dark:text-gray-100 text-center md:text-left">
+          Deposit History
         </h1>
         <DateSelector />
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-          {filteredData && filteredData.length === 0 ? (
+        <div className="relative overflow-x-auto shadow-md sm:rounded-lg hidden md:block">
+          {filteredData && filteredData.length === 3 ? (
             <div>
               <img alt="no data" src={gif1} className="m-auto" />
               <p className="text-center font-bold text-xl">No Records !</p>
@@ -140,7 +140,9 @@ export default function DepositHistory() {
                       <td className="whitespace-nowrap px-6 py-4 hidden md:table-cell">
                         {item.payment_type === "USDT" ? "Crypto" : item.type}
                       </td>
-                      <td className="whitespace-nowrap px-6 py-4">{item.status}</td>
+                      <td className="whitespace-nowrap px-6 py-4">
+                        {item.status}
+                      </td>
                       <td className="whitespace-nowrap px-6 py-4">
                         <FaEye
                           size={20}
@@ -159,7 +161,7 @@ export default function DepositHistory() {
                             <div className="p-6 text-black font-medium dark:text-gray-200   ">
                               <p>Transaction ID: {item.transaction_id}</p>
                               <p>Amount: {item.amount}</p>
-                              <p>Date: {item.date.split(" ")[0]}</p>
+                              <p>Date: {item.date.split("T")[0]}</p>
                               <p>Transfered To: {item.upi_id}</p>
                               <p>Status: {item.status}</p>
                               {item.status === "Cancelled" ? (
@@ -174,7 +176,7 @@ export default function DepositHistory() {
                             <div className="p-6 text-black font-medium dark:text-gray-200   border-gray-700">
                               <p>Transaction ID: {item.transaction_id}</p>
                               <p>Amount: {item.amount}</p>
-                              <p>Date: {item.date.split(" ")[0]}</p>
+                              <p>Date: {item.date.split("T")[0]}</p>
                               <p>Transfered To:-{">"} </p>
                               <div>
                                 <p>Account Holder: {item.name}</p>
@@ -201,7 +203,7 @@ export default function DepositHistory() {
                                 INR)
                               </p>
                               <p>Price: {item.price_at_time} INR</p>
-                              <p>Date: {item.date.split(" ")[0]}</p>
+                              <p>Date: {item.date.split("T")[0]}</p>
                               <p>Transfered To: {item.cypto}</p>
 
                               <p>Status: {item.status}</p>
@@ -222,6 +224,53 @@ export default function DepositHistory() {
               )}
             </table>
           )}
+        </div>
+
+        <div className="flex flex-col md:hidden">
+          {filteredData &&
+            filteredData?.map((item, index) => (
+              <div className="rounded  shadow-lg bg-gray-800 p-3 mb-4">
+                <section className="border-b-[0.5px] border-gray-600 pb-2  flex justify-between items-center font-semibold  ">
+                  <p className="px-2 bg-indigo-500 inline text-gray-200 rounded py-1">
+                    {item.payment_type === "USDT" ? "Crypto" : item.type}
+                  </p>
+                  <p
+                    className={` ${
+                      item.status === "Cancelled"
+                        ? "text-red-500"
+                        : "text-green-500"
+                    }`}
+                  >
+                    {item.status}
+                  </p>
+                </section>
+                <div className="pt-2 font-thin flex flex-col gap-1">
+                  <section className="flex justify-between items-center font-bold  ">
+                    <p className="text-gray-400 font-normal">Amount</p>
+                    <p className="text-[#FEAA57]">
+                      {item.type === "Crypto" ? "$ " : "₹ "}
+                      {item.amount}
+                    </p>
+                  </section>
+                  <section className="flex justify-between items-center font-bold  ">
+                    <p className="text-gray-400 font-normal">Time</p>
+                    <p className="text-gray-200 font-normal">
+                      {item.date.split("T")[0]}
+                    </p>
+                  </section>
+                  <section className="flex justify-between items-center font-bold  ">
+                    <p className="text-gray-400 font-normal">Deposit Id</p>
+                    <p className="text-gray-200 font-normal">{item.id}</p>
+                  </section>
+                  {item.status === "Cancelled" && (
+                    <section className="flex justify-between items-center font-bold  ">
+                      <p className="text-gray-400 font-normal">Reason</p>
+                      <p className="text-gray-200 font-normal">{item.reason}</p>
+                    </section>
+                  )}
+                </div>
+              </div>
+            ))}
         </div>
       </div>
     </div>

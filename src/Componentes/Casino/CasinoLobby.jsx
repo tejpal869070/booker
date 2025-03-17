@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Loading1 } from "../Loading1";
+import { Loading1, Loading3 } from "../Loading1";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import {
@@ -56,7 +56,7 @@ export default function CasinoLobby() {
   if (loading) {
     return (
       <div className="fixed min-h-screen backdrop-blur-[1px] top-0 left-0 w-full h-full flex justify-center items-center   z-[9999]">
-        <Loading1 />
+        <Loading3 />
       </div>
     );
   }

@@ -258,11 +258,11 @@ export default function ColorGameMyHistory({
                       </div>
                       <div className="text-black dark:text-gray-800 flex px-10 justify-between">
                         <p>Date</p>
-                        <p>{item.date?.split(" ")[0]}</p>
+                        <p>{item.date.split("T")[0]}</p>
                       </div>
                       <div className="text-black dark:text-gray-800 flex px-10 justify-between">
                         <p>Time</p>
-                        <p>{item.date?.split(" ")[1]}</p>
+                        <p>{item.date.split("T")[1]}</p>
                       </div>
                     </td>
                   </tr>

@@ -5,7 +5,7 @@ import {
   GetPaymentMethod,
 } from "../../../Controllers/User/UserController";
 import { MdCancel } from "react-icons/md";
-import { Loading1 } from "../../Loading1";
+import { Loading1, Loading3 } from "../../Loading1";
 import CryptoDeposit from "./CryptoDeposit";
 import gif1 from "../../../assets/photos/bankdepositgif.gif";
 import DepositMethod from "./DepositMethod";
@@ -120,7 +120,7 @@ export default function BankDeposit() {
   if (loading) {
     return (
       <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-50 z-[9999]">
-        <Loading1 />
+        <Loading3 />
       </div>
     );
   }

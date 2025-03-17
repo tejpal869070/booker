@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { GetUserDetails } from "../../Controllers/User/UserController";
-import { Loading1 } from "../Loading1";
+import { Loading1, Loading3 } from "../Loading1";
 import ThemeToggle from "../../Controllers/ThemeToggle";
 import { FaAngleRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -68,7 +68,7 @@ export default function UserProfile() {
   if (loading) {
     return (
       <div className="w-screen h-screen flex items-center justify-center m-auto inset-0">
-        <Loading1 />
+        <Loading3 />
       </div>
     );
   }
@@ -167,7 +167,7 @@ export default function UserProfile() {
                 Joined On
               </span>
               <span className="ml-auto dark:text-gray-200 font-semibold">
-                {user && user.date.split(" ")[0]}
+                {user && user.date.split("T")[0]}
               </span>
             </li>
             <li className="flex items-center py-3 text-sm">

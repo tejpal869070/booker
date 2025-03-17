@@ -3,7 +3,7 @@ import { Tree, TreeNode } from "react-organizational-chart";
 import ball from "../../assets/photos/ball2.png";
 import { GetTree, GetUserDetails } from "../../Controllers/User/UserController";
 import { Link, useLocation } from "react-router-dom";
-import { Loading1 } from "../Loading1";
+import { Loading1, Loading3 } from "../Loading1";
 
 const styles = {
   node: {
@@ -293,7 +293,7 @@ export default function MemberTree() {
   if (loading || userLoading) {
     return (
       <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-50 z-[9999]">
-        <Loading1 />
+        <Loading3 />
       </div>
     );
   }

@@ -7,7 +7,7 @@ import { GiWallet, GiMoneyStack } from "react-icons/gi";
 import Hero1 from "./Hero1";
 import GamesSlider from "./GamesSlider";
 import { GetUserDetails } from "../../Controllers/User/UserController";
-import { Loading1 } from "../Loading1";
+import { Loading1, Loading3 } from "../Loading1";
 import { Link } from "react-router-dom";
 
 export default function Dashboard() {
@@ -94,9 +94,8 @@ export default function Dashboard() {
 
   if (loading) {
     return (
-      <div className="absolute top-0   z-[9999] w-screen h-screen flex items-center justify-center m-auto inset-0">
-        <div className="w-screen h-screen top-0 z-[99999] blur-lg absolute" />
-        <Loading1 />
+      <div className="absolute top-0   z-[9999] w-screen h-screen flex items-center justify-center m-auto inset-0"> 
+        <Loading3 />
       </div>
     );
   }

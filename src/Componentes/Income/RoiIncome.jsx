@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import DateSelector from "./DateSelector";
 import { GetRoi } from "../../Controllers/User/UserController";
 import { useLocation } from "react-router-dom";
+import { Loading3 } from "../Loading1";
 
 export default function RoiIncome() {
   const [tableData, setTableData] = useState([]);
@@ -9,26 +10,23 @@ export default function RoiIncome() {
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
   const [filteredData, setFilteredData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const tableHead = [
-    "S.No.",
-    "INVESTED AMOUNT",
-    "PAYOUT",
-    "TOTAL PAYOUT",
-    "Date",
-  ];
+  const tableHead = ["Id", "INVESTED AMOUNT", "PAYOUT", "TOTAL PAYOUT", "Date"];
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await GetRoi();
       if (response !== null) {
         const updatedData = response?.map((item) => {
-          const { id, reffer_by, reffer_code, ...rest } = item;
+          const { reffer_by, reffer_code, ...rest } = item;
           return rest;
         });
         setTableData(updatedData);
+        setLoading(false);
       } else {
         setTableData([]);
+        setLoading(false);
       }
     };
 
@@ -59,11 +57,18 @@ export default function RoiIncome() {
       setFilteredData(filteredData);
     }
   }, [startDate, endDate, tableData]);
- 
+
+  if (loading) {
+    return (
+      <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-50 z-[9999]">
+        <Loading3 />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen">
-      <p className="font-bold text-xl mb-6 dark:text-white">
+      <p className="font-bold text-xl mb-6 dark:text-white text-center md:text-left">
         Income Manager {">"} ROI Income
       </p>
       <DateSelector />
@@ -81,7 +86,7 @@ export default function RoiIncome() {
           </div>
         ) : (
           <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 hidden md:inline-table">
               <thead className="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                   {tableHead.map((item, index) => (
@@ -101,7 +106,7 @@ export default function RoiIncome() {
                     key={index}
                     className="odd:bg-white dark:text-gray-300 odd:dark:bg-gray-900 text-black font-medium even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
                   >
-                    <td className="whitespace-nowrap px-6 py-4">{index + 1}</td>
+                    <td className="whitespace-nowrap px-6 py-4">{item?.id}</td>
 
                     <td className="whitespace-nowrap px-6 py-4">
                       $ {item.investment_amount}
@@ -113,12 +118,54 @@ export default function RoiIncome() {
                       $ {Number(item.total_return_amount).toFixed(2)}
                     </td>
                     <td className="whitespace-nowrap px-6 py-4">
-                      {item.date.split(" ")[0]}
+                      {item.date.split("T")[0]}
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
+
+            <div className="flex flex-col md:hidden">
+              {filteredData &&
+                filteredData?.map((item, index) => (
+                  <div className="rounded  shadow-lg bg-gray-800 p-3 mb-4">
+                    <section className="border-b-[0.5px] border-gray-600 pb-2  flex justify-between items-center font-semibold  ">
+                      <p className="px-2 bg-indigo-500 inline text-gray-200 rounded py-1">
+                        VIP1
+                      </p>
+                      <p className="text-green-500">+ ${item.today_return}</p>
+                    </section>
+                    <div className="pt-2 font-thin flex flex-col gap-1">
+                      <section className="flex justify-between items-center font-bold  ">
+                        <p className="text-gray-400 font-normal">
+                          Investment Amount
+                        </p>
+                        <p className="text-[#FEAA57]">
+                          ${item.investment_amount}
+                        </p>
+                      </section>
+                      <section className="flex justify-between items-center font-bold  ">
+                        <p className="text-gray-400 font-normal">
+                          Total Payout
+                        </p>
+                        <p className="text-[#FEAA57]">
+                          $ {Number(item.total_return_amount).toFixed(2)}
+                        </p>
+                      </section>
+                      <section className="flex justify-between items-center font-bold  ">
+                        <p className="text-gray-400 font-normal">Time</p>
+                        <p className="text-gray-200 font-normal">
+                          {item.date.split("T")[0]}
+                        </p>
+                      </section>
+                      <section className="flex justify-between items-center font-bold  ">
+                        <p className="text-gray-400 font-normal">Trnx. Id</p>
+                        <p className="text-gray-200 font-normal">{item.id}</p>
+                      </section>
+                    </div>
+                  </div>
+                ))}
+            </div>
           </div>
         )}
       </div>

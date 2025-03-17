@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Slide, ToastContainer, toast } from "react-toastify";
 import { MdCancel } from "react-icons/md";
 import { GetInvestmentPlans } from "../../Controllers/User/UserController";
-import { Loading1 } from "../Loading1";
+import { Loading1, Loading3 } from "../Loading1";
 import Slider from "react-slick";
 
 const ViewPlans = ({ url, onClose }) => {
@@ -50,7 +50,7 @@ const ViewPlans = ({ url, onClose }) => {
   if (loading) {
     return (
       <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-50 z-[9999]">
-        <Loading1 />
+        <Loading3 />
       </div>
     );
   }

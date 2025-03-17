@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { FaRegEye } from "react-icons/fa";
 import gif1 from "../../assets/photos/nodata.png";
 import { GetAccountAllStatement } from "../../Controllers/User/UserController";
-import { Loading1 } from "../Loading1";
+import { Loading1, Loading3 } from "../Loading1";
 
 export default function TodayHistory() {
   const [isVisible, setIsVisible] = useState(false);
@@ -54,7 +54,7 @@ export default function TodayHistory() {
   if (loading) {
     return (
       <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-50 z-[9999]">
-        <Loading1 />
+        <Loading3 />
       </div>
     );
   }
@@ -112,7 +112,7 @@ export default function TodayHistory() {
                         {index + 1}.
                       </th>
                       <td className="whitespace-nowrap px-4 py-4">{item.type}</td>
-                      <td className="whitespace-nowrap px-6 py-4">{item.date.split(" ")[0]}</td>
+                      <td className="whitespace-nowrap px-6 py-4">{item.date.split("T")[0]}</td>
                       <td className="whitespace-nowrap px-6 py-4">{item.type === "Investment" ? "$ " : "₹"}{item.amount}</td>
                       <td className="whitespace-nowrap px-6 py-4">
                         {item.description.split(" ").includes("To")

@@ -11,7 +11,7 @@ import InnerSection from "./userPages/InnerSection";
 import { FaCoins } from "react-icons/fa6";
 import { GetUserDetails } from "../Controllers/User/UserController";
 import ThemeToggle from "../Controllers/ThemeToggle";
-import { Loading1 } from "../Componentes/Loading1";
+import { Loading1, Loading3 } from "../Componentes/Loading1";
 import CreatePin from "../Componentes/Dashboard/CratePin";
 import Logo from "../assets/photos/mainlogo.png";
 
@@ -22,12 +22,11 @@ import { IoGameControllerSharp } from "react-icons/io5";
 // import Logo from "../assets/photos/mylogo2.png";
 
 import { RiVipDiamondFill } from "react-icons/ri";
-import { MdCancel,MdCasino } from "react-icons/md";
+import { MdCancel, MdCasino } from "react-icons/md";
 import { FaArrowCircleLeft, FaArrowCircleRight } from "react-icons/fa";
 import VerifyPin from "../Componentes/VerifyPin";
 import { toast } from "react-toastify";
-import { MainGameWalletMoneyTransfer } from "../Controllers/User/GamesController"; 
-
+import { MainGameWalletMoneyTransfer } from "../Controllers/User/GamesController";
 
 export default function Home() {
   const [user, setuser] = React.useState({});
@@ -169,14 +168,13 @@ export default function Home() {
   if (loading) {
     return (
       <div className="w-screen h-screen flex items-center justify-center m-auto inset-0">
-        <Loading1 />
+        <Loading3 />
       </div>
     );
   }
 
   return (
-    <div className="relative dark:bg-black w-full h-full overflow-x-hidden">
-      <div className="md:hidden w-full z-[999]  pt-2 pb-2 flex items-center justify-center "></div>
+    <div className="relative dark:bg-black w-full h-full overflow-x-hidden"> 
       <nav className="hidden md:block bg-gradient-to-r from-blue-800 to-indigo-900 z-10 border-b-2 border-gray-200 dark:bg-gray-900 fixed w-full">
         <div className="  flex flex-wrap items-center justify-between mx-auto p-4">
           <div className="sm:pl-64" />
@@ -358,7 +356,7 @@ export default function Home() {
                 to={"/home?game=casino"}
                 className="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group  dark:text-black dark:hover:bg-gray-200 hover:text-center"
               >
-                <MdCasino  size={24} className="dark:text-black" />
+                <MdCasino size={24} className="dark:text-black" />
                 <span className="flex-1 ms-3 text-left rtl:text-right dark:text-black whitespace-nowrap ">
                   Live Casino
                 </span>

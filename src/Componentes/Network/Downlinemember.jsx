@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { GetMyDownline } from "../../Controllers/User/UserController";
 import { toast } from "react-toastify";
-import { Loading1 } from "../Loading1";
+import { Loading1, Loading3 } from "../Loading1";
 
 export default function Downlinemember() {
   const [data, setData] = useState([]);
@@ -31,7 +31,7 @@ export default function Downlinemember() {
   if (loading) {
     return (
       <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-50 z-[9999]">
-        <Loading1 />
+        <Loading3 />
       </div>
     );
   }
@@ -100,9 +100,9 @@ export default function Downlinemember() {
                       ? "RIGHT"
                       : ""}
                   </td>
-                  <td className="whitespace-nowrap px-6 py-4">{item.date?.split(" ")[0]}</td>
+                  <td className="whitespace-nowrap px-6 py-4">{item.date.split("T")[0]}</td>
                   <td className="whitespace-nowrap px-6 py-4">{item.paidType}</td>
-                  <td className="whitespace-nowrap px-6 py-4">{item.totalInvest}</td>
+                  <td className="whitespace-nowrap px-6 py-4">$ {item.total_invest}</td>
                   <td className="whitespace-nowrap px-6 py-4">{item.firstInveDate}</td>
                 </tr>
               ))}

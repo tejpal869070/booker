@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { GetDirectDownline } from "../../Controllers/User/UserController";
 import { toast } from "react-toastify";
-import { Loading1 } from "../Loading1";
+import { Loading1, Loading3 } from "../Loading1";
 
 export default function DirextDownline() {
   const [data, setData] = useState([]);
@@ -31,7 +31,7 @@ export default function DirextDownline() {
   if (loading) {
     return (
       <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-50 z-[9999]">
-        <Loading1 />
+        <Loading3 />
       </div>
     );
   }
@@ -110,7 +110,7 @@ export default function DirextDownline() {
                       ? "RIGHT"
                       : ""}
                   </td>
-                  <td className="whitespace-nowrap px-6 py-4">{item.date?.split(" ")[0]}</td>
+                  <td className="whitespace-nowrap px-6 py-4">{item.date.split("T")[0]}</td>
                   <td className="whitespace-nowrap px-6 py-4">₹{Number(item.balance).toFixed(2)}</td>
                   <td className="whitespace-nowrap px-6 py-4">${item.total_investment}</td>
                   <td className="whitespace-nowrap px-6 py-4">{item.paidType}</td>

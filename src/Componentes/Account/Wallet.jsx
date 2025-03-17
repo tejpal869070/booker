@@ -7,7 +7,7 @@ import { TbMoneybag } from "react-icons/tb";
 import { TiDocumentText } from "react-icons/ti";
 import { GrDocumentText } from "react-icons/gr";
 import { FaHistory } from "react-icons/fa";
-import { Loading1 } from "../Loading1";
+import { Loading1, Loading3 } from "../Loading1";
 import { GetUserDetails } from "../../Controllers/User/UserController";
 import { FaAngleRight } from "react-icons/fa";
 import { FaAngleLeft } from "react-icons/fa";
@@ -112,7 +112,7 @@ export default function Wallet() {
   if (loading) {
     return (
       <div className="w-screen h-screen flex items-center justify-center m-auto inset-0">
-        <Loading1 />
+        <Loading3 />
       </div>
     );
   }

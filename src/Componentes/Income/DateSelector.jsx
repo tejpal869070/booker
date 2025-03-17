@@ -29,7 +29,7 @@ export default function DateSelector() {
           placeholder="Start Date"
           type="date"
           color="black"
-          className="border-2 text-black border-[#ff9600] rounded py-1"
+          className="border-2 bg-black text-white border-[#ff9600] rounded py-1"
           onChange={handleStartDate}
         />
         <p  className="dark:text-gray-200">to</p>
@@ -38,7 +38,7 @@ export default function DateSelector() {
           placeholder="Start Date"
           type="date"
           color="black"
-          className="border-2 text-black border-[#ff9600] rounded py-1"
+          className="border-2 bg-black text-white border-[#ff9600] rounded py-1"
           onChange={handleEndDate}
         />
         {/* <button className="relative ml-6" onClick={handleSearch}>

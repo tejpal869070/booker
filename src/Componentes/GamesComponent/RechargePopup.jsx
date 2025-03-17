@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import gif1 from "../../assets/photos/sendmoneygif.gif";
 import { MdCancel } from "react-icons/md";
-import { Loading1 } from "../Loading1";
+import { Loading1, Loading3 } from "../Loading1";
 import { GetUserDetails } from "../../Controllers/User/UserController";
 import VerifyPin from "../VerifyPin";
 import { MainGameWalletMoneyTransfer } from "../../Controllers/User/GamesController";
@@ -71,7 +71,7 @@ export const FlashPopup = ({ handleClose }) => {
   if (loading) {
     return (
       <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-50 z-[9999]">
-        <Loading1 />
+        <Loading3 />
       </div>
     );
   }

@@ -7,7 +7,7 @@ import swal from "sweetalert";
 import { API } from "../../Controllers/Api";
 import { Link } from "react-router-dom";
 import { GetUserDetails } from "../../Controllers/User/UserController";
-import { Loading1 } from "../Loading1";
+import { Loading1, Loading3 } from "../Loading1";
 import { RiColorFilterFill } from "react-icons/ri";
 import { BiSolidWallet } from "react-icons/bi";
 import { FaHandPointRight } from "react-icons/fa";
@@ -132,7 +132,7 @@ export default function ColorGame() {
   if (loading || gameLoading) {
     return (
       <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-50 z-[9999]">
-        <Loading1 />
+        <Loading3 />
       </div>
     );
   }

@@ -4,7 +4,7 @@ import {
   GetUserDetails,
   SendRequestForChangeAccount,
 } from "../../../../Controllers/User/UserController";
-import { Loading1 } from "../../../Loading1";
+import { Loading1, Loading3 } from "../../../Loading1";
 import { ToastContainer, toast } from "react-toastify";
 import successImg from "../../../../assets/photos/success1-1--unscreen.gif";
 import swal from "sweetalert";
@@ -197,7 +197,7 @@ export default function BankWithDrawal() {
   if (loading) {
     return (
       <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-50 z-[9999]">
-        <Loading1 />
+        <Loading3 />
       </div>
     );
   }

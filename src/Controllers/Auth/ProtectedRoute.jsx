@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"; 
 import { CheckToken } from "./AuthController";
-import { Loading1 } from "../../Componentes/Loading1";
+import { Loading1, Loading3 } from "../../Componentes/Loading1";
 
 export const ProtectedRoute = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -34,7 +34,7 @@ export const ProtectedRoute = ({ children }) => {
   if (!isAuthenticated) {
     return (
       <div className="w-screen h-screen flex justify-center items-center m-auto ">
-        <Loading1 />
+        <Loading3 />
       </div>
     );
   }
