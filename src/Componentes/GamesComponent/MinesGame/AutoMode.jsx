@@ -271,6 +271,7 @@ export default function AutoMode({
     };
 
     startBetting();
+     toast.success("Bet Placed. Game start", { position: "top-center" });
   };
 
   const stopAutoBet = () => {
@@ -424,7 +425,7 @@ export default function AutoMode({
             value={isAutoBetStart ? Number(amount).toFixed(2) : amount}
             onChange={(e) => setAmount(Number(e.target.value))}
             disabled={isAutoBetStart}
-            type="number"
+            type="tel"
           />
           <div className="absolute right-0.5   ">
             <button
@@ -453,7 +454,7 @@ export default function AutoMode({
             className="w-full rounded border-2 border-[#2f4553] px-2 py-2  outline-none font-semibold bg-[#0f212e] text-gray-100 text-sm"
             placeholder="Enter Bets Number "
             value={totalBets}
-            type="number"
+            type="tel"
             disabled={isAutoBetStart}
             onChange={(e) => setTotalBets(e.target.value)}
           />
@@ -519,7 +520,7 @@ export default function AutoMode({
         <input
           className="w-full rounded border-2 border-[#2f4553] px-2 py-2  outline-none font-semibold bg-[#0f212e] text-gray-100 text-sm"
           placeholder="0.0000"
-          type="number"
+          type="tel"
           value={stopProfit}
           disabled={isAutoBetStart}
           onChange={(e) => {
@@ -538,7 +539,7 @@ export default function AutoMode({
           className="w-full rounded border-2 border-[#2f4553] px-2 py-2  outline-none font-semibold bg-[#0f212e] text-gray-100 text-sm"
           placeholder="0.0000"
           value={stopLoss}
-          type="number"
+          type="tel"
           disabled={isAutoBetStart}
           onChange={(e) => {
             const value = e.target.value;
@@ -556,7 +557,7 @@ export default function AutoMode({
           <input
             className="w-full rounded border-2 border-[#2f4553] px-2 py-2  outline-none font-semibold bg-[#0f212e] text-gray-100 text-sm"
             placeholder="0.0000"
-            type="number"
+            type="tel"
             value={increaseOnWin}
             disabled={isAutoBetStart}
             onChange={(e) => {
@@ -579,7 +580,7 @@ export default function AutoMode({
           <input
             className="w-full rounded border-2 border-[#2f4553] px-2 py-2  outline-none font-semibold bg-[#0f212e] text-gray-100 text-sm"
             placeholder="0.0000"
-            type="number"
+            type="tel"
             value={increaseOnLoss}
             disabled={isAutoBetStart}
             onChange={(e) => {

@@ -133,7 +133,7 @@ export default function Hero1() {
               Congratulations {userData && userData.uname}! 🎉
             </h1>
             <p className="text-sm mt-2 text-gray-100">
-              Joining: {userData && userData?.date?.split("T")[0]}
+              Joining: {userData && userData?.date?.split(" ")[0]}
             </p>
             <div className="flex flex-wrap   gap-4 mt-4">
               <button
@@ -368,7 +368,7 @@ export default function Hero1() {
                 Transfer To {type === 1 ? "Game Wallet" : "Main Wallet"}
               </label>
               <input
-                type="number"
+                type="tel"
                 id="input-label"
                 className="py-2 px-4 block text-gray-200 bg-gray-700 w-full border-x-0 border-t-0 border-b-2   text-md       dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                 placeholder=" "

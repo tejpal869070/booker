@@ -159,7 +159,7 @@ export default function DepositHistory() {
                             <div className="p-6 text-black font-medium dark:text-gray-200   ">
                               <p>Transaction ID: {item.transaction_id}</p>
                               <p>Amount: {item.amount}</p>
-                              <p>Date: {item.date.split("T")[0]}</p>
+                              <p>Date: {item.date.split(" ")[0]}</p>
                               <p>Transfered To: {item.upi_id}</p>
                               <p>Status: {item.status}</p>
                               {item.status === "Cancelled" ? (
@@ -174,7 +174,7 @@ export default function DepositHistory() {
                             <div className="p-6 text-black font-medium dark:text-gray-200   border-gray-700">
                               <p>Transaction ID: {item.transaction_id}</p>
                               <p>Amount: {item.amount}</p>
-                              <p>Date: {item.date.split("T")[0]}</p>
+                              <p>Date: {item.date.split(" ")[0]}</p>
                               <p>Transfered To:-{">"} </p>
                               <div>
                                 <p>Account Holder: {item.name}</p>
@@ -201,7 +201,7 @@ export default function DepositHistory() {
                                 INR)
                               </p>
                               <p>Price: {item.price_at_time} INR</p>
-                              <p>Date: {item.date.split("T")[0]}</p>
+                              <p>Date: {item.date.split(" ")[0]}</p>
                               <p>Transfered To: {item.cypto}</p>
 
                               <p>Status: {item.status}</p>

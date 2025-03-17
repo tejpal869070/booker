@@ -12,7 +12,7 @@ import swal from "sweetalert";
 
 export default function CryptoWithdrawal() {
   const inputClasses =
-    "shadow-sm w-full bg-gray-50 font-medium border border-gray-300 dark:bg-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5";
+    "shadow-sm bg-gray-50 font-medium border border-gray-300 dark:bg-gray-200 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5";
 
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
@@ -65,8 +65,8 @@ export default function CryptoWithdrawal() {
   };
 
   const handle1 = async () => {
-    if (amount < 10) {
-      toast.warn("Minimum Withdrawal is 10", {
+    if (amount < 25) {
+      toast.warn("Minimum Withdrawal is 25", {
         position: "bottom-right",
       });
       return;
@@ -84,7 +84,6 @@ export default function CryptoWithdrawal() {
       });
     }
     setIsOpen(true);
-     
   };
 
   const userDataGet = async () => {
@@ -165,7 +164,7 @@ export default function CryptoWithdrawal() {
                   for="product-name"
                   className="text-sm font-medium text-gray-900 block mb-2 dark:text-white"
                 >
-                  Quantity*
+                  Quantity* (Min $25)
                 </label>
                 <input
                   type="text"
@@ -177,10 +176,18 @@ export default function CryptoWithdrawal() {
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
                 />
-                <p className="text-gray-800 font-medium text-sm">
+                <div className="flex justify-between items-center">
+                  <p className="text-[#00e367] font-medium text-sm">
+                    Credit: ${(Number(amount) * 90/100).toFixed(2)}
+                  </p>
+                  <p className="text-gray-800 font-medium text-sm">
+                  Charges: 10%
+                </p>
+                </div>
+                {/* <p className="text-gray-800 font-medium text-sm">
                   Rs. {(amount * Number(user.currency_rate)).toFixed(2)} Will Be
                   deduct{" "}
-                </p>
+                </p> */}
               </div>
             </div>
             <div className="flex flex-wrap   gap-6 mt-6">

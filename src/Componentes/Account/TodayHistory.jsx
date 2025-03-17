@@ -112,7 +112,7 @@ export default function TodayHistory() {
                         {index + 1}.
                       </th>
                       <td className="whitespace-nowrap px-4 py-4">{item.type}</td>
-                      <td className="whitespace-nowrap px-6 py-4">{item.date.split("T")[0]}</td>
+                      <td className="whitespace-nowrap px-6 py-4">{item.date.split(" ")[0]}</td>
                       <td className="whitespace-nowrap px-6 py-4">{item.type === "Investment" ? "$ " : "₹"}{item.amount}</td>
                       <td className="whitespace-nowrap px-6 py-4">
                         {item.description.split(" ").includes("To")

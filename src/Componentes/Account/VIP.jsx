@@ -414,7 +414,7 @@ export default function VIP() {
                         {item.type}
                       </td>
                       <td className="whitespace-nowrap px-6 py-3">
-                        {item.date?.split("T")[0]}
+                        {item.date?.split(" ")[0]}
                       </td>
                     </tr>
                   ))}

@@ -110,7 +110,7 @@ export default function DirextDownline() {
                       ? "RIGHT"
                       : ""}
                   </td>
-                  <td className="whitespace-nowrap px-6 py-4">{item.date?.split("T")[0]}</td>
+                  <td className="whitespace-nowrap px-6 py-4">{item.date?.split(" ")[0]}</td>
                   <td className="whitespace-nowrap px-6 py-4">₹{Number(item.balance).toFixed(2)}</td>
                   <td className="whitespace-nowrap px-6 py-4">${item.total_investment}</td>
                   <td className="whitespace-nowrap px-6 py-4">{item.paidType}</td>

@@ -15,7 +15,7 @@ export default function ManualMode({ refreshHistoryFunction }) {
   const [selectedColor, setSelectedColor] = useState(null);
   const [transitionEnabled, setTransitionEnabled] = useState(true);
   const [gameStarted, setGameStarted] = useState(false);
-  const [currentRotation, setCurrentRotation] = useState(0); 
+  const [currentRotation, setCurrentRotation] = useState(0);
   const [isWin, setWin] = useState(false);
   const [winAmount, setWinAmount] = useState();
   const [user, setUser] = useState({});
@@ -106,6 +106,7 @@ export default function ManualMode({ refreshHistoryFunction }) {
       "deduct",
       amountRef.current
     );
+    toast.success("Bet Placed. Game start", { position: "top-center" });
     if (walletResponse) {
       handleSpinFunction(amountRef.current);
       setTotalBalance((pre) => pre - amountRef.current);
@@ -121,10 +122,10 @@ export default function ManualMode({ refreshHistoryFunction }) {
     formData.game_type = "Wheel";
     formData.uid = user?.uid;
     formData.details = {
-      multiplier : selectedColor?.profit
-    }
+      multiplier: selectedColor?.profit,
+    };
 
-    try { 
+    try {
       const response = await MinesGameUpdateWallet(formData);
       if (response && response.status) {
         return true;
@@ -214,7 +215,7 @@ export default function ManualMode({ refreshHistoryFunction }) {
                 <input
                   className="w-full rounded border-2 border-[#2f4553] px-2 py-2  outline-none font-semibold bg-[#0f212e] text-gray-100 text-sm"
                   placeholder="Enter Amount "
-                  type="number"
+                  type="tel"
                   value={amount}
                   disabled={gameStarted}
                   onChange={(e) => setAmount(Number(e.target.value))} // Convert to number
@@ -295,8 +296,38 @@ export default function ManualMode({ refreshHistoryFunction }) {
                     transition: transitionEnabled
                       ? "transform 3s ease-out"
                       : "none",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
                   }}
                 >
+                  {colors.map((item, index) => {
+                    const startAngle = gameType ==="high" ? 327.6 : (index * 360) / colors.length ;
+                    const endAngle =
+                      startAngle +
+                      (gameType === "low" || gameType === "medium"
+                        ? 360 / colors.length
+                        : (item.area * 360) / 100);
+                    const midAngle = startAngle + (endAngle - startAngle) / 2; 
+
+                    return (
+                      <div
+                        key={index}
+                        className="absolute flex items-center justify-center h-[30%] text-sm font-bold text-white"
+                        style={{
+                          transform: `rotate(${midAngle}deg) translate(0, -130%) rotate(-${0}deg)`,
+                          transformOrigin: "center",
+                          position: "absolute",
+                          textAlign: "center",
+                          whiteSpace: "nowrap",
+                          color : item.color,
+                        }}
+                      >
+                        {item.profit}x
+                      </div>
+                    );
+                  })}
+
                   <div className="w-[85%] h-[85%] bg-[#0F212E] rounded-full"></div>
                 </div>
               </div>

@@ -198,7 +198,7 @@ export default function BankDeposit() {
                           Amount*
                         </label>
                         <input
-                          type="number"
+                          type="tel"
                           name="product-name"
                           id="product-name"
                           className={`${inputClasses}`}

@@ -113,7 +113,7 @@ export default function RoiIncome() {
                       $ {Number(item.total_return_amount).toFixed(2)}
                     </td>
                     <td className="whitespace-nowrap px-6 py-4">
-                      {item.date.split("T")[0]}
+                      {item.date.split(" ")[0]}
                     </td>
                   </tr>
                 ))}

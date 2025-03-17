@@ -101,6 +101,7 @@ export default function DragonTower() {
       return;
     }
     const walletResponse = await updateWalletBalance("deduct", amount);
+     toast.success("Bet Placed. Game start", { position: "top-center" });
     if (walletResponse) {
       setIsPlaying(true);
       return;

@@ -105,7 +105,7 @@ export default function MatchingIncome() {
                     </td>
 
                     <td className="whitespace-nowrap px-6 py-4">
-                      {item.date.split("T")[0]}
+                      {item.date.split(" ")[0]}
                     </td>
                   </tr>
                 ))}

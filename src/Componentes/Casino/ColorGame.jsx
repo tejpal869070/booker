@@ -269,7 +269,7 @@ export default function ColorGame() {
                 Transfer To {type === 1 ? "Game Wallet" : "Main Wallet"}
               </label>
               <input
-                type="number"
+                type="tel"
                 id="input-label"
                 className="py-2 px-4 block text-gray-200 bg-gray-700 w-full border-x-0 border-t-0 border-b-2   text-md       dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                 placeholder=" "

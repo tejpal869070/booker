@@ -126,6 +126,7 @@ export default function ManualMode({
     }
     // admin controller end------------------------------------------------------------------------------------------------------------
     setIsBetPlaced(true);
+    toast.success("Bet Placed. Game start", { position: "top-center" });
     updateWalletBalance("deduct", amount);
 
     setTotalBalance((pre) => pre - amount);

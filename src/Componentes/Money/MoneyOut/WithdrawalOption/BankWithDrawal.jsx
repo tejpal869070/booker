@@ -26,7 +26,7 @@ export default function BankWithDrawal() {
   const [bank_name, setBankName] = useState("");
   const [ac_type, setAccType] = useState("Saving");
   const [reason, setReason] = useState("");
-  const [amount, setAmount] = useState(100);
+  const [amount, setAmount] = useState(249);
   const [processing, setProcessing] = useState(false);
   const [withdrawaing, setWithdrawaing] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -131,8 +131,8 @@ export default function BankWithDrawal() {
 
   const handleWithdrawal = async (pin) => {
     setWithdrawaing(true);
-    if (amount < 100) {
-      toast.error("Minimum withdrawal amount is 100", {
+    if (amount < 249) {
+      toast.error("Minimum withdrawal amount is 249", {
         position: "bottom-right",
       });
       setWithdrawaing(false);
@@ -248,7 +248,7 @@ export default function BankWithDrawal() {
                 {user && Number(user.wallet_balance).toFixed(2)}
               </p>
 
-              {(user?.bank_status === "N" && !editing) ? (
+              {user?.bank_status === "N" && !editing ? (
                 <button
                   onClick={() => setEditing(true)}
                   className="flex justify-center items-center gap-2 flex-col w-full py-2 text-center font-semibold bg-gray-200 rounded"
@@ -309,7 +309,7 @@ export default function BankWithDrawal() {
                         Account Number *
                       </label>
                       <input
-                        type="number"
+                        type="tel"
                         name="category"
                         id="category"
                         className={`${inputClasses} ${
@@ -407,7 +407,7 @@ export default function BankWithDrawal() {
                         for="product-details"
                         className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-800"
                       >
-                        Withdrawal Amount * (Min ₹100)
+                        Withdrawal Amount * (Min ₹249)
                       </label>
                       <input
                         type="text"
@@ -418,6 +418,14 @@ export default function BankWithDrawal() {
                         value={amount}
                         onChange={(e) => setAmount(e.target.value)}
                       />
+                      <div className="flex justify-between items-center">
+                        <p className="text-sm font-medium text-[#00e367] block mb-2 ">
+                          Credit Amount: ₹{(Number(amount) * 90/100).toFixed(2)}
+                        </p>
+                        <p className="text-sm font-medium text-black block mb-2 ">
+                          Charges: 10%
+                        </p>
+                      </div>
                     </div>
 
                     <div
@@ -478,7 +486,8 @@ export default function BankWithDrawal() {
                           user.ac_name === undefined ||
                           user.bank_name === undefined ||
                           user.ifsc_code === undefined ||
-                          amount < 100 || amount > Number(user.wallet_balance)
+                          amount < 100 ||
+                          amount > Number(user.wallet_balance)
                         }
                       >
                         <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-black dark:bg-gray-400"></span>

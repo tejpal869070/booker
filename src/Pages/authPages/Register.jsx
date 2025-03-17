@@ -26,7 +26,8 @@ export default function Register() {
   const [otpSent, setOtpSent] = useState(false);
 
   const location = useLocation();
-
+  const [otp, setOtp] = useState("");
+ 
   const getQueryParam = (name) => {
     const searchParams = new URLSearchParams(location.search);
     return searchParams.get(name);
@@ -74,6 +75,7 @@ export default function Register() {
         if (otpResponse.status) {
           setOtpSent(true);
           setLoading(false);
+          setOtp(otpResponse.data[0].otp);
         } else {
           toast.error("Error in sending OTP");
         }
@@ -90,7 +92,7 @@ export default function Register() {
   };
 
   const goBack = () => {
-    setOtpSent(false); 
+    setOtpSent(false);
   };
 
   return (
@@ -100,6 +102,7 @@ export default function Register() {
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${bg1})`,
       }}
     >
+      <ToastContainer />
       {!otpSent ? (
         <div className="relative py-3 sm:max-w-xl sm:mx-auto">
           <div className="relative px-4 py-8 bg-white/30 backdrop-blur-sm shadow-lg  rounded-3xl sm:px-16 animate-fade-left">
@@ -116,7 +119,10 @@ export default function Register() {
                 <form onSubmit={handleRegister}>
                   <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
                     <div className="relative">
-                      <FaRegCircleUser size={20} className="  absolute top-2.5 left-2"/>
+                      <FaRegCircleUser
+                        size={20}
+                        className="  absolute top-2.5 left-2"
+                      />
                       <input
                         id="name"
                         name="name"
@@ -128,7 +134,10 @@ export default function Register() {
                       />
                     </div>
                     <div className="relative">
-                      <HiOutlineMailOpen size={20} className="  absolute top-2.5 left-2"/>
+                      <HiOutlineMailOpen
+                        size={20}
+                        className="  absolute top-2.5 left-2"
+                      />
                       <input
                         id="email"
                         name="email"
@@ -140,7 +149,10 @@ export default function Register() {
                       />
                     </div>
                     <div className="relative">
-                      <BiSolidPhoneCall size={20} className="  absolute top-2.5 left-2"/>
+                      <BiSolidPhoneCall
+                        size={20}
+                        className="  absolute top-2.5 left-2"
+                      />
                       <input
                         autocomplete="off"
                         id="mobile"
@@ -153,7 +165,10 @@ export default function Register() {
                       />
                     </div>
                     <div className="relative">
-                      <MdOutlineSecurity size={20} className="  absolute top-2.5 left-2"/>
+                      <MdOutlineSecurity
+                        size={20}
+                        className="  absolute top-2.5 left-2"
+                      />
                       <input
                         autocomplete="off"
                         id="password"
@@ -166,7 +181,10 @@ export default function Register() {
                       />
                     </div>
                     <div className="relative">
-                      <TbUsersPlus size={20} className="  absolute top-2.5 left-2"/>
+                      <TbUsersPlus
+                        size={20}
+                        className="  absolute top-2.5 left-2"
+                      />
                       <input
                         autocomplete="off"
                         id="password"
@@ -210,10 +228,8 @@ export default function Register() {
           </div>
         </div>
       ) : (
-        <OtpVerify goBack={goBack} formData={formData} />
+        <OtpVerify goBack={goBack} formData={formData} recivedOtp={otp}/>
       )}
-
-      <ToastContainer />
     </div>
   );
 }

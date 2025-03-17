@@ -8,7 +8,6 @@ import { AiOutlineAreaChart } from "react-icons/ai";
 import Graph from "../MinesGame/Graph";
 import bg1 from "../../../assets/photos/game-bg-2.jpg";
 
-
 export default function AutoMode({ refreshHistoryFunction }) {
   const [amount, setAmount] = useState(100);
   const [totalBalance, setTotalBalance] = useState(0);
@@ -194,7 +193,7 @@ export default function AutoMode({ refreshHistoryFunction }) {
 
   useEffect(() => {
     return () => {
-      stopAutoSpin(); 
+      stopAutoSpin();
     };
   }, []);
 
@@ -206,8 +205,8 @@ export default function AutoMode({ refreshHistoryFunction }) {
     formData.game_type = "Wheel";
     formData.uid = user?.uid;
     formData.details = {
-      multiplier : selectedColor?.profit
-    }
+      multiplier: selectedColor?.profit,
+    };
 
     try {
       const response = await MinesGameUpdateWallet(formData);
@@ -325,14 +324,18 @@ export default function AutoMode({ refreshHistoryFunction }) {
             <div className="order-2 lg:order-1">
               <div>
                 <div className="flex justify-between dark:text-gray-200">
-                  <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">Bet Amount</p>
-                  <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">₹{Number(totalBalance).toFixed(2)}</p>
+                  <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">
+                    Bet Amount
+                  </p>
+                  <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">
+                    ₹{Number(totalBalance).toFixed(2)}
+                  </p>
                 </div>
                 <div className="flex relative items-center">
                   <input
                     className="w-full rounded border-2 border-[#2f4553] px-2 py-2  outline-none font-semibold bg-[#0f212e] text-gray-100 text-sm"
                     placeholder="Enter Amount "
-                    type="number"
+                    type="tel"
                     value={amount}
                     disabled={autoSpin}
                     onChange={(e) => setAmount(Number(e.target.value))} // Convert to number
@@ -375,7 +378,7 @@ export default function AutoMode({ refreshHistoryFunction }) {
                 <input
                   className="w-full rounded border-2 border-[#2f4553] px-2 py-2  outline-none font-semibold bg-[#0f212e] text-gray-100 text-sm"
                   placeholder="Enter number of spins"
-                  type="number"
+                  type="tel"
                   value={desiredSpins}
                   disabled={autoSpin}
                   onChange={(e) => setDesiredSpins(Number(e.target.value) || 0)}
@@ -404,7 +407,7 @@ export default function AutoMode({ refreshHistoryFunction }) {
                 <input
                   className="w-full rounded border-2 border-[#2f4553] px-2 py-2  outline-none font-semibold bg-[#0f212e] text-gray-100 text-sm"
                   placeholder="0.0000"
-                  type="number"
+                  type="tel"
                   disabled={autoSpin}
                   value={stopProfit}
                   onChange={(e) => setStopProfit(e.target.value) || 0}
@@ -417,7 +420,7 @@ export default function AutoMode({ refreshHistoryFunction }) {
                 <input
                   className="w-full rounded border-2 border-[#2f4553] px-2 py-2  outline-none font-semibold bg-[#0f212e] text-gray-100 text-sm"
                   placeholder="0.0000"
-                  type="number"
+                  type="tel"
                   disabled={autoSpin}
                   value={stopLoss}
                   onChange={(e) => setStopLoss(e.target.value) || 0}
@@ -431,7 +434,7 @@ export default function AutoMode({ refreshHistoryFunction }) {
                   <input
                     className="w-full rounded border-2 border-[#2f4553] px-2 py-2  outline-none font-semibold bg-[#0f212e] text-gray-100 text-sm"
                     placeholder="0.0000"
-                    type="number"
+                    type="tel"
                     disabled={autoSpin}
                     value={increaseOnWin}
                     onChange={(e) => setIncreaseOnWin(e.target.value)}
@@ -449,7 +452,7 @@ export default function AutoMode({ refreshHistoryFunction }) {
                   <input
                     className="w-full rounded border-2 border-[#2f4553] px-2 py-2  outline-none font-semibold bg-[#0f212e] text-gray-100 text-sm"
                     placeholder="0.0000"
-                    type="number"
+                    type="tel"
                     disabled={autoSpin}
                     value={increaseOnLoss}
                     onChange={(e) => setIncreaseOnLoss(e.target.value)}
@@ -474,7 +477,6 @@ export default function AutoMode({ refreshHistoryFunction }) {
           id="wheelBoard"
           className="relative  w-[100%]  lg:w-[70%] p-6 h-screen/2 bg-[#0F212E] bg-cover bg-center "
           style={{ backgroundImage: `url(${bg1})` }}
-
         >
           <div className="flex justify-center items-center">
             <div className="relative flex flex-col items-center mt-10">
@@ -509,6 +511,35 @@ export default function AutoMode({ refreshHistoryFunction }) {
                       : "none",
                   }}
                 >
+                  {colors.map((item, index) => {
+                    const startAngle =
+                      gameType === "high"
+                        ? 327.6
+                        : (index * 360) / colors.length;
+                    const endAngle =
+                      startAngle +
+                      (gameType === "low" || gameType === "medium"
+                        ? 360 / colors.length
+                        : (item.area * 360) / 100);
+                    const midAngle = startAngle + (endAngle - startAngle) / 2;
+
+                    return (
+                      <div
+                        key={index}
+                        className="absolute flex items-center justify-center h-[30%] text-sm font-bold text-white"
+                        style={{
+                          transform: `rotate(${midAngle}deg) translate(0, -130%) rotate(-${0}deg)`,
+                          transformOrigin: "center",
+                          position: "absolute",
+                          textAlign: "center",
+                          whiteSpace: "nowrap",
+                          color: item.color,
+                        }}
+                      >
+                        {item.profit}x
+                      </div>
+                    );
+                  })}
                   <div className="w-[85%] h-[85%] bg-[#0F212E] rounded-full"></div>
                 </div>
               </div>

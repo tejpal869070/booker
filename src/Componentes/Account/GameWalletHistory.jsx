@@ -153,7 +153,7 @@ export default function GameWalletHistory() {
                         {item.id}.
                       </th>
                       {/* <td className="whitespace-nowrap px-4 py-2">{item.type}</td> */}
-                      <td className="whitespace-nowrap px-6 py-2">{item.date?.split("T")[0]}</td>
+                      <td className="whitespace-nowrap px-6 py-2">{item.date?.split(" ")[0]}</td>
                       <td
                         className={`px-6 py-2 ${
                           item.bet_type === "Win Bet" || item.game_type ==="Received" ||

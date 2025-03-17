@@ -7,7 +7,7 @@ export default function Details({ onClose, singleData }) {
   function getEndDate(initialDate, days) {
     const date = new Date(initialDate);
     date.setDate(date.getDate() + days);
-    return date.toISOString().split("T")[0];
+    return date.toISOString().split(" ")[0];
   }
 
   return (
@@ -57,7 +57,7 @@ export default function Details({ onClose, singleData }) {
 
           <div className={`${classes1}`}>
             <p>Start Date :</p>
-            <p>{singleData.date.split("T")[0]}</p>
+            <p>{singleData.date.split(" ")[0]}</p>
           </div>
 
           <div className={`${classes1}`}>

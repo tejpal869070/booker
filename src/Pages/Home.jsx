@@ -22,11 +22,12 @@ import { IoGameControllerSharp } from "react-icons/io5";
 // import Logo from "../assets/photos/mylogo2.png";
 
 import { RiVipDiamondFill } from "react-icons/ri";
-import { MdCancel } from "react-icons/md";
+import { MdCancel,MdCasino } from "react-icons/md";
 import { FaArrowCircleLeft, FaArrowCircleRight } from "react-icons/fa";
 import VerifyPin from "../Componentes/VerifyPin";
 import { toast } from "react-toastify";
-import { MainGameWalletMoneyTransfer } from "../Controllers/User/GamesController";
+import { MainGameWalletMoneyTransfer } from "../Controllers/User/GamesController"; 
+
 
 export default function Home() {
   const [user, setuser] = React.useState({});
@@ -353,6 +354,99 @@ export default function Home() {
               </Link>
             </li>
             <li className="side-bar-list">
+              <Link
+                to={"/home?game=casino"}
+                className="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group  dark:text-black dark:hover:bg-gray-200 hover:text-center"
+              >
+                <MdCasino  size={24} className="dark:text-black" />
+                <span className="flex-1 ms-3 text-left rtl:text-right dark:text-black whitespace-nowrap ">
+                  Live Casino
+                </span>
+              </Link>
+            </li>
+            <li className="side-bar-list">
+              <button
+                type="button"
+                className="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group  dark:text-black dark:hover:bg-gray-300 hover:text-center"
+                onClick={() => {
+                  const moneyDropdown =
+                    document.getElementById("casino-dropdown");
+                  moneyDropdown.classList.toggle("hidden");
+                }}
+              >
+                <FaCoins size={20} className="dark:text-black" />
+
+                <span className="flex-1 ms-3 text-left rtl:text-right dark:text-black whitespace-nowrap ">
+                  Our Games
+                </span>
+                <svg
+                  className="w-3 h-3"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 10 6"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="m1 1 4 4 4-4"
+                  />
+                </svg>
+              </button>
+              <ul
+                id="casino-dropdown"
+                className="hidden side-bar-drop-list animate-fade-down animate-duration-500  list-disc py-2 pl-4 space-y-2"
+              >
+                <li className="ml-11">
+                  <Link
+                    to={{ pathname: "/home", search: `?game=color-game` }}
+                    className={`${dropdownClassList}`}
+                    onClick={handleHideSideBar}
+                  >
+                    Color Play
+                  </Link>
+                </li>
+                <li className="ml-11">
+                  <Link
+                    to={{ pathname: "/home", search: `?game=mines` }}
+                    className={`${dropdownClassList}`}
+                    onClick={handleHideSideBar}
+                  >
+                    Mines Game
+                  </Link>
+                </li>
+                <li className="ml-11">
+                  <Link
+                    to={{ pathname: "/home", search: `?game=wheel` }}
+                    className={`${dropdownClassList}`}
+                    onClick={handleHideSideBar}
+                  >
+                    Wheel Game
+                  </Link>
+                </li>
+                <li className="ml-11">
+                  <Link
+                    to={{ pathname: "/home", search: `?game=casino` }}
+                    className={`${dropdownClassList}`}
+                    onClick={handleHideSideBar}
+                  >
+                    Casino
+                  </Link>
+                </li>
+                <li className="ml-11">
+                  <Link
+                    to={{ pathname: "/home", search: `?game=limbo` }}
+                    className={`${dropdownClassList}`}
+                    onClick={handleHideSideBar}
+                  >
+                    Limbo
+                  </Link>
+                </li>
+              </ul>
+            </li>
+            <li className="side-bar-list">
               <button
                 type="button"
                 className="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group  dark:text-black dark:hover:bg-gray-200 hover:text-center"
@@ -425,88 +519,6 @@ export default function Home() {
               </ul>
             </li>
 
-            <li className="side-bar-list">
-              <button
-                type="button"
-                className="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group  dark:text-black dark:hover:bg-gray-300 hover:text-center"
-                onClick={() => {
-                  const moneyDropdown =
-                    document.getElementById("casino-dropdown");
-                  moneyDropdown.classList.toggle("hidden");
-                }}
-              >
-                <FaCoins size={20} className="dark:text-black" />
-
-                <span className="flex-1 ms-3 text-left rtl:text-right dark:text-black whitespace-nowrap ">
-                  Live Casino
-                </span>
-                <svg
-                  className="w-3 h-3"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 10 6"
-                >
-                  <path
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="m1 1 4 4 4-4"
-                  />
-                </svg>
-              </button>
-              <ul
-                id="casino-dropdown"
-                className="hidden side-bar-drop-list animate-fade-down animate-duration-500  list-disc py-2 pl-4 space-y-2"
-              >
-                <li className="ml-11">
-                  <Link
-                    to={{ pathname: "/home", search: `?game=color-game` }}
-                    className={`${dropdownClassList}`}
-                    onClick={handleHideSideBar}
-                  >
-                    Color Play
-                  </Link>
-                </li>
-                <li className="ml-11">
-                  <Link
-                    to={{ pathname: "/home", search: `?game=mines` }}
-                    className={`${dropdownClassList}`}
-                    onClick={handleHideSideBar}
-                  >
-                    Mines Game
-                  </Link>
-                </li>
-                <li className="ml-11">
-                  <Link
-                    to={{ pathname: "/home", search: `?game=wheel` }}
-                    className={`${dropdownClassList}`}
-                    onClick={handleHideSideBar}
-                  >
-                    Wheel Game
-                  </Link>
-                </li>
-                <li className="ml-11">
-                  <Link
-                    to={{ pathname: "/home", search: `?game=casino` }}
-                    className={`${dropdownClassList}`}
-                    onClick={handleHideSideBar}
-                  >
-                    Casino
-                  </Link>
-                </li>
-                <li className="ml-11">
-                  <Link
-                    to={{ pathname: "/home", search: `?game=limbo` }}
-                    className={`${dropdownClassList}`}
-                    onClick={handleHideSideBar}
-                  >
-                    Limbo
-                  </Link>
-                </li>
-              </ul>
-            </li>
             <li className="side-bar-list">
               <button
                 type="button"
@@ -1133,7 +1145,7 @@ export default function Home() {
                 Transfer To {type === 1 ? "Game Wallet" : "Main Wallet"}
               </label>
               <input
-                type="number"
+                type="tel"
                 id="input-label"
                 className="py-2 px-4 block text-gray-200 bg-gray-700 w-full border-x-0 border-t-0 border-b-2   text-md       dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                 placeholder=" "

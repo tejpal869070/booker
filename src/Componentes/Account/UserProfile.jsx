@@ -167,7 +167,7 @@ export default function UserProfile() {
                 Joined On
               </span>
               <span className="ml-auto dark:text-gray-200 font-semibold">
-                {user && user.date.split("T")[0]}
+                {user && user.date.split(" ")[0]}
               </span>
             </li>
             <li className="flex items-center py-3 text-sm">

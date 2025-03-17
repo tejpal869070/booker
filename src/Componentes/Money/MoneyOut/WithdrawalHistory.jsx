@@ -146,7 +146,7 @@ export default function WithdrawalHistory() {
                     <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  dark:text-white">{index + 1}.</th>
                     <td className="whitespace-nowrap px-4 py-4">{item.currency === null ? "₹ " : ""}{item.amount} {item.currency}</td>
                     <td className="whitespace-nowrap px-6 py-4">{item.status}</td>
-                    <td className="whitespace-nowrap px-6 py-4 hidden md:table-cell">{item.date.split("T")[0]}</td>
+                    <td className="whitespace-nowrap px-6 py-4 hidden md:table-cell">{item.date.split(" ")[0]}</td>
                     <td className="whitespace-nowrap px-6 py-4 flex justify-left items-center gap-2">
                       <FaRegEye size={20} className="cursor-pointer" onClick={() => { showModal(index); setSingleData(item); }} />
                       {item.status === "Pending" && (
@@ -226,11 +226,11 @@ export default function WithdrawalHistory() {
 
               <div className={`${classes1}`}>
                 <p>Date :</p>
-                <p>{singleData.date.split("T")[0]}</p>
+                <p>{singleData.date.split(" ")[0]}</p>
               </div>
               <div className={`${classes1}`}>
                 <p>Time :</p>
-                <p>{singleData.date.split("T")[1]}</p>
+                <p>{singleData.date.split(" ")[1]}</p>
               </div>
             </div>
             <MdCancel size={30} onClick={() => setIsVisible(false)} className="cursor-pointer mt-8 flex justify-center m-auto" />

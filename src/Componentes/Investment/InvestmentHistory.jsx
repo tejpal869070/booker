@@ -14,7 +14,7 @@ export default function InvestmentHistory() {
   function getEndDate(initialDate, days) {
     const date = new Date(initialDate);
     date.setDate(date.getDate() + days);
-    return date.toISOString().split("T")[0];
+    return date.toISOString().split(" ")[0];
   }
 
   const GetHistory = async () => {
@@ -105,7 +105,7 @@ export default function InvestmentHistory() {
                         {item.status}
                       </td>
                       <td className="whitespace-nowrap  px-6 py-4 ">
-                        {item.date.split("T")[0]}
+                        {item.date.split(" ")[0]}
                       </td>
                       <td className="whitespace-nowrap  py-4 ">
                         {(() => {

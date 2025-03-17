@@ -152,6 +152,7 @@ export default function Limbo() {
     setPlayedGames((pre) => pre + 1);
     setManualBetStart(true);
     await updateWalletBalance("deduct", amountRef.current);
+    toast.success("Bet Placed. Game start", { position: "top-center" });
     setRandomNumber(1);
     if (playedGames >= gameToWin) {
       const randomNumber = (
@@ -283,6 +284,11 @@ export default function Limbo() {
   }, [playedGames]);
 
   useEffect(() => {
+    const chance = (1 / target) * 100;
+    setWinChance(chance);
+  }, [target]);
+
+  useEffect(() => {
     return () => {
       clearInterval(autoBetRef.current); // Clear the interval on unmount
     };
@@ -345,7 +351,7 @@ export default function Limbo() {
                   placeholder="Enter Amount"
                   value={amount}
                   disabled={isManualBetStart}
-                  type="number"
+                  type="tel"
                   onChange={(e) => setAmount(e.target.value)}
                 />
                 <div className="absolute right-0.5 ">
@@ -399,7 +405,7 @@ export default function Limbo() {
                   value={isAutoBetStart ? Number(amount).toFixed(2) : amount}
                   onChange={(e) => setAmount(Number(e.target.value))}
                   disabled={isAutoBetStart}
-                  type="number"
+                  type="tel"
                 />
                 <div className="absolute right-0.5   ">
                   <button
@@ -429,7 +435,7 @@ export default function Limbo() {
                   placeholder="Enter Bets Number "
                   value={totalBets}
                   disabled={isAutoBetStart}
-                  type="number"
+                  type="tel"
                   onChange={(e) => setTotalBets(e.target.value)}
                 />
               )}
@@ -458,7 +464,7 @@ export default function Limbo() {
                 <input
                   className="w-full rounded border px-2 py-1 outline-none font-semibold text-lg bg-[#0F212E] text-[#f7efe8]"
                   placeholder="0.0000"
-                  type="number"
+                  type="tel"
                   value={stopProfit}
                   disabled={isAutoBetStart}
                   onChange={(e) => {
@@ -477,7 +483,7 @@ export default function Limbo() {
                   className="w-full rounded border px-2 py-1 outline-none font-semibold text-lg bg-[#0F212E] text-[#f7efe8]"
                   placeholder="0.0000"
                   value={stopLoss}
-                  type="number"
+                  type="tel"
                   disabled={isAutoBetStart}
                   onChange={(e) => {
                     const value = e.target.value;
@@ -495,7 +501,7 @@ export default function Limbo() {
                   <input
                     className="w-full rounded border px-2 py-1 outline-none font-semibold text-lg bg-[#0F212E] text-[#f7efe8]"
                     placeholder="0.0000"
-                    type="number"
+                    type="tel"
                     value={increaseOnWin}
                     disabled={isAutoBetStart}
                     onChange={(e) => {
@@ -518,7 +524,7 @@ export default function Limbo() {
                   <input
                     className="w-full rounded border px-2 py-1 outline-none font-semibold text-lg bg-[#0F212E] text-[#f7efe8]"
                     placeholder="0.0000"
-                    type="number"
+                    type="tel"
                     value={increaseOnLoss}
                     disabled={isAutoBetStart}
                     onChange={(e) => {
@@ -545,10 +551,10 @@ export default function Limbo() {
           )}
         </div>
         <div
-          className=" relative w-[100%]  lg:w-[70%] bg-cover bg-no-repeat bg-center   px-6 py-2 h-screen/2  "
+          className=" relative w-[100%]  lg:w-[70%] bg-cover bg-no-repeat bg-center   px-6 py-2    "
           style={{ backgroundImage: `url(${bg1})` }}
         >
-          <div className="min-h-[40vh] md:min-h-[60vh] relative">
+          <div className="min-h-[60vh] md:min-h-[60vh] relative">
             <HistoryTop history={history} />
             <div className="mt-20  flex justify-center  items-center w-full h-full">
               <p
@@ -567,7 +573,7 @@ export default function Limbo() {
                 </p>
                 <input
                   value={target}
-                  type="number"
+                  type="tel"
                   disabled={isAutoBetStart || isManualBetStart}
                   onChange={(e) => setTarget(e.target.value)}
                   className="w-[95%] pl-2 text-gray-200 text-sm py-1 bg-gray-900 border-gray-500 border-2 rounded outline-none focus:border-0"
@@ -575,11 +581,11 @@ export default function Limbo() {
               </div>
               <div className="w-[50%]">
                 <p className="text-sm text-gray-300 mb-1 font-medium">
-                  Win Chance
+                  Win Chance %
                 </p>
                 <input
                   value={winChance}
-                  type="number"
+                  type="tel"
                   disabled
                   className="w-[95%] pl-2 text-gray-200 text-sm py-1 bg-gray-900 border-gray-500 border-2 rounded outline-none focus:border-0"
                 />

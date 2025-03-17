@@ -258,7 +258,7 @@ export default function CryptoDeposit({ data }) {
                     className=" text-black rounded-lg text-sm font-medium p-2 py-1 border-2 border-gray-4000 "
                     placeholder="INR"
                     value={usdtPrice}
-                    type="number"
+                    type="tel"
                     onChange={(e) => handleUsdtChange(e.target.value)}
                   />
                   <p className="absolute font-semibold text-xs text-gray-900">
@@ -271,7 +271,7 @@ export default function CryptoDeposit({ data }) {
                   <input
                     className=" text-black rounded-lg text-sm font-medium p-2 py-1 border-2 border-gray-4000 "
                     placeholder={data.currency}
-                    type="number"
+                    type="tel"
                     value={inrPrice}
                     min={1}
                     onChange={(e) => handleInrChange(e.target.value)}

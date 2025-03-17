@@ -23,6 +23,7 @@ export default function ChangePin() {
   const [isPinChanged, setIsPinChanged] = useState(false);
   const [pinChanging, setPinChanging] = useState(false);
   const [otpVerified, setOtpVerified] = useState(false);
+  const [showOtp, setShowOtp] = useState("");
 
   const handleSendOtp = async () => {
     setOtpSending(true);
@@ -36,9 +37,7 @@ export default function ChangePin() {
         setTimeout(() => {
           setIsOtpSent(false);
         }, 4500);
-        toast.success("OTP Sent at Email !", {
-          position: "top-center",
-        });
+        setShowOtp(response.data[0].otp);
       }
     } catch (error) {
       toast.error("Error in Sending OTP !!!", {
@@ -213,7 +212,7 @@ export default function ChangePin() {
         </div>
 
         <div className="mt-6">
-          <p className="dark:text-gray-200 text-sm font-semibold">OTP</p>
+          <p className="dark:text-gray-200 text-sm font-semibold">OTP {showOtp &&  `( Your OTP is ${showOtp}  )`}</p>
           <div
             className={`inline-flex   overflow-hidden text-white rounded group bg-gray-900  `}
           >

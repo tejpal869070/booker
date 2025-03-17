@@ -142,6 +142,9 @@ export default function NewInvestment() {
   }, [amount, PlansData]);
 
   useEffect(() => {
+    if (amount) {
+      return;
+    }
     setAmount(Number(PlansData[investmentPlan - 1]?.amount_start) || 10);
   }, [investmentPlan, PlansData]);
 
@@ -219,7 +222,7 @@ export default function NewInvestment() {
                         <p className="font-semibold text-green-500">$</p>
                       </div>
                       <input
-                        type="number"
+                        type="tel"
                         value={amount}
                         onChange={(e) => setAmount(e.target.value)}
                         className="w-full  pl-4  pr-3 py-2 rounded-lg text-green-500 font-medium border-2 border-gray-200 outline-none focus:border-indigo-500"
@@ -242,7 +245,7 @@ export default function NewInvestment() {
                   </div>
                   <div className="w-1/2 p-4 border-l-2 text-center  ">
                     <p className="text-md font-semibold text-gray-600">
-                      Payout Period
+                      Validity
                     </p>
                     <p className="text-2xl  text-green-500 font-bold">
                       {Number(payoutDays).toFixed(0)} Days

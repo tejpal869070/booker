@@ -42,7 +42,7 @@ const ColorGamePopup = ({ isOpen, onClose, popupData, currentGameData }) => {
       }
     } catch (error) { 
       if (error.response.status === 302) {
-        const decodederror = atob(error.response.data);
+        const decodederror = atob(error.response.data); 
         toast.error(JSON.parse(decodederror).message, {
           position: "top-center",
         });
@@ -103,7 +103,7 @@ const ColorGamePopup = ({ isOpen, onClose, popupData, currentGameData }) => {
               -
             </button>
             <input
-              type="number"
+              type="tel"
               placeholder="10"
               className="w-32 text-center rounded-2xl h-8"
               value={quantity}
