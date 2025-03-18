@@ -131,7 +131,7 @@ export default function RoiIncome() {
                   <div className="rounded  shadow-lg bg-gray-800 p-3 mb-4">
                     <section className="border-b-[0.5px] border-gray-600 pb-2  flex justify-between items-center font-semibold  ">
                       <p className="px-2 bg-indigo-500 inline text-gray-200 rounded py-1">
-                        VIP1
+                        {item.plan_name}
                       </p>
                       <p className="text-green-500">+ ${item.today_return}</p>
                     </section>
@@ -151,6 +151,10 @@ export default function RoiIncome() {
                         <p className="text-[#FEAA57]">
                           $ {Number(item.total_return_amount).toFixed(2)}
                         </p>
+                      </section>
+                      <section className="flex justify-between items-center font-bold  ">
+                        <p className="text-gray-400 font-normal">Investment Id</p>
+                        <p className="text-gray-200 font-normal">{item.invest_id}</p>
                       </section>
                       <section className="flex justify-between items-center font-bold  ">
                         <p className="text-gray-400 font-normal">Time</p>

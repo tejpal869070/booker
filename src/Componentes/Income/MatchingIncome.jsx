@@ -56,8 +56,8 @@ export default function MatchingIncome() {
 
   return (
     <div className="min-h-screen">
-      <p className="font-bold text-xl mb-6 dark:text-white">
-        Income Manager {">"} Matching Income
+      <p className="font-bold text-xl mb-6 dark:text-white text-center md:text-left">
+        Matching Income
       </p>
       <DateSelector />
       <div>
@@ -74,7 +74,7 @@ export default function MatchingIncome() {
           </div>
         ) : (
           <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 hidden md:inline-table">
               <thead className="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                   {tableHead.map((item, index) => (
@@ -94,14 +94,15 @@ export default function MatchingIncome() {
                     key={index}
                     className="odd:bg-white dark:text-gray-300 odd:dark:bg-gray-900 text-black font-medium even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
                   >
-                    <td className="whitespace-nowrap px-6 py-4">{index + 1}.</td>
+                    <td className="whitespace-nowrap px-6 py-4">
+                      {index + 1}.
+                    </td>
                     <td className="whitespace-nowrap px-6 py-4">{item.plan}</td>
                     <td className="flex  gap-2 whitespace-nowrap px-6 py-4 ">
-                      <p>{item.user_1}</p> &
-                      <p>{item.user_2}</p>
+                      <p>{item.user_1}</p> &<p>{item.user_2}</p>
                     </td>
                     <td className="whitespace-nowrap px-6 py-4">
-                      ₹ {item.matching_amount}
+                      $ {Number(item.matching_amount).toFixed(2)}
                     </td>
 
                     <td className="whitespace-nowrap px-6 py-4">
@@ -111,6 +112,48 @@ export default function MatchingIncome() {
                 ))}
               </tbody>
             </table>
+
+            <div className="flex flex-col md:hidden">
+              {filteredData &&
+                filteredData?.map((item, index) => (
+                  <div className="rounded  shadow-lg bg-gray-800 p-3 mb-4">
+                    <section className="border-b-[0.5px] border-gray-600 pb-2  flex justify-between items-center font-semibold  ">
+                      <p className="px-2 bg-indigo-500 inline text-gray-200 rounded py-1">
+                        SUCCESS
+                      </p>
+                      <p className="text-green-500 text-xl">
+                        ${item.matching_amount}
+                      </p>
+                    </section>
+                    <div className="pt-2 font-thin flex flex-col gap-1">
+                      <section className="flex justify-between items-center font-bold  ">
+                        <p className="text-gray-400 font-normal">
+                          Matching Plan
+                        </p>
+                        <p className="text-gray-200 font-normal">{item.plan}</p>
+                      </section>
+                      <section className="flex justify-between items-center font-bold  ">
+                        <p className="text-gray-400 font-normal">User 1</p>
+                        <p className="text-gray-200 font-normal">
+                          {item.user_1}
+                        </p>
+                      </section>
+                      <section className="flex justify-between items-center font-bold  ">
+                        <p className="text-gray-400 font-normal">User 2</p>
+                        <p className="text-gray-200 font-normal">
+                          {item.user_2}
+                        </p>
+                      </section>
+                      <section className="flex justify-between items-center font-bold  ">
+                        <p className="text-gray-400 font-normal">Time</p>
+                        <p className="text-gray-200 font-normal">
+                          {item.date.split("T")[0]}
+                        </p>
+                      </section>
+                    </div>
+                  </div>
+                ))}
+            </div>
           </div>
         )}
       </div>

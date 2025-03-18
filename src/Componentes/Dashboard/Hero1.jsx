@@ -136,16 +136,18 @@ export default function Hero1() {
               Joining: {userData && userData?.date.split("T")[0]}
             </p>
             <div className="flex flex-wrap   gap-4 mt-4">
-              <button
-                id="referButton"
-                className="relative cursor-pointer"
-                onClick={openSocialShare}
+              <Link
+                className="relative"
+                to={{
+                  pathname: "/home",
+                  search: "?user=refer",
+                }}
               >
                 <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-black "></span>
                 <span className="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900">
                   Referral
                 </span>
-              </button>
+              </Link>
               <Link
                 className="relative"
                 to={{
@@ -227,39 +229,29 @@ export default function Hero1() {
         </div>
       </div>
 
-      <div
+      <Link
+        to={{ pathname: "/home", search: "?user=refer" }}
         className="md:hidden cursor-pointer"
-        onClick={() => {
-          const referClickId = document.getElementById("referButton");
-          if (referClickId) {
-            referClickId.click();
-          }
-        }}
       >
         <img
           alt="banner"
           src={require("../../assets/photos/referbanner.jpg")}
           className="rounded-md mt-2 "
         />
-      </div>
+      </Link>
 
       {/* Games */}
       <Games />
-      <div
+      <Link
         className=" hidden md:block cursor-pointer"
-        onClick={() => {
-          const referClickId = document.getElementById("referButton");
-          if (referClickId) {
-            referClickId.click();
-          }
-        }}
+        to={{ pathname: "/home", search: "?user=refer" }}
       >
         <img
           alt="banner"
           src={require("../../assets/photos/referbanner.jpg")}
           className="rounded-md mt-2 "
         />
-      </div>
+      </Link>
 
       {/* quick options */}
       <p className="text-2xl   pb-4 dark:text-gray-200 font-bold ">

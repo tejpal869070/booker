@@ -3,7 +3,7 @@ import { Tree, TreeNode } from "react-organizational-chart";
 import ball from "../../assets/photos/ball2.png";
 import { GetTree, GetUserDetails } from "../../Controllers/User/UserController";
 import { Link, useLocation } from "react-router-dom";
-import { Loading1, Loading3 } from "../Loading1";
+import { Loading3 } from "../Loading1";
 
 const styles = {
   node: {
@@ -160,10 +160,10 @@ export default function MemberTree() {
       };
 
       const result = buildTree(response.data);
-      const stringifyData = JSON.stringify(result, null, 2); 
+      const stringifyData = JSON.stringify(result, null, 2);
       setData(JSON.parse(stringifyData));
       setloading(false);
-    } catch (error) { 
+    } catch (error) {
       setloading(false);
       setData([]);
     }
@@ -320,7 +320,7 @@ export default function MemberTree() {
           </ul>
         </div>
       </div>
-      <Link 
+      <Link
         to={{
           pathname: "/home",
           search: `?network=member-tree&uid=${user.uid}`,

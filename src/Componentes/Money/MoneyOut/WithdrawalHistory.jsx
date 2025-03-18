@@ -198,7 +198,7 @@ export default function WithdrawalHistory() {
                   ))}
                 </tbody>
               </table>
-              <div className="flex flex-col md:hidden">
+              <div className="flex flex-col md:hidden pb-16">
                 {filteredData &&
                   filteredData?.map((item, index) => (
                     <div className="rounded  shadow-lg bg-gray-800 p-3 mb-4">
@@ -220,7 +220,7 @@ export default function WithdrawalHistory() {
                         <section className="flex justify-between items-center font-bold  ">
                           <p className="text-gray-400 font-normal">Amount</p>
                           <p className="text-[#FEAA57]">
-                            {item.type === "Crypto" ? "$ " : "₹ "}
+                            {item.type === "USDT" ? "$ " : "₹ "}
                             {item.amount}
                           </p>
                         </section>

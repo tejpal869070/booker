@@ -23,7 +23,7 @@ const AddNewMember = () => {
   const [password, setPassword] = useState("");
   const [reffer_by, setReffer_by] = useState("");
   const [success, setSuccess] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   const formData = {
@@ -99,7 +99,7 @@ const AddNewMember = () => {
   }
 
   return (
-    <div className="flex flex-col lg:flex-row items-center justify-center   bg-white ">
+    <div className="flex flex-col lg:flex-row items-center justify-center   bg-white p-2">
       <div className="w-full   bg-indigo-200 dark:bg-gray-800 rounded-lg shadow-lg p-8 m-2">
         <h2 className="text-2xl font-bold dark:text-gray-200 mb-6 text-center">
           Add New Member

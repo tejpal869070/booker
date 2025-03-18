@@ -67,7 +67,7 @@ export default function CryptoWithdrawal() {
   const handle1 = async () => {
     if (amount < 25) {
       toast.warn("Minimum Withdrawal is 25", {
-        position: "bottom-right",
+        position: "top-center",
       });
       return;
     } else if (address.length < 10) {

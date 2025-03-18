@@ -211,7 +211,7 @@ export default function DepositHistory() {
                                 <p>Cancel Reason : {item.reason} </p>
                               ) : (
                                 ""
-                              )}
+                              )} 
                             </div>
                           </td>
                         )}
