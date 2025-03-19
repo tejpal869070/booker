@@ -3,6 +3,7 @@ import TableComponent from "../TableComponent";
 import DateSelector from "./DateSelector";
 import { GetReffer } from "../../Controllers/User/UserController";
 import { useLocation } from "react-router-dom";
+import { Loading4 } from "../Loading1";
 
 export default function ReferIncome() {
   const [tableData, setTableData] = useState([]);
@@ -10,8 +11,16 @@ export default function ReferIncome() {
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
   const [filteredData, setFilteredData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const tableHead = ["S.No.", "USER NAME", "Mobile","INCOME", "STATUS", "Date"];
+  const tableHead = [
+    "S.No.",
+    "USER NAME",
+    "Mobile",
+    "INCOME",
+    "STATUS",
+    "Date",
+  ];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,8 +31,10 @@ export default function ReferIncome() {
           return rest;
         });
         setTableData(updatedData);
+        setLoading(false);
       } else {
         setTableData([]);
+        setLoading(false);
       }
     };
 
@@ -55,13 +66,24 @@ export default function ReferIncome() {
     }
   }, [startDate, endDate, tableData]);
 
+  if (loading) {
+    return (
+      <div className="  flex justify-center items-center min-h-[40vh] md:min-h-[90vh] bg-opacity-50 z-[9999]">
+        <Loading4 />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen">
-      <p className="font-bold text-xl mb-6 dark:text-white">
+      <p className="font-bold text-xl mb-6 dark:text-white hidden md:block">
         Income Manager {">"} Reffer Income
       </p>
-      <DateSelector />
-      <div>
+      <div className="md:text-left hidden md:block">
+        <DateSelector />
+      </div>
+
+      <div className="pb-20">
         {filteredData?.length === 0 ? (
           <div className="border-y-[0.2px] border-gray-400 py-4">
             <img
@@ -74,8 +96,8 @@ export default function ReferIncome() {
             </p>
           </div>
         ) : (
-          <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+          <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
+            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 hidden md:inline-table">
               <thead className="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                   {tableHead.map((item, index) => (
@@ -103,7 +125,7 @@ export default function ReferIncome() {
                       {item.mobile}
                     </td>
                     <td className="whitespace-nowrap px-6 py-4">
-                     ₹ {item.reffer_to_amount}
+                      ₹ {item.reffer_to_amount}
                     </td>
                     <td className="whitespace-nowrap px-6 py-4">
                       {item.status === "Y" ? "SUCCESS" : "PENDING"}
@@ -115,6 +137,51 @@ export default function ReferIncome() {
                 ))}
               </tbody>
             </table>
+            <div className="flex flex-col md:hidden pb-20">
+              {filteredData &&
+                filteredData?.map((item, index) => (
+                  <div className="rounded  shadow-lg bg-gray-800 p-3 mb-2">
+                    <section className="border-b-[0.5px] border-gray-600 pb-2  flex justify-between items-center font-semibold  ">
+                      <p className="px-2 bg-indigo-500 inline text-gray-200 rounded py-0.5">
+                        {item.username}
+                      </p>
+                      <p
+                        className={` ${
+                          item.status === "N"
+                            ? "text-red-500"
+                            : "text-green-500"
+                        }`}
+                      >
+                        {item.status === "Y" ? "SUCCESS" : "PENDING"}
+                      </p>
+                    </section>
+                    <div className="pt-2 font-thin flex flex-col gap-1">
+                      <section className="flex justify-between items-center font-bold  ">
+                        <p className="text-gray-400 font-normal">Mobile</p>
+                        <p className="text-gray-200">{item.mobile}</p>
+                      </section>
+                      <section className="flex justify-between items-center font-bold  ">
+                        <p className="text-gray-400 font-normal">Time</p>
+                        <p className="text-gray-200 font-normal">
+                          {item.date.split("T")[0]}
+                        </p>
+                      </section>
+                      <section className="flex justify-between items-center font-bold  ">
+                        <p className="text-gray-400 font-normal">Deposit Id</p>
+                        <p className="text-gray-200 font-normal">{item.id}</p>
+                      </section>
+                      {item.status === "Cancelled" && (
+                        <section className="flex justify-between   font-bold  ">
+                          <p className="text-gray-400 font-normal">Reason</p>
+                          <p className="text-gray-400 font-normal max-w-[60%]">
+                            {item.reason}
+                          </p>
+                        </section>
+                      )}
+                    </div>
+                  </div>
+                ))}
+            </div>
           </div>
         )}
       </div>

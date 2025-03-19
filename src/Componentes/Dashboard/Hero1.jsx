@@ -240,6 +240,17 @@ export default function Hero1() {
         />
       </Link>
 
+      <Link
+        to={{ pathname: "/home", search: "?investment=new-investment" }}
+        className="md:hidden cursor-pointer"
+      >
+        <img
+          alt="banner"
+          src={require("../../assets/photos/investment-img.png")}
+          className="rounded-md  -mt-4 -mb-2 "
+        />
+      </Link>
+
       {/* Games */}
       <Games />
       <Link

@@ -4,7 +4,7 @@ import {
   GetUserPaymentHistory,
   RemoveWithdrawalRequest,
 } from "../../../Controllers/User/UserController";
-import { Loading1, Loading3 } from "../../Loading1";
+import { Loading1, Loading3, Loading4 } from "../../Loading1";
 import gif1 from "../../../assets/photos/nodata.png";
 import { useLocation } from "react-router-dom";
 import DateSelector from "../../Income/DateSelector";
@@ -105,20 +105,24 @@ export default function WithdrawalHistory() {
 
   if (loading) {
     return (
-      <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-50 z-[9999]">
-        <Loading3 />
+      <div className="  flex justify-center items-center min-h-[40vh] md:min-h-[90vh] bg-opacity-50 z-[9999]">
+        <Loading4 />
       </div>
     );
   }
 
   return (
+    
     <div className="relative h-screen">
       <ToastContainer />
       <div>
-        <h1 className="mb-6 font-bold dark:text-gray-200 text-lg text-center md:text-left">
+        <h1 className="mb-6 font-bold dark:text-gray-200 text-lg text-center md:text-left hidden md:blocks">
           Withdrawal History
         </h1>
-        <DateSelector />
+
+        <div className="md:text-left hidden md:block">
+          <DateSelector />
+        </div>
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
           {filteredData.length === 0 ? (
             <div>
@@ -237,9 +241,9 @@ export default function WithdrawalHistory() {
                           <p className="text-gray-200 font-normal">{item.id}</p>
                         </section>
                         {item.status === "Cancelled" && (
-                          <section className="flex justify-between items-center font-bold  ">
+                          <section className="flex justify-between   font-bold  ">
                             <p className="text-gray-400 font-normal">Reason</p>
-                            <p className="text-gray-200 font-normal">
+                            <p className="text-gray-400 font-normal max-w-[60%]">
                               {item.reason}
                             </p>
                           </section>

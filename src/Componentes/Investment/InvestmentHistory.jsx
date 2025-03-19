@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { FaEye } from "react-icons/fa";
 import { MyInvestMentHistory } from "../../Controllers/User/UserController";
-import { Loading1, Loading3 } from "../Loading1";
+import { Loading1, Loading3, Loading4 } from "../Loading1";
 import Details from "./Details";
 import gif1 from "../../assets/photos/nodata.png";
 
@@ -34,8 +34,8 @@ export default function InvestmentHistory() {
 
   if (loading) {
     return (
-      <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-50 z-[9999]">
-        <Loading3 />
+      <div className="  flex justify-center items-center min-h-[40vh] md:min-h-[90vh] bg-opacity-50 z-[9999]">
+        <Loading4 />
       </div>
     );
   }
@@ -44,7 +44,7 @@ export default function InvestmentHistory() {
     <div className="relative min-h-screen">
       <div className=" ">
         <div>
-          <h1 className="mb-6 font-bold text-lg dark:text-white text-center md:text-left">
+          <h1 className="mb-6 font-bold text-lg dark:text-white text-center md:text-left hidden md:block">
             Investment History
           </h1>
           <div className="relative overflow-x-auto shadow-md sm:rounded-lg">

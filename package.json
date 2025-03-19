@@ -65,6 +65,7 @@
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
+    "daisyui": "^5.0.6",
     "tailwindcss": "^3.4.7"
   }
 }

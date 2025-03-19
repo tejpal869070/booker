@@ -20,6 +20,7 @@ import { FaUsers } from "react-icons/fa";
 import { PiUserListFill } from "react-icons/pi";
 import { BsFillSafeFill } from "react-icons/bs";
 import { FaCircleChevronRight } from "react-icons/fa6";
+import AllHistory from "./AllHistory";
 
 export default function Wallet() {
   const [user, setUser] = React.useState({});
@@ -30,6 +31,7 @@ export default function Wallet() {
   const [transferToAmount, setTransferToAmount] = useState();
   const [isVerifyOpen, setVerifyOpen] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [isTransferShow, setTransferShow] = useState(false);
 
   const userDataGet = async () => {
     const response = await GetUserDetails();
@@ -121,64 +123,98 @@ export default function Wallet() {
     <div>
       <ToastContainer />
       <div className=" h-screen">
-        <div className="m-2 border-2 rounded-lg dark:bg-gray-700  ">
-          <p className="text-center text-xl font-bold text-[#8F9DFA]  py-2">
-            Wallet
-          </p>
-          <img
-            alt="wallet icon"
-            src={require("../../assets/photos/walleticon.png")}
-            className="m-auto w-16 h-16"
-          />
-          <p className="text-2xl font-bold text-center mt-2 dark:text-gray-200 ">
-            ₹
-            {user &&
-              (
-                Number(user.wallet_balance) + Number(user.color_wallet_balnace)
-              ).toFixed(2)}
-          </p>
-          <p className="text-center text-sm  text-gray-400 -mt-1 pb-4 border-b-2 border-indigo-400">
-            Total Balance
-          </p>
+        <div className="  rounded-b-4xl ">
+          <section className="mb-4 bg-gradient-to-r from-blue-500 to-teal-400 rounded-b-[30px] pt-10 w-full flex justify-center">
+            <section className="p-4 px-6 -mb-10 rounded-[20px] backdrop-blur-md bg-white/30 w-[90%] inline-block m-auto">
+              <p className="text-3xl font-bold text-center mt-2 dark:text-gray-100 ">
+                ₹
+                {user &&
+                  (
+                    Number(user.wallet_balance) +
+                    Number(user.color_wallet_balnace)
+                  ).toFixed(2)}
+              </p>
+              <p className="text-center text-xs font-semibold italic  text-gray-900 -mt-1 pb-4  ">
+                Total Balance
+              </p>
 
-          <div className="flex justify-between w-full px-2 mt-6">
-            <div className="flex w-[45%] flex-col justify-center items-center rounded-lg  p-4 px-6  bg-[#3F98F6]">
-              <p className="font-semibold text-2xl text-white">
-                ₹{user && Number(user.wallet_balance).toFixed(2)}
-              </p>
-              <p className="text-sm text-gray-200">Main Wallet</p>
-            </div>
-            <div className="flex w-[45%] flex-col justify-center items-center rounded-lg  p-4 px-6  bg-[#3F98F6]">
-              <p className="font-semibold text-2xl text-white">
-                ₹{user && Number(user.color_wallet_balnace).toFixed(2)}
-              </p>
-              <p className="text-sm text-gray-200">Game Wallet</p>
-            </div>
+              <section className="flex items-center bg-gradient-to-r from-violet-400 to-purple-300 rounded-xl">
+                <div className="w-1/2 rounded-tl-xl py-1 flex flex-col items-center justify-center border-r-2 border-gray-200">
+                  <p className="font-semibold text-lg text-[#d8ff00]">
+                    ₹{user && Number(user.wallet_balance).toFixed(2)}
+                  </p>
+                  <p className="text-center text-xs font-semibold   text-gray-900     ">
+                    Main Wallet
+                  </p>
+                </div>
+                <div className="w-1/2 rounded-t-xl py-1 flex flex-col items-center justify-center  ">
+                  <p className="font-semibold text-lg text-[#d8ff00]">
+                    ₹{user && Number(user.color_wallet_balnace).toFixed(2)}
+                  </p>
+                  <p className="text-center text-xs font-semibold   text-gray-900     ">
+                    Game Wallet
+                  </p>
+                </div>
+              </section>
+            </section>
+          </section>
+
+          {/* --------------------------------- */}
+          <div className="flex justify-around w-full p-2 mt-16 rounded bg-gradient-to-r from-purple-500 to-indigo-500">
+            {links.map((item, index) =>
+              item.label === "Transfer" ? (
+                <div
+                  className="flex flex-col justify-center items-center cursor-pointer"
+                  onClick={() => setTransferShow((pre) => !pre)}
+                >
+                  <img
+                    alt="icons"
+                    className="w-12 p-2 rounded-lg backdrop-blur-md bg-white/50"
+                    src={item.icons}
+                  />
+                  <p className="text-sm text-gray-200 mt-1">{item.label}</p>
+                </div>
+              ) : (
+                <Link
+                  to={item.linkTo}
+                  className="flex flex-col justify-center items-center"
+                >
+                  <img
+                    alt="icons"
+                    className="w-12 p-2 rounded-lg backdrop-blur-md bg-white/50"
+                    src={item.icons}
+                  />
+                  <p className="text-sm text-gray-200 mt-1">{item.label}</p>
+                </Link>
+              )
+            )}
           </div>
 
           {/* balance transfer */}
-          <div className="flex justify-between w-full px-2 mt-1 ">
-            <button
-              onClick={() => handleButtons(1)}
-              className="flex w-[45%] flex-col justify-center items-center rounded-md  py-2 px-1.5  bg-white"
-            >
-              <p className="text-sm text-gray-800 font-semibold flex justify-center items-center gap-2">
-                Transfer To Game <FaAngleRight />
-              </p>
-            </button>
-            <button
-              onClick={() => handleButtons(2)}
-              className="flex w-[45%] flex-col justify-center items-center rounded-md  py-2 px-1.5  bg-white"
-            >
-              <p className="text-sm text-gray-800 font-semibold flex justify-center items-center gap-2">
-                <FaAngleLeft /> Transfer To Main
-              </p>
-            </button>
-          </div>
+          {isTransferShow && (
+            <div className="flex justify-between w-full   mt-1 gap-2">
+              <button
+                onClick={() => handleButtons(1)}
+                className="flex w-[90%] flex-col justify-center items-center rounded-md  py-2 px-1.5  bg-white"
+              >
+                <p className="text-sm text-gray-800 font-semibold flex justify-center items-center gap-2">
+                  Transfer To Game <FaAngleRight />
+                </p>
+              </button>
+              <button
+                onClick={() => handleButtons(2)}
+                className="flex w-[90%] flex-col justify-center items-center rounded-md  py-2 px-1.5  bg-white"
+              >
+                <p className="text-sm text-gray-800 font-semibold flex justify-center items-center gap-2">
+                  <FaAngleLeft /> Transfer To Main
+                </p>
+              </button>
+            </div>
+          )}
 
-          <Link
+          {/* <Link
             to={"/home?investment=new-investment"}
-            className="flex justify-between px-2 items-center gap-2 mx-2 bg-indigo-200 rounded-md  mt-4 py-1"
+            className="flex justify-between px-2 items-center gap-2  bg-indigo-200 rounded-md  mt-4 py-1"
           >
             <div>
               <img
@@ -195,25 +231,11 @@ export default function Wallet() {
               size={30}
               color="black"
             />
-          </Link>
-
-          <div className="flex flex-wrap   mt-2">
-            {links.map((item, index) => (
-              <Link
-                key={index}
-                to={item.linkTo}
-                className="w-1/4  backdrop-blur-sm flex flex-col gap-1  p-2 pt-2 rounded-lg flex   items-center   "
-              >
-                <p className="p-2 dark:bg-gray-500 rounded-lg shadow-lg">
-                  {item.icons}
-                </p>
-                <p className=" text-sm text-gray-500 dark:text-gray-200 text-center">
-                  {item.label}
-                </p>
-              </Link>
-            ))}
-          </div>
+          </Link> */}
         </div>
+
+        {/* history--------------------------- */}
+        <AllHistory />
 
         {/* balance transfer popup */}
         {isOpen && (
@@ -302,77 +324,82 @@ export default function Wallet() {
 const links = [
   {
     label: "Deposit",
-    icons: <FaWallet size={26} className="dark:text-white" />,
+    icons: require("../../assets/photos/add-payment.png"),
     linkTo: "/home?money=usdt-deposit",
   },
   {
     label: "Withdraw",
-    icons: <BsWalletFill size={26} className="dark:text-white" />,
+    icons: require("../../assets/photos/bank.png"),
     linkTo: "/home?money=withdrawal",
   },
   {
     label: "Send Money",
-    icons: <RiUserSharedFill size={26} className="dark:text-white" />,
+    icons: require("../../assets/photos/send-money.png"),
     linkTo: "/home?account=send-money",
   },
   {
-    label: "Investment",
-    icons: <TbMoneybag fill="white" size={26} className="dark:text-white" />,
-    linkTo: "/home?investment=new-investment",
+    label: "Transfer",
+    icons: require("../../assets/photos/transfer.png"),
+    linkTo: "/home?account=send-money",
   },
-  {
-    label: "ROI Income",
-    icons: <TbMoneybag fill="white" size={26} className="dark:text-white" />,
-    linkTo: "/home?income=roi-income",
-  },
-  {
-    label: "Level Income",
-    icons: (
-      <PiUserListFill fill="white" size={26} className="dark:text-white" />
-    ),
-    linkTo: "/home?income=level-income",
-  },
-  {
-    label: "Reffer Income",
-    icons: <FaUsers fill="white" size={26} className="dark:text-white" />,
-    linkTo: "/home?income=refferer-income",
-  },
+  // {
+  //   label: "Investment",
+  //   icons: <TbMoneybag fill="white" size={26} className="dark:text-white" />,
+  //   linkTo: "/home?investment=new-investment",
+  // },
+  // {
+  //   label: "ROI Income",
+  //   icons: <TbMoneybag fill="white" size={26} className="dark:text-white" />,
+  //   linkTo: "/home?income=roi-income",
+  // },
+  // {
+  //   label: "Level Income",
+  //   icons: (
+  //     <PiUserListFill fill="white" size={26} className="dark:text-white" />
+  //   ),
+  //   linkTo: "/home?income=level-income",
+  // },
+  // {
+  //   label: "Reffer Income",
+  //   icons: <FaUsers fill="white" size={26} className="dark:text-white" />,
+  //   linkTo: "/home?income=refferer-income",
+  // },
 
-  {
-    label: "Matching Income",
-    icons: <FaWallet size={26} className="dark:text-white" />,
-    linkTo: "/home?income=matching-income",
-  },
-  {
-    label: "Deposit History",
-    icons: <FaWallet size={26} className="dark:text-white" />,
-    linkTo: "/home?money=deposit-history",
-  },
-  {
-    label: "Withdraw History",
-    icons: <BsWalletFill size={26} className="dark:text-white" />,
-    linkTo: "/home?money=withdrawal-history",
-  },
+  // {
+  //   label: "Matching Income",
+  //   icons: <FaWallet size={26} className="dark:text-white" />,
+  //   linkTo: "/home?income=matching-income",
+  // },
+  // {
+  //   label: "Deposit History",
+  //   icons: <FaWallet size={26} className="dark:text-white" />,
+  //   linkTo: "/home?money=deposit-history",
+  // },
+  // {
+  //   label: "Withdraw History",
+  //   icons: <BsWalletFill size={26} className="dark:text-white" />,
+  //   linkTo: "/home?money=withdrawal-history",
+  // },
 
-  {
-    label: "Investment History",
-    icons: <TiDocumentText size={26} className="dark:text-white" />,
-    linkTo: "/home?investment=investment-history",
-  },
+  // {
+  //   label: "Investment History",
+  //   icons: <TiDocumentText size={26} className="dark:text-white" />,
+  //   linkTo: "/home?investment=investment-history",
+  // },
 
-  {
-    label: "Today History",
-    icons: <GrDocumentText size={26} className="dark:text-white" />,
-    linkTo: "/home?account=today-history",
-  },
-  {
-    label: "Account Statement",
-    icons: <FaHistory size={26} className="dark:text-white" />,
-    linkTo: "/home?account=account-history",
-  },
-  {
-    label: "Game Wallet Statement",
-    icons: <IoGameController size={26} className="dark:text-white" />,
-    linkTo: "/home?account=game-wallet-history",
-  },
+  // {
+  //   label: "Today History",
+  //   icons: <GrDocumentText size={26} className="dark:text-white" />,
+  //   linkTo: "/home?account=today-history",
+  // },
+  // {
+  //   label: "Account Statement",
+  //   icons: <FaHistory size={26} className="dark:text-white" />,
+  //   linkTo: "/home?account=account-history",
+  // },
+  // {
+  //   label: "Game Wallet Statement",
+  //   icons: <IoGameController size={26} className="dark:text-white" />,
+  //   linkTo: "/home?account=game-wallet-history",
+  // },
 ];

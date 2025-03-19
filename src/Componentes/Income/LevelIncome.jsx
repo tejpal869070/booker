@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import DateSelector from "./DateSelector";
 import { GetLevelIncome } from "../../Controllers/User/UserController";
 import { useLocation } from "react-router-dom";
+import { Loading4 } from "../Loading1";
 
 export default function LevelIncome() {
   const [tableData, setTableData] = useState([]);
@@ -9,6 +10,7 @@ export default function LevelIncome() {
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
   const [filteredData, setFilteredData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const tableHead = ["S.No.", "USER", "position", "LEVEL", "PAYOUT", "Date"];
 
@@ -16,6 +18,7 @@ export default function LevelIncome() {
     const fetchData = async () => {
       const response = await GetLevelIncome();
       setTableData(response);
+      setLoading(false);
     };
 
     fetchData();
@@ -46,15 +49,25 @@ export default function LevelIncome() {
     }
   }, [startDate, endDate, tableData]);
 
+  if (loading) {
+    return (
+      <div className="  flex justify-center items-center min-h-[40vh] md:min-h-[90vh] bg-opacity-50 z-[9999]">
+        <Loading4 />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen">
-      <p className="font-bold text-xl mb-6 dark:text-white text-center md:text-left">
+      <p className="font-bold text-xl mb-6 dark:text-white text-center md:text-left hidden md:block">
         Level Income
       </p>
-      <DateSelector />
+      <div className="md:text-left hidden md:block">
+        <DateSelector />
+      </div>
       <div>
         {filteredData?.length === 0 ? (
-          <div className="border-y-[0.2px] border-gray-400 py-4">
+          <div className=" py-4">
             <img
               alt="no data"
               src={require("../../assets/photos/nodata.png")}
@@ -116,7 +129,7 @@ export default function LevelIncome() {
                 filteredData?.map((item, index) => (
                   <div className="rounded  shadow-lg bg-gray-800 p-3 mb-4">
                     <section className="border-b-[0.5px] border-gray-600 pb-2  flex justify-between items-center font-semibold  ">
-                      <p className="px-2 bg-indigo-500 inline text-gray-200 rounded py-1">
+                      <p className="px-2 bg-indigo-500 inline text-gray-200 rounded py-0.5">
                         {item.user_name}
                       </p>
                       <p className="text-green-500 text-lg">
@@ -126,15 +139,11 @@ export default function LevelIncome() {
                     <div className="pt-2 font-thin flex flex-col gap-1">
                       <section className="flex justify-between items-center font-bold  ">
                         <p className="text-gray-400 font-normal">Mobile</p>
-                        <p className="text-gray-200"> 
-                          {item.mobile}
-                        </p>
+                        <p className="text-gray-200">{item.mobile}</p>
                       </section>
                       <section className="flex justify-between items-center font-bold  ">
                         <p className="text-gray-400 font-normal">User Level</p>
-                        <p className="text-gray-200"> 
-                          {item.level}
-                        </p>
+                        <p className="text-gray-200">{item.level}</p>
                       </section>
                       <section className="flex justify-between items-center font-bold  ">
                         <p className="text-gray-400 font-normal">Time</p>
@@ -146,7 +155,6 @@ export default function LevelIncome() {
                         <p className="text-gray-400 font-normal">Trnx. Id</p>
                         <p className="text-gray-200 font-normal">{item.id}</p>
                       </section>
-                       
                     </div>
                   </div>
                 ))}

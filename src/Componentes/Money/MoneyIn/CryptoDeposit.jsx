@@ -57,7 +57,7 @@ export default function CryptoDeposit({ data }) {
       return;
     }
     try {
-      const response = await AddCryptoDepositRequest(formData); 
+      const response = await AddCryptoDepositRequest(formData);
       if (response.status) {
         setLoading(false);
         setSuccess(true);
@@ -73,7 +73,7 @@ export default function CryptoDeposit({ data }) {
         });
         setLoading(false);
       }
-    } catch (error) { 
+    } catch (error) {
       if (error?.response.status === 302) {
         toast.error(`${error.response.data.message}`);
         setLoading(false);
@@ -144,7 +144,9 @@ export default function CryptoDeposit({ data }) {
             </div>
             <div className="w-full md:w-1/2 py-10 px-5 md:px-10">
               <div className="  mb-6">
-                <h1 className="font-bold text-3xl text-gray-900">CRYPTO DEPOSIT</h1>
+                <h1 className="font-bold text-3xl text-gray-900">
+                  CRYPTO DEPOSIT
+                </h1>
               </div>
               <div className="   ">
                 <h1 className=" font-semibold text-lg text-black dark:text-gray-200">
@@ -222,6 +224,7 @@ export default function CryptoDeposit({ data }) {
                         name="product-name"
                         id="product-name"
                         type="file"
+                        accept=".jpg, .jpeg, .png"
                         onChange={(e) => setImage(e.target.files[0]) || null}
                       />
                     )}

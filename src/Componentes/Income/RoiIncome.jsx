@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import DateSelector from "./DateSelector";
 import { GetRoi } from "../../Controllers/User/UserController";
 import { useLocation } from "react-router-dom";
-import { Loading3 } from "../Loading1";
+import { Loading3, Loading4 } from "../Loading1";
 
 export default function RoiIncome() {
   const [tableData, setTableData] = useState([]);
@@ -60,18 +60,20 @@ export default function RoiIncome() {
 
   if (loading) {
     return (
-      <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-50 z-[9999]">
-        <Loading3 />
+      <div className="  flex justify-center items-center min-h-[40vh] md:min-h-[90vh] bg-opacity-50 z-[9999]">
+        <Loading4 />
       </div>
     );
   }
 
   return (
     <div className="min-h-screen">
-      <p className="font-bold text-xl mb-6 dark:text-white text-center md:text-left">
+      <p className="font-bold text-xl mb-6 dark:text-white text-center md:text-left hidden md:block">
         Income Manager {">"} ROI Income
       </p>
-      <DateSelector />
+      <div className="md:text-left hidden md:block">
+        <DateSelector />
+      </div>
       <div>
         {filteredData?.length === 0 ? (
           <div className="border-y-[0.2px] border-gray-400 py-4">
@@ -153,8 +155,12 @@ export default function RoiIncome() {
                         </p>
                       </section>
                       <section className="flex justify-between items-center font-bold  ">
-                        <p className="text-gray-400 font-normal">Investment Id</p>
-                        <p className="text-gray-200 font-normal">{item.invest_id}</p>
+                        <p className="text-gray-400 font-normal">
+                          Investment Id
+                        </p>
+                        <p className="text-gray-200 font-normal">
+                          {item.invest_id}
+                        </p>
                       </section>
                       <section className="flex justify-between items-center font-bold  ">
                         <p className="text-gray-400 font-normal">Time</p>

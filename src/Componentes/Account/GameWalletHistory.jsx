@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import gif1 from "../../assets/photos/nodata.png";
 import { GetGameWalletStatement } from "../../Controllers/User/UserController";
 import DateSelector from "../Income/DateSelector";
-import { Loading1, Loading3 } from "../Loading1";
+import { Loading1, Loading3, Loading4 } from "../Loading1";
 import { useLocation } from "react-router-dom";
 import { FaArrowCircleLeft } from "react-icons/fa";
 import { FaArrowCircleRight } from "react-icons/fa";
@@ -86,8 +86,8 @@ export default function GameWalletHistory() {
 
   if (loading) {
     return (
-      <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-50 z-[9999]">
-        <Loading3 />
+      <div className="  flex justify-center items-center min-h-[40vh] md:min-h-[90vh] bg-opacity-50 z-[9999]">
+        <Loading4 />
       </div>
     );
   }
@@ -96,12 +96,16 @@ export default function GameWalletHistory() {
     <div className=" min-h-screen">
       <div className=" ">
         <div>
-          <h1 className="mb-6 font-bold text-lg dark:text-white ">
+          <h1 className="mb-6 font-bold text-lg dark:text-white hidden md:block ">
             Account {"> "}Game Wallet History
           </h1>
           {/* <AccountHistoryPeriod /> */}
-          <DateSelector />
-          <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-6">
+
+          <div className="md:text-left hidden md:block">
+            <DateSelector />
+          </div>
+
+          <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-1">
             {filteredData && filteredData.length === 0 ? (
               <div>
                 <img alt="no data" src={gif1} className="m-auto w-60" />
@@ -110,53 +114,70 @@ export default function GameWalletHistory() {
                 </p>
               </div>
             ) : (
-              <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead className="text-xs font-semibold text-black uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
-                  <tr>
-                    <th scope="col" className="px-4 py-3">
-                      ID.
-                    </th>
-                    {/* <th scope="col" className="px-6 py-3">
+              <div>
+                <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 hidden md:inline-table w-full">
+                  <thead className="text-xs font-semibold text-black uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                      <th scope="col" className="px-4 py-3">
+                        ID.
+                      </th>
+                      {/* <th scope="col" className="px-6 py-3">
                       TYPE
                     </th> */}
-                    <th scope="col" className="px-6 py-3">
-                      Date
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      AMOUNT
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Updated Balance
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      GAME NAME
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Desc.
-                    </th>
-                    
-                  </tr>
-                </thead>
-                {filteredData.map((item, index) => (
-                  <tbody key={index}>
-                    <tr
-                      className={` text-black font-semibold dark:text-gray-200  border-b dark:border-gray-700 ${
-                        index % 2 === 0
-                          ? "bg-white dark:bg-gray-900"
-                          : "bg-gray-200 dark:bg-gray-800"
-                      }`}
-                    >
-                      <th
-                        scope="row"
-                        className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap  dark:text-white"
-                      >
-                        {item.id}.
+                      <th scope="col" className="px-6 py-3">
+                        Date
                       </th>
-                      {/* <td className="whitespace-nowrap px-4 py-2">{item.type}</td> */}
-                      <td className="whitespace-nowrap px-6 py-2">{item.date.split("T")[0]}</td>
-                      <td
-                        className={`px-6 py-2 ${
-                          item.bet_type === "Win Bet" || item.game_type ==="Received" ||
+                      <th scope="col" className="px-6 py-3">
+                        AMOUNT
+                      </th>
+                      <th scope="col" className="px-6 py-3 whitespace-nowrap">
+                        Updated Balance
+                      </th>
+                      <th scope="col" className="px-6 py-3">
+                        GAME NAME
+                      </th>
+                      <th scope="col" className="px-6 py-3">
+                        Desc.
+                      </th>
+                    </tr>
+                  </thead>
+                  {filteredData.map((item, index) => (
+                    <tbody key={index}>
+                      <tr
+                        className={` text-black font-semibold dark:text-gray-200  border-b dark:border-gray-700 ${
+                          index % 2 === 0
+                            ? "bg-white dark:bg-gray-900"
+                            : "bg-gray-200 dark:bg-gray-800"
+                        }`}
+                      >
+                        <th
+                          scope="row"
+                          className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap  dark:text-white"
+                        >
+                          {item.id}.
+                        </th>
+                        {/* <td className="whitespace-nowrap px-4 py-2">{item.type}</td> */}
+                        <td className="whitespace-nowrap px-6 py-2">
+                          {item.date.split("T")[0]}
+                        </td>
+                        <td
+                          className={`px-6 py-2 ${
+                            item.bet_type === "Win Bet" ||
+                            item.game_type === "Received" ||
+                            (item.transaction_type === "credit" &&
+                              (item.bet_type === "win" ||
+                                item.bet_type === "bonus" ||
+                                item.bet_type === "spin" ||
+                                item.bet_type === "bet")) ||
+                            (item.transaction_type === "debit" &&
+                              (item.bet_type === "cancel" ||
+                                item.bet_type === "partial_cancel"))
+                              ? "text-[green]"
+                              : "text-red-600"
+                          }`}
+                        >
+                          {item.bet_type === "Win Bet" ||
+                          item.game_type === "Received" ||
                           (item.transaction_type === "credit" &&
                             (item.bet_type === "win" ||
                               item.bet_type === "bonus" ||
@@ -165,54 +186,127 @@ export default function GameWalletHistory() {
                           (item.transaction_type === "debit" &&
                             (item.bet_type === "cancel" ||
                               item.bet_type === "partial_cancel"))
-                            ? "text-[green]"
-                            : "text-red-600"
-                        }`}
-                      >
-                        {item.bet_type === "Win Bet" || item.game_type ==="Received" ||
-                        (item.transaction_type === "credit" &&
-                          (item.bet_type === "win" ||
-                            item.bet_type === "bonus" ||
-                            item.bet_type === "spin" ||
-                            item.bet_type === "bet")) ||
-                        (item.transaction_type === "debit" &&
-                          (item.bet_type === "cancel" ||
-                            item.bet_type === "partial_cancel"))
-                          ? "+"
-                          : "-"}
-                        ₹{Number(item.bet_balance).toFixed(2)}
-                      </td>
-                      <td className="whitespace-nowrap px-6 py-2">₹{Number(item.total_balance).toFixed(2)}</td>
-                      <td className="whitespace-nowrap px-6 py-2 flex justify-left items-center gap-2">
-                        {item.game_type}{" "}
-                        {item.game_type === "casino" && (
-                          <FaRegEye
-                            className="cursor-pointer"
-                            size={16}
-                            onClick={() => {
-                              setOpenCasinoTransection(item);
-                            }}
-                          />
-                        )}
-                      </td>
-                      <td className="whitespace-nowrap px-6 py-2">{item.bet_type}</td>
-                      
-                    </tr>
-                    {isVisible && selectedIndex === index ? (
-                      <tr>
-                        <td colspan="7" className="text-center p-4">
-                          No Records Found!
+                            ? "+"
+                            : "-"}
+                          ₹{Number(item.bet_balance).toFixed(2)}
+                        </td>
+                        <td className="whitespace-nowrap px-6 py-2">
+                          ₹{Number(item.total_balance).toFixed(2)}
+                        </td>
+                        <td className="whitespace-nowrap px-6 py-2 flex justify-left items-center gap-2">
+                          {item.game_type}{" "}
+                          {item.game_type === "casino" && (
+                            <FaRegEye
+                              className="cursor-pointer"
+                              size={16}
+                              onClick={() => {
+                                setOpenCasinoTransection(item);
+                              }}
+                            />
+                          )}
+                        </td>
+                        <td className="whitespace-nowrap px-6 py-2">
+                          {item.bet_type}
                         </td>
                       </tr>
-                    ) : (
-                      ""
-                    )}
-                  </tbody>
-                ))}
-              </table>
+                      {isVisible && selectedIndex === index ? (
+                        <tr>
+                          <td colspan="7" className="text-center p-4">
+                            No Records Found!
+                          </td>
+                        </tr>
+                      ) : (
+                        ""
+                      )}
+                    </tbody>
+                  ))}
+                </table>
+                <div className="flex flex-col md:hidden pb-20">
+                  {filteredData &&
+                    filteredData?.map((item, index) => (
+                      <div className="rounded  shadow-lg bg-gray-800 p-3 mb-2">
+                        <section className="border-b-[0.5px] border-gray-600 pb-2  flex justify-between items-center font-semibold  ">
+                          <p className="px-2 bg-indigo-500 inline text-gray-200 rounded  py-0.5">
+                            {item.game_type}
+                          </p>
+                          <p
+                            className={`  ${
+                              item.bet_type === "Win Bet" ||
+                              item.game_type === "Received" ||
+                              (item.transaction_type === "credit" &&
+                                (item.bet_type === "win" ||
+                                  item.bet_type === "bonus" ||
+                                  item.bet_type === "spin" ||
+                                  item.bet_type === "bet")) ||
+                              (item.transaction_type === "debit" &&
+                                (item.bet_type === "cancel" ||
+                                  item.bet_type === "partial_cancel"))
+                                ? "text-[green]"
+                                : "text-red-600"
+                            }`}
+                          >
+                            {item.bet_type === "Win Bet" ||
+                            item.game_type === "Received" ||
+                            (item.transaction_type === "credit" &&
+                              (item.bet_type === "win" ||
+                                item.bet_type === "bonus" ||
+                                item.bet_type === "spin" ||
+                                item.bet_type === "bet")) ||
+                            (item.transaction_type === "debit" &&
+                              (item.bet_type === "cancel" ||
+                                item.bet_type === "partial_cancel"))
+                              ? "+"
+                              : "-"}
+                            ₹{Number(item.bet_balance).toFixed(2)}
+                          </p>
+                        </section>
+                        <div className="pt-2 font-thin flex flex-col gap-1">
+                          <section className="flex justify-between items-center font-bold  ">
+                            <p className="text-gray-400 font-normal">
+                              Updated Balance
+                            </p>
+                            <p className="text-gray-200 font-normal">
+                              ₹{Number(item.total_balance).toFixed(2)}
+                            </p>
+                          </section>
+                          <section className="flex justify-between items-center font-bold  ">
+                            <p className="text-gray-400 font-normal">
+                              Bet Type
+                            </p>
+                            <p className="text-gray-200 font-normal">
+                              {item.bet_type}
+                            </p>
+                          </section>
+                          <section className="flex justify-between items-center font-bold  ">
+                            <p className="text-gray-400 font-normal">Time</p>
+                            <p className="text-gray-200 font-normal">
+                              {item.date.split("T")[0]}
+                            </p>
+                          </section>
+                          <section className="flex justify-between items-center font-bold  ">
+                            <p className="text-gray-400 font-normal">Id</p>
+                            <p className="text-gray-200 font-normal">
+                              {item.id}
+                            </p>
+                          </section>
+                          {item.status === "Cancelled" && (
+                            <section className="flex justify-between   font-bold  ">
+                              <p className="text-gray-400 font-normal">
+                                Reason
+                              </p>
+                              <p className="text-gray-400 font-normal max-w-[60%]">
+                                {item.reason}
+                              </p>
+                            </section>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                </div>
+              </div>
             )}
           </div>
-          <div className="flex items-center gap-2 text-black dark:text-white">
+          <div className="flex items-center gap-2 text-black dark:text-white pb-40">
             <button
               disabled={pageId === 1}
               onClick={() => setPageId(pageId - 1)}

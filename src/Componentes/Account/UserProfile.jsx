@@ -156,7 +156,7 @@ export default function UserProfile() {
             </li>
             <li className="flex items-center py-3 text-sm">
               <span className="text-gray-800 dark:text-gray-300 font-semibold">
-                Reffer Code
+                Refer Code
               </span>
               <span className="ml-auto dark:text-gray-200 font-semibold">
                 {user.reffer_code}

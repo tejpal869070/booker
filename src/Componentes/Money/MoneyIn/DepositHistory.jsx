@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { GetUserPaymentHistory } from "../../../Controllers/User/UserController";
 import { FaEye } from "react-icons/fa";
-import { Loading1, Loading3 } from "../../Loading1";
+import { Loading1, Loading3, Loading4 } from "../../Loading1";
 import gif1 from "../../../assets/photos/nodata.png";
 import DateSelector from "../../Income/DateSelector";
 import { useLocation } from "react-router-dom";
@@ -65,8 +65,8 @@ export default function DepositHistory() {
 
   if (loading) {
     return (
-      <div className="fixed min-h-screen backdrop-blur-[1px] top-0 left-0 w-full h-full flex justify-center items-center   z-[9999]">
-        <Loading3 />
+      <div className="  flex justify-center items-center min-h-[40vh] md:min-h-[90vh] bg-opacity-50 z-[9999]">
+        <Loading4 />
       </div>
     );
   }
@@ -74,10 +74,12 @@ export default function DepositHistory() {
   return (
     <div className=" min-h-screen">
       <div>
-        <h1 className="mb-6 font-bold text-lg dark:text-gray-100 text-center md:text-left">
+        <h1 className="mb-6 font-bold text-lg dark:text-gray-100 text-center md:text-left hidden md:block">
           Deposit History
         </h1>
-        <DateSelector />
+        <div className="md:text-left hidden md:block">
+          <DateSelector />
+        </div>
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg hidden md:block">
           {filteredData && filteredData.length === 3 ? (
             <div>
@@ -211,7 +213,7 @@ export default function DepositHistory() {
                                 <p>Cancel Reason : {item.reason} </p>
                               ) : (
                                 ""
-                              )} 
+                              )}
                             </div>
                           </td>
                         )}
@@ -226,10 +228,10 @@ export default function DepositHistory() {
           )}
         </div>
 
-        <div className="flex flex-col md:hidden">
+        <div className="flex flex-col md:hidden pb-20">
           {filteredData &&
             filteredData?.map((item, index) => (
-              <div className="rounded  shadow-lg bg-gray-800 p-3 mb-4">
+              <div className="rounded  shadow-lg bg-gray-800 p-3 mb-2">
                 <section className="border-b-[0.5px] border-gray-600 pb-2  flex justify-between items-center font-semibold  ">
                   <p className="px-2 bg-indigo-500 inline text-gray-200 rounded py-1">
                     {item.payment_type === "USDT" ? "Crypto" : item.type}
@@ -263,9 +265,11 @@ export default function DepositHistory() {
                     <p className="text-gray-200 font-normal">{item.id}</p>
                   </section>
                   {item.status === "Cancelled" && (
-                    <section className="flex justify-between items-center font-bold  ">
+                    <section className="flex justify-between   font-bold  ">
                       <p className="text-gray-400 font-normal">Reason</p>
-                      <p className="text-gray-200 font-normal">{item.reason}</p>
+                      <p className="text-gray-400 font-normal max-w-[60%]">
+                        {item.reason}
+                      </p>
                     </section>
                   )}
                 </div>

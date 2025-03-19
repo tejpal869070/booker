@@ -24,3 +24,13 @@ export function Loading3({ width }) {
     </div>
   );
 }
+
+
+export function Loading4({ width }) {
+  return (
+    <div className="    flex justify-center items-center">
+      <div class="border-gray-300 h-20 w-20 animate-spin rounded-full border-8 border-t-blue-600" />
+    </div>
+  );
+}
+

@@ -4,7 +4,7 @@ import AccountHistoryPeriod from "./AccountHistoryPeriod";
 import gif1 from "../../assets/photos/nodata.png";
 import { GetAccountAllStatement } from "../../Controllers/User/UserController";
 import DateSelector from "../Income/DateSelector";
-import { Loading1, Loading3 } from "../Loading1";
+import { Loading1, Loading3, Loading4 } from "../Loading1";
 import { useLocation } from "react-router-dom";
 
 export default function AccountHistory() {
@@ -75,8 +75,8 @@ export default function AccountHistory() {
 
   if (loading) {
     return (
-      <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-50 z-[9999]">
-        <Loading3 />
+      <div className="  flex justify-center items-center min-h-[40vh] md:min-h-[90vh] bg-opacity-50 z-[9999]">
+        <Loading4 />
       </div>
     );
   }
@@ -85,11 +85,13 @@ export default function AccountHistory() {
     <div className="relative min-h-screen">
       <div className=" ">
         <div>
-          <h1 className="mb-6 font-bold text-lg dark:text-white text-center md:text-left">
+          <h1 className="mb-6 font-bold text-lg dark:text-white text-center md:text-left hidden md:block">
             Account History
           </h1>
           {/* <AccountHistoryPeriod /> */}
-          <DateSelector />
+          <div className="md:text-left hidden md:block">
+            <DateSelector />
+          </div>
           <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-6 hidden md:block">
             {filteredData && filteredData.length === 0 ? (
               <div>
@@ -188,7 +190,7 @@ export default function AccountHistory() {
                   <p className="px-2 bg-indigo-500 inline text-gray-200 rounded py-1">
                     {item.type}
                   </p>
-                  <p className="text-green-500 ">Completed</p>
+                  <p className="text-green-500 ">{item.description}</p>
                 </section>
                 <div className="pt-2 font-thin flex flex-col gap-1">
                   <section className="flex justify-between items-center font-bold  ">

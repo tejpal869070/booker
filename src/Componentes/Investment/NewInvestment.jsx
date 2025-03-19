@@ -150,6 +150,8 @@ export default function NewInvestment() {
 
   return (
     <div>
+      <ToastContainer />
+
       <div className="   flex items-center justify-center  ">
         <div className="bg-[#e1e6ff] text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden">
           <div className="md:flex flex-row-reverse w-full">
@@ -189,7 +191,14 @@ export default function NewInvestment() {
                         <i className="mdi mdi-email-outline text-gray-400 text-lg"></i>
                       </div>
                       <select
-                        onChange={(e) => setInvestmentPlan(e.target.value)}
+                        onChange={(e) => {
+                          const selectedOption =
+                            e.target.options[e.target.selectedIndex];
+                          const value2 =
+                            selectedOption.getAttribute("data-value2");
+                          setInvestmentPlan(e.target.value);
+                          setAmount(Number(value2));
+                        }}
                         defaultChecked={investmentPlan}
                         value={investmentPlan}
                         className="w-full -ml-10  pr-3 py-2 text-green-500 font-medium rounded-lg border-2 border-gray-200 outline-none focus:border-none"
@@ -199,6 +208,7 @@ export default function NewInvestment() {
                             <option
                               key={index}
                               value={item.id}
+                              data-value2={item.amount_start}
                               className="font-semibold cursor-pointer text-green-500"
                             >
                               ${item.amount_start} - {item.amount_end}{" "}
@@ -348,7 +358,6 @@ export default function NewInvestment() {
           </div>
         </div>
       )}
-      <ToastContainer />
     </div>
   );
 }
