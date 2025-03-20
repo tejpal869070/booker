@@ -81,7 +81,7 @@ export default function DepositHistory() {
           <DateSelector />
         </div>
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg hidden md:block">
-          {filteredData && filteredData.length === 3 ? (
+          {filteredData && filteredData.length === 0 ? (
             <div>
               <img alt="no data" src={gif1} className="m-auto" />
               <p className="text-center font-bold text-xl">No Records !</p>
@@ -250,7 +250,7 @@ export default function DepositHistory() {
                   <section className="flex justify-between items-center font-bold  ">
                     <p className="text-gray-400 font-normal">Amount</p>
                     <p className="text-[#FEAA57]">
-                      {item.type === "Crypto" ? "$ " : "₹ "}
+                      {item.type === "USDT" ? "$ " : "₹ "}
                       {item.amount}
                     </p>
                   </section>

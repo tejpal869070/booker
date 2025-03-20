@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { GetAllCasinoGames } from "../../Controllers/User/UserController";
 
 export default function Games() {
   const [games, setGames] = React.useState([]);
+  const [selected, setSelected] = useState(1);
   const navigate = useNavigate();
 
   const formData = {};
@@ -32,16 +33,44 @@ export default function Games() {
   }, []);
   return (
     <div>
-      <div className="flex flex-wrap     py-3 gap-[1.3%]  ">
-        {gameData.map((item, index) => (
-          <Link
-            to={item.to}
-            key={index}
-            className="w-[32%] md:w-[19%] lg:w-[15%] mb-4   bg-gray-300 rounded-xl"
-          >
-            <img alt="poster" src={item.image} className="rounded-xl" />
-          </Link>
-        ))}
+      <div className="flex md:hidden -mt-5">
+        <div className={`${selected===1 && "border-b-4 border-[#f6d368]"}`} onClick={() => setSelected(1)}>
+          <img alt="sdfs" src={require("../../assets/photos/gameBox1.png")} />
+        </div>
+        <div   className={`${selected===2 && "border-b-4 border-[#f6d368]"}`} onClick={() => setSelected(2)}>
+          <img alt="sdfs" src={require("../../assets/photos/gameBox2.png")} />
+        </div>
+      </div>
+
+      <div className="border-4 rounded-t-sm md:border-0 border-[#f6d368]">
+        {selected === 1 ? (
+          <div className="flex flex-wrap justify-around md:justify-start md:gap-[1.3%]   px-1 py-3   ">
+            {gameData.map((item, index) => (
+              <Link
+                to={item.to}
+                key={index}
+                className="w-[32%] md:w-[19%] lg:w-[15%] mb-4   bg-gray-300 rounded-md md:rounded-xl"
+              >
+                <img alt="poster" src={item.image} className="rounded-xl" />
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <div className="flex flex-wrap justify-around pt-3 gap-[1.3%]  ">
+            {games &&
+              games
+                .filter((item) => item.providerName === "Supernowa")
+                .map((item, index) => (
+                  <div
+                    key={index}
+                    onClick={() => handleCasinoSelect(item)}
+                    className="w-[48%] md:w-[23%] border lg:w-[15%] mb-2 bg-black/30 cursor-pointer"
+                  >
+                    <img alt="banner" src={item.thumb} className="w-full" />
+                  </div>
+                ))}
+          </div>
+        )}
       </div>
 
       <Link
@@ -56,21 +85,20 @@ export default function Games() {
       </Link>
 
       {/* casions--------- */}
-
-      <div className="flex flex-wrap   gap-[1.3%]  ">
-        {games &&
-          games
-            .filter((item) => item.providerName === "Supernowa")
-            .map((item, index) => (
-              <div
-                key={index}
-                onClick={() => handleCasinoSelect(item)}
-                className="w-[48%] md:w-[23%] lg:w-[15%] mb-2 bg-black/30 cursor-pointer"
-              >
-                <img alt="banner" src={item.thumb} className="w-full" />
-              </div>
-            ))}
-      </div>
+      <div className="flex flex-wrap  pt-3 gap-[1.3%]  hidden md:flex">
+            {games &&
+              games
+                .filter((item) => item.providerName === "Supernowa")
+                .map((item, index) => (
+                  <div
+                    key={index}
+                    onClick={() => handleCasinoSelect(item)}
+                    className="w-[48%] md:w-[23%] border lg:w-[15%] mb-2 bg-black/30 cursor-pointer"
+                  >
+                    <img alt="banner" src={item.thumb} className="w-full" />
+                  </div>
+                ))}
+          </div>
     </div>
   );
 }

@@ -108,7 +108,7 @@ export default function GameWalletHistory() {
           <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-1">
             {filteredData && filteredData.length === 0 ? (
               <div>
-                <img alt="no data" src={gif1} className="m-auto w-60" />
+                <img alt="no data" src={gif1} className="m-auto w-40" />
                 <p className="text-center dark:text-white font-bold text-xl">
                   No Records !
                 </p>

@@ -123,6 +123,39 @@ export default function Hero1() {
   return (
     <div className="pb-6">
       <ToastContainer />
+      <div className="flex justify-around md:hidden">
+        <div className="">
+          <img
+            alt="sdf"
+            src={require("../../assets/photos/notification.png")}
+            className="w-10"
+          />
+        </div>
+        <div className="w-[70%] py-1 rounded-t-lg bg-white m-auto   bg-gradient-to-r from-indigo-400 to-cyan-400">
+          <p className="text-center font-bold text-xl  text-white flex items-center gap-2 justify-center">
+            <img
+              alt="sodf"
+              src={require("../../assets/photos/money-bag.png")}
+              className="w-5"
+            />{" "}
+            ₹
+            {(
+              Number(userData.wallet_balance) +
+              Number(userData.color_wallet_balnace)
+            ).toFixed(2)}
+          </p>
+          <p className="text-[9px] font-medium text-center dark:text-gray-200">
+            ( Main + Game Wallet)
+          </p>
+        </div>
+        <Link to={{ pathname: "/home", search: `?user=profile` }}>
+          <img
+            alt="sdf"
+            src={require("../../assets/photos/profile.png")}
+            className="w-10"
+          />
+        </Link>
+      </div>
       <div className="grid grid-cols-12 gap-4 w-full">
         <div
           className="relative   col-span-12 lg:col-span-6 xl:col-span-8 bg-opacity-10 bg-top bg-cover bg-left-bottom border-2 border-[#92a0fd] dark:border-gray-200 rounded-lg flex justify-between p-4"
@@ -135,7 +168,7 @@ export default function Hero1() {
             <p className="text-sm mt-2 text-gray-100">
               Joining: {userData && userData?.date.split("T")[0]}
             </p>
-            <div className="flex flex-wrap   gap-4 mt-4">
+            <div className="flex flex-wrap   gap-4 mt-4 hidden md:flex">
               <Link
                 className="relative"
                 to={{
@@ -177,7 +210,7 @@ export default function Hero1() {
           <div className="absolute inset-0 bg-gradient-to-b rounded-lg from-black to-transparent opacity-100 z-1" />
         </div>
 
-        <div className="col-span-12 lg:col-span-6 xl:col-span-4     w-full   rounded-lg">
+        <div className="col-span-12 lg:col-span-6 xl:col-span-4 w-full rounded-lg hidden md:block">
           <div className="grid grid-cols-12 gap-4 w-full">
             <div
               className=" col-span-6 rounded-lg  p-4 border-2 border-black"
@@ -247,7 +280,7 @@ export default function Hero1() {
         <img
           alt="banner"
           src={require("../../assets/photos/investment-img.png")}
-          className="rounded-md  -mt-4 -mb-2 "
+          className="rounded-md w-full -mt-8 -mb-2 "
         />
       </Link>
 

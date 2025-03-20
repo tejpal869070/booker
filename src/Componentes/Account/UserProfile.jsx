@@ -117,31 +117,7 @@ export default function UserProfile() {
             ))}
           </div>
 
-          <div className="flex items-center py-3 rounded mt-3 text-lg bg-gray-100 dark:bg-gray-600 py-2 px-3">
-            <span className="text-gray-800 dark:text-gray-300 font-semibold">
-              Refer
-            </span>
-            <span className="ml-auto flex items-center justify-center gap-2 dark:text-gray-200 font-semibold">
-              <CopyToClipboard
-                text={url}
-                onCopy={handleCopy}
-                className={` px-3 py-1 rounded-lg text-gray-700    ${
-                  isCopied1 ? "bg-[green]" : "bg-indigo-300"
-                }`}
-              >
-                <button> {isCopied1 ? "Copied" : "Join In Left"} </button>
-              </CopyToClipboard>
-              <CopyToClipboard
-                text={url}
-                onCopy={handleCopy2}
-                className={` px-3 py-1 rounded-lg text-gray-700    ${
-                  isCopied2 ? "bg-[green]" : "bg-indigo-300"
-                }`}
-              >
-                <button> {isCopied2 ? "Copied" : "Join In Right"} </button>
-              </CopyToClipboard>
-            </span>
-          </div>
+           
 
           <ul className="mt-3 divide-y rounded bg-gray-100 dark:bg-gray-600 py-2 px-3 text-gray-600 shadow-sm hover:text-gray-700 hover:shadow">
             <li className="flex items-center py-3 text-sm">

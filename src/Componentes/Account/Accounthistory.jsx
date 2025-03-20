@@ -30,7 +30,7 @@ export default function AccountHistory() {
     try {
       const response = await GetAccountAllStatement();
       if (response.status) {
-        setData(response.data.reverse());
+        setData(response.data);
         setLoading(false);
       } else {
         window.alert("Something Went Wrong.");
@@ -149,10 +149,13 @@ export default function AccountHistory() {
                       </td>
                       <td className="whitespace-nowrap px-6 py-4">
                         {item.type === "Investment" ||
-                        item.type === "Investment Return"
+                        item.type === "Investment Return" ||
+                        item.amount?.charAt(0) === "$"
                           ? "$ "
                           : "₹ "}
-                        {item.amount}
+                        {item.amount?.charAt(0) === "$"
+                          ? item?.amount.slice(1)
+                          : Number(item.amount).toFixed(2)}
                       </td>
                       <td className="whitespace-nowrap px-6 py-4">
                         {item.description.split(" ").includes("To")
@@ -183,24 +186,27 @@ export default function AccountHistory() {
             )}
           </div>
 
-          <div className="flex flex-col md:hidden">
+          <div className="flex flex-col md:hidden pb-20">
             {filteredData?.map((item, index) => (
-              <div className="rounded  shadow-lg bg-gray-800 p-3 mb-4">
+              <div className="rounded  shadow-lg bg-gray-800 p-3 mb-2">
                 <section className="border-b-[0.5px] border-gray-600 pb-2  flex justify-between items-center font-semibold  ">
-                  <p className="px-2 bg-indigo-500 inline text-gray-200 rounded py-1">
+                  <p className="px-2 bg-indigo-500 inline text-gray-200 rounded py-0.5">
                     {item.type}
                   </p>
-                  <p className="text-green-500 ">{item.description}</p>
+                  <p className="text-green-500 ">{item.type==="Matching-Income" ? "" : item.description}</p>
                 </section>
-                <div className="pt-2 font-thin flex flex-col gap-1">
+                <div className="pt-2 font-thin flex flex-col gap-0.5">
                   <section className="flex justify-between items-center font-bold  ">
                     <p className="text-gray-400 font-normal">Amount</p>
                     <p className="text-[#FEAA57]">
                       {item.type === "Investment" ||
-                      item.type === "Investment Return"
+                      item.type === "Investment Return" ||
+                      item.amount?.charAt(0) === "$"
                         ? "$ "
                         : "₹ "}
-                      {item.amount}
+                      {item.amount?.charAt(0) === "$"
+                        ? item?.amount.slice(1)
+                        : Number(item.amount).toFixed(2)}
                     </p>
                   </section>
                   <section className="flex justify-between items-center font-bold  ">
