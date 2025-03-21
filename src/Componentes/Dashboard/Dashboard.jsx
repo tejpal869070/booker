@@ -93,7 +93,7 @@ export default function Dashboard() {
 
   if (loading) {
     return (
-      <div className="absolute top-0   z-[9999] w-screen h-screen flex items-center justify-center m-auto inset-0">
+      <div className="fixed top-0   z-[9999] w-screen h-screen flex items-center justify-center m-auto inset-0">
         <Loading3 />
       </div>
     );

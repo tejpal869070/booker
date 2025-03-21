@@ -28,6 +28,7 @@ import GameWalletHistory from "../../Componentes/Account/GameWalletHistory";
 import LevelIncome from "../../Componentes/Income/LevelIncome";
 import LiveCasino from "../LiveCasino";
 import Refer from "../../Componentes/Account/Refer";
+import InvestmentPage from "../../Componentes/Account/InvestmentPage";
 
 export default function InnerSection() {
   const location = useLocation();
@@ -57,6 +58,8 @@ export default function InnerSection() {
     return <div> {<VIP />} </div>;
   } else if (paramsData && paramsData.user === "refer") {
     return <div> {<Refer />} </div>;
+  } else if (paramsData && paramsData.user === "investment") {
+    return <div> {<InvestmentPage />} </div>;
   } else if (paramsData && paramsData.investment === "investment-history") {
     return <div> {<InvestmentHistory />} </div>;
   } else if (paramsData && paramsData.network === "downline-member") {
@@ -83,7 +86,7 @@ export default function InnerSection() {
     return <div> {<AccountHistory />} </div>;
   } else if (paramsData && paramsData.account === "game-wallet-history") {
     return <div> {<GameWalletHistory />} </div>;
-  }   else if (paramsData && paramsData.income === "matching-income") {
+  } else if (paramsData && paramsData.income === "matching-income") {
     return <div> {<MatchingIncome />} </div>;
   } else if (paramsData && paramsData.income === "refferer-income") {
     return <div> {<ReferIncome />} </div>;

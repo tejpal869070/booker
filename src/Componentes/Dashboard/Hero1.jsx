@@ -114,7 +114,7 @@ export default function Hero1() {
 
   if (loading) {
     return (
-      <div className="absolute inset-0   z-[99999]  w-screen h-screen flex items-center justify-center m-auto inset-0">
+      <div className="fixed inset-0   z-[99999]  w-screen h-screen flex items-center justify-center m-auto inset-0">
         <Loading3 />
       </div>
     );
@@ -123,39 +123,7 @@ export default function Hero1() {
   return (
     <div className="pb-6">
       <ToastContainer />
-      <div className="flex justify-around md:hidden">
-        <div className="">
-          <img
-            alt="sdf"
-            src={require("../../assets/photos/notification.png")}
-            className="w-10"
-          />
-        </div>
-        <div className="w-[70%] py-1 rounded-t-lg bg-white m-auto   bg-gradient-to-r from-indigo-400 to-cyan-400">
-          <p className="text-center font-bold text-xl  text-white flex items-center gap-2 justify-center">
-            <img
-              alt="sodf"
-              src={require("../../assets/photos/money-bag.png")}
-              className="w-5"
-            />{" "}
-            ₹
-            {(
-              Number(userData.wallet_balance) +
-              Number(userData.color_wallet_balnace)
-            ).toFixed(2)}
-          </p>
-          <p className="text-[9px] font-medium text-center dark:text-gray-200">
-            ( Main + Game Wallet)
-          </p>
-        </div>
-        <Link to={{ pathname: "/home", search: `?user=profile` }}>
-          <img
-            alt="sdf"
-            src={require("../../assets/photos/profile.png")}
-            className="w-10"
-          />
-        </Link>
-      </div>
+
       <div className="grid grid-cols-12 gap-4 w-full">
         <div
           className="relative   col-span-12 lg:col-span-6 xl:col-span-8 bg-opacity-10 bg-top bg-cover bg-left-bottom border-2 border-[#92a0fd] dark:border-gray-200 rounded-lg flex justify-between p-4"
@@ -261,6 +229,39 @@ export default function Hero1() {
           </div>
         </div>
       </div>
+      <div className="flex justify-around items-center md:hidden">
+        <div className="">
+          <img
+            alt="sdf"
+            src={require("../../assets/photos/notification.png")}
+            className="w-10"
+          />
+        </div>
+        <div className="w-[70%] py-1 rounded-b-lg bg-white m-auto   bg-gradient-to-r from-indigo-400 to-cyan-400">
+          <p className="text-center font-bold text-xl  text-white flex items-center gap-2 justify-center">
+            <img
+              alt="sodf"
+              src={require("../../assets/photos/money-bag.png")}
+              className="w-5"
+            />{" "}
+            ₹
+            {(
+              Number(userData.wallet_balance) +
+              Number(userData.color_wallet_balnace)
+            ).toFixed(2)}
+          </p>
+          <p className="text-[9px] font-medium text-center dark:text-gray-200">
+            ( Main + Game Wallet)
+          </p>
+        </div>
+        <Link to={{ pathname: "/home", search: `?user=profile` }}>
+          <img
+            alt="sdf"
+            src={require("../../assets/photos/profile.png")}
+            className="w-10"
+          />
+        </Link>
+      </div>
 
       <Link
         to={{ pathname: "/home", search: "?user=refer" }}
@@ -274,7 +275,7 @@ export default function Hero1() {
       </Link>
 
       <Link
-        to={{ pathname: "/home", search: "?investment=new-investment" }}
+        to={{ pathname: "/home", search: "?user=investment" }}
         className="md:hidden cursor-pointer"
       >
         <img

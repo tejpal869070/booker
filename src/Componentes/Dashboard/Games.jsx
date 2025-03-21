@@ -33,16 +33,26 @@ export default function Games() {
   }, []);
   return (
     <div>
-      <div className="flex md:hidden -mt-5">
-        <div className={`${selected===1 && "border-b-4 border-[#f6d368]"}`} onClick={() => setSelected(1)}>
-          <img alt="sdfs" src={require("../../assets/photos/gameBox1.png")} />
+      <div className="flex justify-between md:hidden  mt-4 ">
+        <div
+          className={`w-[49%] rounded-t-md py-2 text-[#283B90] bg-[#dcad5e] text-center  font-bold text-xl ${
+            selected === 1 && "  border-b-4 border-[#f6d368]"
+          }`}
+          onClick={() => setSelected(1)}
+        >
+          <p className=" ">GAMES </p>
         </div>
-        <div   className={`${selected===2 && "border-b-4 border-[#f6d368]"}`} onClick={() => setSelected(2)}>
-          <img alt="sdfs" src={require("../../assets/photos/gameBox2.png")} />
+        <div
+          className={`w-[49%] rounded-t-md py-2 text-[#283B90] bg-[#dcad5e] text-center  font-bold text-xl   ${
+            selected === 2 && "border-b-4 border-[#f6d368]"
+          }`}
+          onClick={() => setSelected(2)}
+        >
+          <p className=" ">CASINO </p>
         </div>
       </div>
 
-      <div className="border-4 rounded-t-sm md:border-0 border-[#f6d368]">
+      <div className="border-4  md:border-0 border-[#f6d368]">
         {selected === 1 ? (
           <div className="flex flex-wrap justify-around md:justify-start md:gap-[1.3%]   px-1 py-3   ">
             {gameData.map((item, index) => (
@@ -86,19 +96,19 @@ export default function Games() {
 
       {/* casions--------- */}
       <div className="flex flex-wrap  pt-3 gap-[1.3%]  hidden md:flex">
-            {games &&
-              games
-                .filter((item) => item.providerName === "Supernowa")
-                .map((item, index) => (
-                  <div
-                    key={index}
-                    onClick={() => handleCasinoSelect(item)}
-                    className="w-[48%] md:w-[23%] border lg:w-[15%] mb-2 bg-black/30 cursor-pointer"
-                  >
-                    <img alt="banner" src={item.thumb} className="w-full" />
-                  </div>
-                ))}
-          </div>
+        {games &&
+          games
+            .filter((item) => item.providerName === "Supernowa")
+            .map((item, index) => (
+              <div
+                key={index}
+                onClick={() => handleCasinoSelect(item)}
+                className="w-[48%] md:w-[23%] border lg:w-[15%] mb-2 bg-black/30 cursor-pointer"
+              >
+                <img alt="banner" src={item.thumb} className="w-full" />
+              </div>
+            ))}
+      </div>
     </div>
   );
 }

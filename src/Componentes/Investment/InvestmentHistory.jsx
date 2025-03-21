@@ -8,14 +8,6 @@ import gif1 from "../../assets/photos/nodata.png";
 export default function InvestmentHistory() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [isOpen, setIsOpen] = useState(false);
-  const [singleData, setSingleData] = useState();
-
-  function getEndDate(initialDate, days) {
-    const date = new Date(initialDate);
-    date.setDate(date.getDate() + days);
-    return date.toISOString().split(" ")[0];
-  }
 
   const GetHistory = async () => {
     const response = await MyInvestMentHistory();
@@ -34,7 +26,7 @@ export default function InvestmentHistory() {
 
   if (loading) {
     return (
-      <div className="  flex justify-center items-center min-h-[40vh] md:min-h-[90vh] bg-opacity-50 z-[9999]">
+      <div className=" fixed flex justify-center items-center min-h-[40vh] md:min-h-[90vh] bg-opacity-50 z-[9999]">
         <Loading4 />
       </div>
     );
@@ -203,10 +195,6 @@ export default function InvestmentHistory() {
           </div>
         </div>
       </div>
-
-      {isOpen && (
-        <Details singleData={singleData} onClose={() => setIsOpen(false)} />
-      )}
     </div>
   );
 }
