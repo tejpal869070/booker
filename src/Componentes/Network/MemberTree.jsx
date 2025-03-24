@@ -300,7 +300,7 @@ export default function MemberTree() {
 
   return (
     <div className="min-h-screen">
-      <div className="tree-member-first-box flex flex-wrap  gap-16 border-2 border-black  dark:border-gray-400 rounded-lg  mb-6 p-2">
+      {/* <div className="tree-member-first-box flex flex-wrap  gap-16 border-2 border-black  dark:border-gray-400 rounded-lg  mb-6 p-2">
         <div className="">
           <p className="bg-[#ff9600] px-2 text-white rounded-lg">TARUN9742</p>
           <h1 className="font-bold text-xl dark:text-white">Left Team</h1>
@@ -319,7 +319,7 @@ export default function MemberTree() {
             <li className="dark:text-gray-300">Carry.Business: $0</li>
           </ul>
         </div>
-      </div>
+      </div> */}
       <Link
         to={{
           pathname: "/home",

@@ -9,7 +9,6 @@ import { userLogin } from "../../Controllers/Auth/AuthController";
 import { FaUserCircle } from "react-icons/fa";
 import { MdOutlineSecurity } from "react-icons/md";
 
-
 export default function Login() {
   const [creating, setCreating] = useState(false);
   const [mobile, setMobile] = useState("");
@@ -53,11 +52,15 @@ export default function Login() {
         return;
       }
     } catch (error) {
-      if (error.response && error.response.status === 404) {
+      if (
+        error.response &&
+        (error.response.status === 404 || error.response.status === 401)
+      ) {
         toast.error(`${error.response.data.message}`);
         setCreating(false);
         return;
       }
+
       toast.error("Server Error !");
       setCreating(false);
     }
@@ -86,7 +89,10 @@ export default function Login() {
               <form onSubmit={handleLogin}>
                 <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
                   <div className="relative">
-                    <FaUserCircle size={20} className="  absolute top-2.5 left-2"/>
+                    <FaUserCircle
+                      size={20}
+                      className="  absolute top-2.5 left-2"
+                    />
                     <input
                       id="Mobile"
                       name="Mobile"
@@ -98,7 +104,10 @@ export default function Login() {
                     />
                   </div>
                   <div className="relative flex items-center">
-                  <MdOutlineSecurity size={20} className="  absolute top-2.5 left-2"/>
+                    <MdOutlineSecurity
+                      size={20}
+                      className="  absolute top-2.5 left-2"
+                    />
                     <input
                       id="password"
                       name="password"

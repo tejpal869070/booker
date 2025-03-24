@@ -46,6 +46,8 @@ export default function LiveCasino() {
             setGameComponent(<DragonTower />);
           } else if (paramsData && paramsData.game === "casino-lobby") {
             setGameComponent(<CasinoLobby />);
+          } else if (paramsData && paramsData.game === "aviator") {
+            setGameComponent(<Aviator />);
           } else {
             setGameComponent(
               <div>
