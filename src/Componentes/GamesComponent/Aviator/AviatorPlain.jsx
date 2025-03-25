@@ -1,12 +1,45 @@
-import React, { useState } from "react";
-import bg1 from "../../../assets/photos/aviator-bg-1.webp";
-import { motion } from "framer-motion";
-import aviator from "../../../assets/photos/aviatorPng.png";
+import React, { useEffect, useState } from "react";
+import bg1 from "../../../assets/photos/aviator-bg-2.png";
+import { motion, useMotionValue } from "framer-motion";
+import aviator from "../../../assets/photos/aviator.gif";
 import CountUp from "react-countup";
+import ProgressBar from "@ramonak/react-progress-bar";
 
 export default function AviatorPlain() {
   const [amount, setAmount] = useState(10);
-  const [isFlying, setFlying]  = useState(false);
+  const [isFlying, setFlying] = useState(false);
+  const [isGameStarting, setGameStarting] = useState(true);
+
+  const [planeX, setPlaneX] = useState(50);
+  const [planeY, setPlaneY] = useState(500);
+
+  // Motion values for real-time tracking
+  const x = useMotionValue(50);
+  const y = useMotionValue(500);
+
+  // Update state when motion values change
+  useEffect(() => {
+    x.onChange((latest) => setPlaneX(latest));
+    y.onChange((latest) => setPlaneY(latest));
+  }, [x, y]);
+
+  useEffect(() => {
+    let intervalId = setInterval(() => {
+      setFlying(true);
+      setGameStarting(false);
+    }, 11000);
+
+    let intervalId2 = setInterval(() => {
+      setFlying(false);
+      setGameStarting(true);
+    }, 22000);
+
+    return () => {
+      clearInterval(intervalId);
+      clearInterval(intervalId2);
+    };
+  }, []);
+
   return (
     <div>
       <div className="relative border-[1px] border-gray-700 w-full  rounded-md mt-2 min-h-[60vh]  max-h-[60vh] overflow-hidden">
@@ -14,38 +47,78 @@ export default function AviatorPlain() {
           <img
             src={bg1}
             alt="poster"
-            className="max-w-none absolute w-[200vw] -left-[184%] -top-[205%] animate-[spin_25s_linear_infinite]  "
+            className={`max-w-none absolute w-[200vw] -left-[184%] -top-[205%] ${
+              isFlying && "animate-[spin_25s_linear_infinite]"
+            } `}
           />
         </div>
         <div className="absolute -bottom-20 -left-20 w-[12vw]  h-[12vw] backdrop-blur-md  rounded-full "></div>
         <div className="absolute  top-0 left-0 w-full h-full flex justify-center items-center">
-          <div
-            className="bg-[#3559a973]  w-[40%] h-[35%] rounded-full flex justify-center items-center"
-            style={{ boxShadow: "1px 0px 97px #375eb5" }}
-          >
-            <p className="text-7xl font-bold text-gray-100">
-              <CountUp end={100} />
-            </p>
-          </div>
+          {isGameStarting ? (
+            <div className=" backdrop-blur-[1px] rounded w-[40%] h-[35%]   flex justify-center items-center">
+              <p className="text-4xl font-bold text-gray-100">
+                <p>SneakBooker</p>
+                <ProgressBar
+                  maxCompleted={100}
+                  dir="rtl"
+                  completed={100}
+                  height="10px"
+                  className="mt-4"
+                  baseBgColor="red"
+                  bgColor="white"
+                  animateOnRender={true}
+                  customLabel=" "
+                  transitionDuration="10s"
+                />
+              </p>
+            </div>
+          ) : (
+            <div className="   w-[40%] h-[35%] rounded-full flex justify-center items-center">
+              <p
+                className="text-7xl font-bold text-gray-100"
+                style={{ textShadow: "0px 0px 100px rgba(47,118,210,1)" }}
+              >
+                <CountUp end={15.3} decimals={2} duration={15.3} />x
+              </p>
+            </div>
+          )}
         </div>
 
         {/* plain */}
-        <motion.div
-          initial={{ width: 0, height: 1, x: 0, y: 200, opacity: 1 }}
-          animate={{ width: 600, height: 50, x: 0, y: -100, opacity: 1 }}
-          transition={{ duration: 3, ease: "easeInOut", repeat: Infinity }}
-          className="absolute top-40 left-0   "
-        />
+        {isFlying ? (
+          <div>
+            <svg className="absolute -top-2 left-0 w-full h-full">
+              <motion.path
+                d={`M 50,500 
+              Q ${(planeX + 50) / 2},${(planeY + 500) / 2 + 50} 
+              ${planeX},${planeY} 
+              L ${planeX},500 Z`}
+                fill="rgba(255, 0, 0, 0.5)" // Semi-transparent red
+                transition={{ duration: 0.3, ease: "easeOut" }}
+              />
+            </svg>
 
-        {/* Animated Plane */}
-        <motion.div
-          initial={{ x: 0, y: 200, rotate: 15 }}
-          animate={{ x: 600, y: -100, rotate: 10 }}
-          transition={{ duration: 3, ease: "easeInOut", repeat: Infinity }}
-          className="absolute top-40 left-0"
-        >
-          <img src={aviator} alt="Plane" width={128} height={128} />
-        </motion.div>
+            {/* Plane Animation */}
+            <motion.div
+              style={{ x, y }}
+              initial={{ x: 50, y: 500, rotate: 15 }}
+              animate={{ x: 700, y: 100, rotate: 10 }}
+              transition={{ duration: 3, ease: "easeInOut" }}
+              className="absolute"
+            >
+              <img src={aviator} alt="Plane" className="-ml-10 -mt-8" width={128} height={128} />
+            </motion.div>
+          </div>
+        ) : (
+          <img
+            src={aviator}
+            alt="Plane"
+            className="absolute bottom-0 left-0"
+            style={{ rotate: "15deg" }}
+            width={128}
+            height={128}
+          />
+        )}
       </div>
 
       {/* pricing tag */}
