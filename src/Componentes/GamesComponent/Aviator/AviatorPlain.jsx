@@ -1,16 +1,23 @@
-import React, { useEffect, useState } from "react";
-import bg1 from "../../../assets/photos/aviator-bg-2.png";
-import { motion, useMotionValue } from "framer-motion";
+import React, { useEffect, useRef, useState } from "react";
+import bg1 from "../../../assets/photos/aviator-bg-4.png";
+import { circOut, motion, useMotionValue } from "framer-motion";
 import aviator from "../../../assets/photos/aviator.gif";
 import CountUp from "react-countup";
 import ProgressBar from "@ramonak/react-progress-bar";
+import { MovingDot, MovingDot2 } from "./MovingDot";
 
 export default function AviatorPlain() {
   const [amount, setAmount] = useState(10);
+  const [timeTake, setTimeTake] = useState(10);
   const [isFlying, setFlying] = useState(false);
   const [isGameStarting, setGameStarting] = useState(true);
+  const [flewAwayAt, setFlewAwayAt] = useState(1)
 
-  const [planeX, setPlaneX] = useState(50);
+  const [count, setCount] = useState(1); // Initial count value
+  const [randomNumber, setRandomNumber] = useState(0);
+  const randomNumberRef = useRef(randomNumber);
+
+  const [planeX, setPlaneX] = useState(0);
   const [planeY, setPlaneY] = useState(500);
 
   // Motion values for real-time tracking
@@ -27,33 +34,68 @@ export default function AviatorPlain() {
     let intervalId = setInterval(() => {
       setFlying(true);
       setGameStarting(false);
-    }, 11000);
-
+    }, timeTake * 1000);
+  
     let intervalId2 = setInterval(() => {
       setFlying(false);
       setGameStarting(true);
-    }, 22000);
-
+    }, timeTake * 1100);
+  
     return () => {
       clearInterval(intervalId);
       clearInterval(intervalId2);
     };
-  }, []);
+  }, [timeTake]);
 
+  // Update randomNumberRef whenever randomNumber changes
+  useEffect(() => {
+    randomNumberRef.current = randomNumber;
+  }, [randomNumber]);
+
+  const generateRandomNumber = () => {
+    return (Math.random() * (4 - 1) + 1).toFixed(2);
+  };
+  useEffect(() => {
+    if (isFlying) {
+      randomNumberRef.current = generateRandomNumber();
+      setFlewAwayAt(randomNumberRef.current)
+      setCount(1);
+
+      const interval = setInterval(() => {
+        setCount((prev) => {
+          const nextValue = (prev + 0.01).toFixed(2);
+          return parseFloat(nextValue) <= randomNumberRef.current
+            ? parseFloat(nextValue)
+            : prev;
+        });
+      }, 90);
+
+      // Calculate the time required to reach the random number
+      const stepsRequired = (randomNumberRef.current - 1) / 0.01;
+      const timeRequiredMs = stepsRequired * 90;
+      const timeRequiredSec = timeRequiredMs / 1000;
+
+      setTimeTake(timeRequiredSec);
+      
+
+      return () => clearInterval(interval);
+    }
+  }, [isFlying]);
+ 
   return (
-    <div>
-      <div className="relative border-[1px] border-gray-700 w-full  rounded-md mt-2 min-h-[60vh]  max-h-[60vh] overflow-hidden">
+    <div className=" ">
+      <div className="relative border-[1px] border-gray-700 w-full  rounded-md mt-2 min-h-[60vh]  max-h-[60vh] overflow-hidden ">
         <div className="absolute w-full h-full  ">
           <img
             src={bg1}
             alt="poster"
-            className={`max-w-none absolute w-[200vw] -left-[184%] -top-[205%] ${
+            className={`max-w-none absolute w-[200vw] -left-[176%] -top-[237%] ${
               isFlying && "animate-[spin_25s_linear_infinite]"
             } `}
           />
         </div>
-        <div className="absolute -bottom-20 -left-20 w-[12vw]  h-[12vw] backdrop-blur-md  rounded-full "></div>
-        <div className="absolute  top-0 left-0 w-full h-full flex justify-center items-center">
+        {/* <div className="absolute -bottom-20 -left-20 w-[12vw]  h-[12vw] backdrop-blur-md  rounded-full "></div> */}
+        <div className="absolute z-[99] top-0 left-0 w-full h-full flex justify-center items-center">
           {isGameStarting ? (
             <div className=" backdrop-blur-[1px] rounded w-[40%] h-[35%]   flex justify-center items-center">
               <p className="text-4xl font-bold text-gray-100">
@@ -70,15 +112,16 @@ export default function AviatorPlain() {
                   customLabel=" "
                   transitionDuration="10s"
                 />
+                {/* <p>{flewAwayAt}</p> */}
               </p>
             </div>
           ) : (
-            <div className="   w-[40%] h-[35%] rounded-full flex justify-center items-center">
+            <div className="w-[40%] h-[35%] rounded-full flex justify-center items-center">
               <p
                 className="text-7xl font-bold text-gray-100"
                 style={{ textShadow: "0px 0px 100px rgba(47,118,210,1)" }}
               >
-                <CountUp end={15.3} decimals={2} duration={15.3} />x
+                <p>{Number(count).toFixed(2)}x</p>
               </p>
             </div>
           )}
@@ -87,12 +130,25 @@ export default function AviatorPlain() {
         {/* plain */}
         {isFlying ? (
           <div>
-            <svg className="absolute -top-2 left-0 w-full h-full">
+            {/* Background Red Area */}
+            <svg className="absolute left-0 w-full h-full">
+              {/* Border Path on Top (hypotenuse) */}
               <motion.path
-                d={`M 50,500 
-              Q ${(planeX + 50) / 2},${(planeY + 500) / 2 + 50} 
-              ${planeX},${planeY} 
-              L ${planeX},500 Z`}
+                d={`M -120,500 
+      Q ${(planeX + 40) / 2},${(planeY + 404) / 2 + 100} 
+      ${planeX + 20},${planeY}`}
+                stroke="red" // Black border color
+                strokeWidth="4" // Width of the border
+                fill="transparent" // No fill for the border path
+                transition={{ duration: 0.3, ease: "easeOut" }}
+              />
+
+              {/* Original Path with semi-transparent red fill */}
+              <motion.path
+                d={`M -120,500 
+      Q ${(planeX + 40) / 2},${(planeY + 404) / 2 + 100} 
+      ${planeX + 20},${planeY} 
+      L ${planeX + 20},500 Z`}
                 fill="rgba(255, 0, 0, 0.5)" // Semi-transparent red
                 transition={{ duration: 0.3, ease: "easeOut" }}
               />
@@ -101,12 +157,18 @@ export default function AviatorPlain() {
             {/* Plane Animation */}
             <motion.div
               style={{ x, y }}
-              initial={{ x: 50, y: 500, rotate: 15 }}
+              initial={{ x: 40, y: 404, rotate: 15 }}
               animate={{ x: 700, y: 100, rotate: 10 }}
-              transition={{ duration: 3, ease: "easeInOut" }}
+              transition={{ duration: 6, ease: "easeInOut" }}
               className="absolute"
             >
-              <img src={aviator} alt="Plane" className="-ml-10 -mt-8" width={128} height={128} />
+              <img
+                src={aviator}
+                alt="Plane"
+                className="relative -top-10 -left-10"
+                width={150}
+                height={150}
+              />
             </motion.div>
           </div>
         ) : (
@@ -115,10 +177,12 @@ export default function AviatorPlain() {
             alt="Plane"
             className="absolute bottom-0 left-0"
             style={{ rotate: "15deg" }}
-            width={128}
-            height={128}
+            width={150}
+            height={150}
           />
         )}
+
+        <MovingDot />
       </div>
 
       {/* pricing tag */}
