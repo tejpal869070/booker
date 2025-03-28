@@ -27,9 +27,9 @@ export default function Aviator() {
           <AviatorPlain />
         </div>
       </div>
-    </div>
+    </div> 
   );
-}
+} 
 
 const tabSection1 = [
   { id: 1, name: "All Bets" },

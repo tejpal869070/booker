@@ -148,14 +148,7 @@ export default function AccountHistory() {
                         {item.date.split("T")[0]}
                       </td>
                       <td className="whitespace-nowrap px-6 py-4">
-                        {item.type === "Investment" ||
-                        item.type === "Investment Return" ||
-                        item.amount?.charAt(0) === "$"
-                          ? "$ "
-                          : "₹ "}
-                        {item.amount?.charAt(0) === "$"
-                          ? item?.amount.slice(1)
-                          : Number(item.amount).toFixed(2)}
+                        {item.amount}
                       </td>
                       <td className="whitespace-nowrap px-6 py-4">
                         {item.description.split(" ").includes("To")
@@ -168,7 +161,7 @@ export default function AccountHistory() {
                           : ""}
                       </td>
                       <td className="whitespace-nowrap px-6 py-4">
-                        ₹{Number(item.balance).toFixed(2)}
+                        {Number(item.balance).toFixed(2)}
                       </td>
                     </tr>
                     {isVisible && selectedIndex === index ? (
@@ -193,21 +186,14 @@ export default function AccountHistory() {
                   <p className="px-2 bg-indigo-500 inline text-gray-200 rounded py-0.5">
                     {item.type}
                   </p>
-                  <p className="text-green-500 ">{item.type==="Matching-Income" ? "" : item.description}</p>
+                  <p className="text-green-500 ">
+                    {item.type === "Matching-Income" ? "" : item.description}
+                  </p>
                 </section>
                 <div className="pt-2 font-thin flex flex-col gap-0.5">
                   <section className="flex justify-between items-center font-bold  ">
                     <p className="text-gray-400 font-normal">Amount</p>
-                    <p className="text-[#FEAA57]">
-                      {item.type === "Investment" ||
-                      item.type === "Investment Return" ||
-                      item.amount?.charAt(0) === "$"
-                        ? "$ "
-                        : "₹ "}
-                      {item.amount?.charAt(0) === "$"
-                        ? item?.amount.slice(1)
-                        : Number(item.amount).toFixed(2)}
-                    </p>
+                    <p className="text-[#FEAA57]">{item.amount}</p>
                   </section>
                   <section className="flex justify-between items-center font-bold  ">
                     <p className="text-gray-400 font-normal">Time</p>
@@ -234,7 +220,7 @@ export default function AccountHistory() {
                   <section className="flex justify-between items-center font-bold  ">
                     <p className="text-gray-400 font-normal">Updated Balance</p>
                     <p className="text-gray-200 font-normal">
-                      ₹{Number(item.balance).toFixed(2)}
+                       {Number(item.balance).toFixed(2)}
                     </p>
                   </section>
                 </div>

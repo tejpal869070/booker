@@ -384,7 +384,7 @@ export default function AutoMode({
                     {profitRef.current}x
                   </p>
                   <p className="text-center text-[#20E701] font-semibold text-lg border-t-2 border-gray-400 pt-0.5">
-                    +₹
+                    +$
                     {Number(
                       Number(betAmountWin) *
                         Number(
@@ -416,7 +416,7 @@ export default function AutoMode({
       <div>
         <div className="flex justify-between dark:text-gray-200">
           <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">Bet Amount</p>
-          <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">₹{Number(totlaBalance).toFixed(2)}</p>
+          <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">${Number(totlaBalance).toFixed(2)}</p>
         </div>
         <div className="flex relative items-center">
           <input

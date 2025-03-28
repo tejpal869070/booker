@@ -159,7 +159,7 @@ export default function SendMoney() {
                   WALLET MONEY TRANSFER
                 </h1>
                 <p className=" mt-2 font-medium text-lg text-[green] mb-4">
-                  Account Balance: ₹
+                  Account Balance: $
                   {user && Number(user.wallet_balance).toFixed(2)}
                 </p>
               </div>

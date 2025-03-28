@@ -8,9 +8,6 @@ import PreLoad from "./Pages/PreLoad";
 import { ProtectedRoute } from "./Controllers/Auth/ProtectedRoute";
 import ChangePassword from "./Pages/authPages/ChangePassword";
 import ForgetPassword from "./Pages/authPages/ForgetPassword";
-import AboutUs from "./Pages/AboutUs";
-import AstroHome from "./Pages/AstroHome";
-import Horoscope from "./Pages/Horoscope";
 
 function App() {
   return (

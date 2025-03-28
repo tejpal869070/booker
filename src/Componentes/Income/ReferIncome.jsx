@@ -125,7 +125,7 @@ export default function ReferIncome() {
                       {item.mobile}
                     </td>
                     <td className="whitespace-nowrap px-6 py-4">
-                      ₹ {item.reffer_to_amount}
+                      $ {item.reffer_to_amount}
                     </td>
                     <td className="whitespace-nowrap px-6 py-4">
                       {item.status === "Y" ? "SUCCESS" : "PENDING"}

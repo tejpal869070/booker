@@ -188,10 +188,10 @@ export default function GameWalletHistory() {
                               item.bet_type === "partial_cancel"))
                             ? "+"
                             : "-"}
-                          ₹{Number(item.bet_balance).toFixed(2)}
+                          {Number(item.bet_balance).toFixed(2)}
                         </td>
                         <td className="whitespace-nowrap px-6 py-2">
-                          ₹{Number(item.total_balance).toFixed(2)}
+                           {Number(item.total_balance).toFixed(2)}
                         </td>
                         <td className="whitespace-nowrap px-6 py-2 flex justify-left items-center gap-2">
                           {item.game_type}{" "}
@@ -257,7 +257,7 @@ export default function GameWalletHistory() {
                                 item.bet_type === "partial_cancel"))
                               ? "+"
                               : "-"}
-                            ₹{Number(item.bet_balance).toFixed(2)}
+                            {Number(item.bet_balance).toFixed(2)}
                           </p>
                         </section>
                         <div className="pt-2 font-thin flex flex-col gap-1">
@@ -266,7 +266,7 @@ export default function GameWalletHistory() {
                               Updated Balance
                             </p>
                             <p className="text-gray-200 font-normal">
-                              ₹{Number(item.total_balance).toFixed(2)}
+                             {Number(item.total_balance).toFixed(2)}
                             </p>
                           </section>
                           <section className="flex justify-between items-center font-bold  ">
@@ -334,7 +334,7 @@ export default function GameWalletHistory() {
               <div className="flex flex-col mt-6 gap-2">
                 <div className={`${classes1}`}>
                   <p>Amount :</p>
-                  <p>₹{Number(popupData.bet_balance).toFixed(2)}</p>
+                  <p>{Number(popupData.bet_balance).toFixed(2)}</p>
                 </div>
 
                 <div className={`${classes1}`}>

@@ -182,7 +182,7 @@ export default function VIP() {
                 Upgrading to {item.title} requires{" "}
               </p>
               <p className="font-semibold text-xl lg:text-lg">
-                ₹{item.minimumrebetamount} Amount
+                ${item.minimumrebetamount} Amount
               </p>
               <p className="text-right text-xs mr-2  mt-4 lg:mt-0">
                 {item.title}
@@ -223,7 +223,7 @@ export default function VIP() {
                 </p>
                 <p className="text-sm lg:text-[12px]">
                   {Number(item.minimumrebetamount) - Number(user?.wagering) > 0
-                    ? `Require ₹ ${(
+                    ? `Require $ ${(
                         Number(item.minimumrebetamount) - Number(user?.wagering)
                       ).toFixed(2)} `
                     : "Upgraded"}
@@ -245,7 +245,7 @@ export default function VIP() {
                       <p>
                         Level Up Reward{" "}
                         <span className="text-[green] bg-gray-200 px-2 rounded-lg">
-                          ₹{item.levelreward}
+                          ${item.levelreward}
                         </span>
                       </p>
                       <p>Will receive only 1 time</p>
@@ -290,7 +290,7 @@ export default function VIP() {
       </Slider>
 
       {user?.vip_id !== 0 && (
-        <div className="max-w-xl flex justify-between mt-6 m-auto">
+        <div className="max-w-xl flex justify-center mt-6 m-auto">
           <div className="rounded   w-[48%] bg-gray-200 p-1">
             <img
               alt="phihs"
@@ -315,7 +315,7 @@ export default function VIP() {
               </p>
             )}
           </div>
-          <div className="rounded   w-[48%] bg-gray-200 p-1">
+          {/* <div className="rounded   w-[48%] bg-gray-200 p-1">
             <img
               alt="phihs"
               className="w-full rounded"
@@ -338,7 +338,7 @@ export default function VIP() {
                 Received
               </div>
             )}
-          </div>
+          </div> */}
         </div>
       )}
 
@@ -408,7 +408,7 @@ export default function VIP() {
                         {index + 1}.
                       </th>
                       <td className="whitespace-nowrap px-4 py-3 ">
-                        ₹{item.amount}
+                        ${item.amount}
                       </td>
                       <td className="whitespace-nowrap px-6 py-3">
                         {item.type}
@@ -445,7 +445,7 @@ export default function VIP() {
             />
             <p className="text-xl font-bold text-gray-700">Congratulation </p>
             <p className="text-3xl mt-2 font-bold text-[#20e701]">
-              ₹{rewardedAmount}{" "}
+              ${rewardedAmount}{" "}
             </p>
           </div>
         </div>

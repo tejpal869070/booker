@@ -125,8 +125,7 @@ export default function Hero1() {
       <ToastContainer />
 
       <div className="grid grid-cols-12 gap-4 w-full">
-        <div
-          className="relative   col-span-12 lg:col-span-6 xl:col-span-8 bg-opacity-10 bg-top bg-cover bg-left-bottom border-2 border-[#92a0fd] dark:border-gray-200 rounded-lg flex justify-between p-4"
+        <div   className="relative   col-span-12 lg:col-span-6 xl:col-span-8 bg-opacity-10 bg-top bg-cover bg-left-bottom border-2 border-[#92a0fd] dark:border-gray-200 rounded-lg flex justify-between p-4"
           style={{ backgroundImage: `url(${bg1})` }}
         >
           <div className="z-[9]">
@@ -181,7 +180,7 @@ export default function Hero1() {
         <div className="col-span-12 lg:col-span-6 xl:col-span-4 w-full rounded-lg hidden md:block">
           <div className="grid grid-cols-12 gap-4 w-full">
             <div
-              className=" col-span-6 rounded-lg  p-4 border-2 border-black"
+              className=" col-span-12 rounded-lg  p-4 border-2 border-black"
               style={{ boxShadow: "0px 0px 4px white" }}
             >
               <div
@@ -193,12 +192,12 @@ export default function Hero1() {
                   EXCHANGE
                 </p>
               </div>
-              <p className="font-bold dark:text-gray-300">Total Balance</p>
-              <p className="text-[9px] font-medium dark:text-gray-200">
+              <p className="font-bold dark:text-gray-300">Total Balance <span className="text-[9px] font-medium dark:text-gray-200">
                 ( Main + Game Wallet)
-              </p>
+              </span></p>
+              
               <p className="text-2xl font-bold text-black dark:text-gray-300">
-                ₹
+                $
                 {(
                   Number(userData.wallet_balance) +
                   Number(userData.color_wallet_balnace)
@@ -206,24 +205,11 @@ export default function Hero1() {
               </p>
             </div>
 
-            <div
-              className=" col-span-6 rounded-lg  p-4 border-2 border-black"
-              style={{ boxShadow: "0px 0px 4px white" }}
-            >
-              <MdGeneratingTokens size={26} color="#92a0fd" />
-              <p className="font-bold dark:text-gray-300">
-                {userData.currency} Value
-              </p>
-              <p className="text-2xl font-bold text-black dark:text-gray-300">
-                {(
-                  userData.wallet_balance / Number(userData.currency_rate)
-                ).toFixed(2)}
-              </p>
-            </div>
+             
 
             <div className="col-span-12    bg-gradient-to-r from-indigo-400 to-cyan-400 py-2 rounded-lg px-4">
               <p className="font-bold text-white">
-                {userData.currency} Rate : ₹{userData.currency_rate}/COIN
+                {userData.currency} Rate : $1/COIN
               </p>
             </div>
           </div>
@@ -244,7 +230,7 @@ export default function Hero1() {
               src={require("../../assets/photos/money-bag.png")}
               className="w-5"
             />{" "}
-            ₹
+            $
             {(
               Number(userData.wallet_balance) +
               Number(userData.color_wallet_balnace)
@@ -335,7 +321,7 @@ export default function Hero1() {
                   Main Wallet
                 </p>
                 <p className="font-semibold text-xl text-center mt-2 pt-2 border-gray-400  text-white border-t-2">
-                  ₹{Number(userData.wallet_balance).toFixed(2)}
+                  ${Number(userData.wallet_balance).toFixed(2)}
                 </p>
               </section>
               <section className="px-6 py-2 rounded border-2 border-white">
@@ -343,7 +329,7 @@ export default function Hero1() {
                   Game Wallet
                 </p>
                 <p className="font-semibold text-xl text-center mt-2 pt-2 border-gray-400  text-white border-t-2">
-                  ₹{Number(userData.color_wallet_balnace).toFixed(2)}
+                  ${Number(userData.color_wallet_balnace).toFixed(2)}
                 </p>
               </section>
             </div>
@@ -391,7 +377,7 @@ export default function Hero1() {
               {"  "}
               {"  "}
               <span className="text-lg font-bold">
-                ₹{" "}
+                ${" "}
                 {type === 1
                   ? Number(userData.wallet_balance).toFixed(2)
                   : Number(userData.color_wallet_balnace).toFixed(2)}

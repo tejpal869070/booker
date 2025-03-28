@@ -14,9 +14,7 @@ export default function CryptoDeposit({ data }) {
   const inputClasses =
     "shadow-sm bg-gray-50 font-medium border border-gray-300 dark:bg-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5";
 
-  const [cryptoPrice, setCryptoPrice] = useState(data.price);
-  const [usdtPrice, setUsdtPrice] = useState();
-  const [inrPrice, setInrPrice] = useState();
+
   const [isQrShow, setQrShow] = useState(false);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -86,16 +84,7 @@ export default function CryptoDeposit({ data }) {
     }
   };
 
-  const handleInrChange = (value) => {
-    setInrPrice(value);
-    setUsdtPrice(value * cryptoPrice);
-  };
-
-  const handleUsdtChange = (value) => {
-    setUsdtPrice(value);
-    setInrPrice(value / cryptoPrice);
-  };
-
+   
   const handleCopy = () => {
     toast.success("Address Copied !", {
       position: "top-center",
@@ -144,7 +133,7 @@ export default function CryptoDeposit({ data }) {
             </div>
             <div className="w-full md:w-1/2 py-10 px-5 md:px-10">
               <div className="  mb-6">
-                <h1 className="font-bold text-3xl text-gray-900">
+                <h1 className="font-bold text-3xl dark:text-gray-200">
                   CRYPTO DEPOSIT
                 </h1>
               </div>
@@ -210,7 +199,7 @@ export default function CryptoDeposit({ data }) {
                       onChange={(e) => setAmount(e.target.value)}
                     />
                     <p className="absolute text-xs font-medium text-gray-900">
-                      1 {data.currency} ~ ₹ {data?.price}
+                      1 {data.currency} ~ $ {data?.price}
                     </p>
                   </div>
                   <div className="flex align-center items-center mt-4 col-span-7 sm:col-span-7">

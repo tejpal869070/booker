@@ -127,7 +127,7 @@ export default function Wallet() {
           <section className="mb-4 bg-gradient-to-r from-blue-500 to-teal-400 rounded-b-[30px] pt-10 w-full flex justify-center">
             <section className="p-4 px-6 -mb-10 rounded-[20px] backdrop-blur-md bg-white/30 w-[90%] inline-block m-auto">
               <p className="text-3xl font-bold text-center mt-2 dark:text-gray-100 ">
-                ₹
+                $
                 {user &&
                   (
                     Number(user.wallet_balance) +
@@ -141,7 +141,7 @@ export default function Wallet() {
               <section className="flex items-center bg-gradient-to-r from-violet-400 to-purple-300 rounded-xl">
                 <div className="w-1/2 rounded-tl-xl py-1 flex flex-col items-center justify-center border-r-2 border-gray-200">
                   <p className="font-semibold text-lg text-[#d8ff00]">
-                    ₹{user && Number(user.wallet_balance).toFixed(2)}
+                    ${user && Number(user.wallet_balance).toFixed(2)}
                   </p>
                   <p className="text-center text-xs font-semibold   text-gray-900     ">
                     Main Wallet
@@ -149,7 +149,7 @@ export default function Wallet() {
                 </div>
                 <div className="w-1/2 rounded-t-xl py-1 flex flex-col items-center justify-center  ">
                   <p className="font-semibold text-lg text-[#d8ff00]">
-                    ₹{user && Number(user.color_wallet_balnace).toFixed(2)}
+                    ${user && Number(user.color_wallet_balnace).toFixed(2)}
                   </p>
                   <p className="text-center text-xs font-semibold   text-gray-900     ">
                     Game Wallet
@@ -253,7 +253,7 @@ export default function Wallet() {
                 {"  "}
                 {"  "}
                 <span className="text-lg font-bold">
-                  ₹{" "}
+                  ${" "}
                   {type === 1
                     ? Number(user.wallet_balance).toFixed(2)
                     : Number(user.color_wallet_balnace).toFixed(2)}

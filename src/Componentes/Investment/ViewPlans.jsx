@@ -91,7 +91,7 @@ const ViewPlans = ({ url, onClose }) => {
                       <div className="">
                         <div className="flex gap-4 justify-center mb-4">
                           <p className="font-bold text-gray-700 text-xl mb-2">
-                            ₹
+                            $
                             {(
                               (Number((amount * item.percentage) / 100) +
                                 Number(amount)) /
@@ -141,7 +141,7 @@ const ViewPlans = ({ url, onClose }) => {
 
                         <div className="flex justify-center mt-8">
                           <button className="px-4 py-2 border-violet-400 border-4 hover:bg-violet-100 rounded-xl">
-                            Total Return: ₹
+                            Total Return: $
                             {(
                               Number((amount * item.percentage) / 100) +
                               Number(amount)
@@ -167,7 +167,7 @@ const ViewPlans = ({ url, onClose }) => {
                     <div>
                       <div className="flex gap-4 justify-center mb-4">
                         <p className="font-bold text-gray-700 text-2xl mb-2">
-                          ₹
+                          $
                           {(
                             (Number((amount * item.percentage) / 100) +
                               Number(amount)) /
@@ -217,7 +217,7 @@ const ViewPlans = ({ url, onClose }) => {
 
                       <div className="flex justify-center mt-8">
                         <button className="px-4 py-2 border-violet-400 border-4 hover:bg-violet-100 rounded-xl">
-                          Total Return: ₹
+                          Total Return: $
                           {(
                             Number((amount * item.percentage) / 100) +
                             Number(amount)

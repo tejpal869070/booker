@@ -77,8 +77,8 @@ export default function ColorGame() {
       toast.error("Amount Exceed", {
         position: "top-center",
       });
-    } else if (transferToAmount < 100 || transferToAmount === undefined) {
-      toast.error("Minimum Amount is 100", {
+    } else if (transferToAmount < 1 || transferToAmount === undefined) {
+      toast.error("Minimum Amount is 1", {
         position: "top-center",
       });
     } else {
@@ -151,7 +151,7 @@ export default function ColorGame() {
       <div className=" hidden md:flex   gap-6 mb-4 flex-wrap  ">
         <p className="relative " href="#">
           <p className="fold-bold border-2 border-black dark:border-gray-400 relative z-[2] inline-block h-full w-full rounded     bg-indigo-100 dark:bg-indigo-100 text-gray-700 px-3 py-1 text-base font-bold text-black transition duration-100  ">
-            <BiSolidWallet size={28} color="black" /> Main Balance : ₹
+            <BiSolidWallet size={28} color="black" /> Main Balance : 
             {Number(user.wallet_balance).toFixed(2)}
           </p>
           <div className="absolute w-full h-full bg-black dark:bg-gray-200 animate-pulse animate-duration-1000 top-1 left-1 z-[1] rounded " />
@@ -175,7 +175,7 @@ export default function ColorGame() {
         <p className="relative " href="#">
           <p className="fold-bold border-2 border-black dark:border-gray-400 relative z-[2] inline-block h-full w-full rounded  bg-indigo-100 dark:bg-indigo-100 text-gray-700 px-3 py-1 text-base font-bold text-black transition duration-100  ">
             <RiColorFilterFill size={28} color="black" />
-            Game Balance : ₹{Number(user.color_wallet_balnace).toFixed(2)}
+            Game Balance : {Number(user.color_wallet_balnace).toFixed(2)}
           </p>
           <div className="absolute w-full h-full bg-black dark:bg-gray-200 animate-pulse animate-duration-1000 top-1 left-1 z-[1] rounded " />
         </p>
@@ -187,14 +187,14 @@ export default function ColorGame() {
             <RiColorFilterFill size={28} color="black" />
             Game Balance : <br />{" "}
             <p className="text-xl">
-              ₹{Number(user.color_wallet_balnace).toFixed(2)}
+              {Number(user.color_wallet_balnace).toFixed(2)}
             </p>
           </p>
         </p>
         <p className="relative w-[45%]" href="#">
           <p className="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-indigo-100 dark:bg-indigo-100 text-gray-700 px-3 py-1 text-base font-bold text-black transition duration-100  ">
             <BiSolidWallet size={28} color="black" /> Main Balance :
-            <p className="text-xl">₹{Number(user.wallet_balance).toFixed(2)}</p>
+            <p className="text-xl">{Number(user.wallet_balance).toFixed(2)}</p>
           </p>
         </p>
         <div className="flex    w-full flex-row justify-between px-4 dark:text-gray-200 font-semibold">
@@ -255,7 +255,7 @@ export default function ColorGame() {
               {"  "}
               {"  "}
               <span className="text-lg font-bold">
-                ₹{" "}
+                {" "}
                 {type === 1
                   ? Number(user.wallet_balance).toFixed(2)
                   : Number(user.color_wallet_balnace).toFixed(2)}

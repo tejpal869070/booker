@@ -318,7 +318,7 @@ export default function ManualMode({
                 src={require("../../../assets/photos/winimg.png")}
               />
               <p className="absolute mt-24 font-bold text-2xl text-[#13b70a]">
-                +₹
+                +$
                 {(
                   Number(amount) *
                   (minesProfitTable.find(
@@ -354,13 +354,13 @@ export default function ManualMode({
               <p className="mt-1 lg:text-xs text-gray-200 font-medium">
                 Balance:{" "}
                 <span className="lg:text-xs text-green-400">
-                  ₹{Number(totlaBalance).toFixed(2)}
+                  ${Number(totlaBalance).toFixed(2)}
                 </span>{" "}
               </p>
             </div>
             <div className="flex justify-between">
               <p className="mt-1 lg:text-xs text-gray-200 font-medium">
-                Bet Amt.: <span className="lg:text-xs">₹{amount}</span>
+                Bet Amt.: <span className="lg:text-xs">${amount}</span>
               </p>{" "}
               <p className="mt-1 lg:text-xs text-gray-200 font-medium">
                 Profit:{" "}
@@ -380,7 +380,7 @@ export default function ManualMode({
                 Bet Amount
               </p>
               <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">
-                ₹{Number(totlaBalance).toFixed(2)}{" "}
+                ${Number(totlaBalance).toFixed(2)}{" "}
               </p>
             </div>
             <div className="flex relative items-center">
@@ -447,7 +447,7 @@ export default function ManualMode({
             <div>
               <p>CASHOUT</p>
               <p className="px-6 py-0.5 mt-1 rounded-lg bg-gray-800 text-gray-200 text-center  inline-block">
-                ₹
+                $
                 {(
                   Number(amount) *
                   (minesProfitTable.find(

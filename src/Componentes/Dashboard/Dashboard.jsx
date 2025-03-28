@@ -39,14 +39,14 @@ export default function Dashboard() {
     {
       id: 3,
       title: "Total Withdrawal",
-      value: user && `₹${user.withdrawal || 0}`,
+      value: user && `$${user.withdrawal || 0}`,
       link: "/home?money=withdrawal-history",
       icons: <PiHandWithdrawFill size={24} />,
     },
     {
       id: 3,
       title: "Total Deposit",
-      value: user && `₹${user.deposit || 0}`,
+      value: user && `$${user.deposit || 0}`,
       link: "/home?money=deposit-history",
       icons: <PiHandWithdrawFill size={24} />,
     },
@@ -60,14 +60,14 @@ export default function Dashboard() {
     {
       id: 5,
       title: "Direct Income",
-      value: user && `₹${user?.reffer_to_amount || 0}`,
+      value: user && `$${user?.reffer_to_amount || 0}`,
       link: "",
       icons: <FaMoneyBills size={24} />,
     },
     {
       id: 6,
       title: "ROI",
-      value: user && `₹${user?.roi_income || 0}`,
+      value: user && `$${user?.roi_income || 0}`,
       link: "",
       icons: <GiWallet size={24} />,
     },
@@ -81,7 +81,7 @@ export default function Dashboard() {
     {
       id: 3,
       title: "Total Business",
-      value: "₹0",
+      value: "$0",
       link: "",
       icons: <PiHandWithdrawFill size={24} />,
     },

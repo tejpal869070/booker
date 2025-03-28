@@ -27,7 +27,7 @@ export default function Manual() {
 
   const handleBetPlace = () => {
     if (amount < 1) {
-      toast.error("Min. amount is ₹1", {
+      toast.error("Min. amount is $1", {
         position: "top-center",
       });
       return;
@@ -94,7 +94,7 @@ export default function Manual() {
       <div>
         <div className="flex justify-between dark:text-gray-200">
           <p className="lg:text-sm font-medium">Bet Amount</p>
-          <p>₹{amount}</p>
+          <p>${amount}</p>
         </div>
         <div className="flex relative items-center">
           <input

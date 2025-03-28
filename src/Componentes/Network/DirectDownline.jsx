@@ -108,7 +108,7 @@ export default function DirextDownline() {
                       {item.date.split("T")[0]}
                     </td>
                     <td className="whitespace-nowrap px-6 py-4">
-                      ₹{Number(item.balance).toFixed(2)}
+                      ${Number(item.balance).toFixed(2)}
                     </td>
                     <td className="whitespace-nowrap px-6 py-4">
                       ${item.total_investment}
@@ -160,7 +160,7 @@ export default function DirextDownline() {
                             User Balance
                           </p>
                           <p className="text-gray-200 font-normal">
-                            ₹{Number(item.balance).toFixed(2)}
+                            ${Number(item.balance).toFixed(2)}
                           </p>
                         </section>
                         <section className="flex justify-between items-center font-bold  ">

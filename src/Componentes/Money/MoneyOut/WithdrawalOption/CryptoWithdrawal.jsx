@@ -9,7 +9,7 @@ import VerifyPin from "../../../VerifyPin";
 import { ToastContainer, toast } from "react-toastify";
 import successImg from "../../../../assets/photos/success1-1--unscreen.gif";
 import swal from "sweetalert";
-
+ 
 export default function CryptoWithdrawal() {
   const inputClasses =
     "shadow-sm bg-gray-50 font-medium border border-gray-300 dark:bg-gray-200 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5";

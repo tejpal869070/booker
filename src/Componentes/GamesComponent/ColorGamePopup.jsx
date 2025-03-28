@@ -120,7 +120,7 @@ const ColorGamePopup = ({ isOpen, onClose, popupData, currentGameData }) => {
 
         {/* total bet money */}
         <p className="mt-4 font-semibold italic">
-          Total Bet Money : Rs {amount * quantity}
+          Total Bet Money :  ${amount * quantity}
         </p>
 
         {/* buttons */}

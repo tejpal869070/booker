@@ -89,7 +89,7 @@ export default function InvestmentPage() {
             <p className="text-gray-300 font-medium text-sm">
               Yesterday Income
             </p>
-            <p className=" text-2xl mt-1 font-semibold text-gray-200">$0</p>
+            <p className=" text-2xl mt-1 font-semibold text-gray-200">${user?.yesterday_return}</p>
           </section>
         </div>
       </div>
@@ -109,7 +109,7 @@ export default function InvestmentPage() {
               </p>
               <div className="flex justify-between text-gray-700 font-medium mt-2 ">
                 <p>Till Payout</p>
-                <p>$16.20</p>
+                <p>${item.total_return_amount}</p>
               </div>
               <div className="flex justify-between  text-gray-700 font-medium">
                 <p>Start</p>
@@ -135,7 +135,7 @@ export default function InvestmentPage() {
           ))}
       </div>
 
-      {/* button */}
+      {/* button */} 
       <Link
         to={"/home?investment=new-investment"}
         className={`w-full rounded-t-3xl text-center bg-center inline-block  bg-gray-200  fixed bottom-16 left-0 text-2xl  font-bold italic ${

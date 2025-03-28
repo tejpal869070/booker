@@ -85,11 +85,11 @@ export default function AviatorPlain() {
   return (
     <div className=" ">
       <div className="relative border-[1px] border-gray-700 w-full  rounded-md mt-2 min-h-[60vh]  max-h-[60vh] overflow-hidden ">
-        <div className="absolute w-full h-full  ">
+        <div className="relative w-full h-full   ">
           <img
             src={bg1}
             alt="poster"
-            className={`max-w-none absolute w-[200vw] -left-[176%] -top-[237%] ${
+            className={`max-w-none absolute w-[200vw] -left-[100vw] -top-[237%] ${
               isFlying && "animate-[spin_25s_linear_infinite]"
             } `}
           />
@@ -230,7 +230,7 @@ export default function AviatorPlain() {
           }`}
           disabled={amount < 1}
         >
-          BET<p>₹{Number(amount).toFixed(2)}</p>
+          BET<p>${Number(amount).toFixed(2)}</p>
         </button>
       </div>
     </div>

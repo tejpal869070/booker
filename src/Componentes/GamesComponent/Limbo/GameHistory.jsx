@@ -63,7 +63,7 @@ export default function GameHistory({ type, refreshHistory }) {
                         : "text-green-600"
                     }`}
                   >
-                    ₹ {Number(item.bet_balance).toFixed(2)}
+                    ${" "}{Number(item.bet_balance).toFixed(2)}
                   </td>
                   <td class="px-6 py-2">
                     {item.date.split("T")[0]}{" "}

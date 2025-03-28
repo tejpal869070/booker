@@ -117,7 +117,7 @@ export default function Limbo() {
 
   const mainBetFunction = async () => {
     if (amount < 1 || target < 1.01) {
-      toast.error("Min. amount is ₹1 & target is 1.01", {
+      toast.error("Min. amount is $1 & target is 1.01", {
         position: "top-center",
       });
       stopAutoBet();
@@ -343,7 +343,7 @@ export default function Limbo() {
             <div>
               <div className="flex justify-between dark:text-gray-200">
                 <p className="lg:text-sm font-medium">Bet Amount</p>
-                <p>₹{Number(totlaBalance).toFixed(2)}</p>
+                <p>${Number(totlaBalance).toFixed(2)}</p>
               </div>
               <div className="flex relative items-center">
                 <input
@@ -396,7 +396,7 @@ export default function Limbo() {
             <div>
               <div className="flex justify-between dark:text-gray-200">
                 <p className="lg:text-sm font-medium">Bet Amount</p>
-                <p>₹{Number(totlaBalance).toFixed(2)}</p>
+                <p>${Number(totlaBalance).toFixed(2)}</p>
               </div>
               <div className="flex relative items-center">
                 <input

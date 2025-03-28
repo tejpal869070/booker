@@ -228,7 +228,7 @@ export default function ColorGame({ gameType }) {
             )}
           </div>
           <p className="font-medium dark:text-gray-200 text-medium pr-4">
-            Balance : ₹ {user && Number(user.color_wallet_balnace).toFixed(2)}
+            Balance :  $ {user && Number(user.color_wallet_balnace).toFixed(2)}
           </p>
         </div>
 
@@ -326,8 +326,8 @@ export default function ColorGame({ gameType }) {
                   winAmount > 0 ? "text-[#13b70a]" : "text-red-800"
                 }`}
               >
-                {/* +₹{winAmount} */}
-                {winAmount > 0 ? `+₹${winAmount}` : `-₹${Math.abs(winAmount)}`}
+                {/* +${winAmount} */}
+                {winAmount > 0 ? `+$${winAmount}` : `-$${Math.abs(winAmount)}`}
               </p>
             </div>
           )}

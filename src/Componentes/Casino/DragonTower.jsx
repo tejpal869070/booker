@@ -42,7 +42,7 @@ class WinPopup extends React.Component {
           className="w-80"
         />
         <p className="absolute mt-20 font-bold text-2xl text-[#13b70a]">
-          ₹{Number(amount * profit).toFixed(2)}
+          ${Number(amount * profit).toFixed(2)}
         </p>
       </div>
     );
@@ -94,7 +94,7 @@ export default function DragonTower() {
   // bet function----------------------------------------------------
   const handleBet = async () => {
     if (amount < 10) {
-      toast.warn("Minimum bet is ₹10", { position: "top-center" });
+      toast.warn("Minimum bet is $10", { position: "top-center" });
       return;
     } else if (totlaBalance < amount) {
       toast.error("Insufficient balance", { position: "top-center" });
@@ -313,7 +313,7 @@ export default function DragonTower() {
             <div className="flex mt-1 justify-between text-gray-200">
               <p className="lg:text-xs font-medium">Bet Amount</p>
               <p className="lg:text-xs  ">
-                ₹{Number(totlaBalance).toFixed(2)}{" "}
+                ${Number(totlaBalance).toFixed(2)}{" "}
               </p>
             </div>
             <div className="flex relative mt-0.5 items-center">

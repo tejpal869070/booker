@@ -328,7 +328,7 @@ export default function AutoMode({ refreshHistoryFunction }) {
                     Bet Amount
                   </p>
                   <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">
-                    ₹{Number(totalBalance).toFixed(2)}
+                    ${Number(totalBalance).toFixed(2)}
                   </p>
                 </div>
                 <div className="flex relative items-center">
@@ -587,10 +587,10 @@ export default function AutoMode({ refreshHistoryFunction }) {
                   }`}
                 >
                   {winAmount * selectedColor?.profit !== 0
-                    ? `+₹${Number(winAmount * selectedColor?.profit).toFixed(
+                    ? `+$${Number(winAmount * selectedColor?.profit).toFixed(
                         2
                       )}`
-                    : `-₹${Math.abs(winAmount).toFixed(2)}`}
+                    : `-$${Math.abs(winAmount).toFixed(2)}`}
                 </p>
               </div>
             </div>

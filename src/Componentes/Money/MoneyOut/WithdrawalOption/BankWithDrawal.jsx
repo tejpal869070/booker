@@ -244,7 +244,7 @@ export default function BankWithDrawal() {
               </p>
 
               <p className="  font-medium text-lg text-[#20e701] mb-6">
-                Account Balance: ₹
+                Account Balance: $
                 {user && Number(user.wallet_balance).toFixed(2)}
               </p>
 
@@ -407,7 +407,7 @@ export default function BankWithDrawal() {
                         for="product-details"
                         className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-800"
                       >
-                        Withdrawal Amount * (Min ₹249)
+                        Withdrawal Amount * (Min $249)
                       </label>
                       <input
                         type="text"
@@ -420,7 +420,7 @@ export default function BankWithDrawal() {
                       />
                       <div className="flex justify-between items-center">
                         <p className="text-sm font-medium text-[#00e367] block mb-2 ">
-                          Credit Amount: ₹{(Number(amount) * 90/100).toFixed(2)}
+                          Credit Amount: ${(Number(amount) * 90/100).toFixed(2)}
                         </p>
                         <p className="text-sm font-medium text-black block mb-2 ">
                           Charges: 10%

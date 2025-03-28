@@ -110,7 +110,7 @@ export default function Refer() {
             TOTAL EARNINGS
           </h1>
           <p className="font-semibold text-gray-100 text-center text-2xl mt-1">
-            ₹{Number(totalEarnings).toFixed(2)}
+            ${Number(totalEarnings).toFixed(2)}
           </p>
         </div>
       </section>

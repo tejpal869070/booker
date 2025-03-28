@@ -29,6 +29,7 @@ import LevelIncome from "../../Componentes/Income/LevelIncome";
 import LiveCasino from "../LiveCasino";
 import Refer from "../../Componentes/Account/Refer";
 import InvestmentPage from "../../Componentes/Account/InvestmentPage";
+import CryptoWithdrawal from "../../Componentes/Money/MoneyOut/WithdrawalOption/CryptoWithdrawal";
 
 export default function InnerSection() {
   const location = useLocation();
@@ -75,7 +76,7 @@ export default function InnerSection() {
   } else if (paramsData && paramsData.money === "deposit-history") {
     return <div> {<DepositHistory />} </div>;
   } else if (paramsData && paramsData.money === "withdrawal") {
-    return <div>{<Withdrawal />}</div>;
+    return <div>{<CryptoWithdrawal />}</div>;
   } else if (paramsData && paramsData.money === "withdrawal-history") {
     return <div> {<WithdrawalHistory />} </div>;
   } else if (paramsData && paramsData.account === "send-money") {

@@ -41,28 +41,7 @@ export default function Home() {
 
   const dropdownClassList =
     "flex w-full p-2 pl-0 text-gray-900 rounded-lg group dark:text-black dark:hover:text-black  hover:bg-[#919ffdfc]  hover:animate-fade-right hover:animate-once hover:justify-center hover:animate-duration-[400ms]";
-
-  // close side bar on url change
-  // const location = useLocation();
-
-  // const paramsData = useMemo(() => {
-  //   const queryParams = new URLSearchParams(location.search);
-  //   const params = {};
-  //   for (const [key, value] of queryParams.entries()) {
-  //     params[key] = value;
-  //   }
-  //   return params;
-  // }, [location.search]); // Dependency is only location.search
-
-  // useEffect(() => {
-  //   const sidebar = document.getElementById("sidebar-multi-level-sidebar");
-  //   if (sidebar) {
-  //     sidebar.classList.toggle("translate-x-0");
-  //     sidebar.classList.toggle("-translate-x-full");
-  //   }
-  // }, [paramsData]);
-
-  // close side bar---------------------------------------------------------------
+ 
 
   const handleHideSideBar = () => {
     const sidebar = document.getElementById("sidebar-multi-level-sidebar");
@@ -153,8 +132,8 @@ export default function Home() {
   const openVerifyPin = () => {
     if (transferToAmount > Number(amountHave)) {
       setError("Amount Exceed");
-    } else if (transferToAmount < 100 || transferToAmount === undefined) {
-      setError("Minimum Amount is 100");
+    } else if (transferToAmount < 1 || transferToAmount === undefined) {
+      setError("Minimum Amount is $1");
     } else {
       setVerifyOpen(true);
     }
@@ -1080,7 +1059,7 @@ export default function Home() {
                   Main Wallet
                 </p>
                 <p className="font-semibold text-xl text-center mt-2 pt-2 border-gray-400  text-white border-t-2">
-                  ₹{Number(user.wallet_balance).toFixed(2)}
+                  ${Number(user.wallet_balance).toFixed(2)}
                 </p>
               </section>
               <section className="px-6 py-2 rounded border-2 border-white">
@@ -1088,7 +1067,7 @@ export default function Home() {
                   Game Wallet
                 </p>
                 <p className="font-semibold text-xl text-center mt-2 pt-2 border-gray-400  text-white border-t-2">
-                  ₹{Number(user.color_wallet_balnace).toFixed(2)}
+                  ${Number(user.color_wallet_balnace).toFixed(2)}
                 </p>
               </section>
             </div>
@@ -1136,7 +1115,7 @@ export default function Home() {
               {"  "}
               {"  "}
               <span className="text-lg font-bold">
-                ₹{" "}
+                $ 
                 {type === 1
                   ? Number(user.wallet_balance).toFixed(2)
                   : Number(user.color_wallet_balnace).toFixed(2)}

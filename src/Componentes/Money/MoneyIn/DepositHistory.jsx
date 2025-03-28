@@ -133,7 +133,7 @@ export default function DepositHistory() {
                         {index + 1}.
                       </th>
                       <td className="whitespace-nowrap px-4 py-4">
-                        {item.currency === null ? "₹ " : ""}
+                        {item.currency === null ? "$ " : ""}
                         {item.amount} {item.currency}
                       </td>
                       <td className="whitespace-nowrap px-6 py-4 hidden md:table-cell">
@@ -250,7 +250,7 @@ export default function DepositHistory() {
                   <section className="flex justify-between items-center font-bold  ">
                     <p className="text-gray-400 font-normal">Amount</p>
                     <p className="text-[#FEAA57]">
-                      {item.type === "USDT" ? "$ " : "₹ "}
+                      {item.type === "USDT" ? "$ " : "$ "}
                       {item.amount}
                     </p>
                   </section>
