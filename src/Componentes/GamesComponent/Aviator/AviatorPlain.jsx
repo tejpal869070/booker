@@ -1,17 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
-import bg1 from "../../../assets/photos/aviator-bg-4.png";
+import bg1 from "../../../assets/photos/space-gif.gif";
 import { circOut, motion, useMotionValue } from "framer-motion";
 import aviator from "../../../assets/photos/aviator.gif";
 import CountUp from "react-countup";
 import ProgressBar from "@ramonak/react-progress-bar";
 import { MovingDot, MovingDot2 } from "./MovingDot";
+import PlainFly from "./PlainFly";
 
 export default function AviatorPlain() {
   const [amount, setAmount] = useState(10);
   const [timeTake, setTimeTake] = useState(10);
   const [isFlying, setFlying] = useState(false);
   const [isGameStarting, setGameStarting] = useState(true);
-  const [flewAwayAt, setFlewAwayAt] = useState(1)
+  const [flewAwayAt, setFlewAwayAt] = useState(1);
 
   const [count, setCount] = useState(1); // Initial count value
   const [randomNumber, setRandomNumber] = useState(0);
@@ -35,12 +36,12 @@ export default function AviatorPlain() {
       setFlying(true);
       setGameStarting(false);
     }, timeTake * 1000);
-  
+
     let intervalId2 = setInterval(() => {
       setFlying(false);
       setGameStarting(true);
     }, timeTake * 1100);
-  
+
     return () => {
       clearInterval(intervalId);
       clearInterval(intervalId2);
@@ -58,7 +59,7 @@ export default function AviatorPlain() {
   useEffect(() => {
     if (isFlying) {
       randomNumberRef.current = generateRandomNumber();
-      setFlewAwayAt(randomNumberRef.current)
+      setFlewAwayAt(randomNumberRef.current);
       setCount(1);
 
       const interval = setInterval(() => {
@@ -76,114 +77,14 @@ export default function AviatorPlain() {
       const timeRequiredSec = timeRequiredMs / 1000;
 
       setTimeTake(timeRequiredSec);
-      
 
       return () => clearInterval(interval);
     }
   }, [isFlying]);
- 
+
   return (
     <div className=" ">
-      <div className="relative border-[1px] border-gray-700 w-full  rounded-md mt-2 min-h-[60vh]  max-h-[60vh] overflow-hidden ">
-        <div className="relative w-full h-full   ">
-          <img
-            src={bg1}
-            alt="poster"
-            className={`max-w-none absolute w-[200vw] -left-[100vw] -top-[237%] ${
-              isFlying && "animate-[spin_25s_linear_infinite]"
-            } `}
-          />
-        </div>
-        {/* <div className="absolute -bottom-20 -left-20 w-[12vw]  h-[12vw] backdrop-blur-md  rounded-full "></div> */}
-        <div className="absolute z-[99] top-0 left-0 w-full h-full flex justify-center items-center">
-          {isGameStarting ? (
-            <div className=" backdrop-blur-[1px] rounded w-[40%] h-[35%]   flex justify-center items-center">
-              <p className="text-4xl font-bold text-gray-100">
-                <p>SneakBooker</p>
-                <ProgressBar
-                  maxCompleted={100}
-                  dir="rtl"
-                  completed={100}
-                  height="10px"
-                  className="mt-4"
-                  baseBgColor="red"
-                  bgColor="white"
-                  animateOnRender={true}
-                  customLabel=" "
-                  transitionDuration="10s"
-                />
-                {/* <p>{flewAwayAt}</p> */}
-              </p>
-            </div>
-          ) : (
-            <div className="w-[40%] h-[35%] rounded-full flex justify-center items-center">
-              <p
-                className="text-7xl font-bold text-gray-100"
-                style={{ textShadow: "0px 0px 100px rgba(47,118,210,1)" }}
-              >
-                <p>{Number(count).toFixed(2)}x</p>
-              </p>
-            </div>
-          )}
-        </div>
-
-        {/* plain */}
-        {isFlying ? (
-          <div>
-            {/* Background Red Area */}
-            <svg className="absolute left-0 w-full h-full">
-              {/* Border Path on Top (hypotenuse) */}
-              <motion.path
-                d={`M -120,500 
-      Q ${(planeX + 40) / 2},${(planeY + 404) / 2 + 100} 
-      ${planeX + 20},${planeY}`}
-                stroke="red" // Black border color
-                strokeWidth="4" // Width of the border
-                fill="transparent" // No fill for the border path
-                transition={{ duration: 0.3, ease: "easeOut" }}
-              />
-
-              {/* Original Path with semi-transparent red fill */}
-              <motion.path
-                d={`M -120,500 
-      Q ${(planeX + 40) / 2},${(planeY + 404) / 2 + 100} 
-      ${planeX + 20},${planeY} 
-      L ${planeX + 20},500 Z`}
-                fill="rgba(255, 0, 0, 0.5)" // Semi-transparent red
-                transition={{ duration: 0.3, ease: "easeOut" }}
-              />
-            </svg>
-
-            {/* Plane Animation */}
-            <motion.div
-              style={{ x, y }}
-              initial={{ x: 40, y: 404, rotate: 15 }}
-              animate={{ x: 700, y: 100, rotate: 10 }}
-              transition={{ duration: 6, ease: "easeInOut" }}
-              className="absolute"
-            >
-              <img
-                src={aviator}
-                alt="Plane"
-                className="relative -top-10 -left-10"
-                width={150}
-                height={150}
-              />
-            </motion.div>
-          </div>
-        ) : (
-          <img
-            src={aviator}
-            alt="Plane"
-            className="absolute bottom-0 left-0"
-            style={{ rotate: "15deg" }}
-            width={150}
-            height={150}
-          />
-        )}
-
-        <MovingDot />
-      </div>
+      <PlainFly />
 
       {/* pricing tag */}
       <div className="border-[1px] border-gray-700 rounded-md mt-3 p-4 bg-[#1b1c1d] flex flex-row rounded-md justify-center gap-4">

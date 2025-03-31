@@ -46,7 +46,7 @@ export default function DirextDownline() {
         <table className="w-full md:border-4 rounded-sm border-indigo-300 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           {data.length === 0 ? (
             <div>
-              <img alt="no data" src={gif1} className="m-auto" />
+              <img alt="no data" src={gif1} className="m-auto w-40" />
               <p className="text-center font-bold text-xl">No Records !</p>
             </div>
           ) : (

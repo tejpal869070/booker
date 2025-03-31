@@ -12,7 +12,7 @@ export default function ManualMode({
   isRecharged,
   refreshHistoryFunction,
 }) {
-  const [amount, setAmount] = useState(100);
+  const [amount, setAmount] = useState(10);
   const [totalBombs, setTotalBombs] = useState(1);
   const [totlaBalance, setTotalBalance] = useState();
   const [bombIndex, setBombIndex] = useState([]);

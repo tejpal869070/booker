@@ -112,7 +112,6 @@ export default function WithdrawalHistory() {
   }
 
   return (
-    
     <div className="relative h-screen">
       <ToastContainer />
       <div>
@@ -321,24 +320,6 @@ export default function WithdrawalHistory() {
                   <p>
                     {singleData.cypto.slice(0, 8)}...
                     {singleData.cypto.slice(-6)}
-                  </p>
-                </div>
-              )}
-
-              {singleData.currency !== null && (
-                <div className={`${classes1}`}>
-                  <p>At Price :</p>
-                  <p>{singleData.price_at_that_time} INR</p>
-                </div>
-              )}
-              {singleData.currency !== null && (
-                <div className={`${classes1}`}>
-                  <p>Transfer Amount :</p>
-                  <p>
-                    {(
-                      singleData.price_at_that_time * singleData.amount
-                    ).toFixed(2)}{" "}
-                    INR
                   </p>
                 </div>
               )}

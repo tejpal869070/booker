@@ -89,10 +89,10 @@ export function AllBets() {
 
 export function BetCashouts() {
   return (
-    <div className=" flex flex-row gap-1">
+    <div className=" flex flex-row gap-1 overflow-x-auto scrollbar-hide">
       {BetCashoutHistory.map((item, index) => (
         <div
-          className="px-2   rounded-full text-xs text-[#2d97d6] font-semibold bg-gray-700"
+          className="px-2 rounded-full text-xs text-[#2d97d6] font-semibold bg-gray-700"
           key={index}
         >
           {Number(item.target).toFixed(2)}x

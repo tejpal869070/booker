@@ -2,7 +2,7 @@ import React from "react";
 
 export function MovingDot() {
   return (
-    <div className="absolute bottom-0 w-full h-1 bg-black overflow-hidden">
+    <div className="absolute bottom-0 w-full h-1 bg-transparent overflow-hidden">
       {/* First line of dots */}
       <div className="absolute inset-0 flex justify-between px-4 animate-moveDots z-10">
         {Array.from({ length: 10 }).map((_, index) => (

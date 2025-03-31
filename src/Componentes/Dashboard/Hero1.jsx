@@ -125,7 +125,8 @@ export default function Hero1() {
       <ToastContainer />
 
       <div className="grid grid-cols-12 gap-4 w-full">
-        <div   className="relative   col-span-12 lg:col-span-6 xl:col-span-8 bg-opacity-10 bg-top bg-cover bg-left-bottom border-2 border-[#92a0fd] dark:border-gray-200 rounded-lg flex justify-between p-4"
+        <div
+          className="relative   col-span-12 lg:col-span-6 xl:col-span-8 bg-opacity-10 bg-top bg-cover bg-left-bottom border-2 border-[#92a0fd] dark:border-gray-200 rounded-lg flex justify-between p-4"
           style={{ backgroundImage: `url(${bg1})` }}
         >
           <div className="z-[9]">
@@ -192,10 +193,13 @@ export default function Hero1() {
                   EXCHANGE
                 </p>
               </div>
-              <p className="font-bold dark:text-gray-300">Total Balance <span className="text-[9px] font-medium dark:text-gray-200">
-                ( Main + Game Wallet)
-              </span></p>
-              
+              <p className="font-bold dark:text-gray-300">
+                Total Balance{" "}
+                <span className="text-[9px] font-medium dark:text-gray-200">
+                  ( Main + Game Wallet)
+                </span>
+              </p>
+
               <p className="text-2xl font-bold text-black dark:text-gray-300">
                 $
                 {(
@@ -205,8 +209,6 @@ export default function Hero1() {
               </p>
             </div>
 
-             
-
             <div className="col-span-12    bg-gradient-to-r from-indigo-400 to-cyan-400 py-2 rounded-lg px-4">
               <p className="font-bold text-white">
                 {userData.currency} Rate : $1/COIN
@@ -214,6 +216,8 @@ export default function Hero1() {
             </div>
           </div>
         </div>
+
+        
       </div>
       <div className="flex justify-around items-center md:hidden">
         <div className="">

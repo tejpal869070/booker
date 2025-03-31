@@ -13,7 +13,7 @@ export default function AutoMode({
   refreshHistoryFunction,
 }) {
   const [totalBombs, setTotalBombs] = useState(1);
-  const [amount, setAmount] = useState(100);
+  const [amount, setAmount] = useState(10);
   const [totlaBalance, setTotalBalance] = useState();
   const [userSelectedIndex, setUserSelectedIndex] = useState([]);
   const [isAutoBetStart, setAutoBetStart] = useState(false);

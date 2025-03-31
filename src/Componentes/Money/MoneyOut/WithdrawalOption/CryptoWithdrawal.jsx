@@ -18,7 +18,7 @@ export default function CryptoWithdrawal() {
   const [loading, setLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [address, setAddress] = useState("");
-  const [amount, setAmount] = useState(10);
+  const [amount, setAmount] = useState(25);
   const [processing, setProcessing] = useState(false);
   const [success, setSuccess] = useState(false);
 

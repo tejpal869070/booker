@@ -7,7 +7,7 @@ import { GetUserDetails } from "../../../Controllers/User/UserController";
 import bg1 from "../../../assets/photos/game-bg-2.jpg";
 
 export default function ManualMode({ refreshHistoryFunction }) {
-  const [amount, setAmount] = useState(100);
+  const [amount, setAmount] = useState(10);
   const [totalBalance, setTotalBalance] = useState(0);
   const [gameType, setGameType] = useState("low");
   const [colors, setColors] = useState([]);

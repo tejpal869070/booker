@@ -147,7 +147,7 @@ export default function ColorGameMyHistory({
                     {item.Period}
                   </th>
                   <td className="whitespace-nowrap px-4 py-[3px] hidden md:table-cell  ">
-                    {item.price}
+                    ${item.price}
                   </td>
 
                   <td className="whitespace-nowrap px-4 py-[3px] hidden md:table-cell">

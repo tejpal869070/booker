@@ -121,7 +121,7 @@ export default function AccountHistory() {
                       Received From
                     </th>
                     <th scope="col" className="px-6 py-3">
-                      Updated Balance
+                      Updated Balance ($)
                     </th>
                   </tr>
                 </thead>
@@ -220,7 +220,7 @@ export default function AccountHistory() {
                   <section className="flex justify-between items-center font-bold  ">
                     <p className="text-gray-400 font-normal">Updated Balance</p>
                     <p className="text-gray-200 font-normal">
-                       {Number(item.balance).toFixed(2)}
+                       ${Number(item.balance).toFixed(2)}
                     </p>
                   </section>
                 </div>

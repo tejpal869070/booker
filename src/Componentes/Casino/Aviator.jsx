@@ -4,7 +4,7 @@ import AviatorPlain from "../GamesComponent/Aviator/AviatorPlain";
 
 export default function Aviator() {
   return (
-    <div className="m-auto max-w-[375px]  md:max-w-[400px] lg:max-w-[600px] xl:max-w-[1024px]">
+    <div className="m-auto  ">
       <div className="flex flex-wrap-reverse bg-[#0e0e0e] rounded-md p-2">
         <div className="w-[100%]  xl:w-[30%] bg-[#1b1c1d] rounded-md h-screen p-2 max-h-screen overflow-x-auto scrollbar-hide">
           <div className="flex gap-2 bg-[#141516] rounded-xl p-0.5 inline">
