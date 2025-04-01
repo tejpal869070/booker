@@ -9,7 +9,7 @@ import VerifyPin from "../../../VerifyPin";
 import { ToastContainer, toast } from "react-toastify";
 import successImg from "../../../../assets/photos/success1-1--unscreen.gif";
 import swal from "sweetalert";
- 
+
 export default function CryptoWithdrawal() {
   const inputClasses =
     "shadow-sm bg-gray-50 font-medium border border-gray-300 dark:bg-gray-200 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5";
@@ -38,11 +38,10 @@ export default function CryptoWithdrawal() {
       const response = await AddCryptoWithdrawalRequest(formData, pin);
       if (response.status) {
         setProcessing(false);
-        setSuccess(true);
         userDataGet();
-        setTimeout(() => {
-          setSuccess(false);
-        }, 3500);
+        toast.success("Withdrawal Verifying...", {
+          position: "top-center",
+        });
         setAddress("");
         setAmount(10);
       } else {
@@ -110,19 +109,9 @@ export default function CryptoWithdrawal() {
     );
   }
 
-  if (success) {
-    return (
-      <div className="fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center bg-[#000000d1] bg-opacity-50 z-[999999]">
-        <img alt="success" src={successImg} />
-        <p className="text-2xl text-white font-semibold">
-          Crypto Withdrawal Scuucess.
-        </p>
-      </div>
-    );
-  }
-
   return (
     <div className="   flex items-center justify-center  ">
+      <ToastContainer />
       <div className="bg-[#e1e6ff] dark:bg-[#868ba3fc] text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden">
         <div className="md:flex flex-row-reverse w-full">
           <div className="hidden md:block w-1/2 bg-indigo-200  p-2">
@@ -135,9 +124,8 @@ export default function CryptoWithdrawal() {
               </h1>
             </div>
             <p className="  font-medium text-lg dark:text-[#d4e11d] text-[green] mb-4">
-              Crypto Balance ({user.currency}) :{" "}
-              {user &&
-                (user.wallet_balance / Number(user.currency_rate)).toFixed(2)}
+              Crypto Balance ({user.currency}) : ${" "}
+              {user && Number(user.wallet_balance).toFixed(2)}
             </p>
 
             <div className="grid grid-cols-12 gap-6 mt-10">
@@ -178,11 +166,11 @@ export default function CryptoWithdrawal() {
                 />
                 <div className="flex justify-between items-center">
                   <p className="text-[#00e367] font-medium text-sm">
-                    Credit: ${(Number(amount) * 90/100).toFixed(2)}
+                    Credit: ${((Number(amount) * 90) / 100).toFixed(2)}
                   </p>
                   <p className="text-gray-800 font-medium text-sm">
-                  Charges: 10%
-                </p>
+                    Charges: 10%
+                  </p>
                 </div>
                 {/* <p className="text-gray-800 font-medium text-sm">
                   Rs. {(amount * Number(user.currency_rate)).toFixed(2)} Will Be

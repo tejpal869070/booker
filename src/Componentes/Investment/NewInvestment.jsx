@@ -169,11 +169,7 @@ export default function NewInvestment() {
                 Account Balance:{" "}
                 <p className="px-3 bg-green-500 rounded-full text-[#ffca00] text-sm py-1  flex justify-center items-center">
                   <BiSolidDollarCircle size={16} />
-                  {(user &&
-                    (
-                      Number(user.wallet_balance) / Number(user.currency_rate)
-                    ).toFixed(2)) ||
-                    0.0}
+                  {user && Number(user.wallet_balance).toFixed(2)}
                 </p>
               </p>
               <div className="  mb-4"></div>

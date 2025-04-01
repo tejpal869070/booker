@@ -124,7 +124,7 @@ export default function TodayHistory() {
                           {item.date.split("T")[0]}
                         </td>
                         <td className="whitespace-nowrap px-6 py-4">
-                          {item.amount}
+                          $ {item.amount}
                         </td>
                         <td className="whitespace-nowrap px-6 py-4">
                           {item.description.split(" ").includes("To")
@@ -176,7 +176,7 @@ export default function TodayHistory() {
                         <div className="pt-2 font-thin flex flex-col gap-1">
                           <section className="flex justify-between items-center font-bold  ">
                             <p className="text-gray-400 font-normal">Amount</p>
-                            <p className="text-[#FEAA57]">{item.amount}</p>
+                            <p className="text-[#FEAA57]">$ {item.amount}</p>
                           </section>
                           <section className="flex justify-between items-center font-bold  ">
                             <p className="text-gray-400 font-normal">Time</p>

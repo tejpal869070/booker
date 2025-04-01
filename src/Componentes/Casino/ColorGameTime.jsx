@@ -228,7 +228,7 @@ export default function ColorGame({ gameType }) {
             )}
           </div>
           <p className="font-medium dark:text-gray-200 text-medium pr-4">
-            Balance :  $ {user && Number(user.color_wallet_balnace).toFixed(2)}
+            Balance : $ {user && Number(user.color_wallet_balnace).toFixed(2)}
           </p>
         </div>
 
@@ -256,7 +256,7 @@ export default function ColorGame({ gameType }) {
 
         <div className="relative bg-gradient-to-r from-rose-100 to-teal-100 dark:bg-gradient-to-r dark:from-slate-500 dark:to-slate-800 py-4">
           {/* color buttons */}
-          <div className="flex justify-between lg:justify-center lg:gap-12 justify-center py-2 border-b-2 border-white">
+          <div className="flex justify-around lg:justify-center lg:gap-12 justify-center py-2 border-b-2 border-white">
             {GameColors &&
               GameColors.map((item, index) => (
                 <button
@@ -280,11 +280,12 @@ export default function ColorGame({ gameType }) {
           </div>
 
           {/* color numbers */}
-          <div className="  pt-4 border-b-2 border-white">
+          <div className="  p-4 border-b-2 border-white">
             <div className="grid grid-cols-5 grid-rows-2 gap-4 lg:px-10">
               {GameNumber &&
                 GameNumber.map((item, index) => (
                   <ColorCircle
+                    index={index}
                     key={item.id}
                     number={item.number}
                     orders={item.orders}
@@ -382,6 +383,7 @@ const ColorCircle = ({
   popupData,
   currentGameData,
   refresh,
+  index
 }) => {
   const colors = orders.map((order) => order.color_code);
   const colorCount = colors.length;
@@ -406,7 +408,8 @@ const ColorCircle = ({
         onClick={openPopup}
         className="relative cursor-pointer h-14 md:h-24 w-14 md:w-24 rounded-full p-1 border-2 border-dotted border-black dark:border-gray-400 overflow-hidden"
       >
-        {colorCount === 1 ? (
+        <img alt="dfdg" src={require(`../../assets/photos/${index}.png`)} />
+        {/* {colorCount === 1 ? (
           <div
             className="h-full w-full rounded-full flex justify-center items-center"
             style={{ background: colors[0] }}
@@ -431,7 +434,7 @@ const ColorCircle = ({
           </div>
         ) : (
           <div className="h-full w-full bg-transparent" />
-        )}
+        )} */}
       </div>
       <ColorGamePopup
         isOpen={isPopupOpen}

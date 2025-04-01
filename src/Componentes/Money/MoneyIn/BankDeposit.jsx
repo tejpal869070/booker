@@ -35,8 +35,6 @@ export default function BankDeposit() {
     currency: data?.currency,
   };
 
-  
-
   const handleForm = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -63,10 +61,9 @@ export default function BankDeposit() {
       const response = await AddCryptoDepositRequest(formData);
       if (response.status) {
         setLoading(false);
-        setSuccess(true);
-        setTimeout(() => {
-          setSuccess(false);
-        }, 3500);
+        toast.success("Deposit Success. Verifying...", {
+          position: "top-center",
+        });
         setImage(null);
         setTransectionId("");
         setAmount(10);
@@ -108,9 +105,9 @@ export default function BankDeposit() {
     getDepositMethode();
   }, []);
 
-  useEffect(()=>{
-    console.log("first")
-  },[])
+  useEffect(() => {
+    console.log("first");
+  }, []);
 
   if (isQrShow) {
     return (
@@ -129,17 +126,6 @@ export default function BankDeposit() {
           onClick={() => setQrShow(false)}
           size={28}
         />
-      </div>
-    );
-  }
-
-  if (success) {
-    return (
-      <div className="fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center bg-[#000000d1] bg-opacity-50 z-[9999]">
-        <img alt="success" src={successImg} />
-        <p className="text-2xl text-white mt-1 font-semibold">
-          Deposit Request Sent Successfully !.
-        </p>
       </div>
     );
   }
@@ -228,7 +214,6 @@ export default function BankDeposit() {
                       value={amount}
                       onChange={(e) => setAmount(e.target.value)}
                     />
-                    
                   </div>
                   <div className="flex align-center items-center mt-4 col-span-7 sm:col-span-7">
                     {image !== null ? (

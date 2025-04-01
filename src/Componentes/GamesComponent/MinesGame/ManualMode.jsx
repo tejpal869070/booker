@@ -274,13 +274,18 @@ export default function ManualMode({
                   openedMines.length === 25 - totalBombs
                 }
                 key={index}
-                className={`w-full h-16 flex justify-center items-center shadow-lg lg:h-28  rounded-xl  ${openedMines.includes(item.id) ? "bg-[#071824]" : "bg-[#2f4553] border-b-4 border-[#213743]"}`}
+                className={`w-full h-16 flex justify-center items-center shadow-lg lg:h-28  rounded-xl  ${
+                  openedMines.includes(item.id)
+                    ? "bg-[#071824]"
+                    : "bg-[#2f4553] border-b-4 border-[#213743]"
+                }`}
               >
                 {bombFound ? (
                   diamondIndexeRef.current.includes(item.id) ? (
                     <img
                       alt="sdjbf"
-                      className="m-auto w-12 lg:w-16 animate-rotate-y animate-once animate-duration-[3000ms]"
+                      className="m-auto w-12 lg:w-16 animate-rotate-y animate-once animate-duration-[3000ms] "
+                      style={{ filter: "drop-shadow(0px 2px 12px green)" }}
                       src={require("../../../assets/photos/diamond-png.png")}
                     />
                   ) : (
@@ -296,6 +301,7 @@ export default function ManualMode({
                     alt="sdjbf"
                     className={`m-auto w-12 lg:w-16 animate-jump-in`}
                     src={require("../../../assets/photos/diamond-png.png")}
+                    style={{ filter: "drop-shadow(0px 2px 12px green)" }}
                   />
                 ) : openedMines.includes(item.id) &&
                   bombIndexRef.current.includes(item.id) ? (
@@ -347,9 +353,7 @@ export default function ManualMode({
             <div className="flex justify-between">
               <p className="mt-1 lg:text-xs text-gray-200 font-medium">
                 Bombs:{" "}
-                <span className="lg:text-xs text-red-400">
-                  {totalBombs}
-                </span>
+                <span className="lg:text-xs text-red-400">{totalBombs}</span>
               </p>{" "}
               <p className="mt-1 lg:text-xs text-gray-200 font-medium">
                 Balance:{" "}

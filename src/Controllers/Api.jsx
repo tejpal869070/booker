@@ -6,9 +6,9 @@ export const API = {
 };
 
 // export const API = {
-//   url: "http://192.168.29.233:5999/",
-//   colorGameUrl: "http://192.168.29.233:5999/game/",
-//   gametype_hostURL: "http://192.168.29.233:5999/image/game-type/",
+//   url: "http://192.168.137.245:5999/",
+//   colorGameUrl: "http://192.168.137.245:5999/game/",
+//   gametype_hostURL: "http://192.168.137.245:5999/image/game-type/",
 // };
 
 

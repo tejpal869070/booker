@@ -14,11 +14,8 @@ export default function CryptoDeposit({ data }) {
   const inputClasses =
     "shadow-sm bg-gray-50 font-medium border border-gray-300 dark:bg-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5";
 
-
   const [isQrShow, setQrShow] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-
   const [transection_id, setTransectionId] = useState("");
   const [amount, setAmount] = useState(10);
   const [image, setImage] = useState(null);
@@ -58,10 +55,9 @@ export default function CryptoDeposit({ data }) {
       const response = await AddCryptoDepositRequest(formData);
       if (response.status) {
         setLoading(false);
-        setSuccess(true);
-        setTimeout(() => {
-          setSuccess(false);
-        }, 3500);
+        toast.success("Deposit Success. Verifying...", {
+          position: "top-center",
+        });
         setImage(null);
         setTransectionId("");
         setAmount(10);
@@ -84,7 +80,6 @@ export default function CryptoDeposit({ data }) {
     }
   };
 
-   
   const handleCopy = () => {
     toast.success("Address Copied !", {
       position: "top-center",
@@ -112,19 +107,9 @@ export default function CryptoDeposit({ data }) {
     );
   }
 
-  if (success) {
-    return (
-      <div className="fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center bg-[#000000d1] bg-opacity-50 z-[9999]">
-        <img alt="success" src={successImg} />
-        <p className="text-2xl text-white mt-1 font-semibold">
-          Deposit Request Sent Successfully !.
-        </p>
-      </div>
-    );
-  }
-
   return (
     <div>
+      <ToastContainer />
       <div className="     mt-6    border-b-4 rounded-lg shadow-lg   flex flex-col">
         <div className="bg-[#e1e6ff] dark:bg-[#868ba3fc]   text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden">
           <div className="md:flex flex-row-reverse  ">

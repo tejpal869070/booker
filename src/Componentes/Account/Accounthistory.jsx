@@ -148,7 +148,7 @@ export default function AccountHistory() {
                         {item.date.split("T")[0]}
                       </td>
                       <td className="whitespace-nowrap px-6 py-4">
-                        {item.amount}
+                        $ {item.amount}
                       </td>
                       <td className="whitespace-nowrap px-6 py-4">
                         {item.description.split(" ").includes("To")

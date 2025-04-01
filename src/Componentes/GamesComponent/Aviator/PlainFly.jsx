@@ -38,7 +38,7 @@ export default function PlainFly() {
               (planeY + 404) / 2 + 100
             } ${planeX + 20},${planeY}`}
             stroke="red" // Black border color
-            strokeWidth="4" // Width of the border
+            strokeWidth="4" // Width of the borderm
             fill="transparent" // No fill for the border path
             transition={{ duration: 0.3, ease: "easeOut" }}
           />
