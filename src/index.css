@@ -148,17 +148,12 @@
 
 
 .color-game-amount button{
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  border-radius: 8px;
+  
+  border-radius: 200px;
   font-weight: 700;
   color: rgb(0, 0, 0);
   text-align: center;
-  width: 33%;
-  background-color: #dffff8;
-  box-shadow:  5px 5px 5px 0px #cbd5e0;
+  width: 33%;  
   /* border: 0.5px solid rgb(229, 253, 255); */
 }
 

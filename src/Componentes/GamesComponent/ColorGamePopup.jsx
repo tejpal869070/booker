@@ -23,26 +23,26 @@ const ColorGamePopup = ({ isOpen, onClose, popupData, currentGameData }) => {
   };
 
   const amounts = [
-    { id: 1, price: 10 },
-    { id: 2, price: 100 },
-    { id: 3, price: 1000 },
-    { id: 4, price: 10000 },
+    { id: 1, price: 10, img: require("../../assets/photos/78.png") },
+    { id: 2, price: 100, img: require("../../assets/photos/81.png") },
+    { id: 3, price: 1000, img: require("../../assets/photos/83.png") },
+    { id: 4, price: 2000, img: require("../../assets/photos/84.png") },
   ];
 
   const handleBet = async () => {
     setLoading(true);
     try {
       const response = await AddNewColorGameBet(formData);
-      if (response.status) {  
-        onClose("success") 
+      if (response.status) {
+        onClose("success");
       } else {
         toast.error("Somthing Went Wrong !", {
           position: "top-center",
         });
       }
-    } catch (error) { 
+    } catch (error) {
       if (error.response.status === 302) {
-        const decodederror = atob(error.response.data); 
+        const decodederror = atob(error.response.data);
         toast.error(JSON.parse(decodederror).message, {
           position: "top-center",
         });
@@ -77,7 +77,7 @@ const ColorGamePopup = ({ isOpen, onClose, popupData, currentGameData }) => {
           <div className="flex gap-2">
             {amounts.map((item, index) => (
               <button
-                className={`${
+                className={`p-1 ${
                   selectedAmount === index ? "border-black border-2" : ""
                 }`}
                 onClick={() => {
@@ -85,7 +85,12 @@ const ColorGamePopup = ({ isOpen, onClose, popupData, currentGameData }) => {
                   setAmount(item.price);
                 }}
               >
-                {item.price}
+                <img
+                  alt="df"
+                  src={item.img}
+                  className="w-10"
+                  style={{ filter: "drop-shadow(2px 4px 6px black)" }}
+                />
               </button>
             ))}
           </div>
@@ -120,7 +125,7 @@ const ColorGamePopup = ({ isOpen, onClose, popupData, currentGameData }) => {
 
         {/* total bet money */}
         <p className="mt-4 font-semibold italic">
-          Total Bet Money :  ${amount * quantity}
+          Total Bet Money : ${amount * quantity}
         </p>
 
         {/* buttons */}
@@ -139,7 +144,6 @@ const ColorGamePopup = ({ isOpen, onClose, popupData, currentGameData }) => {
           </button>
         </div>
       </div>
-      
     </div>
   );
 };
