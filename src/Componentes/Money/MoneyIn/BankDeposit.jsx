@@ -39,19 +39,19 @@ export default function BankDeposit() {
     e.preventDefault();
     setLoading(true);
     if (transection_id < 10) {
-      toast.error("Invalid Transaction ID", {
+      toast.warn("Invalid Transaction ID", {
         position: "top-center",
       });
       setLoading(false);
       return;
     } else if (amount < 10) {
-      toast.error("Minimum Amount is $10", {
+      toast.warn("Minimum Amount is $10", {
         position: "top-center",
       });
       setLoading(false);
       return;
     } else if (image === null) {
-      toast.error("Please upload Payment file/image.", {
+      toast.warn("Please upload Payment file/image.", {
         position: "top-center",
       });
       setLoading(false);
@@ -68,17 +68,17 @@ export default function BankDeposit() {
         setTransectionId("");
         setAmount(10);
       } else {
-        toast.error("Something Went Wrong !", {
+        toast.warn("Something Went Wrong !", {
           position: "top-center",
         });
         setLoading(false);
       }
     } catch (error) {
       if (error?.response.status === 302) {
-        toast.error(`${error.response.data.message}`);
+        toast.warn(`${error.response.data.message}`);
         setLoading(false);
       } else {
-        toast.error("Server Error !", {
+        toast.warn("Server Error !", {
           position: "top-center",
         });
         setLoading(false);
@@ -214,11 +214,12 @@ export default function BankDeposit() {
                       value={amount}
                       onChange={(e) => setAmount(e.target.value)}
                     />
+                    
                   </div>
                   <div className="flex align-center items-center mt-4 col-span-7 sm:col-span-7">
                     {image !== null ? (
                       <p className="w-full overflow-hidden shadow-sm bg-gray-200 border-2 pr-[22px] border-gray-700 dark:bg-gray-400 text-gray-900 font-medium  rounded-xl focus:ring-cyan-600 focus:border-cyan-600 block  px-2.5 py-2.5">
-                        {image.name}
+                        <p className="w-[90%]  overflow-hidden">{image.name}</p>
                       </p>
                     ) : (
                       <input
@@ -299,7 +300,6 @@ export default function BankDeposit() {
           </p>
         </div>
       </div>
-      <ToastContainer />
     </div>
   );
 }

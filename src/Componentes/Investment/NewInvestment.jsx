@@ -18,7 +18,7 @@ export default function NewInvestment() {
   const [isOpen, setIsOpen] = useState(false);
   const [PlansData, setPlansData] = useState([]);
   const [user, setUser] = useState({});
-  const [amount, setAmount] = useState(10);
+  const [amount, setAmount] = useState(50);
   const [investmentPlan, setInvestmentPlan] = useState();
   const [pin, setPin] = useState("");
   const [loading, setLoading] = useState(false);
@@ -70,6 +70,7 @@ export default function NewInvestment() {
       setLoading(false);
       return;
     } else if (amount > user && user.wallet_balance) {
+      console.log("first");
       toast.error("Insufficient balance", {
         autoClose: 2000,
       });
@@ -263,10 +264,7 @@ export default function NewInvestment() {
                   <button
                     className="relative"
                     onClick={() => {
-                      if (
-                        Number(amount) <
-                        Number(user.wallet_balance) / Number(user.currency_rate)
-                      ) {
+                      if (Number(amount) < Number(user.wallet_balance)) {
                         setVerifyPinPop(true);
                       } else {
                         toast.warn("Insufficient balance.", {

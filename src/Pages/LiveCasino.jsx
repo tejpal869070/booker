@@ -10,6 +10,7 @@ import CasinoLobby from "../Componentes/Casino/CasinoLobby";
 import Limbo from "../Componentes/Casino/Limbo";
 import DragonTower from "../Componentes/Casino/DragonTower";
 import GameLoading from "../Componentes/GameLoading";
+import CoinFlip from "../Componentes/Casino/CoinFlip";
 
 export default function LiveCasino() {
   const location = useLocation();
@@ -48,6 +49,8 @@ export default function LiveCasino() {
             setGameComponent(<CasinoLobby />);
           } else if (paramsData && paramsData.game === "aviator") {
             setGameComponent(<Aviator />);
+          } else if (paramsData && paramsData.game === "coin-flip") {
+            setGameComponent(<CoinFlip />);
           } else {
             setGameComponent(
               <div>

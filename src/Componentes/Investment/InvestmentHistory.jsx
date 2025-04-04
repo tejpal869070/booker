@@ -61,6 +61,9 @@ export default function InvestmentHistory() {
                       <th scope="col" className=" px-6 py-3 whitespace-nowrap ">
                         PLAN
                       </th>
+                      <th scope="col" className=" px-6 py-3 whitespace-nowrap ">
+                        TOTAL PAYOUT
+                      </th>
                       <th scope="col" className="px-6 py-3 whitespace-nowrap ">
                         Status
                       </th>
@@ -92,6 +95,9 @@ export default function InvestmentHistory() {
                         </td>
                         <td className="whitespace-nowrap  px-4 py-4 ">
                           {item.plan_name}
+                        </td>
+                        <td className="whitespace-nowrap  px-4 py-4 ">
+                          ${item.total_return_amount}
                         </td>
 
                         <td className="whitespace-nowrap  px-6 py-4  ">
