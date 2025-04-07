@@ -37,8 +37,7 @@ export function AllBets() {
     });
 
     const sortedData = updatedData.sort((a, b) => b.betAmount - a.betAmount);
-
-    console.log(sortedData);
+ 
     setAllBetsdata(sortedData);
   }, [rendomBetAmouts]);
 

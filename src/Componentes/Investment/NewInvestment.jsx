@@ -69,8 +69,7 @@ export default function NewInvestment() {
       toast.error("Invalid investment plan");
       setLoading(false);
       return;
-    } else if (amount > user && user.wallet_balance) {
-      console.log("first");
+    } else if (amount > user && user.wallet_balance) { 
       toast.error("Insufficient balance", {
         autoClose: 2000,
       });

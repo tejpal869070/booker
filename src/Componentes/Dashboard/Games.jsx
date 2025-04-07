@@ -140,6 +140,11 @@ const gameData = [
     to: { pathname: "/home", search: "?game=dragon-tower" },
   },
   {
+    id: 3,
+    image: require("../../assets/photos/coin-flip.png"),
+    to: { pathname: "/home", search: "?game=coin-flip" },
+  },
+  {
     id: 4,
     image: require("../../assets/photos/aviator.png"),
     to: {
@@ -157,6 +162,7 @@ const gameData = [
         "?game=casino-lobby&data=eyJwcm92aWRlckNvZGUiOiJTTiIsImdhbWVDb2RlIjoiRFQ3TSJ9",
     },
   },
+
   {
     id: 4,
     image: require("../../assets/photos/ander.png"),

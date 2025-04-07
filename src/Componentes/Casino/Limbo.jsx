@@ -300,7 +300,7 @@ export default function Limbo() {
       {/* {isFlashPopup && <FlashPopup handleClose={handleClose} />} */}
       <div className="flex flex-wrap-reverse m-auto rounded-lg overflow-hidden  max-w-[421px] md:max-w-[500px] lg:max-w-5xl">
         <div className="w-[100%]  lg:w-[30%]  p-6 h-screen/2 bg-[#213743]">
-          <div className="w-full flex space-x-2 bg-gray-800 rounded-full px-2 py-2">
+          {/* <div className="w-full flex space-x-2 bg-gray-800 rounded-full px-2 py-2">
             <button
               onClick={() => handleClick("Manual")}
               disabled={isAutoBetStart || isManualBetStart}
@@ -319,7 +319,7 @@ export default function Limbo() {
               Manual
             </button>
 
-            {/* <button
+            <button
               onClick={() => handleClick("Auto")}
               disabled={isAutoBetStart || isManualBetStart}
               disabled
@@ -336,8 +336,8 @@ export default function Limbo() {
             } origin-left`}
               />
               Auto
-            </button> */}
-          </div>
+            </button>
+          </div> */}
 
           {selected === "Manual" ? (
             <div>

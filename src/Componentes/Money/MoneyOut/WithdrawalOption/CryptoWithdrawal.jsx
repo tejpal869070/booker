@@ -110,12 +110,12 @@ export default function CryptoWithdrawal() {
   }
 
   return (
-    <div className="   flex items-center justify-center  ">
+    <div className=" min-h-screen">
       <ToastContainer />
       <div className="bg-[#e1e6ff] dark:bg-[#868ba3fc] text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden">
         <div className="md:flex flex-row-reverse w-full">
-          <div className="hidden md:block w-1/2 bg-indigo-200  p-2">
-            <img alt="animation" className="w-full h-full " src={gif1} />
+          <div className="w-full md:w-1/2 bg-indigo-200  p-2">
+            <img alt="animation" className="w-full h-full rounded-t-2xl md:rounded-2xl " src={gif1} />
           </div>
           <div className="w-full md:w-1/2 py-10 px-5 md:px-10">
             <div className="  mb-6">

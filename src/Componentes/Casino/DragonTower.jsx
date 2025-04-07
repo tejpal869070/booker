@@ -101,7 +101,7 @@ export default function DragonTower() {
       return;
     }
     const walletResponse = await updateWalletBalance("deduct", amount);
-     toast.success("Bet Placed. Game start", { position: "top-center" });
+    toast.success("Bet Placed. Game start", { position: "top-center" });
     if (walletResponse) {
       setIsPlaying(true);
       return;
@@ -291,23 +291,6 @@ export default function DragonTower() {
               />
               Manual
             </button>
-
-            {/* <button
-              onClick={() => handleClick("Auto")}
-              className={`relative w-1/2 px-6 py-2 rounded-full overflow-hidden  font-medium transition-all  ${
-                selected === "Auto"
-                  ? "bg-blue-500 text-gray-100"
-                  : "bg-gray-300 text-gray-900"
-              }`}
-            >
-              <span
-                className={`absolute rounded-lg inset-0 z-[-1] bg-blue-500 transition-all duration-300 ease-in-out 
-            ${
-              selected === 2 ? "transform scale-x-100" : "transform scale-x-0"
-            } origin-left`}
-              />
-              Auto
-            </button> */}
           </div>
           <div>
             <div className="flex mt-1 justify-between text-gray-200">
@@ -349,7 +332,7 @@ export default function DragonTower() {
             </div>
             <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">
               Difficulty
-            </p> 
+            </p>
             <select
               onChange={(e) => setLevel(e.target.value)}
               disabled={isPlaying}

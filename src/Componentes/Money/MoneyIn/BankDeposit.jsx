@@ -44,7 +44,7 @@ export default function BankDeposit() {
       });
       setLoading(false);
       return;
-    } else if (amount < 10) {
+    } else if (amount < 10 || isNaN(amount)) {
       toast.warn("Minimum Amount is $10", {
         position: "top-center",
       });
@@ -105,9 +105,7 @@ export default function BankDeposit() {
     getDepositMethode();
   }, []);
 
-  useEffect(() => {
-    console.log("first");
-  }, []);
+  
 
   if (isQrShow) {
     return (
@@ -145,7 +143,7 @@ export default function BankDeposit() {
         <div className="bg-[#e1e6ff] dark:bg-[#868ba3fc]   text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden">
           <div className="md:flex flex-row-reverse  ">
             <div className="w-full md:w-1/2   bg-indigo-200  p-2">
-              <img alt="animation" className="w-full h-full " src={gif1} />
+              <img alt="animation" className="w-full h-full  rounded-t-2xl md:rounded-2xl" src={gif1} />
             </div>
             <div className="w-full md:w-1/2 py-10 px-5 md:px-10">
               <div className="  mb-6">
@@ -205,7 +203,7 @@ export default function BankDeposit() {
                       Amount*
                     </label>
                     <input
-                      type="text"
+                      type="tel"
                       name="product-name"
                       id="product-name"
                       className={`${inputClasses}`}

@@ -131,10 +131,10 @@ export default function Hero1() {
         >
           <div className="z-[9]">
             <h1 className="text-xl font-bold  text-white ">
-              Congratulations {userData && userData.uname}! 🎉
+              Congratulations {userData && userData?.uname}! 🎉
             </h1>
             <p className="text-sm mt-2 text-gray-100">
-              Joining: {userData && userData?.date.split("T")[0]}
+              Joining: {userData && userData?.date?.split("T")[0]}
             </p>
             <div className="flex flex-wrap   gap-4 mt-4 hidden md:flex">
               <Link
