@@ -269,7 +269,7 @@ export default function ColorGame({ gameType }) {
                       : false
                   }
                   onClick={() => openPopup(item)}
-                  className={`px-6 md:px-8 cursor-pointer  hover:shadow-lg rounded-lg py-3  `}
+                  className={`px-6 md:px-8 cursor-pointer  hover:shadow-lg  py-3  ${index===0 ? "rounded-tr-2xl rounded-bl-2xl": index===2 ? "rounded-tl-2xl rounded-br-2xl":"rounded-xl"}`}
                   style={{ backgroundColor: item.color_code }}
                 >
                   <button className="text-2xl font-bold text-white">

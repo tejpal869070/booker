@@ -73,7 +73,7 @@ export default function DirextDownline() {
                       BALANCE
                     </th>
                     <th scope="col" className="px-6 py-3">
-                      TOTAL INVST
+                      TOTAL INVEST
                     </th>
                     <th scope="col" className="px-6 py-3">
                       PAID/UNPAID

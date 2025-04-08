@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { GetUserPaymentHistory } from "../../../Controllers/User/UserController";
 import { FaEye } from "react-icons/fa";
-import { Loading1, Loading3, Loading4 } from "../../Loading1";
+import { Loading4 } from "../../Loading1";
 import gif1 from "../../../assets/photos/nodata.png";
 import DateSelector from "../../Income/DateSelector";
 import { useLocation } from "react-router-dom";
+import { FaCopy } from "react-icons/fa";
+import CopyToClipboard from "react-copy-to-clipboard";
+import { toast, ToastContainer } from "react-toastify";
 
 export default function DepositHistory() {
   const [data, setData] = useState([]);
@@ -16,6 +19,12 @@ export default function DepositHistory() {
   const [filteredData, setFilteredData] = useState([]);
 
   const location = useLocation();
+
+  const handleCopy = () => {
+    toast.success("Transection Hash copied.", {
+      position: "top-center",
+    });
+  };
 
   const GetPaymentHistory = async () => {
     const response = await GetUserPaymentHistory();
@@ -73,6 +82,7 @@ export default function DepositHistory() {
 
   return (
     <div className=" min-h-screen">
+      <ToastContainer />
       <div>
         <h1 className="mb-6 font-bold text-lg dark:text-gray-100 text-center md:text-left hidden md:block">
           Deposit History
@@ -261,8 +271,19 @@ export default function DepositHistory() {
                     </p>
                   </section>
                   <section className="flex justify-between items-center font-bold  ">
-                    <p className="text-gray-400 font-normal">Deposit Id</p>
-                    <p className="text-gray-200 font-normal">{item.id}</p>
+                    <p className="text-gray-400 font-normal">Trnx. Hash</p>
+                    <div className="text-gray-200 font-normal w-[50%] overflow-hidden flex gap-1 items-center ">
+                      <p className="w-[98%] overflow-hidden">
+                        {item?.transaction_id}
+                      </p>
+                      ..{" "}
+                      <CopyToClipboard
+                        text={item.transaction_id}
+                        onCopy={handleCopy}
+                      >
+                        <FaCopy className="cursor-pointer  " />
+                      </CopyToClipboard>
+                    </div>
                   </section>
                   {item.status === "Cancelled" && (
                     <section className="flex justify-between   font-bold  ">

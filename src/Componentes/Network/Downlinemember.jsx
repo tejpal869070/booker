@@ -74,7 +74,7 @@ export default function Downlinemember() {
                       PAID/UNPAID
                     </th>
                     <th scope="col" className="px-6 py-3">
-                      TOTAL INVST
+                      TOTAL INVEST
                     </th>
                     <th scope="col" className="px-6 py-3">
                       FIRST INVST. DATE

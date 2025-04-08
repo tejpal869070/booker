@@ -168,7 +168,7 @@ export default function CoinFlip() {
                   Bet Amount
                 </p>
                 <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">
-                  ${totalBalance}
+                  ${Number(totalBalance).toFixed(2)}
                 </p>
               </div>
               <div className="flex relative items-center">
@@ -292,12 +292,12 @@ export default function CoinFlip() {
                       <FaViacoin className="m-auto animate-rotate-y animate-infinite animate-ease-linear" />
                     </p>
                   ) : (
-                      <p className="w-[82%] py-1 m-auto rounded-b-lg backdrop-blur-sm bg-black/30">
-                        $
-                        {isWon
-                          ? Number(amount * 2).toFixed(2)
-                          : Number(amount).toFixed(2)}
-                      </p>
+                    <p className="w-[82%] py-1 m-auto rounded-b-lg backdrop-blur-sm bg-black/30">
+                      $
+                      {isWon
+                        ? Number(amount * 2).toFixed(2)
+                        : Number(amount).toFixed(2)}
+                    </p>
                   )}
                 </div>
               }

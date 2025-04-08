@@ -1,10 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { FaRegEye } from "react-icons/fa";
-import AccountHistoryPeriod from "./AccountHistoryPeriod";
 import gif1 from "../../assets/photos/nodata.png";
 import { GetAccountAllStatement } from "../../Controllers/User/UserController";
 import DateSelector from "../Income/DateSelector";
-import { Loading1, Loading3, Loading4 } from "../Loading1";
+import { Loading4 } from "../Loading1";
 import { useLocation } from "react-router-dom";
 
 export default function AccountHistory() {
@@ -193,34 +191,41 @@ export default function AccountHistory() {
                 <div className="pt-2 font-thin flex flex-col gap-0.5">
                   <section className="flex justify-between items-center font-bold  ">
                     <p className="text-gray-400 font-normal">Amount</p>
-                    <p className="text-[#FEAA57]">{item.amount}</p>
+                    <p className="text-[#FEAA57]">${item.amount}</p>
                   </section>
                   <section className="flex justify-between items-center font-bold  ">
                     <p className="text-gray-400 font-normal">Time</p>
                     <p className="text-gray-200 font-normal">
-                      {item.date.split("T")[0]}
+                      {item.date.split("T")[0]}{" "}
+                      {item.date.split("T")[1]?.split(".")[0]}
                     </p>
                   </section>
-                  <section className="flex justify-between items-center font-bold  ">
-                    <p className="text-gray-400 font-normal">Sent To</p>
-                    <p className="text-gray-200 font-normal">
-                      {item.description.split(" ").includes("To")
-                        ? item.description.split(" ")[2]
-                        : ""}
-                    </p>
-                  </section>
-                  <section className="flex justify-between items-center font-bold  ">
-                    <p className="text-gray-400 font-normal">Received From </p>
-                    <p className="text-gray-200 font-normal">
-                      {item.description.split(" ").includes("from")
-                        ? item.description.split(" ")[2]
-                        : ""}
-                    </p>
-                  </section>
+                  {item.type !== "Withdrawal" && item.type !== "Deposit" && (
+                    <>
+                      <section className="flex justify-between items-center font-bold  ">
+                        <p className="text-gray-400 font-normal">Sent To</p>
+                        <p className="text-gray-200 font-normal">
+                          {item.description.split(" ").includes("To")
+                            ? item.description.split(" ")[2]
+                            : ""}
+                        </p>
+                      </section>
+                      <section className="flex justify-between items-center font-bold  ">
+                        <p className="text-gray-400 font-normal">
+                          Received From{" "}
+                        </p>
+                        <p className="text-gray-200 font-normal">
+                          {item.description.split(" ").includes("from")
+                            ? item.description.split(" ")[2]
+                            : ""}
+                        </p>
+                      </section>
+                    </>
+                  )}
                   <section className="flex justify-between items-center font-bold  ">
                     <p className="text-gray-400 font-normal">Updated Balance</p>
                     <p className="text-gray-200 font-normal">
-                       ${Number(item.balance).toFixed(2)}
+                      ${Number(item.balance).toFixed(2)}
                     </p>
                   </section>
                 </div>
