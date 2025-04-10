@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import bg1 from "../../assets/photos/stadium2.jpg";
-import { ToastContainer, toast } from "react-toastify";
+ import { ToastContainer, toast } from "react-toastify";import 'react-toastify/dist/ReactToastify.css';
 import "react-toastify/dist/ReactToastify.css";
 import {
   CheckUserExistance,

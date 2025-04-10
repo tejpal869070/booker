@@ -6,8 +6,8 @@ import {
   MakeNewInvestment,
 } from "../../Controllers/User/UserController";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Loading1 } from "../Loading1";
-import successImg from "../../assets/photos/success1-1--unscreen.gif";
 import gif1 from "../../assets/photos/growwealthgif.gif";
 import VerifyPin from "../VerifyPin";
 import { BiSolidDollarCircle } from "react-icons/bi";
@@ -20,7 +20,6 @@ export default function NewInvestment() {
   const [user, setUser] = useState({});
   const [amount, setAmount] = useState(50);
   const [investmentPlan, setInvestmentPlan] = useState();
-  const [pin, setPin] = useState("");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [verifyPinPopup, setVerifyPinPop] = useState(false);
@@ -69,7 +68,7 @@ export default function NewInvestment() {
       toast.error("Invalid investment plan");
       setLoading(false);
       return;
-    } else if (amount > user && user.wallet_balance) { 
+    } else if (amount > user && user.wallet_balance) {
       toast.error("Insufficient balance", {
         autoClose: 2000,
       });
@@ -90,7 +89,6 @@ export default function NewInvestment() {
         setInvestmentPlan(PlansData[0].id);
         userDataGet();
         setAmount(10);
-        setPin("");
       } else {
         toast.error(response.response.data.message);
         setLoading(false);

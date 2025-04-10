@@ -5,7 +5,7 @@ import ThemeToggle from "../../Controllers/ThemeToggle";
 import { FaAngleRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import CopyToClipboard from "react-copy-to-clipboard";
-import { ToastContainer, toast } from "react-toastify";
+ import { ToastContainer, toast } from "react-toastify";import 'react-toastify/dist/ReactToastify.css';
 import { FaWallet } from "react-icons/fa";
 import { BsWalletFill } from "react-icons/bs";
 import { FaUserFriends } from "react-icons/fa";

@@ -6,7 +6,7 @@ import {
   SendOtp,
   VerifyOtp,
 } from "../../Controllers/Auth/AuthController";
-import { ToastContainer, toast } from "react-toastify";
+ import { ToastContainer, toast } from "react-toastify";import 'react-toastify/dist/ReactToastify.css';
 import { Loading1 } from "../Loading1";
 import OTPInput from "react-otp-input";
 import successImg from "../../assets/photos/success1-1--unscreen.gif";

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+ import { ToastContainer, toast } from "react-toastify";import 'react-toastify/dist/ReactToastify.css';
 import { GetPaymentMethod } from "../../../Controllers/User/UserController";
 import { Loading3 } from "../../Loading1";
 import { CopyToClipboard } from "react-copy-to-clipboard";
@@ -7,8 +7,7 @@ import { FaCopy } from "react-icons/fa";
 import { API } from "../../../Controllers/Api";
 import { BsQrCodeScan } from "react-icons/bs";
 import gif1 from "../../../assets/photos/cryptodepositgif.gif";
-import { MdCancel } from "react-icons/md";
-import successImg from "../../../assets/photos/success1-1--unscreen.gif";
+import { MdCancel } from "react-icons/md"; 
 import { Loading1 } from "../../Loading1";
 import { AddCryptoDepositRequest } from "../../../Controllers/User/UserController";
 
@@ -16,8 +15,7 @@ export default function BankDeposit() {
   const [pageloading, setPageLoading] = useState(true);
   const [data, setData] = useState();
   const [isQrShow, setQrShow] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false); 
 
   const [transection_id, setTransectionId] = useState("");
   const [amount, setAmount] = useState(10);

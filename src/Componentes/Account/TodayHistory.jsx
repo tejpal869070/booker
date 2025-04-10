@@ -113,30 +113,30 @@ export default function TodayHistory() {
                       >
                         <th
                           scope="row"
-                          className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  dark:text-white"
+                          className="px-6 py-3 font-medium text-gray-900 whitespace-nowrap  dark:text-white"
                         >
                           {index + 1}.
                         </th>
-                        <td className="whitespace-nowrap px-4 py-4">
+                        <td className="whitespace-nowrap px-4 py-3">
                           {item.type}
                         </td>
-                        <td className="whitespace-nowrap px-6 py-4">
+                        <td className="whitespace-nowrap px-6 py-3">
                           {item.date.split("T")[0]}
                         </td>
-                        <td className="whitespace-nowrap px-6 py-4">
+                        <td className="whitespace-nowrap px-6 py-3">
                           $ {item.amount}
                         </td>
-                        <td className="whitespace-nowrap px-6 py-4">
+                        <td className="whitespace-nowrap px-6 py-3">
                           {item.description.split(" ").includes("To")
                             ? item.description.split(" ")[2]
                             : ""}
                         </td>
-                        <td className="whitespace-nowrap px-6 py-4">
+                        <td className="whitespace-nowrap px-6 py-3">
                           {item.description.split(" ").includes("from")
                             ? item.description.split(" ")[2]
                             : ""}
                         </td>
-                        <td className="whitespace-nowrap px-6 py-4">
+                        <td className="whitespace-nowrap px-6 py-3">
                           {item?.description}
                         </td>
                       </tr>

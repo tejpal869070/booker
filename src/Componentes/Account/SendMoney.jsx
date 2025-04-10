@@ -5,18 +5,15 @@ import {
   SendMoneyToUser,
 } from "../../Controllers/Auth/AuthController";
 import { Loading1 } from "../Loading1";
-import { ToastContainer, toast } from "react-toastify";
+ import { ToastContainer, toast } from "react-toastify";import 'react-toastify/dist/ReactToastify.css';
 import gif1 from "../../assets/photos/sendmoneygif.gif";
-import VerifyPin from "../VerifyPin";
-import successImg from "../../assets/photos/success1-1--unscreen.gif";
+import VerifyPin from "../VerifyPin"; 
 
 export default function SendMoney() {
-   
   const [sendTo, setSendTo] = useState("");
   const [mobile, setMobile] = useState("");
   const [amount, setAmount] = useState("");
-  const [pin, setPin] = useState("");
-  const [error, setError] = useState(null);
+  const [pin, setPin] = useState(""); 
   const [success, setSuccess] = useState(null);
   const [loading, setLoading] = useState(false);
   const [userVerified, setUserVerified] = useState(false);
@@ -49,6 +46,10 @@ export default function SendMoney() {
     setChecking(true);
     if (mobile.length < 10) {
       toast.error("Invalid User Mobile.");
+      setChecking(false);
+      return;
+    } else if (mobile === user?.mobile) {
+      toast.error("You cannot send money to yourself.");
       setChecking(false);
       return;
     }
@@ -140,6 +141,7 @@ export default function SendMoney() {
 
   return (
     <div className="min-h-screen">
+      <ToastContainer />
       <div>
         <p className="lg:pl-10 font-bold text-xl mb-6 dark:text-white">
           Account {">"}Send Money
@@ -208,13 +210,13 @@ export default function SendMoney() {
                       Amount To be Transferred :
                     </label>
                     <input
-                      type="text"
+                      type="number"
                       name="price"
                       id="price"
                       value={amount}
                       onChange={(e) => setAmount(e.target.value)}
                       disabled={!userVerified}
-                      className="shadow-sm bg-gray-50 border w-1/2 border-gray-300 dark:bg-gray-200 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block  p-2.5"
+                      className="shadow-sm font-semibold bg-gray-50 border w-1/2 border-gray-300 dark:bg-gray-200 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block  p-2.5"
                       placeholder="AMOUNT"
                       required=""
                     />
@@ -224,7 +226,15 @@ export default function SendMoney() {
                 <div className="flex     gap-6 mt-6">
                   <button
                     className="relative"
-                    onClick={() => setIsOpen(true)}
+                    onClick={() => {
+                      if (amount > user?.wallet_balance || isNaN(amount)) {
+                        toast.warn("Amount Exceed");
+                      } else if (amount < 100) {
+                        toast.warn("Minimum amount is $100");
+                      } else {
+                        setIsOpen(true);
+                      }
+                    }}
                     disabled={!userVerified}
                   >
                     <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded-full bg-black dark:bg-gray-400"></span>

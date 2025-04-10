@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import OTPInput from "react-otp-input";
-import { ToastContainer, toast } from "react-toastify";
+ import { ToastContainer, toast } from "react-toastify";import 'react-toastify/dist/ReactToastify.css';
 import { CreateAccountPin } from "../../Controllers/User/UserController";
 import { Loading1 } from "../Loading1";
 import gif1 from "../../assets/photos/lock.png";

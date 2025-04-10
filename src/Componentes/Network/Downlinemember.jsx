@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { GetMyDownline } from "../../Controllers/User/UserController";
 import { toast } from "react-toastify";
-import { Loading1, Loading3 } from "../Loading1";
+import { Loading3 } from "../Loading1";
 
 export default function Downlinemember() {
   const [data, setData] = useState([]);

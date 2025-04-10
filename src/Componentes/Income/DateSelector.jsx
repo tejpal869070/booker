@@ -1,6 +1,5 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function DateSelector() {
@@ -17,13 +16,12 @@ export default function DateSelector() {
     const params = new URLSearchParams(location.search);
     params.set("to", e.target.value);
     navigate(`${location.pathname}?${params.toString()}`);
-  }; 
- 
+  };
 
   return (
     <div className="mb-4">
       <div className="flex items-center gap-1">
-        <p  className="dark:text-gray-200">From</p>
+        <p className="dark:text-gray-200">From</p>
         <input
           aria-label="Date"
           placeholder="Start Date"
@@ -32,7 +30,7 @@ export default function DateSelector() {
           className="border-2 bg-black text-white border-[#ff9600] rounded py-1"
           onChange={handleStartDate}
         />
-        <p  className="dark:text-gray-200">to</p>
+        <p className="dark:text-gray-200">to</p>
         <input
           aria-label="Date"
           placeholder="Start Date"
@@ -48,7 +46,6 @@ export default function DateSelector() {
           </span>
         </button> */}
       </div>
-      <ToastContainer />
     </div>
   );
 }

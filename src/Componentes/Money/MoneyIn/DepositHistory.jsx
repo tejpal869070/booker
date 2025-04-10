@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { GetUserPaymentHistory } from "../../../Controllers/User/UserController";
-import { FaEye } from "react-icons/fa";
+import { GetUserPaymentHistory } from "../../../Controllers/User/UserController"; 
 import { Loading4 } from "../../Loading1";
 import gif1 from "../../../assets/photos/nodata.png";
 import DateSelector from "../../Income/DateSelector";
@@ -11,9 +10,7 @@ import { toast, ToastContainer } from "react-toastify";
 
 export default function DepositHistory() {
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [selectedIndex, setSelectedIndex] = useState();
-  const [visible, setVisible] = useState(false);
+  const [loading, setLoading] = useState(true); 
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
   const [filteredData, setFilteredData] = useState([]);
@@ -110,13 +107,10 @@ export default function DepositHistory() {
                     Transaction Hash
                   </th>
                   <th scope="col" className="hidden md:table-cell px-6 py-3">
-                    TYPE
+                    DATE
                   </th>
                   <th scope="col" className="px-6 py-3">
                     Status
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    View
                   </th>
                 </tr>
               </thead>
@@ -143,94 +137,20 @@ export default function DepositHistory() {
                         {index + 1}.
                       </th>
                       <td className="whitespace-nowrap px-4 py-4">
-                        {item.currency === null ? "$ " : ""}
-                        {item.amount} {item.currency}
+                        ${item.amount}
                       </td>
-                      <td className="whitespace-nowrap px-6 py-4 hidden md:table-cell">
+                      <td className="whitespace-nowrap px-6 py-4 hidden md:table-cell ">
                         {item.transaction_id}
                       </td>
                       <td className="whitespace-nowrap px-6 py-4 hidden md:table-cell">
-                        {item.payment_type === "USDT" ? "Crypto" : item.type}
+                        {item.date?.split("T")[0]}
+                        {" / "}
+                        {item.date?.split("T")[1]?.split(".")[0]}
                       </td>
                       <td className="whitespace-nowrap px-6 py-4">
                         {item.status}
                       </td>
-                      <td className="whitespace-nowrap px-6 py-4">
-                        <FaEye
-                          size={20}
-                          className="cursor-pointer"
-                          onClick={() => {
-                            setSelectedIndex(index);
-                            setVisible((pre) => !pre);
-                          }}
-                        />
-                      </td>
                     </tr>
-                    {visible && selectedIndex === index ? (
-                      <tr className=" bg-gray-300 dark:bg-black animate-fade-down animate-duration-500">
-                        {item.type === "UPI" ? (
-                          <td colSpan="8 ">
-                            <div className="p-6 text-black font-medium dark:text-gray-200   ">
-                              <p>Transaction ID: {item.transaction_id}</p>
-                              <p>Amount: {item.amount}</p>
-                              <p>Date: {item.date.split("T")[0]}</p>
-                              <p>Transfered To: {item.upi_id}</p>
-                              <p>Status: {item.status}</p>
-                              {item.status === "Cancelled" ? (
-                                <p>Cancel Reason : {item.reason} </p>
-                              ) : (
-                                ""
-                              )}
-                            </div>
-                          </td>
-                        ) : item.type === "Bank" ? (
-                          <td colSpan="8">
-                            <div className="p-6 text-black font-medium dark:text-gray-200   border-gray-700">
-                              <p>Transaction ID: {item.transaction_id}</p>
-                              <p>Amount: {item.amount}</p>
-                              <p>Date: {item.date.split("T")[0]}</p>
-                              <p>Transfered To:-{">"} </p>
-                              <div>
-                                <p>Account Holder: {item.name}</p>
-                                <p>Account No.: {item.ac_no}</p>
-                                <p>Bank Name: {item.bank_name}</p>
-                                <p>IFSC: {item.ifsc_code}</p>
-                              </div>
-                              <p>Status: {item.status}</p>
-                              {item.status === "Cancelled" ? (
-                                <p>Cancel Reason : {item.reason} </p>
-                              ) : (
-                                ""
-                              )}
-                            </div>
-                          </td>
-                        ) : (
-                          <td colSpan="8">
-                            <div className="p-6 text-black font-medium dark:text-gray-200   border-gray-700">
-                              <p>Transaction ID: {item.transaction_id}</p>
-                              <p>
-                                Amount: {item.amount} {item.currency} (
-                                {Number(item.amount) *
-                                  Number(item.price_at_that_time)}{" "}
-                                INR)
-                              </p>
-                              <p>Price: {item.price_at_time} INR</p>
-                              <p>Date: {item.date.split("T")[0]}</p>
-                              <p>Transfered To: {item.cypto}</p>
-
-                              <p>Status: {item.status}</p>
-                              {item.status === "Cancelled" ? (
-                                <p>Cancel Reason : {item.reason} </p>
-                              ) : (
-                                ""
-                              )}
-                            </div>
-                          </td>
-                        )}
-                      </tr>
-                    ) : (
-                      ""
-                    )}
                   </tbody>
                 ))
               )}

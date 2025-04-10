@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import OtpInput from "react-otp-input";
-import { ToastContainer, toast } from "react-toastify";
+ import { ToastContainer, toast } from "react-toastify";import 'react-toastify/dist/ReactToastify.css';
 import "react-toastify/dist/ReactToastify.css";
 import bg1 from "../../assets/photos/stadium2.jpg";
 import {

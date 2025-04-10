@@ -5,7 +5,7 @@ import {
   SendRequestForChangeAccount,
 } from "../../../../Controllers/User/UserController";
 import { Loading1, Loading3 } from "../../../Loading1";
-import { ToastContainer, toast } from "react-toastify";
+ import { ToastContainer, toast } from "react-toastify";import 'react-toastify/dist/ReactToastify.css';
 import successImg from "../../../../assets/photos/success1-1--unscreen.gif";
 import swal from "sweetalert";
 import gif1 from "../../../../assets/photos/withdrawgif.gif";

@@ -6,8 +6,7 @@ import {
 } from "../../../../Controllers/User/UserController";
 import { Loading1, Loading3 } from "../../../Loading1";
 import VerifyPin from "../../../VerifyPin";
-import { ToastContainer, toast } from "react-toastify";
-import successImg from "../../../../assets/photos/success1-1--unscreen.gif";
+ import { ToastContainer, toast } from "react-toastify";import 'react-toastify/dist/ReactToastify.css'; 
 import swal from "sweetalert";
 
 export default function CryptoWithdrawal() {
@@ -19,8 +18,7 @@ export default function CryptoWithdrawal() {
   const [isOpen, setIsOpen] = useState(false);
   const [address, setAddress] = useState("");
   const [amount, setAmount] = useState(25);
-  const [processing, setProcessing] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const [processing, setProcessing] = useState(false); 
 
   const onclose2 = () => {
     setIsOpen(false);
@@ -75,7 +73,7 @@ export default function CryptoWithdrawal() {
       });
       return;
     } else if (
-      Number(amount) >
+      Number(amount) > 
       Number(user.wallet_balance) / Number(user.currency_rate)
     ) {
       toast.warn("Insufficient Balance", {
@@ -86,7 +84,7 @@ export default function CryptoWithdrawal() {
   };
 
   const userDataGet = async () => {
-    const response = await GetUserDetails();
+    const response = await GetUserDetails();      
     if (response !== null) {
       setUser(response[0]);
       setLoading(false);

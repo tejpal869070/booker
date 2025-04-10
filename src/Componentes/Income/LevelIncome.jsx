@@ -108,7 +108,7 @@ export default function LevelIncome() {
                         {item.user_name}
                       </td>
                       <td className="whitespace-nowrap px-6 py-4">
-                        {item.position}
+                        {item.position==="R" ? "Right" :"Left"}
                       </td>
                       <td className="whitespace-nowrap px-6 py-4">
                         {item.level}
@@ -137,10 +137,10 @@ export default function LevelIncome() {
                       </p>
                     </section>
                     <div className="pt-2 font-thin flex flex-col gap-1">
-                      <section className="flex justify-between items-center font-bold  ">
+                      {/* <section className="flex justify-between items-center font-bold  ">
                         <p className="text-gray-400 font-normal">Mobile</p>
                         <p className="text-gray-200">{item.mobile}</p>
-                      </section>
+                      </section> */}
                       <section className="flex justify-between items-center font-bold  ">
                         <p className="text-gray-400 font-normal">User Level</p>
                         <p className="text-gray-200">{item.level}</p>

@@ -3,9 +3,8 @@ import ReactDOM from "react-dom/client";
 import { mines } from "../../../assets/Data/GamesData";
 import { GetUserDetails } from "../../../Controllers/User/UserController";
 import { MinesGameUpdateWallet } from "../../../Controllers/User/GamesController";
-import { ToastContainer, toast } from "react-toastify";
-import { minesProfitTable } from "../../../assets/Data/MinesData";
-import { IoReloadCircle } from "react-icons/io5";
+ import { ToastContainer, toast } from "react-toastify";import 'react-toastify/dist/ReactToastify.css';
+import { minesProfitTable } from "../../../assets/Data/MinesData"; 
 
 export default function ManualMode({
   isBetPlacedFunction,

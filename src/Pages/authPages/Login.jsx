@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import bg1 from "../../assets/photos/stadium2.jpg";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { IoEyeOff } from "react-icons/io5";
 import { FaEye } from "react-icons/fa";
 import { Loading1 } from "../../Componentes/Loading1";

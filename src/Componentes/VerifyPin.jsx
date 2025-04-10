@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import OTPInput from "react-otp-input";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Loading1 } from "./Loading1";
 import { PinVerification } from "../Controllers/Auth/AuthController";
 import { MdCancel } from "react-icons/md";
 
 const VerifyPin = ({ onclose2, successFunction }) => {
   const [pin, setPin] = useState(Number);
-  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   const checkPin = async (e) => {
@@ -80,9 +80,6 @@ const VerifyPin = ({ onclose2, successFunction }) => {
               fontSize: "20px",
             }}
           />
-          <p className="text-left text-[red] font-medium text-sm mt-2">
-            {error}
-          </p>
           <div className="mt-6">
             <button
               disabled={loading}

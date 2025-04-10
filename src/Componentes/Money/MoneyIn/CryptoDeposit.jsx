@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { ToastContainer, toast } from "react-toastify";
+ import { ToastContainer, toast } from "react-toastify";import 'react-toastify/dist/ReactToastify.css';
 import { FaCopy } from "react-icons/fa";
 import { API } from "../../../Controllers/Api";
 import { BsQrCodeScan } from "react-icons/bs";

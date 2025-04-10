@@ -13,7 +13,7 @@ import { BiSolidWallet } from "react-icons/bi";
 import { FaHandPointRight } from "react-icons/fa";
 import { FaHandPointLeft } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
-import { ToastContainer, toast } from "react-toastify";
+ import { ToastContainer, toast } from "react-toastify";import 'react-toastify/dist/ReactToastify.css';
 import successImg from "../../assets/photos/success1-1--unscreen.gif";
 import VerifyPin from "../VerifyPin";
 import gameGirl from "../../assets/photos/colorgame.jpg";

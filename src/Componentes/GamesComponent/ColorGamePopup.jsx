@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { AddNewColorGameBet } from "../../Controllers/User/GamesController";
-import { ToastContainer, toast } from "react-toastify";
+ import { ToastContainer, toast } from "react-toastify";import 'react-toastify/dist/ReactToastify.css';
 
 const ColorGamePopup = ({ isOpen, onClose, popupData, currentGameData }) => {
   const [quantity, setQuantity] = useState(1);

@@ -1,13 +1,13 @@
-import React, { useState } from "react"; 
+import React, { useState } from "react";
 import bg1 from "../../assets/photos/security-bg.jpg";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Loading1 } from "../../Componentes/Loading1";
 import { ChangePasswordControll } from "../../Controllers/User/UserController";
 import Logo from "../../assets/photos/logo.png";
 
 export default function ChangePassword() {
-  const [formError, setFormError] = useState();
   const [resetting, setResetting] = useState(false);
 
   const sessionMobile = sessionStorage.getItem("mobile");
@@ -84,7 +84,6 @@ export default function ChangePassword() {
             <h2 className="mb-1 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Change Password
             </h2>
-            <p className="text-[red]"> {formError} </p>
             <form
               className="mt-4 space-y-4 lg:mt-5 md:space-y-5"
               onSubmit={resetPassord}

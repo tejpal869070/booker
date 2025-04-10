@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
-import { ToastContainer, toast } from "react-toastify";
+ import { ToastContainer, toast } from "react-toastify";import 'react-toastify/dist/ReactToastify.css';
 import { MdCancel } from "react-icons/md"; 
 
 const SocialShare = ({ url, onClose }) => {

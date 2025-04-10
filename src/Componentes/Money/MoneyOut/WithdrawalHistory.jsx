@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { FaCopy, FaRegEye } from "react-icons/fa";
+import React, { useEffect, useState } from "react";
+import { FaCopy } from "react-icons/fa";
 import {
   GetUserPaymentHistory,
   RemoveWithdrawalRequest,
@@ -14,12 +14,6 @@ import Swal from "sweetalert2";
 import CopyToClipboard from "react-copy-to-clipboard";
 
 export default function WithdrawalHistory() {
-  const classes1 = "flex justify-between border-b border-gray-400";
-
-  const [isVisible, setIsVisible] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState(null);
-  const [singleData, setSingleData] = useState();
-
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [startDate, setStartDate] = useState();
@@ -78,11 +72,6 @@ export default function WithdrawalHistory() {
 
   useEffect(() => {
     GetPaymentHistory();
-  }, []);
-
-  const showModal = useCallback((index) => {
-    setIsVisible((pre) => !pre);
-    setSelectedIndex(index);
   }, []);
 
   useEffect(() => {
@@ -192,7 +181,7 @@ export default function WithdrawalHistory() {
                           {item.cypto.slice(0, 8)}.....
                           {item.cypto.slice(-4)}
                           <CopyToClipboard
-                            text={item.transaction_id}
+                            text={item.cypto}
                             onCopy={handleCopy}
                           >
                             <FaCopy className="cursor-pointer  " />
@@ -258,7 +247,7 @@ export default function WithdrawalHistory() {
                               {item.cypto.slice(0, 8)}.....
                               {item.cypto.slice(-4)}
                               <CopyToClipboard
-                                text={item.transaction_id}
+                                text={item?.cypto}
                                 onCopy={handleCopy}
                               >
                                 <FaCopy className="cursor-pointer  " />
@@ -297,97 +286,6 @@ export default function WithdrawalHistory() {
             )}
           </div>
         </div>
-
-        {/* Withdrawal Details */}
-        {isVisible && (
-          <div className="animate-fade-down animate-duration-500 fixed top-0 left-0 w-full h-full flex justify-center pt-10 backdrop-blur-md z-[9999]">
-            <div className="text-white bg-gradient-to-r from-gray-700 rounded h-[70vh] to-slate-900 p-10 inline-block">
-              <h1 className="text-center text-2xl font-bold">
-                WITHDRAWAL DETAIL
-              </h1>
-              <div className="flex flex-col mt-6 gap-2">
-                <div className={`${classes1}`}>
-                  <p>Amount :</p>
-                  <p>
-                    {singleData.amount} {singleData.currency}
-                  </p>
-                </div>
-
-                <div className={`${classes1}`}>
-                  <p>Status :</p>
-                  <p>{singleData.status}</p>
-                </div>
-
-                {singleData.status === "Cancelled" && (
-                  <div className={`${classes1}`}>
-                    <p>Cancel Reason :</p>
-                    <p>{singleData.reason}</p>
-                  </div>
-                )}
-
-                {singleData.currency !== null && (
-                  <div className={`${classes1}`}>
-                    <p>To :</p>
-                    <p>
-                      {singleData.cypto.slice(0, 8)}...
-                      {singleData.cypto.slice(-6)}
-                    </p>
-                  </div>
-                )}
-
-                <div
-                  className={`${
-                    singleData.currency !== null ? "hidden" : "block"
-                  } ${classes1}`}
-                >
-                  <p>Account Holder :</p>
-                  <p>{singleData.name}</p>
-                </div>
-
-                <div
-                  className={`${
-                    singleData.currency !== null ? "hidden" : "block"
-                  } ${classes1}`}
-                >
-                  <p>Bank Name :</p>
-                  <p>{singleData.bank_name}</p>
-                </div>
-
-                <div
-                  className={`${
-                    singleData.currency !== null ? "hidden" : "block"
-                  } ${classes1}`}
-                >
-                  <p>Account No. :</p>
-                  <p>{singleData.ac_no}</p>
-                </div>
-
-                <div
-                  className={`${
-                    singleData.currency !== null ? "hidden" : "block"
-                  } ${classes1}`}
-                >
-                  <p>IFSC Code :</p>
-                  <p>{singleData.ifsc_code}</p>
-                </div>
-
-                <div className={`${classes1}`}>
-                  <p>Date :</p>
-                  <p>{singleData.date.split("T")[0]}</p>
-                </div>
-                <div className={`${classes1}`}>
-                  <p>Time :</p>
-                  <p>{singleData.date.split("T")[1]}</p>
-                </div>
-              </div>
-              <MdCancel
-                size={30}
-                onClick={() => setIsVisible(false)}
-                className="cursor-pointer mt-8 flex justify-center m-auto"
-              />
-            </div>
-          </div>
-        )}
       </div>
     </>
   );

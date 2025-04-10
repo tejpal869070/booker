@@ -7,6 +7,7 @@ import { Loading3 } from "../Loading1";
 import { Link } from "react-router-dom";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { toast, ToastContainer } from "react-toastify";
+import { FaCopy } from "react-icons/fa6";
 
 export default function Refer() {
   const [user, setUser] = useState();
@@ -53,6 +54,12 @@ export default function Refer() {
     }, 2000);
   };
 
+  const handleCopy3 = () => {
+    toast("Code copied. Share with your friends", {
+      position: "top-center",
+    });
+  };
+
   useEffect(() => {
     userDataGet();
   }, []);
@@ -95,7 +102,15 @@ export default function Refer() {
   return (
     <div className="md:max-w-sm m-auto">
       <ToastContainer />
-      <img src={img1} alt="poster" className="w-full" />
+      <div className="relative">
+        <img src={img1} alt="poster" className="w-full" />
+        <p className="absolute w-full bottom-0 backdrop-blur-sm bg-white/30 text-xs font-semibold italic   rounded my-1 text-center py-0.5 flex items-center gap-1 justify-center">
+          Referral Code: {user && user.reffer_code}{" "}
+          <CopyToClipboard text={user?.reffer_code} onCopy={handleCopy3}>
+            <FaCopy className="cursor-pointer  " />
+          </CopyToClipboard>
+        </p>
+      </div>
       <section className="relative flex p-2 rounded bg-gradient-to-r from-red-400 to-pink-500">
         <div className="w-1/2 rounded-l-md border border-r-0 rounded-r-0 border-indigo-500 flex flex-col items-center bg-gradient-to-r from-purple-500 to-purple-900">
           <h1 className="text-gray-800 font-semibold text-xs italic text-center px-4 py-1 bg-indigo-100 rounded-b-lg inline-block m-auto rounded-t-0 ">
@@ -115,7 +130,14 @@ export default function Refer() {
         </div>
       </section>
 
-      <div className="flex justift-around gap-[3%] items-center  py-2 mt-1">
+      {/* <p className="text-xs font-semibold italic bg-[#b4e4fd] rounded my-1 text-center pt-0.5 flex items-center gap-1 justify-center">
+        Referral Code: {user && user.reffer_code}{" "}
+        <CopyToClipboard text={user?.reffer_code} onCopy={handleCopy3}>
+          <FaCopy className="cursor-pointer  " />
+        </CopyToClipboard>
+      </p> */}
+
+      <div className="flex justift-around gap-[3%] items-center  py-2 ">
         <CopyToClipboard
           text={`${url}&position=L`}
           onCopy={handleCopy}

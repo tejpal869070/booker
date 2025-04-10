@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom/client";
 import HistoryTop from "./HistoryTop";
 import CountUp from "react-countup";
-import { ToastContainer, toast } from "react-toastify";
+ import { ToastContainer, toast } from "react-toastify";import 'react-toastify/dist/ReactToastify.css';
 
 export default function Manual() {
   const [amount, setAmount] = useState(100);

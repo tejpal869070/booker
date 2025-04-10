@@ -8,7 +8,7 @@ import {
 } from "../../Controllers/Auth/AuthController";
 import { Loading1 } from "../../Componentes/Loading1";
 import OTPInput from "react-otp-input";
-import { ToastContainer, toast } from "react-toastify";
+ import { ToastContainer, toast } from "react-toastify";import 'react-toastify/dist/ReactToastify.css';
 
 export default function ForgetPassword() {
   const [email, setEmail] = useState("");

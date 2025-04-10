@@ -18,6 +18,7 @@ export default function CoinFlip() {
   const [totalBalance, setTotalBalance] = useState(0);
   const [user, setUser] = useState({});
   const [isWon, setWon] = useState(false);
+  const [processing, setProcesssing] = useState(false);
 
   const [flipResult, setFlipResult] = useState(null);
   const [flipping, setFlipping] = useState(false);
@@ -37,15 +38,18 @@ export default function CoinFlip() {
 
   const flipCoin = async () => {
     toast.dismiss();
+    setProcesssing(true);
     if (amount < 1 || isNaN(amount)) {
       toast.warn("Minimum bet amount is $1", {
         position: "top-center",
       });
+      setProcesssing(false);
       return;
     } else if (!selected) {
       toast.warn("Please select a side", {
         position: "top-center",
       });
+      setProcesssing(false);
       return;
     } else if (amount > totalBalance) {
       toast.warn(
@@ -67,6 +71,7 @@ export default function CoinFlip() {
           position: "top-center",
         }
       );
+      setProcesssing(false);
       return;
     }
     const updateWallet = await updateWalletBalance("deduct", amountRef.current);
@@ -77,7 +82,9 @@ export default function CoinFlip() {
       const audio = new Audio(require("../../assets/audio/coin-flip-2.mp3"));
       audio.play();
       flipFunction();
+      setProcesssing(false);
     }
+    setProcesssing(false);
   };
 
   const flipFunction = () => {
@@ -209,7 +216,7 @@ export default function CoinFlip() {
                   <button
                     onClick={() => setSelected("heads")}
                     disabled={flipping}
-                    className={`rounded-l flex items-center gap-2 justify-center text-sm py-2 w-[48%] bg-gray-800 text-gray-200 text-center px-2 cursor-pointer ${
+                    className={`rounded-l hover:rounded-l-xl transition-all duration-300 ease-in-out flex items-center gap-2 justify-center text-sm py-2 w-[48%] bg-gray-800 text-gray-200 text-center px-2 cursor-pointer ${
                       selected === "heads" && "bg-indigo-500 shadow-md"
                     } `}
                   >
@@ -219,7 +226,7 @@ export default function CoinFlip() {
                   <button
                     onClick={() => setSelected("tails")}
                     disabled={flipping}
-                    className={`rounded-r flex items-center gap-2 justify-center text-sm py-2 w-[48%] bg-gray-800 text-gray-200 text-center px-2 cursor-pointer ${
+                    className={`rounded-r  hover:rounded-r-xl transition-all duration-300 ease-in-out flex items-center gap-2 justify-center text-sm py-2 w-[48%] bg-gray-800 text-gray-200 text-center px-2 cursor-pointer ${
                       selected === "tails" && "bg-indigo-500 shadow-md"
                     } `}
                   >
@@ -234,7 +241,7 @@ export default function CoinFlip() {
               ) : (
                 <button
                   onClick={() => flipCoin()}
-                  disabled={flipping}
+                  disabled={flipping || processing}
                   className="w-full rounded bg-[#20e701] font-semibold py-2 text-sm mt-3"
                 >
                   Place Bet

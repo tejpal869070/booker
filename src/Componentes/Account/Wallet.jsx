@@ -13,7 +13,7 @@ import { FaAngleRight } from "react-icons/fa";
 import { FaAngleLeft } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
 import VerifyPin from "../VerifyPin";
-import { ToastContainer, toast } from "react-toastify";
+ import { ToastContainer, toast } from "react-toastify";import 'react-toastify/dist/ReactToastify.css';
 import { MainGameWalletMoneyTransfer } from "../../Controllers/User/GamesController";
 import { IoGameController } from "react-icons/io5";
 import { FaUsers } from "react-icons/fa";

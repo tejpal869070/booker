@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom/client";
 import { mines } from "../../../assets/Data/GamesData";
-import { ToastContainer, toast } from "react-toastify";
+ import { ToastContainer, toast } from "react-toastify";import 'react-toastify/dist/ReactToastify.css';
 import { minesProfitTable } from "../../../assets/Data/MinesData";
 import { GetUserDetails } from "../../../Controllers/User/UserController";
 import { AiOutlineAreaChart } from "react-icons/ai";
