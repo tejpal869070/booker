@@ -12,7 +12,7 @@ export default function LevelIncome() {
   const [filteredData, setFilteredData] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const tableHead = ["S.No.", "USER", "position", "LEVEL", "PAYOUT", "Date"];
+  const tableHead = ["Trnx. Id", "USER", "position", "LEVEL", "PAYOUT", "Date"];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -101,7 +101,7 @@ export default function LevelIncome() {
                       className="odd:bg-white dark:text-gray-300 odd:dark:bg-gray-900 text-black font-medium even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
                     >
                       <td className="whitespace-nowrap px-6 py-4">
-                        {index + 1}
+                        {item.txtid}
                       </td>
 
                       <td className="whitespace-nowrap px-6 py-4">
@@ -153,7 +153,7 @@ export default function LevelIncome() {
                       </section>
                       <section className="flex justify-between items-center font-bold  ">
                         <p className="text-gray-400 font-normal">Trnx. Id</p>
-                        <p className="text-gray-200 font-normal">{item.id}</p>
+                        <p className="text-gray-200 font-normal">{item.txtid}</p>
                       </section>
                     </div>
                   </div>

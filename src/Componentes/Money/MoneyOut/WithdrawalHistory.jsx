@@ -132,7 +132,7 @@ export default function WithdrawalHistory() {
                   <thead className="text-xs font-semibold text-black uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                       <th scope="col" className="px-4 py-3">
-                        S.No.
+                        Trnx Id
                       </th>
                       <th scope="col" className="px-4 py-3">
                         AMOUNT
@@ -168,7 +168,7 @@ export default function WithdrawalHistory() {
                           scope="row"
                           className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  dark:text-white"
                         >
-                          {index + 1}.
+                          {item.txtid}
                         </th>
                         <td className="whitespace-nowrap px-4 py-4">
                           {item.currency === null ? "$ " : ""}
@@ -254,8 +254,16 @@ export default function WithdrawalHistory() {
                               </CopyToClipboard>
                             </p>
                           </section>
+                          <section className="flex justify-between items-center font-bold  ">
+                            <p className="text-gray-400 font-normal">
+                              Transection Id
+                            </p>
+                            <p className="text-gray-200 font-normal flex items-center gap-1">
+                              {item.txtid}
+                            </p>
+                          </section>
                           {item.status === "Cancelled" && (
-                            <section className="flex justify-between   font-bold  ">
+                            <section className="flex justify-between font-bold">
                               <p className="text-gray-400 font-normal">
                                 Reason
                               </p>

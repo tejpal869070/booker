@@ -109,7 +109,7 @@ export default function InvestmentPage() {
               </p>
               <div className="flex justify-between text-gray-700 font-medium mt-2 ">
                 <p>Till Payout</p>
-                <p>${item.total_return_amount}</p>
+                <p>${Number(item.total_return_amount).toFixed(3)}</p>
               </div>
               <div className="flex justify-between  text-gray-700 font-medium">
                 <p>Start</p>

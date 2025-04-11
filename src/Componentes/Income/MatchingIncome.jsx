@@ -12,24 +12,24 @@ export default function MatchingIncome() {
   const [filteredData, setFilteredData] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const tableHead = ["S.No.", "Plan name", "Matched user", "INcome", "Date"];
+  const tableHead = ["Trnx. ID", "Plan name", "Matched user", "INcome", "Date"];
+
+  const fetchData = async () => {
+    const response = await GetMatchingIncome();
+    if (response !== null) {
+      const updatedData = response?.map((item) => {
+        const { id, reffer_by, reffer_code, ...rest } = item;
+        return rest;
+      });
+      setTableData(updatedData);
+      setLoading(false);
+    } else {
+      setTableData([]);
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await GetMatchingIncome();
-      if (response !== null) {
-        const updatedData = response?.map((item) => {
-          const { id, reffer_by, reffer_code, ...rest } = item;
-          return rest;
-        });
-        setTableData(updatedData);
-        setLoading(false);
-      } else {
-        setTableData([]);
-        setLoading(false);
-      }
-    };
-
     fetchData();
   }, []);
 
@@ -57,6 +57,7 @@ export default function MatchingIncome() {
       setFilteredData(filteredData);
     }
   }, [startDate, endDate, tableData]);
+ 
 
   if (loading) {
     return (
@@ -67,7 +68,7 @@ export default function MatchingIncome() {
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen"> 
       <p className="font-bold text-xl mb-6 dark:text-white text-center md:text-left hidden md:block">
         Matching Income
       </p>
@@ -109,7 +110,7 @@ export default function MatchingIncome() {
                     className="odd:bg-white dark:text-gray-300 odd:dark:bg-gray-900 text-black font-medium even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
                   >
                     <td className="whitespace-nowrap px-6 py-4">
-                      {index + 1}.
+                      {item.txtid}.
                     </td>
                     <td className="whitespace-nowrap px-6 py-4">{item.plan}</td>
                     <td className="flex  gap-2 whitespace-nowrap px-6 py-4 ">
@@ -162,6 +163,12 @@ export default function MatchingIncome() {
                         <p className="text-gray-400 font-normal">Time</p>
                         <p className="text-gray-200 font-normal">
                           {item.date.split("T")[0]}
+                        </p>
+                      </section>
+                      <section className="flex justify-between items-center font-bold  ">
+                        <p className="text-gray-400 font-normal">Transection Id</p>
+                        <p className="text-gray-200 font-normal">
+                          {item.txtid}
                         </p>
                       </section>
                     </div>

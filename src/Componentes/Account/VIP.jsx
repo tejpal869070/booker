@@ -23,7 +23,6 @@ export default function VIP() {
   const [rewardedAmount, setRewarededAmount] = useState(0);
   const [isSuccess, setSuccess] = useState(false);
   const [history, setHistory] = useState([]);
- 
 
   const settings = {
     dots: true,
@@ -87,7 +86,7 @@ export default function VIP() {
       setSuccess(true);
       setTimeout(() => {
         setSuccess(false);
-        getAllStatement()
+        getAllStatement();
       }, 1500);
       userDataGet();
     } catch (error) {
@@ -200,7 +199,7 @@ export default function VIP() {
                 maxCompleted={100}
                 height="15px"
                 labelSize="11px"
-                className=""
+                className="border-2 rounded-full shadow-md"
               />
 
               {/* <ProgressBar

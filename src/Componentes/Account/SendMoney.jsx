@@ -5,15 +5,16 @@ import {
   SendMoneyToUser,
 } from "../../Controllers/Auth/AuthController";
 import { Loading1 } from "../Loading1";
- import { ToastContainer, toast } from "react-toastify";import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import gif1 from "../../assets/photos/sendmoneygif.gif";
-import VerifyPin from "../VerifyPin"; 
+import VerifyPin from "../VerifyPin";
 
 export default function SendMoney() {
   const [sendTo, setSendTo] = useState("");
   const [mobile, setMobile] = useState("");
   const [amount, setAmount] = useState("");
-  const [pin, setPin] = useState(""); 
+  const [pin, setPin] = useState("");
   const [success, setSuccess] = useState(null);
   const [loading, setLoading] = useState(false);
   const [userVerified, setUserVerified] = useState(false);
@@ -151,7 +152,7 @@ export default function SendMoney() {
             <div className="w-full md:w-1/2 bg-indigo-200  p-2">
               <img
                 alt="animation"
-                className="w-full rounded-t-xl md:rounded-xl h-full "
+                className="w-full rounded-t-2xl md:rounded-2xl h-full "
                 src={gif1}
               />
             </div>
@@ -160,7 +161,7 @@ export default function SendMoney() {
                 <h1 className="font-bold text-3xl text-gray-900">
                   WALLET MONEY TRANSFER
                 </h1>
-                <p className=" mt-2 font-medium text-lg text-[green] mb-4">
+                <p className=" mt-2 font-medium text-lg  text-black italic  mb-4">
                   Account Balance: $
                   {user && Number(user.wallet_balance).toFixed(2)}
                 </p>

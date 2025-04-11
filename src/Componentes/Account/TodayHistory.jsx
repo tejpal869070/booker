@@ -80,7 +80,7 @@ export default function TodayHistory() {
                   <thead className="text-xs font-semibold text-black uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                       <th scope="col" className="px-4 py-3">
-                        S.No.
+                        Trnx Id
                       </th>
                       <th scope="col" className="px-6 py-3">
                         TYPE
@@ -115,7 +115,7 @@ export default function TodayHistory() {
                           scope="row"
                           className="px-6 py-3 font-medium text-gray-900 whitespace-nowrap  dark:text-white"
                         >
-                          {index + 1}.
+                          {item.txtid}
                         </th>
                         <td className="whitespace-nowrap px-4 py-3">
                           {item.type}
@@ -173,7 +173,7 @@ export default function TodayHistory() {
                             {item.status}
                           </p>
                         </section>
-                        <div className="pt-2 font-thin flex flex-col gap-1">
+                        <div className="pt-2 font-thin flex flex-col gap-0.5">
                           <section className="flex justify-between items-center font-bold  ">
                             <p className="text-gray-400 font-normal">Amount</p>
                             <p className="text-[#FEAA57]">$ {item.amount}</p>
@@ -184,14 +184,7 @@ export default function TodayHistory() {
                               {item.date.split("T")[0]}
                             </p>
                           </section>
-                          <section className="flex justify-between items-center font-bold  ">
-                            <p className="text-gray-400 font-normal">
-                              Deposit Id
-                            </p>
-                            <p className="text-gray-200 font-normal">
-                              {item.id}
-                            </p>
-                          </section>
+
                           <section className="flex justify-between items-center font-bold  ">
                             <p className="text-gray-400 font-normal">
                               Description
@@ -210,6 +203,14 @@ export default function TodayHistory() {
                               </p>
                             </section>
                           )}
+                          <section className="flex justify-between items-center font-bold  ">
+                            <p className="text-gray-400 font-normal">
+                              Transection Id
+                            </p>
+                            <p className="text-gray-200 font-normal">
+                              {item.txtid}
+                            </p>
+                          </section>
                         </div>
                       </div>
                     ))}

@@ -119,7 +119,7 @@ export default function GameWalletHistory() {
                   <thead className="text-xs font-semibold text-black uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                       <th scope="col" className="px-4 py-3">
-                        ID.
+                        Trnx. Id
                       </th>
                       {/* <th scope="col" className="px-6 py-3">
                       TYPE
@@ -154,7 +154,7 @@ export default function GameWalletHistory() {
                           scope="row"
                           className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap  dark:text-white"
                         >
-                          {item.id}.
+                          {item.txtid}.
                         </th>
                         {/* <td className="whitespace-nowrap px-4 py-2">{item.type}</td> */}
                         <td className="whitespace-nowrap px-6 py-2">
@@ -284,9 +284,9 @@ export default function GameWalletHistory() {
                             </p>
                           </section>
                           <section className="flex justify-between items-center font-bold  ">
-                            <p className="text-gray-400 font-normal">Id</p>
+                            <p className="text-gray-400 font-normal">Transection Id</p>
                             <p className="text-gray-200 font-normal">
-                              {item.id}
+                              {item.txtid}
                             </p>
                           </section>
                           {item.status === "Cancelled" && (

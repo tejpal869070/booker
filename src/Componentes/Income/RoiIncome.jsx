@@ -12,7 +12,7 @@ export default function RoiIncome() {
   const [filteredData, setFilteredData] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const tableHead = ["Id", "INVESTED AMOUNT", "PAYOUT", "TOTAL PAYOUT", "Date"];
+  const tableHead = ["Trnx. Id", "INVESTED AMOUNT", "PAYOUT", "TOTAL PAYOUT", "Date"];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -108,7 +108,7 @@ export default function RoiIncome() {
                     key={index}
                     className="odd:bg-white dark:text-gray-300 odd:dark:bg-gray-900 text-black font-medium even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
                   >
-                    <td className="whitespace-nowrap px-6 py-4">{item?.id}</td>
+                    <td className="whitespace-nowrap px-6 py-4">{item?.txtid}</td>
 
                     <td className="whitespace-nowrap px-6 py-4">
                       $ {item.investment_amount}
@@ -170,7 +170,7 @@ export default function RoiIncome() {
                       </section>
                       <section className="flex justify-between items-center font-bold  ">
                         <p className="text-gray-400 font-normal">Trnx. Id</p>
-                        <p className="text-gray-200 font-normal">{item.id}</p>
+                        <p className="text-gray-200 font-normal">{item.txtid}</p>
                       </section>
                     </div>
                   </div>

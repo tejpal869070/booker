@@ -321,3 +321,21 @@
 .tails {
   transform: rotateX(180deg); /* Tails is at the back */
 }
+
+
+
+
+
+
+
+
+.css-1bioabq {
+  overflow: scroll;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari, and Opera */
+.css-1bioabq::-webkit-scrollbar {
+  display: none;
+}

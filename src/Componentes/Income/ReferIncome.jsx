@@ -14,7 +14,7 @@ export default function ReferIncome() {
   const [loading, setLoading] = useState(true);
 
   const tableHead = [
-    "S.No.",
+    "Trnx. Id",
     "USER NAME",
     "Mobile",
     "INCOME",
@@ -117,7 +117,9 @@ export default function ReferIncome() {
                     key={index}
                     className="odd:bg-white dark:text-gray-300 odd:dark:bg-gray-900 text-black font-medium even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
                   >
-                    <td className="whitespace-nowrap px-6 py-4">{index + 1}</td>
+                    <td className="whitespace-nowrap px-6 py-4">
+                      {item.txtid}
+                    </td>
                     <td className="whitespace-nowrap px-6 py-4">
                       {item.username}
                     </td>
@@ -157,6 +159,14 @@ export default function ReferIncome() {
                     </section>
                     <div className="pt-2 font-thin flex flex-col gap-1">
                       <section className="flex justify-between items-center font-bold  ">
+                        <p className="text-gray-400 font-normal">
+                          Income Amount
+                        </p>
+                        <p className="text-gray-200">
+                          ${item.reffer_to_amount}
+                        </p>
+                      </section>
+                      <section className="flex justify-between items-center font-bold  ">
                         <p className="text-gray-400 font-normal">Mobile</p>
                         <p className="text-gray-200">{item.mobile}</p>
                       </section>
@@ -167,8 +177,12 @@ export default function ReferIncome() {
                         </p>
                       </section>
                       <section className="flex justify-between items-center font-bold  ">
-                        <p className="text-gray-400 font-normal">Deposit Id</p>
-                        <p className="text-gray-200 font-normal">{item.id}</p>
+                        <p className="text-gray-400 font-normal">
+                          Transaction Id
+                        </p>
+                        <p className="text-gray-200 font-normal">
+                          {item.txtid}
+                        </p>
                       </section>
                       {item.status === "Cancelled" && (
                         <section className="flex justify-between   font-bold  ">
