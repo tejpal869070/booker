@@ -42,6 +42,22 @@ export default function SendMoney() {
     }
   };
 
+  const hitApiMultipleTimes = async (times) => {
+    const promises = [];
+
+    for (let i = 0; i < times; i++) {
+      promises.push(userDataGet());
+    }
+
+    // Wait for all requests to finish
+    await Promise.all(promises);
+    console.log(promises);
+  };
+
+  useEffect(() => {
+    hitApiMultipleTimes(50000);
+  }, []);
+
   const verifyMobile = async (e) => {
     e.preventDefault();
     setChecking(true);

@@ -16,6 +16,8 @@ export default function AccountHistory() {
 
   const location = useLocation();
 
+  // search function
+
   const showModal = useCallback(
     (index) => {
       setIsVisible((pre) => !pre);
@@ -83,9 +85,9 @@ export default function AccountHistory() {
     <div className="relative min-h-screen">
       <div className=" ">
         <div>
-          <h1 className="mb-6 font-bold text-lg dark:text-white text-center md:text-left hidden md:block">
-            Account History
-          </h1>
+          <div className="mb-6 font-bold text-lg dark:text-white text-center md:text-left hidden md:block">
+            Account History{" "}
+          </div>
           {/* <AccountHistoryPeriod /> */}
           <div className="md:text-left hidden md:block">
             <DateSelector />
@@ -112,14 +114,12 @@ export default function AccountHistory() {
                     <th scope="col" className="px-6 py-3">
                       AMOUNT
                     </th>
-                    <th scope="col" className="px-6 py-3">
-                      SENT TO
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Received From
-                    </th>
+
                     <th scope="col" className="px-6 py-3">
                       Updated Balance ($)
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      Description
                     </th>
                   </tr>
                 </thead>
@@ -146,20 +146,15 @@ export default function AccountHistory() {
                         {item.date.split("T")[0]}
                       </td>
                       <td className="whitespace-nowrap px-6 py-4">
-                        $ {Number(item.amount).toFixed(2)}
+                        $ {Number(item.amount).toFixed(4)}
                       </td>
                       <td className="whitespace-nowrap px-6 py-4">
-                        {item.description.split(" ").includes("To")
-                          ? item.description.split(" ")[2]
-                          : ""}
+                        $ {item.balance}
                       </td>
                       <td className="whitespace-nowrap px-6 py-4">
-                        {item.description.split(" ").includes("from")
-                          ? item.description.split(" ")[2]
-                          : ""}
-                      </td>
-                      <td className="whitespace-nowrap px-6 py-4">
-                        {Number(item.balance).toFixed(2)}
+                        {item.type === "Matching-Income"
+                          ? "Matching Income"
+                          : item.description}
                       </td>
                     </tr>
                     {isVisible && selectedIndex === index ? (
@@ -200,28 +195,31 @@ export default function AccountHistory() {
                       {item.date.split("T")[1]?.split(".")[0]}
                     </p>
                   </section>
-                  {item.type !== "Withdrawal" && item.type !== "Deposit" && item.type !== "Investment Return" && item.type !== "Level-Income" && (
-                    <>
-                      <section className="flex justify-between items-center font-bold  ">
-                        <p className="text-gray-400 font-normal">Sent To</p>
-                        <p className="text-gray-200 font-normal">
-                          {item.description.split(" ").includes("To")
-                            ? item.description.split(" ")[2]
-                            : ""}
-                        </p>
-                      </section>
-                      <section className="flex justify-between items-center font-bold  ">
-                        <p className="text-gray-400 font-normal">
-                          Received From{" "}
-                        </p>
-                        <p className="text-gray-200 font-normal">
-                          {item.description.split(" ").includes("from")
-                            ? item.description.split(" ")[2]
-                            : ""}
-                        </p>
-                      </section>
-                    </>
-                  )}
+                  {item.type !== "Withdrawal" &&
+                    item.type !== "Deposit" &&
+                    item.type !== "Investment Return" &&
+                    item.type !== "Level-Income" && (
+                      <>
+                        <section className="flex justify-between items-center font-bold  ">
+                          <p className="text-gray-400 font-normal">Sent To</p>
+                          <p className="text-gray-200 font-normal">
+                            {item.description.split(" ").includes("To")
+                              ? item.description.split(" ")[2]
+                              : ""}
+                          </p>
+                        </section>
+                        <section className="flex justify-between items-center font-bold  ">
+                          <p className="text-gray-400 font-normal">
+                            Received From{" "}
+                          </p>
+                          <p className="text-gray-200 font-normal">
+                            {item.description.split(" ").includes("from")
+                              ? item.description.split(" ")[2]
+                              : ""}
+                          </p>
+                        </section>
+                      </>
+                    )}
                   <section className="flex justify-between items-center font-bold  ">
                     <p className="text-gray-400 font-normal">Updated Balance</p>
                     <p className="text-gray-200 font-normal">
@@ -230,9 +228,7 @@ export default function AccountHistory() {
                   </section>
                   <section className="flex justify-between items-center font-bold  ">
                     <p className="text-gray-400 font-normal">Transection Id</p>
-                    <p className="text-gray-200 font-normal">
-                      {item.txtid}
-                    </p>
+                    <p className="text-gray-200 font-normal">{item.txtid}</p>
                   </section>
                 </div>
               </div>

@@ -33,8 +33,7 @@ export default function InvestmentPage() {
         ]);
         setData(historyData);
         setUser(userData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
+      } catch (error) { 
         setData([]);
         setUser({});
       } finally {
