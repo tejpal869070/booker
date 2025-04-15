@@ -120,7 +120,7 @@ export default function ReferIncome() {
                     <td className="whitespace-nowrap px-6 py-4">
                       {item.txtid}
                     </td>
-                    <td className="whitespace-nowrap px-6 py-4">
+                    <td className="whitespace-nowrap px-6 py-4 capitalize">
                       {item.username}
                     </td>
                     <td className="whitespace-nowrap px-6 py-4">
@@ -144,7 +144,7 @@ export default function ReferIncome() {
                 filteredData?.map((item, index) => (
                   <div className="rounded  shadow-lg bg-gray-800 p-3 mb-2">
                     <section className="border-b-[0.5px] border-gray-600 pb-2  flex justify-between items-center font-semibold  ">
-                      <p className="px-2 bg-indigo-500 inline text-gray-200 rounded py-0.5">
+                      <p className="px-2 bg-indigo-500 inline text-gray-200 rounded py-0.5 capitalize">
                         {item.username}
                       </p>
                       <p

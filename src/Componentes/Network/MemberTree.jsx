@@ -212,30 +212,52 @@ export default function MemberTree() {
                 uid: getNestedChild(data?.Root, "L", "L", "L")?.uid || "",
                 children: [
                   {
-                    name: getNestedChild(data?.Root, "L", "L", "L","L")?.username || "",
-                    uid: getNestedChild(data?.Root, "L", "L", "L","L")?.uid || "",
+                    name:
+                      getNestedChild(data?.Root, "L", "L", "L", "L")
+                        ?.username || "",
+                    uid:
+                      getNestedChild(data?.Root, "L", "L", "L", "L")?.uid || "",
                     children: [
                       {
-                        name: getNestedChild(data?.Root, "L", "L", "L","L","L")?.username || "",
-                        uid: getNestedChild(data?.Root, "L", "L", "L","L","L")?.uid || "",
+                        name:
+                          getNestedChild(data?.Root, "L", "L", "L", "L", "L")
+                            ?.username || "",
+                        uid:
+                          getNestedChild(data?.Root, "L", "L", "L", "L", "L")
+                            ?.uid || "",
                       },
                       {
-                        name: getNestedChild(data?.Root, "L", "L", "L", "L","R")?.username || "",
-                        uid: getNestedChild(data?.Root, "L", "L", "L", "L", "R")?.uid || "",
+                        name:
+                          getNestedChild(data?.Root, "L", "L", "L", "L", "R")
+                            ?.username || "",
+                        uid:
+                          getNestedChild(data?.Root, "L", "L", "L", "L", "R")
+                            ?.uid || "",
                       },
                     ],
                   },
                   {
-                    name: getNestedChild(data?.Root, "L", "L", "L", "R")?.username || "",
-                    uid: getNestedChild(data?.Root, "L", "L", "L", "R")?.uid || "",
+                    name:
+                      getNestedChild(data?.Root, "L", "L", "L", "R")
+                        ?.username || "",
+                    uid:
+                      getNestedChild(data?.Root, "L", "L", "L", "R")?.uid || "",
                     children: [
                       {
-                        name: getNestedChild(data?.Root, "L", "L", "L", "R","L")?.username || "",
-                        uid: getNestedChild(data?.Root, "L", "L", "L", "R","L")?.uid || "",
+                        name:
+                          getNestedChild(data?.Root, "L", "L", "L", "R", "L")
+                            ?.username || "",
+                        uid:
+                          getNestedChild(data?.Root, "L", "L", "L", "R", "L")
+                            ?.uid || "",
                       },
                       {
-                        name: getNestedChild(data?.Root, "L", "L", "L", "R","R")?.username || "",
-                        uid: getNestedChild(data?.Root, "L", "L", "L", "R", "R")?.uid || "",
+                        name:
+                          getNestedChild(data?.Root, "L", "L", "L", "R", "R")
+                            ?.username || "",
+                        uid:
+                          getNestedChild(data?.Root, "L", "L", "L", "R", "R")
+                            ?.uid || "",
                       },
                     ],
                   },
@@ -246,30 +268,52 @@ export default function MemberTree() {
                 uid: getNestedChild(data?.Root, "L", "L", "R")?.uid || "",
                 children: [
                   {
-                    name: getNestedChild(data?.Root, "L", "L", "R","L")?.username || "",
-                    uid: getNestedChild(data?.Root, "L", "L", "R","L")?.uid || "",
+                    name:
+                      getNestedChild(data?.Root, "L", "L", "R", "L")
+                        ?.username || "",
+                    uid:
+                      getNestedChild(data?.Root, "L", "L", "R", "L")?.uid || "",
                     children: [
                       {
-                        name: getNestedChild(data?.Root, "L", "L", "R","L","L")?.username || "",
-                        uid: getNestedChild(data?.Root, "L", "L", "R","L","L")?.uid || "",
+                        name:
+                          getNestedChild(data?.Root, "L", "L", "R", "L", "L")
+                            ?.username || "",
+                        uid:
+                          getNestedChild(data?.Root, "L", "L", "R", "L", "L")
+                            ?.uid || "",
                       },
                       {
-                        name: getNestedChild(data?.Root, "L", "L", "R","L","R")?.username || "",
-                        uid: getNestedChild(data?.Root, "L", "L", "R","L", "R")?.uid || "",
+                        name:
+                          getNestedChild(data?.Root, "L", "L", "R", "L", "R")
+                            ?.username || "",
+                        uid:
+                          getNestedChild(data?.Root, "L", "L", "R", "L", "R")
+                            ?.uid || "",
                       },
                     ],
                   },
                   {
-                    name: getNestedChild(data?.Root, "L", "L", "R", "R")?.username || "",
-                    uid: getNestedChild(data?.Root, "L", "L", "R", "R")?.uid || "",
+                    name:
+                      getNestedChild(data?.Root, "L", "L", "R", "R")
+                        ?.username || "",
+                    uid:
+                      getNestedChild(data?.Root, "L", "L", "R", "R")?.uid || "",
                     children: [
                       {
-                        name: getNestedChild(data?.Root, "L", "L", "R", "R","L")?.username || "",
-                        uid: getNestedChild(data?.Root, "L", "L", "R", "R","L")?.uid || "",
+                        name:
+                          getNestedChild(data?.Root, "L", "L", "R", "R", "L")
+                            ?.username || "",
+                        uid:
+                          getNestedChild(data?.Root, "L", "L", "R", "R", "L")
+                            ?.uid || "",
                       },
                       {
-                        name: getNestedChild(data?.Root, "L", "L", "R", "R","R")?.username || "",
-                        uid: getNestedChild(data?.Root, "L", "L", "R", "R", "R")?.uid || "",
+                        name:
+                          getNestedChild(data?.Root, "L", "L", "R", "R", "R")
+                            ?.username || "",
+                        uid:
+                          getNestedChild(data?.Root, "L", "L", "R", "R", "R")
+                            ?.uid || "",
                       },
                     ],
                   },
@@ -286,30 +330,52 @@ export default function MemberTree() {
                 uid: getNestedChild(data?.Root, "L", "R", "L")?.uid || "",
                 children: [
                   {
-                    name: getNestedChild(data?.Root, "L", "R", "L","L")?.username || "",
-                    uid: getNestedChild(data?.Root, "L", "R", "L","L")?.uid || "",
+                    name:
+                      getNestedChild(data?.Root, "L", "R", "L", "L")
+                        ?.username || "",
+                    uid:
+                      getNestedChild(data?.Root, "L", "R", "L", "L")?.uid || "",
                     children: [
                       {
-                        name: getNestedChild(data?.Root, "L", "R", "L","L","L")?.username || "",
-                        uid: getNestedChild(data?.Root, "L", "R", "L","L","L")?.uid || "",
+                        name:
+                          getNestedChild(data?.Root, "L", "R", "L", "L", "L")
+                            ?.username || "",
+                        uid:
+                          getNestedChild(data?.Root, "L", "R", "L", "L", "L")
+                            ?.uid || "",
                       },
                       {
-                        name: getNestedChild(data?.Root, "L", "R", "L","L","R")?.username || "",
-                        uid: getNestedChild(data?.Root, "L", "R", "L","L", "R")?.uid || "",
+                        name:
+                          getNestedChild(data?.Root, "L", "R", "L", "L", "R")
+                            ?.username || "",
+                        uid:
+                          getNestedChild(data?.Root, "L", "R", "L", "L", "R")
+                            ?.uid || "",
                       },
                     ],
                   },
                   {
-                    name: getNestedChild(data?.Root, "L", "R", "L", "R")?.username || "",
-                    uid: getNestedChild(data?.Root, "L", "R", "L", "R")?.uid || "",
+                    name:
+                      getNestedChild(data?.Root, "L", "R", "L", "R")
+                        ?.username || "",
+                    uid:
+                      getNestedChild(data?.Root, "L", "R", "L", "R")?.uid || "",
                     children: [
                       {
-                        name: getNestedChild(data?.Root, "L", "R", "L", "R","L")?.username || "",
-                        uid: getNestedChild(data?.Root, "L", "R", "L", "R","L")?.uid || "",
+                        name:
+                          getNestedChild(data?.Root, "L", "R", "L", "R", "L")
+                            ?.username || "",
+                        uid:
+                          getNestedChild(data?.Root, "L", "R", "L", "R", "L")
+                            ?.uid || "",
                       },
                       {
-                        name: getNestedChild(data?.Root, "L", "R", "L", "R","R")?.username || "",
-                        uid: getNestedChild(data?.Root, "L", "R", "L", "R", "R")?.uid || "",
+                        name:
+                          getNestedChild(data?.Root, "L", "R", "L", "R", "R")
+                            ?.username || "",
+                        uid:
+                          getNestedChild(data?.Root, "L", "R", "L", "R", "R")
+                            ?.uid || "",
                       },
                     ],
                   },
@@ -320,30 +386,52 @@ export default function MemberTree() {
                 uid: getNestedChild(data?.Root, "L", "R", "R")?.uid || "",
                 children: [
                   {
-                    name: getNestedChild(data?.Root, "L", "R", "R","L")?.username || "",
-                    uid: getNestedChild(data?.Root, "L", "R", "R","L")?.uid || "",
+                    name:
+                      getNestedChild(data?.Root, "L", "R", "R", "L")
+                        ?.username || "",
+                    uid:
+                      getNestedChild(data?.Root, "L", "R", "R", "L")?.uid || "",
                     children: [
                       {
-                        name: getNestedChild(data?.Root, "L", "R", "R","L","L")?.username || "",
-                        uid: getNestedChild(data?.Root, "L", "R", "R","L","L")?.uid || "",
+                        name:
+                          getNestedChild(data?.Root, "L", "R", "R", "L", "L")
+                            ?.username || "",
+                        uid:
+                          getNestedChild(data?.Root, "L", "R", "R", "L", "L")
+                            ?.uid || "",
                       },
                       {
-                        name: getNestedChild(data?.Root, "L", "R", "R","L","R")?.username || "",
-                        uid: getNestedChild(data?.Root, "L", "R", "R","L", "R")?.uid || "",
+                        name:
+                          getNestedChild(data?.Root, "L", "R", "R", "L", "R")
+                            ?.username || "",
+                        uid:
+                          getNestedChild(data?.Root, "L", "R", "R", "L", "R")
+                            ?.uid || "",
                       },
                     ],
                   },
                   {
-                    name: getNestedChild(data?.Root, "L", "R", "R", "R")?.username || "",
-                    uid: getNestedChild(data?.Root, "L", "R", "R", "R")?.uid || "",
+                    name:
+                      getNestedChild(data?.Root, "L", "R", "R", "R")
+                        ?.username || "",
+                    uid:
+                      getNestedChild(data?.Root, "L", "R", "R", "R")?.uid || "",
                     children: [
                       {
-                        name: getNestedChild(data?.Root, "L", "R", "R", "R","L")?.username || "",
-                        uid: getNestedChild(data?.Root, "L", "R", "R", "R","L")?.uid || "",
+                        name:
+                          getNestedChild(data?.Root, "L", "R", "R", "R", "L")
+                            ?.username || "",
+                        uid:
+                          getNestedChild(data?.Root, "L", "R", "R", "R", "L")
+                            ?.uid || "",
                       },
                       {
-                        name: getNestedChild(data?.Root, "L", "R", "R", "R","R")?.username || "",
-                        uid: getNestedChild(data?.Root, "L", "R", "R", "R", "R")?.uid || "",
+                        name:
+                          getNestedChild(data?.Root, "L", "R", "R", "R", "R")
+                            ?.username || "",
+                        uid:
+                          getNestedChild(data?.Root, "L", "R", "R", "R", "R")
+                            ?.uid || "",
                       },
                     ],
                   },
@@ -366,30 +454,52 @@ export default function MemberTree() {
                 uid: getNestedChild(data?.Root, "R", "L", "L")?.uid || "",
                 children: [
                   {
-                    name: getNestedChild(data?.Root, "R", "L", "L","L")?.username || "",
-                    uid: getNestedChild(data?.Root, "R", "L", "L","L")?.uid || "",
+                    name:
+                      getNestedChild(data?.Root, "R", "L", "L", "L")
+                        ?.username || "",
+                    uid:
+                      getNestedChild(data?.Root, "R", "L", "L", "L")?.uid || "",
                     children: [
                       {
-                        name: getNestedChild(data?.Root, "R", "L", "L","L","L")?.username || "",
-                        uid: getNestedChild(data?.Root, "R", "L", "L","L","L")?.uid || "",
+                        name:
+                          getNestedChild(data?.Root, "R", "L", "L", "L", "L")
+                            ?.username || "",
+                        uid:
+                          getNestedChild(data?.Root, "R", "L", "L", "L", "L")
+                            ?.uid || "",
                       },
                       {
-                        name: getNestedChild(data?.Root, "R", "L", "L","L","R")?.username || "",
-                        uid: getNestedChild(data?.Root, "R", "L", "L","L", "R")?.uid || "",
+                        name:
+                          getNestedChild(data?.Root, "R", "L", "L", "L", "R")
+                            ?.username || "",
+                        uid:
+                          getNestedChild(data?.Root, "R", "L", "L", "L", "R")
+                            ?.uid || "",
                       },
                     ],
                   },
                   {
-                    name: getNestedChild(data?.Root, "R", "L", "L", "R")?.username || "",
-                    uid: getNestedChild(data?.Root, "R", "L", "L", "R")?.uid || "",
+                    name:
+                      getNestedChild(data?.Root, "R", "L", "L", "R")
+                        ?.username || "",
+                    uid:
+                      getNestedChild(data?.Root, "R", "L", "L", "R")?.uid || "",
                     children: [
                       {
-                        name: getNestedChild(data?.Root, "R", "L", "L", "R","L")?.username || "",
-                        uid: getNestedChild(data?.Root, "R", "L", "L", "R","L")?.uid || "",
+                        name:
+                          getNestedChild(data?.Root, "R", "L", "L", "R", "L")
+                            ?.username || "",
+                        uid:
+                          getNestedChild(data?.Root, "R", "L", "L", "R", "L")
+                            ?.uid || "",
                       },
                       {
-                        name: getNestedChild(data?.Root, "R", "L", "L", "R","R")?.username || "",
-                        uid: getNestedChild(data?.Root, "R", "L", "L", "R", "R")?.uid || "",
+                        name:
+                          getNestedChild(data?.Root, "R", "L", "L", "R", "R")
+                            ?.username || "",
+                        uid:
+                          getNestedChild(data?.Root, "R", "L", "L", "R", "R")
+                            ?.uid || "",
                       },
                     ],
                   },
@@ -400,30 +510,52 @@ export default function MemberTree() {
                 uid: getNestedChild(data?.Root, "R", "L", "R")?.uid || "",
                 children: [
                   {
-                    name: getNestedChild(data?.Root, "R", "L", "R","L")?.username || "",
-                    uid: getNestedChild(data?.Root, "R", "L", "R","L")?.uid || "",
+                    name:
+                      getNestedChild(data?.Root, "R", "L", "R", "L")
+                        ?.username || "",
+                    uid:
+                      getNestedChild(data?.Root, "R", "L", "R", "L")?.uid || "",
                     children: [
                       {
-                        name: getNestedChild(data?.Root, "R", "L", "R","L","L")?.username || "",
-                        uid: getNestedChild(data?.Root, "R", "L", "R","L","L")?.uid || "",
+                        name:
+                          getNestedChild(data?.Root, "R", "L", "R", "L", "L")
+                            ?.username || "",
+                        uid:
+                          getNestedChild(data?.Root, "R", "L", "R", "L", "L")
+                            ?.uid || "",
                       },
                       {
-                        name: getNestedChild(data?.Root, "R", "L", "R","L","R")?.username || "",
-                        uid: getNestedChild(data?.Root, "R", "L", "R","L", "R")?.uid || "",
+                        name:
+                          getNestedChild(data?.Root, "R", "L", "R", "L", "R")
+                            ?.username || "",
+                        uid:
+                          getNestedChild(data?.Root, "R", "L", "R", "L", "R")
+                            ?.uid || "",
                       },
                     ],
                   },
                   {
-                    name: getNestedChild(data?.Root, "R", "L", "R", "R")?.username || "",
-                    uid: getNestedChild(data?.Root, "R", "L", "R", "R")?.uid || "",
+                    name:
+                      getNestedChild(data?.Root, "R", "L", "R", "R")
+                        ?.username || "",
+                    uid:
+                      getNestedChild(data?.Root, "R", "L", "R", "R")?.uid || "",
                     children: [
                       {
-                        name: getNestedChild(data?.Root, "R", "L", "R", "R","L")?.username || "",
-                        uid: getNestedChild(data?.Root, "R", "L", "R", "R","L")?.uid || "",
+                        name:
+                          getNestedChild(data?.Root, "R", "L", "R", "R", "L")
+                            ?.username || "",
+                        uid:
+                          getNestedChild(data?.Root, "R", "L", "R", "R", "L")
+                            ?.uid || "",
                       },
                       {
-                        name: getNestedChild(data?.Root, "R", "L", "R", "R","R")?.username || "",
-                        uid: getNestedChild(data?.Root, "R", "L", "R", "R", "R")?.uid || "",
+                        name:
+                          getNestedChild(data?.Root, "R", "L", "R", "R", "R")
+                            ?.username || "",
+                        uid:
+                          getNestedChild(data?.Root, "R", "L", "R", "R", "R")
+                            ?.uid || "",
                       },
                     ],
                   },
@@ -440,30 +572,52 @@ export default function MemberTree() {
                 uid: getNestedChild(data?.Root, "R", "R", "L")?.uid || "",
                 children: [
                   {
-                    name: getNestedChild(data?.Root, "R", "R", "L","L")?.username || "",
-                    uid: getNestedChild(data?.Root, "R", "R", "L","L")?.uid || "",
+                    name:
+                      getNestedChild(data?.Root, "R", "R", "L", "L")
+                        ?.username || "",
+                    uid:
+                      getNestedChild(data?.Root, "R", "R", "L", "L")?.uid || "",
                     children: [
                       {
-                        name: getNestedChild(data?.Root, "R", "R", "L","L","L")?.username || "",
-                        uid: getNestedChild(data?.Root, "R", "R", "L","L","L")?.uid || "",
+                        name:
+                          getNestedChild(data?.Root, "R", "R", "L", "L", "L")
+                            ?.username || "",
+                        uid:
+                          getNestedChild(data?.Root, "R", "R", "L", "L", "L")
+                            ?.uid || "",
                       },
                       {
-                        name: getNestedChild(data?.Root, "R", "R", "L","L","R")?.username || "",
-                        uid: getNestedChild(data?.Root, "R", "R", "L","L", "R")?.uid || "",
+                        name:
+                          getNestedChild(data?.Root, "R", "R", "L", "L", "R")
+                            ?.username || "",
+                        uid:
+                          getNestedChild(data?.Root, "R", "R", "L", "L", "R")
+                            ?.uid || "",
                       },
                     ],
                   },
                   {
-                    name: getNestedChild(data?.Root, "R", "R", "L", "R")?.username || "",
-                    uid: getNestedChild(data?.Root, "R", "R", "L", "R")?.uid || "",
+                    name:
+                      getNestedChild(data?.Root, "R", "R", "L", "R")
+                        ?.username || "",
+                    uid:
+                      getNestedChild(data?.Root, "R", "R", "L", "R")?.uid || "",
                     children: [
                       {
-                        name: getNestedChild(data?.Root, "R", "R", "L", "R","L")?.username || "",
-                        uid: getNestedChild(data?.Root, "R", "R", "L", "R","L")?.uid || "",
+                        name:
+                          getNestedChild(data?.Root, "R", "R", "L", "R", "L")
+                            ?.username || "",
+                        uid:
+                          getNestedChild(data?.Root, "R", "R", "L", "R", "L")
+                            ?.uid || "",
                       },
                       {
-                        name: getNestedChild(data?.Root, "R", "R", "L", "R","R")?.username || "",
-                        uid: getNestedChild(data?.Root, "R", "R", "L", "R", "R")?.uid || "",
+                        name:
+                          getNestedChild(data?.Root, "R", "R", "L", "R", "R")
+                            ?.username || "",
+                        uid:
+                          getNestedChild(data?.Root, "R", "R", "L", "R", "R")
+                            ?.uid || "",
                       },
                     ],
                   },
@@ -474,30 +628,52 @@ export default function MemberTree() {
                 uid: getNestedChild(data?.Root, "R", "R", "R")?.uid || "",
                 children: [
                   {
-                    name: getNestedChild(data?.Root, "R", "R", "R","L")?.username || "",
-                    uid: getNestedChild(data?.Root, "R", "R", "R","L")?.uid || "",
+                    name:
+                      getNestedChild(data?.Root, "R", "R", "R", "L")
+                        ?.username || "",
+                    uid:
+                      getNestedChild(data?.Root, "R", "R", "R", "L")?.uid || "",
                     children: [
                       {
-                        name: getNestedChild(data?.Root, "R", "R", "R","L","L")?.username || "",
-                        uid: getNestedChild(data?.Root, "R", "R", "R","L","L")?.uid || "",
+                        name:
+                          getNestedChild(data?.Root, "R", "R", "R", "L", "L")
+                            ?.username || "",
+                        uid:
+                          getNestedChild(data?.Root, "R", "R", "R", "L", "L")
+                            ?.uid || "",
                       },
                       {
-                        name: getNestedChild(data?.Root, "R", "R", "R","L","R")?.username || "",
-                        uid: getNestedChild(data?.Root, "R", "R", "R","L", "R")?.uid || "",
+                        name:
+                          getNestedChild(data?.Root, "R", "R", "R", "L", "R")
+                            ?.username || "",
+                        uid:
+                          getNestedChild(data?.Root, "R", "R", "R", "L", "R")
+                            ?.uid || "",
                       },
                     ],
                   },
                   {
-                    name: getNestedChild(data?.Root, "R", "R", "R", "R")?.username || "",
-                    uid: getNestedChild(data?.Root, "R", "R", "R", "R")?.uid || "",
+                    name:
+                      getNestedChild(data?.Root, "R", "R", "R", "R")
+                        ?.username || "",
+                    uid:
+                      getNestedChild(data?.Root, "R", "R", "R", "R")?.uid || "",
                     children: [
                       {
-                        name: getNestedChild(data?.Root, "R", "R", "R", "R","L")?.username || "",
-                        uid: getNestedChild(data?.Root, "R", "R", "R", "R","L")?.uid || "",
+                        name:
+                          getNestedChild(data?.Root, "R", "R", "R", "R", "L")
+                            ?.username || "",
+                        uid:
+                          getNestedChild(data?.Root, "R", "R", "R", "R", "L")
+                            ?.uid || "",
                       },
                       {
-                        name: getNestedChild(data?.Root, "R", "R", "R", "R","R")?.username || "",
-                        uid: getNestedChild(data?.Root, "R", "R", "R", "R", "R")?.uid || "",
+                        name:
+                          getNestedChild(data?.Root, "R", "R", "R", "R", "R")
+                            ?.username || "",
+                        uid:
+                          getNestedChild(data?.Root, "R", "R", "R", "R", "R")
+                            ?.uid || "",
                       },
                     ],
                   },
@@ -540,7 +716,7 @@ export default function MemberTree() {
   }
 
   return (
-    <div className="min-h-screen oveflow-scroll">
+    <div className="min-h-screen oveflow-scroll ">
       {/* <div className="tree-member-first-box flex flex-wrap  gap-16 border-2 border-black  dark:border-gray-400 rounded-lg  mb-6 p-2">
         <div className="">
           <p className="bg-[#ff9600] px-2 text-white rounded-lg">TARUN9742</p>
@@ -574,14 +750,17 @@ export default function MemberTree() {
       <Tree
         lineWidth={"2px"}
         lineColor={"green"}
-        lineBorderRadius={"10px"} 
+        lineBorderRadius={"10px"}
         label={
           <div
             style={styles.node}
             className="mb-6 border-black  dark:border-white  border-dotted  border-2"
           >
             <img alt="ball" src={ball} className="w-6 h-6" loading="lazy" />
-            <div style={styles.text} className="w-80 dark:text-gray-200 !rotate-[90deg]  !-left-2 !text-left">
+            <div
+              style={styles.text}
+              className="w-80 dark:text-gray-200 !rotate-[90deg]  !-left-2 !text-left"
+            >
               {familyData.name}
             </div>
           </div>

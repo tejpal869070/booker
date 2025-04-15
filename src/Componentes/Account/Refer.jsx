@@ -24,11 +24,9 @@ export default function Refer() {
       setUrl(
         `${window.location.origin}/register?referrer_code=${response[0].reffer_code}`
       );
-      const referIncome = Number(response[0].reffer_to_amount); //inr
-      const matching_income =
-        Number(response[0].matching_income) * response[0].currency_rate; // usdt
-      const level_income =
-        Number(response[0].level_income) * response[0].currency_rate; // usdt
+      const referIncome = Number(response[0].reffer_to_amount); // usdt
+      const matching_income =  Number(response[0].matching_income); // usdt
+      const level_income =  Number(response[0].level_income)  // usdt
       setTotalEarnings(referIncome + matching_income + level_income);
       setLoading(false);
     }
@@ -81,7 +79,7 @@ export default function Refer() {
       icon: require("../../assets/photos/add-friend.png"),
     },
     {
-      label: "View Member Tree",
+      label: "Member Tree",
       url: `/home?network=member-tree&uid=${user?.uid}`,
       icon: require("../../assets/photos/tree.png"),
     },

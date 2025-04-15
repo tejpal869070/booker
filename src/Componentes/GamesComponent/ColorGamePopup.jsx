@@ -86,9 +86,10 @@ const ColorGamePopup = ({ isOpen, onClose, popupData, currentGameData }) => {
                 }}
               >
                 <img
-                  alt="df"
+                  alt={item.price}
                   src={item.img}
                   className="w-10"
+                  loading="lazy"
                   style={{ filter: "drop-shadow(2px 4px 6px black)" }}
                 />
               </button>

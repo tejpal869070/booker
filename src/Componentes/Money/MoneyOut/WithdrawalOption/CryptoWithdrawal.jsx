@@ -108,7 +108,7 @@ export default function CryptoWithdrawal() {
   }
 
   return (
-    <div className=" min-h-screen">
+    <div className=" min-h-screen max-w-7xl">
       <ToastContainer />
       <div className="bg-[#e1e6ff] dark:bg-[#868ba3fc] text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden">
         <div className="md:flex flex-row-reverse w-full">

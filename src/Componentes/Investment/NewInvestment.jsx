@@ -150,7 +150,7 @@ export default function NewInvestment() {
     <div>
       <ToastContainer />
 
-      <div className="   flex items-center justify-center  ">
+      <div className=" max-w-7xl    justify-center  min-h-screen">
         <div className="bg-[#e1e6ff] text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden">
           <div className="md:flex flex-row-reverse w-full">
             <div className=" w-full md:w-1/2 bg-indigo-500 py-10 px-10">
@@ -161,7 +161,9 @@ export default function NewInvestment() {
                 <h1 className="font-bold text-3xl text-gray-900">
                   NEW INVESTMENT
                 </h1>
-                <p>Let Your Money Work for You.</p>
+                <p className="font-semibold italic text-xs">
+                  Let Your Money Work for You.
+                </p>
               </div>
               <p className=" flex gap-2 font-medium text-lg text-[green] mb-4">
                 Account Balance:{" "}
@@ -233,7 +235,7 @@ export default function NewInvestment() {
                       />
                     </div>
                     <p className="text-gray-700 text-xs italic">
-                      Minimum Amount is $1
+                      Minimum Investment is $50
                     </p>
                   </div>
                 </div>
@@ -329,15 +331,15 @@ export default function NewInvestment() {
       )}
 
       {instructionOpen && (
-        <div className="fixed top-0 left-0 w-full h-full bg-black/30 backdrop-blur-sm z-[9999] flex justify-center items-center">
-          <div className="p-4 rounded bg-white max-w-lg text-center mx-4">
+        <div className="fixed top-0 left-0 w-full h-full bg-black/30 backdrop-blur-sm z-[9999] flex justify-center items-center ">
+          <div className="p-4 rounded bg-white max-w-lg text-center mx-4 animate-jump">
             <p className="mb-3 font-semibold text-black text-xl">INSTRUCTION</p>
             <p className="mt-1 text-md text-gray-600 text-justify">
-              Your investment will be credited after the specified date, once it
-              has grown to twice its original value.{" "}
+              Receive daily earnings according to your selected investment plan,
+              until{" "}
               <span className="font-semibold text-black text-indigo-800  ">
-                This process will take place once the investment reaches 2x its
-                initial amount.
+                your total returns reach 2X the amount of your initial
+                investment.
               </span>
             </p>
             <button

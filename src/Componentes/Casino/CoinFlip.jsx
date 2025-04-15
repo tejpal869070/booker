@@ -236,15 +236,17 @@ export default function CoinFlip() {
               </div>
               {flipping ? (
                 <button className="w-full rounded bg-[#20e701] font-semibold py-2 text-sm mt-3">
-                  Flipping...
+                  <div className="flex justify-center items-center">
+                    <div className="border-gray-300 h-6 w-6 animate-spin duration-100 rounded-full border-4 border-t-blue-600" />
+                  </div>
                 </button>
               ) : (
                 <button
                   onClick={() => flipCoin()}
                   disabled={flipping || processing}
-                  className="w-full rounded bg-[#20e701] font-semibold py-2 text-sm mt-3"
+                  className="w-full rounded bg-[#20e701] font-bold py-2 text-xs mt-3"
                 >
-                  Place Bet
+                  FLIP COIN
                 </button>
               )}
             </div>

@@ -70,9 +70,7 @@ export default function Downlinemember() {
                     <th scope="col" className="px-6 py-3">
                       JOINING
                     </th>
-                    <th scope="col" className="px-6 py-3">
-                      PAID/UNPAID
-                    </th>
+                     
                     <th scope="col" className="px-6 py-3">
                       TOTAL INVEST
                     </th>
@@ -92,7 +90,7 @@ export default function Downlinemember() {
                     >
                       {index + 1}.
                     </th>
-                    <td className="whitespace-nowrap px-6 py-4">
+                    <td className="whitespace-nowrap px-6 py-4 capitalize">
                       {item.username}
                     </td>
                     <td className="whitespace-nowrap px-6 py-4">
@@ -108,9 +106,7 @@ export default function Downlinemember() {
                     <td className="whitespace-nowrap px-6 py-4">
                       {item.date.split("T")[0]}
                     </td>
-                    <td className="whitespace-nowrap px-6 py-4">
-                      {item.paidType}
-                    </td>
+                     
                     <td className="whitespace-nowrap px-6 py-4">
                       $ {item.total_invest}
                     </td>
@@ -126,7 +122,7 @@ export default function Downlinemember() {
                   data?.map((item, index) => (
                     <div className="rounded  shadow-lg bg-gray-800 p-3 mb-4">
                       <section className="border-b-[0.5px] border-gray-600 pb-2  flex justify-between items-center font-semibold  ">
-                        <p className="px-2 bg-indigo-500 inline text-gray-200 rounded py-1">
+                        <p className="px-2 bg-indigo-500 inline text-gray-200 rounded py-1 capitalize">
                           {item.username}
                         </p>
                         {/* <p className="text-green-500">{item.uid}</p> */}

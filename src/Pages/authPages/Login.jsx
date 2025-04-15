@@ -52,7 +52,7 @@ export default function Login() {
         setCreating(false);
         return;
       }
-    } catch (error) {
+    } catch (error) { 
       if (
         error.response &&
         (error.response.status === 404 || error.response.status === 401)
