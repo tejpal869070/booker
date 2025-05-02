@@ -366,7 +366,8 @@ export default function AutoMode({
                   ) : (
                     <img
                       className="m-auto w-16 animate-jump-in animate-duration-400"
-                      src={require("../../../assets/photos/time-bomb.png")}
+                      src={require("../../../assets/photos/black-bomb.png")}
+                      style={{ filter: "drop-shadow(2px 4px 6px black)" }}
                       alt="imagggse"
                     />
                   )

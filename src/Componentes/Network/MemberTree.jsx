@@ -33,7 +33,7 @@ const renderTreeNode = (node) => (
         <img alt="ball" src={ball} className="w-6 h-6 " />
         <Link
           style={styles.text}
-          className="dark:text-gray-200 text-xs cursor-pointer rotate-[270deg] -ml-5"
+          className="dark:text-gray-200 text-xs cursor-pointer rotate-[200deg] -ml-5"
           to={{
             pathname: "/home",
             search: `?network=member-tree&uid=${node.uid}`,

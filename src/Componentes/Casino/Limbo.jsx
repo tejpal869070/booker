@@ -155,30 +155,34 @@ export default function Limbo() {
     toast.success("Bet Placed. Game start", { position: "top-center" });
     setRandomNumber(1);
     if (playedGames >= gameToWin) {
-      const randomNumber = (
-        Math.random() * Number(target) +
-        Number(target)
-      ).toFixed(2);
-      setRandomNumber(parseFloat(randomNumber));
-      setHistory((prevData) => [...prevData, { target, randomNumber }]);
+      const randomValue = Math.random() * Number(target) + Number(target);
+      const formattedRandom = parseFloat(randomValue.toFixed(2));
+    
+      setRandomNumber(formattedRandom);
+      setHistory((prevData) => [...prevData, { target, randomNumber: formattedRandom }]);
+    
       if (selected === "Manual") {
         setPlayedGames(0);
       }
-      updateBalanceShow(randomNumber);
+    
+      updateBalanceShow(formattedRandom);
       generateGameToWin();
     } else {
-      const randomNumber = 1 + Math.random() * (target - 1);
-      setRandomNumber(parseFloat(randomNumber.toFixed(2)));
-      setHistory((prevData) => [...prevData, { target, randomNumber }]);
-      updateBalanceShow(randomNumber);
+      const randomValue = 1 + Math.random() * (target - 1);
+      const formattedRandom = parseFloat(randomValue.toFixed(2));
+    
+      setRandomNumber(formattedRandom);
+      setHistory((prevData) => [...prevData, { target, randomNumber: formattedRandom }]);
+      updateBalanceShow(formattedRandom);
     }
+    
     setTimeout(() => {
       setManualBetStart(false);
     }, 1000);
   };
 
   const updateBalanceShow = async (randomNumber) => {
-    if (Number(randomNumber).toFixed(2) >= Number(target).toFixed(2)) {
+    if (Number(randomNumber) >= Number(target)) {
       await updateWalletBalance("add", amountRef.current * target);
       setTotalWin((pre) => pre + 1);
       setGraphProfit((pre) => pre + amount * target - amount);
@@ -385,7 +389,10 @@ export default function Limbo() {
                 value={(amount * target - amount).toFixed(2)}
               />
               <button
-                onClick={() => handleBetPlace()}
+                onClick={() => {
+                  handleBetPlace();
+                  toast.dismiss();
+                }}
                 disabled={isManualBetStart}
                 className="w-full rounded bg-[#20e701] font-semibold py-2 text-sm mt-3"
               >

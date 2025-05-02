@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function HistoryTop({ history }) { 
+export default function HistoryTop({ history }) {  
   return (
     <div className="flex overflow-hidden place-content-end gap-2 py-4 px-2">
       {history &&
@@ -8,8 +8,7 @@ export default function HistoryTop({ history }) {
         history.map((item, index) => (
           <div
             className={`px-4 py-1 text-sm flex justify-center items-center font-medium rounded-full ${
-              Number(item.target).toFixed(2) <=
-              Number(item.randomNumber).toFixed(2)
+              Number(item.target)  <= Number(item.randomNumber) 
                 ? "bg-green-500  text-gray-200"
                 : "bg-gray-200 text-gray-800"
             }`}

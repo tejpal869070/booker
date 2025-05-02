@@ -23,7 +23,10 @@ export default function WithdrawalHistory() {
   const location = useLocation();
 
   const handleCopy = () => {
-    window.alert("Withdrawal Address Copied.");
+    // window.alert("Withdrawal Address Copied.");
+    toast.success("Withdrawal Address Copied.", {
+      position: "top-right",
+    });
   };
 
   const handleCancelWithdrawalRequest = async (id) => {

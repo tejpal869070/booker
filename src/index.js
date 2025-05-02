@@ -6,7 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <div className="dark:bg-[#1a2c38]">
+  <div className="dark:bg-[#1a2c38]  ">
     {/* <DeveloperMode /> */}
     <App />
   </div>

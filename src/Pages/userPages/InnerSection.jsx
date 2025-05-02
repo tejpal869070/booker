@@ -42,65 +42,65 @@ export default function InnerSection() {
   }
 
   if (paramsData && paramsData.event === "inplay") {
-    return <div>{<Inplay />}</div>;
+    return <div className="max-w-7xl">{<Inplay />}</div>;
   } else if (paramsData && paramsData.event === "cricket") {
-    return <div> {<Events gameType="cricket" />} </div>;
+    return <div className="max-w-7xl"> {<Events gameType="cricket" />} </div>;
   } else if (paramsData && paramsData.event === "football") {
-    return <div>{<Events gameType="football" />}</div>;
+    return <div className="max-w-7xl">{<Events gameType="football" />}</div>;
   } else if (paramsData && paramsData.event === "tennis") {
-    return <div>{<Events gameType="tennis" />}</div>;
+    return <div className="max-w-7xl">{<Events gameType="tennis" />}</div>;
   } else if (paramsData && paramsData.investment === "new-investment") {
-    return <div> {<NewInvestment />} </div>;
+    return <div className="max-w-7xl"> {<NewInvestment />} </div>;
   } else if (paramsData && paramsData.user === "profile") {
-    return <div> {<UserProfile />} </div>;
+    return <div className="max-w-7xl"> {<UserProfile />} </div>;
   } else if (paramsData && paramsData.user === "wallet") {
-    return <div> {<Wallet />} </div>;
+    return <div className="max-w-7xl"> {<Wallet />} </div>;
   } else if (paramsData && paramsData.user === "VIP") {
-    return <div> {<VIP />} </div>;
+    return <div className="max-w-7xl"> {<VIP />} </div>;
   } else if (paramsData && paramsData.user === "refer") {
-    return <div> {<Refer />} </div>;
+    return <div className="max-w-7xl"> {<Refer />} </div>;
   } else if (paramsData && paramsData.user === "investment") {
-    return <div> {<InvestmentPage />} </div>;
+    return <div className="max-w-7xl"> {<InvestmentPage />} </div>;
   } else if (paramsData && paramsData.investment === "investment-history") {
-    return <div> {<InvestmentHistory />} </div>;
+    return <div className="max-w-7xl"> {<InvestmentHistory />} </div>;
   } else if (paramsData && paramsData.network === "downline-member") {
-    return <div>{<Downlinemember />}</div>;
+    return <div className="max-w-7xl">{<Downlinemember />}</div>;
   } else if (paramsData && paramsData.network === "direct-downline") {
-    return <div>{<DirextDownline />}</div>;
+    return <div className="max-w-7xl">{<DirextDownline />}</div>;
   } else if (paramsData && paramsData.network === "add-new-member") {
-    return <div>{<AddNewMember />}</div>;
+    return <div className="max-w-7xl">{<AddNewMember />}</div>;
   } else if (paramsData && paramsData.network === "member-tree") {
-    return <div>{<MemberTree />}</div>;
+    return <div className="max-w-7xl">{<MemberTree />}</div>;
   } else if (paramsData && paramsData.money === "usdt-deposit") {
-    return <div> {<BankDeposit />} </div>;
+    return <div className="max-w-7xl"> {<BankDeposit />} </div>;
   } else if (paramsData && paramsData.money === "deposit-history") {
-    return <div> {<DepositHistory />} </div>;
+    return <div className="max-w-7xl"> {<DepositHistory />} </div>;
   } else if (paramsData && paramsData.money === "withdrawal") {
-    return <div>{<CryptoWithdrawal />}</div>;
+    return <div className="max-w-7xl">{<CryptoWithdrawal />}</div>;
   } else if (paramsData && paramsData.money === "withdrawal-history") {
-    return <div> {<WithdrawalHistory />} </div>;
+    return <div className="max-w-7xl"> {<WithdrawalHistory />} </div>;
   } else if (paramsData && paramsData.account === "send-money") {
-    return <div> {<SendMoney />} </div>;
+    return <div className="max-w-7xl"> {<SendMoney />} </div>;
   } else if (paramsData && paramsData.account === "today-history") {
-    return <div> {<TodayHistory />} </div>;
+    return <div className="max-w-7xl"> {<TodayHistory />} </div>;
   } else if (paramsData && paramsData.account === "account-history") {
-    return <div> {<AccountHistory />} </div>;
+    return <div className="max-w-7xl"> {<AccountHistory />} </div>;
   } else if (paramsData && paramsData.account === "game-wallet-history") {
-    return <div> {<GameWalletHistory />} </div>;
+    return <div className="max-w-7xl"> {<GameWalletHistory />} </div>;
   } else if (paramsData && paramsData.income === "matching-income") {
-    return <div> {<MatchingIncome />} </div>;
+    return <div className="max-w-7xl"> {<MatchingIncome />} </div>;
   } else if (paramsData && paramsData.income === "refferer-income") {
-    return <div> {<ReferIncome />} </div>;
+    return <div className="max-w-7xl"> {<ReferIncome />} </div>;
   } else if (paramsData && paramsData.income === "level-income") {
-    return <div> {<LevelIncome />} </div>;
+    return <div className="max-w-7xl"> {<LevelIncome />} </div>;
   } else if (paramsData && paramsData.income === "roi-income") {
-    return <div> {<RoiIncome />} </div>;
+    return <div className="max-w-7xl"> {<RoiIncome />} </div>;
   } else if (paramsData && paramsData.change === "securityPin") {
-    return <div> {<ChangePin />} </div>;
+    return <div className="max-w-7xl"> {<ChangePin />} </div>;
   } else if (paramsData && paramsData.colorGameType) {
-    return <div> {<ColorGameTime gameType={paramsData.colorGameType} />} </div>;
+    return <div className="max-w-7xl"> {<ColorGameTime gameType={paramsData.colorGameType} />} </div>;
   } else if (paramsData && paramsData.game !== undefined) {
-    return <div> {<LiveCasino />} </div>;
+    return <div className="max-w-7xl"> {<LiveCasino />} </div>;
   } else {
     return <div>{<Dashboard />}</div>;
   }

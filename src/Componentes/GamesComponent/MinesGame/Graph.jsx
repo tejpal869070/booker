@@ -7,7 +7,7 @@ import { IoRefreshCircleSharp } from "react-icons/io5";
 export default function Graph({
   wageredAmount,
   graphProfit,
-  totalWin, 
+  totalWin,
   totalLoss,
   handleClose,
   resetGraph,
@@ -46,7 +46,6 @@ export default function Graph({
             >
               {Number(graphProfit) > 0 ? "+" : ""}
               {Number(graphProfit).toFixed(2)}
-              <TbCoinRupeeFilled />
             </p>
           </div>
           <div className="w-[49%]  pl-4">

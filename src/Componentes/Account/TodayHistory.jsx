@@ -137,7 +137,7 @@ export default function TodayHistory() {
                             : ""}
                         </td>
                         <td className="whitespace-nowrap px-6 py-3">
-                          {item?.description}
+                          {item?.type==="Matching-Income" ? "Matching Income" : item.description}
                         </td>
                       </tr>
 

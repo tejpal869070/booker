@@ -137,7 +137,7 @@ export default function BankDeposit() {
   return (
     <div>
       <ToastContainer />
-      <div className="  max-w-7xl   mt-6    border-b-4 rounded-lg shadow-lg   flex flex-col">
+      <div className="      mt-6    border-b-4 rounded-lg shadow-lg   flex flex-col">
         <div className="bg-[#e1e6ff] dark:bg-[#868ba3fc]   text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden">
           <div className="md:flex flex-row-reverse  ">
             <div className="w-full md:w-1/2   bg-indigo-200  p-2">

@@ -3,8 +3,9 @@ import ReactDOM from "react-dom/client";
 import { mines } from "../../../assets/Data/GamesData";
 import { GetUserDetails } from "../../../Controllers/User/UserController";
 import { MinesGameUpdateWallet } from "../../../Controllers/User/GamesController";
- import { ToastContainer, toast } from "react-toastify";import 'react-toastify/dist/ReactToastify.css';
-import { minesProfitTable } from "../../../assets/Data/MinesData"; 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { minesProfitTable } from "../../../assets/Data/MinesData";
 
 export default function ManualMode({
   isBetPlacedFunction,
@@ -199,6 +200,8 @@ export default function ManualMode({
       audio.play();
     }
   };
+ 
+  
 
   const generateRandom = () => {
     const allRandomNumbers = new Set();
@@ -290,15 +293,20 @@ export default function ManualMode({
                   ) : (
                     <img
                       alt="sdjbf"
-                      className="m-auto w-16 animate-wiggle animate-infinite"
-                      src={require("../../../assets/photos/time-bomb.png")}
+                      className="m-auto w-16 animate-wiggle   animate-jump-in"
+                      src={require("../../../assets/photos/black-bomb.png")}
+                      style={{ filter: "drop-shadow(2px 4px 6px black)" }}
                     />
                   )
                 ) : openedMines.includes(item.id) &&
                   diamondIndexeRef.current.includes(item.id) ? (
                   <img
                     alt="sdjbf"
-                    className={`m-auto w-12 lg:w-16 animate-jump-in`}
+                    className={`m-auto w-12 lg:w-16 ${
+                      openedMines[openedMines.length - 1] === item.id
+                        ? "animate-jump-in"
+                        : ""
+                    }`}
                     src={require("../../../assets/photos/diamond-png.png")}
                     style={{ filter: "drop-shadow(0px 2px 12px green)" }}
                   />
@@ -307,7 +315,7 @@ export default function ManualMode({
                   <img
                     alt="sdjbf"
                     className="m-auto w-16"
-                    src={require("../../../assets/photos/time-bomb.png")}
+                    src={require("../../../assets/photos/black-bomb.png")}
                   />
                 ) : (
                   <div className="m-auto w-12 bg-[#2f4553]" />

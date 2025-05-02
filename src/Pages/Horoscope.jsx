@@ -4,7 +4,7 @@ export default function Horoscope() {
   return (
     <div>
       {/* -------------------------------------------------------------------------------- */}
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8   pb-16 text-center  ">
+      <div className="mx-auto   px-4 sm:px-6 lg:px-8   pb-16 text-center  ">
         <div className="mx-auto flex justify-center items-center -mt-4 max-w-2xl text-lg tracking-tight text-slate-700 sm:mt-6">
           <img alt="icno" width="200" src={require("../assets/a/img10.png")}/>
         </div>

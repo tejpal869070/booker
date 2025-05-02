@@ -150,7 +150,7 @@ export default function NewInvestment() {
     <div>
       <ToastContainer />
 
-      <div className=" max-w-7xl    justify-center  min-h-screen">
+      <div className="      justify-center  min-h-screen">
         <div className="bg-[#e1e6ff] text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden">
           <div className="md:flex flex-row-reverse w-full">
             <div className=" w-full md:w-1/2 bg-indigo-500 py-10 px-10">

@@ -5,7 +5,7 @@ export default function AboutUs() {
     <div>
       {/* ------------------------------------------------------- */}
       <section className="py-10 relative xl:mr-0 lg:mr-5 mr-0">
-        <div className="w-full max-w-7xl px-4 md:px-5 lg:px-5 mx-auto">
+        <div className="w-full   px-4 md:px-5 lg:px-5 mx-auto">
           <div className="w-full justify-start items-center xl:gap-12 gap-10 grid lg:grid-cols-2 grid-cols-1">
             <div className="w-full flex-col justify-center lg:items-start items-center gap-10 inline-flex">
               <div className="w-full flex-col justify-center items-start gap-8 flex">
@@ -100,7 +100,7 @@ export default function AboutUs() {
       </section>
 
       {/* ---------------------------------------------------------- */}
-      <section className="w-full max-w-7xl px-4 md:px-5 lg:px-5 mx-auto overflow-hidden 0 pb-12   lg:pb-[90px] bg-white dark:bg-dark">
+      <section className="w-full   px-4 md:px-5 lg:px-5 mx-auto overflow-hidden 0 pb-12   lg:pb-[90px] bg-white dark:bg-dark">
         <div className="container mx-auto">
           <div className="flex flex-wrap-reverse items-center justify-between -mx-4">
             <div className="w-full px-4 lg:w-6/12">
@@ -733,7 +733,7 @@ export default function AboutUs() {
       </section>
 
       {/* ------------------------------------------------------------ */}
-      <div className="bg-[#FFF6EA] py-10 max-w-7xl px-4 m-auto">
+      <div className="bg-[#FFF6EA] py-10   px-4 m-auto">
         <div className="flex flex-col justify-center items-center">
           <div className="flex items-center justify-center rounded-full border border-zinc-600 px-2 py-[6px]">
             <div className="w-5 h-5 bg-zinc-900 rounded-full text-zinc-400 mr-2 p-[4px]">
@@ -763,7 +763,7 @@ export default function AboutUs() {
       </div>
 
         {/* ------------------------------------------------------------ */}
-        <div className="bg-[#FFF6EA] py-10 max-w-7xl px-4 m-auto mt-6">
+        <div className="bg-[#FFF6EA] py-10   px-4 m-auto mt-6">
         <div className="flex flex-col justify-center items-center">
           <div className="flex items-center justify-center rounded-full border border-zinc-600 px-2 py-[6px]">
             <div className="w-5 h-5 bg-zinc-900 rounded-full text-zinc-400 mr-2 p-[4px]">
@@ -793,7 +793,7 @@ export default function AboutUs() {
       </div>
 
       {/* ---------------------------------------------------------------- */}
-      <div className="max-w-7xl mt-12 mx-auto rounded-3xl bg-gradient-to-r from-green-100 to-green-50  py-16 text-center overflow-hidden">
+      <div className="  mt-12 mx-auto rounded-3xl bg-gradient-to-r from-green-100 to-green-50  py-16 text-center overflow-hidden">
         <div className="relative m-auto max-w-xl">
           <div className="flex flex-row items-center justify-center text-yellow-500">
             <svg
@@ -914,7 +914,7 @@ export default function AboutUs() {
       </div>
 
       {/* -------------------------------------------------------------- */}
-      <div className="max-w-7xl  mx-auto  mt-10 mb-20">
+      <div className="   mx-auto  mt-10 mb-20">
         <div className="grid grid-cols-1 md:grid-cols-12 border">
           <div className="bg-gray-900 md:col-span-4 p-10 text-white">
             <p className="mt-4 text-sm leading-7 font-regular uppercase">Contact</p>

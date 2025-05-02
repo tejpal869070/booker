@@ -16,7 +16,7 @@ export function Loading2() {
     </div>
   );
 }
-
+ 
 export function Loading3({ width }) {
   return (
     <div className="absolute top-0 left-0 w-screen h-screen bg-gradient-to-r from-black via-gray-900 to-black animate-gradient-fast flex justify-center items-center">

@@ -69,9 +69,10 @@ export default function AccountHistory() {
         const startDateObj = new Date(startDate);
         return itemDate >= startDateObj && itemDate <= endDateObj;
       });
-      setFilteredData(filteredData);
+      setFilteredData(filteredData); 
     }
   }, [startDate, endDate, data]);
+ 
 
   if (loading) {
     return (

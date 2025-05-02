@@ -130,7 +130,7 @@ export default function AstroHome() {
 
       {/* ========================================--------------------------------------------- */}
 
-      <div className="max-w-7xl mx-auto">
+      <div className="  mx-auto">
         <div
           id="default-carousel"
           className="relative rounded-lg overflow-hidden shadow-lg"
@@ -152,8 +152,8 @@ export default function AstroHome() {
       </div>
 
       {/* ------------------------------------------------------------------------------------ */}
-      <section className="sm:mt-6 lg:mt-8 mt-12 max-w-7xl mx-auto   sm:px-6  ">
-        <div className="my-10 mx-auto max-w-7xl px-4 sm:mt-12   md:mt-16 lg:mt-20   xl:mt-28 flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row">
+      <section className="sm:mt-6 lg:mt-8 mt-12   mx-auto   sm:px-6  ">
+        <div className="my-10 mx-auto   px-4 sm:mt-12   md:mt-16 lg:mt-20   xl:mt-28 flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row">
           <div className="sm:text-center lg:text-left">
             <h1 className="text-4xl tracking-tight font-extrabold text-gray-800 sm:text-5xl md:text-5xl">
               <span className=" xl:inline">Unlock the Secrets of Your Stars </span>
@@ -200,7 +200,7 @@ export default function AstroHome() {
 
       {/* -------------------------------------------------------------- */}
       <div className="  p-4  pt-0">
-        <div className="max-w-7xl mx-auto   md:px-12 xl:px-6">
+        <div className="  mx-auto   md:px-12 xl:px-6">
           <div className="mt-16 grid divide-x divide-y  divide-gray-700 overflow-hidden  rounded-3xl border text-gray-600 border-gray-700 grid-cols-2 lg:grid-cols-4  lg:divide-y-0 xl:grid-cols-4">
             <div className="group relative bg-white-200 transition hover:z-[1] hover:shadow-2xl  hover:shadow-gray-600/10">
               <div className="relative space-y-4 py-12 p-4 lg:p-8">
@@ -289,7 +289,7 @@ export default function AstroHome() {
 
       {/* ------------------------------------------------------------------------------------- */}
       <div className="flex flex-col justify-center items-center px-4">
-        {/* <div className="p-1 grid grid-cols-3 md:grid-cols-9 lg:grid-cold-9 gap-3 max-w-7xl">
+        {/* <div className="p-1 grid grid-cols-3 md:grid-cols-9 lg:grid-cold-9 gap-3  ">
           {plants2.map((plant, index) => (
             <div
               className={`flex-shrink-0 relative overflow-hidden bg-[#800000] rounded-lg max-w-xs shadow-lg`}
@@ -354,7 +354,7 @@ export default function AstroHome() {
             <span className="relative">Pop</span>
           </span>
         </h1>
-        <div className="max-w-7xl mx-auto  flex flex-wrap justify-center gap-3    ">
+        <div className="  mx-auto  flex flex-wrap justify-center gap-3    ">
           {cards9.map((item, index) => (
             <div
               key={index}
@@ -369,8 +369,8 @@ export default function AstroHome() {
 
       {/* ------------------------------------------------------------------------------------- */}
       <div className="w-full m-auto flex justify-center ">
-        <div className="p-10 sm:p-10 sm:py-28 max-w-7xl  m-auto m-5 rounded-3xl    dark:text-white  bg-[#fff6ea] text-black flex items-center justify-center overflow-hidden  ">
-          <div className="w-full max-w-7xl px-4 sm:px-6 m-auto">
+        <div className="p-10 sm:p-10 sm:py-28    m-auto m-5 rounded-3xl    dark:text-white  bg-[#fff6ea] text-black flex items-center justify-center overflow-hidden  ">
+          <div className="w-full   px-4 sm:px-6 m-auto">
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
               <div className="relative flex items-center sm:m-10 px-4">
                 <div className="absolute -top-10 md:-top-20 -left-10 sm:w-32 sm:h-32 lg:w-64 lg:h-64 bg-yellow-500 rotate-12 rounded-lg border-yellow-700 border-b-4 border-r-8 max-sm:hidden">
@@ -423,7 +423,7 @@ export default function AstroHome() {
       </div>
 
       {/* ------------------------------------------------------------- */}
-      <div className="mx-auto max-w-7xl px-5 py-16 md:px-10 md:py-16 bg-gradient-to-b from-blue-50 via-white to-blue-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+      <div className="mx-auto   px-5 py-16 md:px-10 md:py-16 bg-gradient-to-b from-blue-50 via-white to-blue-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
         <div className="mx-auto w-full max-w-3xl text-center">
           <h2 className="text-4xl font-extrabold text-[#800000] dark:text-white md:text-5xl">
             NeuroGraph AI Assistant
@@ -566,7 +566,7 @@ export default function AstroHome() {
             your photos today.
           </p>
         </main>
-        <div className="p-1 flex flex-wrap items-center justify-around max-w-7xl">
+        <div className="p-1 flex flex-wrap items-center justify-around  ">
           {plants.map((plant, index) => (
             <div
               className={`flex-shrink-0 mb-4  relative overflow-hidden bg-[#309ac9ad] rounded-lg w-[45%] md:w-[20%]  shadow-lg`}
@@ -620,7 +620,7 @@ export default function AstroHome() {
       </div>
 
       {/* ---------------------------------------------------------------- */}
-      <div className="max-w-7xl mt-12 mx-auto rounded-3xl bg-gradient-to-r from-green-100 to-green-50  py-16 text-center overflow-hidden">
+      <div className="  mt-12 mx-auto rounded-3xl bg-gradient-to-r from-green-100 to-green-50  py-16 text-center overflow-hidden">
         <div className="relative m-auto max-w-xl">
           <div className="flex flex-row items-center justify-center text-yellow-500">
             <svg
