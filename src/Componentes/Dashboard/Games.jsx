@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { GetAllCasinoGames } from "../../Controllers/User/UserController";
+import { getAllGames } from "../../Controllers/User/GamesController";
+import { API } from "../../Controllers/Api";
 
 export default function Games() {
   const [games, setGames] = React.useState([]);
   const [selected, setSelected] = useState(1);
+  const [gameData, setGameData] = useState([]);
+
   const navigate = useNavigate();
 
   const formData = {};
@@ -20,17 +24,31 @@ export default function Games() {
   };
 
   useEffect(() => {
-    const allCasinoGames = async () => {
+    const fetchCasinoGames = async () => {
       try {
-        const response = await GetAllCasinoGames();
-        setGames(response?.data?.games);
+        const [casinoResponse, gamesResponse] = await Promise.all([
+          GetAllCasinoGames(),
+          getAllGames(),
+        ]);
+
+        const casinoData = casinoResponse?.data?.games;
+        const gamesData = gamesResponse?.data?.data;
+
+        if (casinoData && gamesData) {
+          setGameData(gamesData);
+          setGames(casinoData);
+        } else {
+          throw new Error("Invalid casino response");
+        }
       } catch (error) {
-        window.alert("Something Went Wrong.");
+        console.error("Error fetching casino games:", error);
+        window.alert("Something went wrong while fetching games.");
       }
     };
 
-    allCasinoGames();
+    fetchCasinoGames();
   }, []);
+
   return (
     <div>
       <div className="flex justify-between md:hidden  mt-4 ">
@@ -57,11 +75,15 @@ export default function Games() {
           <div className="flex flex-wrap justify-around md:justify-start md:gap-[1.3%]   px-1 py-3   ">
             {gameData.map((item, index) => (
               <Link
-                to={item.to}
+                to={item.game_url}
                 key={index}
                 className="w-[32%] md:w-[19%] lg:w-[15%] mb-4   bg-gray-300 rounded-md md:rounded-xl"
               >
-                <img alt="poster" src={item.image} className="rounded-xl" />
+                <img
+                  alt="poster"
+                  src={`${API.url}assets/img/${item.image}`}
+                  className="rounded-xl"
+                />
               </Link>
             ))}
           </div>

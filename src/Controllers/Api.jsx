@@ -4,17 +4,17 @@
 //   gametype_hostURL: "https://color.kmaobharat.com/image/game-type/",
 // };
 
-// export const API = {
-//   url: "http://192.168.29.233:5998/",
-//   colorGameUrl: "http://192.168.29.233:5998/game/",
-//   gametype_hostURL: "http://192.168.29.233:5998/image/game-type/",
-// };
-
 export const API = {
-  url: "https://api.stakebooker.com/",
-  colorGameUrl: "https://api.stakebooker.com/game/",
-  gametype_hostURL: "https://api.stakebooker.com/image/game-type/",
+  url: "http://192.168.29.173:5999/",
+  colorGameUrl: "http://192.168.29.173:5999/game/",
+  gametype_hostURL: "http://192.168.29.173:5999/image/game-type/",
 };
+
+// export const API = { 
+//   url: "https://api.stakebooker.com/",
+//   colorGameUrl: "https://api.stakebooker.com/game/",
+//   gametype_hostURL: "https://api.stakebooker.com/image/game-type/",
+// };
 
 // export const API = {
 //   url: "https://api.mt4life.in/",

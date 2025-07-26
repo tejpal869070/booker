@@ -26,7 +26,7 @@ import FlipClockCountdown from "@leenguyen/react-flip-clock-countdown";
 import "@leenguyen/react-flip-clock-countdown/dist/index.css";
 import Countdown from "../GamesComponent/Countdown";
 
-export default function ColorGame({ gameType }) {
+export default function ColorGame({ gameType }) { 
   const [selectedHistoryTab, setSelectedHistoryTab] = useState(1);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [GameColors, setGameColors] = useState([]);

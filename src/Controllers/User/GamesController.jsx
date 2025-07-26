@@ -35,7 +35,12 @@ export const GetGameTypes = async () => {
     return decodedData;
   } catch (error) {
     throw error;
-  }
+  } 
+};
+
+export const getAllGames = async () => {
+  const response = await axios.post(`${API.url}user/get-games `);
+  return response;
 };
 
 export const ColorGameNumbers = async (id) => {

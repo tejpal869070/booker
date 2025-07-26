@@ -34,6 +34,7 @@ export default function ColorGame() {
   const fetchGameTypes = async () => {
     try {
       const data = await GetGameTypes();
+      console.log(data.data)
       setGameTypes(data.data);
       setGameLoading(false);
     } catch (error) {
