@@ -14,39 +14,39 @@ export default function ManualMode({
 }) {
   const [amount, setAmount] = useState(10);
   const [totalBombs, setTotalBombs] = useState(1);
-  const [totlaBalance, setTotalBalance] = useState();
+  const [totalBalance, setTotalBalance] = useState(0);
   const [bombIndex, setBombIndex] = useState([]);
-  const [diamndIndex, setDiamondIndex] = useState([]);
+  const [diamondIndex, setDiamondIndex] = useState([]);
   const [openedMines, setOpenedMines] = useState([]);
   const [isBetPlaced, setIsBetPlaced] = useState(false);
   const [bombFound, setBombFound] = useState(false);
   const [isCashOut, setCashOut] = useState(false);
   const [user, setUser] = useState({});
 
-  // admin controller start------------------------------------------------------------------------------------------------------------
+  // Admin controller state
   const [totalGamePlayed, setTotalGamePlayed] = useState(0);
   const [gameNumberToLoss, setGameNumberToLoss] = useState(0);
   const [thisGameWillLoss, setThisGameLoss] = useState(false);
 
   const bombIndexRef = useRef(bombIndex);
-  const diamondIndexeRef = useRef(diamndIndex);
+  const diamondIndexRef = useRef(diamondIndex);
+
   useEffect(() => {
     bombIndexRef.current = bombIndex;
-    diamondIndexeRef.current = diamndIndex;
-  }, [bombIndex, diamndIndex]);
-  // admin controller ENd------------------------------------------------------------------------------------------------------------
+    diamondIndexRef.current = diamondIndex;
+  }, [bombIndex, diamondIndex]);
 
   const amountRef = useRef(amount);
 
   useEffect(() => {
-    amountRef.current = amount;
+    amountRef.current = Number(amount);
   }, [amount]);
 
   const formData = {};
 
   const userDataGet = async () => {
     const response = await GetUserDetails();
-    if (response !== null) {
+    if (response !== null && response[0]?.color_wallet_balnace != null) {
       setTotalBalance(Number(response[0].color_wallet_balnace));
       setUser(response[0]);
     } else {
@@ -54,10 +54,9 @@ export default function ManualMode({
     }
   };
 
-  // update wallet balance online-------------
   const updateWalletBalance = async (type, amount) => {
     formData.type = type;
-    formData.amount = amount;
+    formData.amount = Number(amount);
     formData.game_type = "Mines";
     formData.uid = user?.uid;
 
@@ -72,7 +71,9 @@ export default function ManualMode({
           position: "top-center",
         });
       } else {
-        toast.error("Server Error");
+        toast.error("Server Error", {
+          position: "top-center",
+        });
       }
     }
   };
@@ -81,23 +82,22 @@ export default function ManualMode({
     setOpenedMines([]);
     setBombFound(false);
     generateRandom();
-    // admin controller start------------------------------------------------------------------------------------------------------------
     if (thisGameWillLoss) {
       setThisGameLoss(false);
       generateGameToBeLoss();
       setTotalGamePlayed(0);
     }
-    // admin controller end------------------------------------------------------------------------------------------------------------
   };
 
   const handleBetPlace = async () => {
     await userDataGet();
-    if (isNaN(amount) || amount <= 0) {
+    const betAmount = Number(amount);
+    if (isNaN(betAmount) || betAmount <= 0) {
       toast.error("Invalid Bet Amount", { position: "top-center" });
       return;
     }
 
-    if (amount > totlaBalance) {
+    if (betAmount > totalBalance) {
       toast.warn(
         <div className="flex justify-center items-center py-4 flex-col gap-2">
           <p>Insufficient Balance</p>
@@ -119,39 +119,30 @@ export default function ManualMode({
       );
       return;
     }
-    // admin controller start------------------------------------------------------------------------------------------------------------
-    setTotalGamePlayed((pre) => pre + 1);
+
+    setTotalGamePlayed((prev) => prev + 1);
     if (totalGamePlayed + 1 === gameNumberToLoss) {
       setThisGameLoss(true);
     }
-    // admin controller end------------------------------------------------------------------------------------------------------------
     setIsBetPlaced(true);
     toast.success("Bet Placed. Game start", { position: "top-center" });
-    updateWalletBalance("deduct", amount);
-
-    setTotalBalance((pre) => pre - amount);
+    updateWalletBalance("deduct", betAmount);
+    setTotalBalance((prev) => prev - betAmount);
   };
 
   const handleCashOut = async () => {
     setCashOut(true);
     setBombFound(true);
-    const audio = new Audio(require("../../../assets/audio/successSound.mp3")); // or use a URL
+    const audio = new Audio(require("../../../assets/audio/successSound.mp3"));
     audio.play();
     setIsBetPlaced(false);
-    setTotalBalance(
-      totlaBalance +
-        amount *
-          minesProfitTable.find((item) => item.totalBomb === totalBombs).profit[
-            openedMines.length - 1
-          ]?.profit || 0
-    );
-    await updateWalletBalance(
-      "add",
-      amount *
-        minesProfitTable.find((item) => item.totalBomb === totalBombs).profit[
-          openedMines.length - 1
-        ]?.profit || 0
-    );
+    const profitMultiplier =
+      minesProfitTable.find((item) => item.totalBomb === totalBombs)?.profit[
+        openedMines.length - 1
+      ]?.profit || 0;
+    const profit = Number(amount) * profitMultiplier;
+    setTotalBalance((prev) => prev + profit);
+    await updateWalletBalance("add", profit);
     await userDataGet();
     setTimeout(() => {
       setCashOut(false);
@@ -160,33 +151,28 @@ export default function ManualMode({
   };
 
   const handleCardClick = (item) => {
-    // admin controller start------------------------------------------------------------------------------------------------------------
-    const allMines = [
-      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-      22, 23, 24, 25,
-    ];
+    const allMines = Array.from({ length: 25 }, (_, i) => i + 1);
     if (thisGameWillLoss) {
       if (bombIndexRef.current.length === 1) {
         bombIndexRef.current = [item.id];
-        const newDiamondIndex = allMines.filter((i) => i != item.id);
-        diamondIndexeRef.current = newDiamondIndex;
+        const newDiamondIndex = allMines.filter((i) => i !== item.id);
+        diamondIndexRef.current = newDiamondIndex;
       } else {
         if (!bombIndexRef.current.includes(item.id)) {
-          const currentBombIndexs = bombIndexRef.current;
-          const lastBombRemoved = currentBombIndexs.pop();
-          bombIndexRef.current = [...currentBombIndexs, item.id];
-          diamondIndexeRef.current = diamondIndexeRef.current.filter(
-            (i) => i != item.id
+          const currentBombIndexes = bombIndexRef.current;
+          const lastBombRemoved = currentBombIndexes.pop();
+          bombIndexRef.current = [...currentBombIndexes, item.id];
+          diamondIndexRef.current = diamondIndexRef.current.filter(
+            (i) => i !== item.id
           );
-          diamondIndexeRef.current = [
-            ...diamondIndexeRef.current,
+          diamondIndexRef.current = [
+            ...diamondIndexRef.current,
             lastBombRemoved,
           ];
         }
       }
     }
-    // admin controller end------------------------------------------------------------------------------------------------------------
-    setOpenedMines((pre) => [...pre, item.id]);
+    setOpenedMines((prev) => [...prev, item.id]);
     if (bombIndexRef.current.includes(item.id)) {
       setBombFound(true);
       setIsBetPlaced(false);
@@ -200,25 +186,25 @@ export default function ManualMode({
       audio.play();
     }
   };
- 
-  
 
   const generateRandom = () => {
     const allRandomNumbers = new Set();
     while (allRandomNumbers.size < totalBombs) {
-      const randomNumber = Math.floor(Math.random() * 25) + 1; // assuming numbers between 1 and 25
+      const randomNumber = Math.floor(Math.random() * 25) + 1;
       allRandomNumbers.add(randomNumber);
     }
-    // Generate diamond indices
     const bombIndexes = Array.from(allRandomNumbers);
-    const allIndexes = new Set(Array.from({ length: 25 }, (_, i) => i + 1)); // All numbers from 1 to 25
+    const allIndexes = new Set(Array.from({ length: 25 }, (_, i) => i + 1));
     const diamondIndexes = Array.from(
       new Set([...allIndexes].filter((num) => !allRandomNumbers.has(num)))
     );
-
-    // Set the bomb and diamond indices
     setBombIndex(bombIndexes);
     setDiamondIndex(diamondIndexes);
+  };
+
+  const generateGameToBeLoss = () => {
+    const randomNum = Math.floor(Math.random() * 5) + 1;
+    setGameNumberToLoss(randomNum);
   };
 
   useEffect(() => {
@@ -231,7 +217,7 @@ export default function ManualMode({
 
   useEffect(() => {
     isBetPlacedFunction(isBetPlaced);
-  }, [isBetPlaced]);
+  }, [isBetPlaced, isBetPlacedFunction]);
 
   useEffect(() => {
     userDataGet();
@@ -243,30 +229,25 @@ export default function ManualMode({
     }
   }, [openedMines, totalBombs, bombFound]);
 
-  const doubleTheAmount = () => {
-    if (amountRef.current * 2 > totlaBalance) {
-      setAmount(totlaBalance);
-    } else {
-      setAmount((pre) => pre * 2);
-    }
-  };
-
-  // admin controller start------------------------------------------------------------------------------------------------------------
-  const generateGameToBeLoss = () => {
-    const randomNum = Math.floor(Math.random() * 5) + 1;
-    setGameNumberToLoss(randomNum);
-  };
   useEffect(() => {
     generateGameToBeLoss();
   }, []);
-  // admin controller end------------------------------------------------------------------------------------------------------------
+
+  const doubleTheAmount = () => {
+    const currentAmount = Number(amount);
+    if (currentAmount * 2 > totalBalance) {
+      setAmount(totalBalance);
+    } else {
+      setAmount(currentAmount * 2);
+    }
+  };
 
   useEffect(() => {
     const element = document.getElementById("boxBoard");
     if (element) {
       ReactDOM.createRoot(element).render(
         <div className="relative">
-          <div className=" grid  grid-cols-5 gap-2 px-4 py-3  ">
+          <div className="grid grid-cols-5 gap-2 px-4 py-3">
             {mines.map((item, index) => (
               <button
                 onClick={() => handleCardClick(item)}
@@ -276,32 +257,32 @@ export default function ManualMode({
                   openedMines.length === 25 - totalBombs
                 }
                 key={index}
-                className={`w-full h-16 flex justify-center items-center shadow-lg lg:h-28  rounded-xl  ${
+                className={`w-full h-16 flex justify-center items-center shadow-lg lg:h-28 rounded-xl ${
                   openedMines.includes(item.id)
                     ? "bg-[#071824]"
                     : "bg-[#2f4553] border-b-4 border-[#213743]"
                 }`}
               >
                 {bombFound ? (
-                  diamondIndexeRef.current.includes(item.id) ? (
+                  diamondIndexRef.current.includes(item.id) ? (
                     <img
-                      alt="sdjbf"
-                      className="m-auto w-12 lg:w-16 animate-rotate-y animate-once animate-duration-[3000ms] "
+                      alt="diamond"
+                      className="m-auto w-12 lg:w-16 animate-rotate-y animate-once animate-duration-[3000ms]"
                       style={{ filter: "drop-shadow(0px 2px 12px green)" }}
                       src={require("../../../assets/photos/diamond-png.png")}
                     />
                   ) : (
                     <img
-                      alt="sdjbf"
-                      className="m-auto w-16 animate-wiggle   animate-jump-in"
+                      alt="bomb"
+                      className="m-auto w-16 animate-wiggle animate-jump-in"
                       src={require("../../../assets/photos/black-bomb.png")}
                       style={{ filter: "drop-shadow(2px 4px 6px black)" }}
                     />
                   )
                 ) : openedMines.includes(item.id) &&
-                  diamondIndexeRef.current.includes(item.id) ? (
+                  diamondIndexRef.current.includes(item.id) ? (
                   <img
-                    alt="sdjbf"
+                    alt="diamond"
                     className={`m-auto w-12 lg:w-16 ${
                       openedMines[openedMines.length - 1] === item.id
                         ? "animate-jump-in"
@@ -313,7 +294,7 @@ export default function ManualMode({
                 ) : openedMines.includes(item.id) &&
                   bombIndexRef.current.includes(item.id) ? (
                   <img
-                    alt="sdjbf"
+                    alt="bomb"
                     className="m-auto w-16"
                     src={require("../../../assets/photos/black-bomb.png")}
                   />
@@ -344,12 +325,7 @@ export default function ManualMode({
         </div>
       );
     }
-  }, [
-    openedMines,
-    isBetPlaced,
-    bombIndexRef.current,
-    diamondIndexeRef.current,
-  ]);
+  }, [isBetPlaced, openedMines, totalBombs, isCashOut, bombFound, amount]);
 
   return (
     <div>
@@ -361,25 +337,26 @@ export default function ManualMode({
               <p className="mt-1 lg:text-xs text-gray-200 font-medium">
                 Bombs:{" "}
                 <span className="lg:text-xs text-red-400">{totalBombs}</span>
-              </p>{" "}
+              </p>
               <p className="mt-1 lg:text-xs text-gray-200 font-medium">
                 Balance:{" "}
                 <span className="lg:text-xs text-green-400">
-                  ${Number(totlaBalance).toFixed(2)}
-                </span>{" "}
+                  ${Number(totalBalance).toFixed(2)}
+                </span>
               </p>
             </div>
             <div className="flex justify-between">
               <p className="mt-1 lg:text-xs text-gray-200 font-medium">
-                Bet Amt.: <span className="lg:text-xs">${amount}</span>
-              </p>{" "}
+                Bet Amt.:{" "}
+                <span className="lg:text-xs">${Number(amount).toFixed(2)}</span>
+              </p>
               <p className="mt-1 lg:text-xs text-gray-200 font-medium">
                 Profit:{" "}
                 <span className="lg:text-xs text-green-400">
                   x
                   {minesProfitTable.find(
                     (item) => item.totalBomb === totalBombs
-                  ).profit[openedMines.length - 1]?.profit || 0}
+                  )?.profit[openedMines.length - 1]?.profit || 0}
                 </span>
               </p>
             </div>
@@ -391,32 +368,44 @@ export default function ManualMode({
                 Bet Amount
               </p>
               <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">
-                ${Number(totlaBalance).toFixed(2)}{" "}
+                ${Number(totalBalance).toFixed(2)}
               </p>
             </div>
             <div className="flex relative items-center">
               <input
-                className="w-full rounded border-2 border-[#2f4553] px-2 py-2  outline-none font-semibold bg-[#0f212e] text-gray-100 text-sm"
-                placeholder="Enter Amount "
+                type="number"
+                className="w-full rounded border-2 border-[#2f4553] px-2 py-2 outline-none font-semibold bg-[#0f212e] text-gray-100 text-sm"
+                placeholder="Enter Amount"
                 value={amount}
-                onChange={(e) => setAmount(e.target.value)}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (value === "" || isNaN(value)) {
+                    setAmount("");
+                  } else {
+                    const numValue = Number(value);
+                    if (numValue >= 0) {
+                      setAmount(numValue);
+                    }
+                  }
+                }}
               />
-              <div className="absolute right-0.5 ">
+              <div className="absolute right-0.5">
                 <button
                   onClick={() => {
-                    if (amount > 1) {
-                      setAmount((pre) => pre / 2);
+                    const currentAmount = Number(amount);
+                    if (currentAmount > 1) {
+                      setAmount(currentAmount / 2);
                     } else {
                       setAmount(1);
                     }
                   }}
-                  className="px-1.5  py-1.5 bg-gray-500 text-gray-200   text-sm  font-medium"
+                  className="px-1.5 py-1.5 bg-gray-500 text-gray-200 text-sm font-medium"
                 >
                   1/2
                 </button>
                 <button
-                  onClick={() => doubleTheAmount()}
-                  className="px-1.5  py-1.5 bg-gray-500 text-gray-200 border-l-2 text-sm cursor-pointer font-medium border-gray-200"
+                  onClick={doubleTheAmount}
+                  className="px-1.5 py-1.5 bg-gray-500 text-gray-200 border-l-2 text-sm cursor-pointer font-medium border-gray-200"
                 >
                   2x
                 </button>
@@ -425,8 +414,8 @@ export default function ManualMode({
             <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">
               Bombs
             </p>
-            <div className="flex justify-between  ">
-              <div className="flex w-1/2 ">
+            <div className="flex justify-between">
+              <div className="flex w-1/2">
                 <button
                   disabled={totalBombs === 1}
                   onClick={() => setTotalBombs(totalBombs - 1)}
@@ -448,16 +437,15 @@ export default function ManualMode({
             </div>
           </div>
         )}
-
         {isBetPlaced ? (
           <button
-            onClick={() => handleCashOut()}
+            onClick={handleCashOut}
             disabled={openedMines.length === 0}
-            className="w-full rounded      text-gray-700 py-2 mt-3     bg-[#20e701] font-bold py-2 text-xs mt-3"
+            className="w-full rounded text-gray-700 py-2 mt-3 bg-[#20e701] font-bold text-xs"
           >
             <div>
               <p>CASHOUT</p>
-              <p className="px-6 py-0.5 mt-1 rounded-lg bg-gray-800 text-gray-200 text-center  inline-block">
+              <p className="px-6 py-0.5 mt-1 rounded-lg bg-gray-800 text-gray-200 text-center inline-block">
                 $
                 {(
                   Number(amount) *
@@ -470,8 +458,8 @@ export default function ManualMode({
           </button>
         ) : (
           <button
-            disabled={isBetPlaced || openedMines.length > 0} // it is already disabled id isBetPlaced is true
-            onClick={() => handleBetPlace()}
+            disabled={isBetPlaced || openedMines.length > 0}
+            onClick={handleBetPlace}
             className="w-full rounded bg-[#20e701] font-semibold py-2 text-sm mt-3"
           >
             Place Bet

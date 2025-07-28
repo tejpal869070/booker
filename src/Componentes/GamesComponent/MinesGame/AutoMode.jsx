@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom/client";
 import { mines } from "../../../assets/Data/GamesData";
- import { ToastContainer, toast } from "react-toastify";import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { minesProfitTable } from "../../../assets/Data/MinesData";
 import { GetUserDetails } from "../../../Controllers/User/UserController";
 import { AiOutlineAreaChart } from "react-icons/ai";
@@ -176,102 +177,63 @@ export default function AutoMode({
   };
 
   const handleAutoStart = () => {
+    // Validate stop-loss against current bet amount
     if (stopLoss > 0 && stopLoss < amountRef.current) {
-      toast.error(
-        "The stop-loss target cannot be lower than the current bet amount."
-      );
+      toast.error("Stop-loss cannot be less than the current bet amount.", {
+        position: "top-center",
+      });
       return;
     }
+
     setAutoBetStart(true);
     let currentBet = 0;
 
-    const startBetting = () => {
-      if (stopProfit > 0 || stopLoss > 0 || totalBets === 0) {
-        const infiniteBetting = () => {
-          if (balanceRef.current < amountRef.current) {
-            stopAutoBet();
-            toast.warn(
-              <div className="flex justify-center items-center py-4 flex-col gap-2">
-                <p>Insufficient Balance</p>
-                <button
-                  className="px-2 py-1 rounded-md bg-black text-gray-200"
-                  onClick={() => {
-                    const rechargeId =
-                      document.getElementById("recharge-button");
-                    if (rechargeId) {
-                      rechargeId.click();
-                    }
-                  }}
-                >
-                  Recharge Game Wallet
-                </button>
-              </div>,
-              {
-                position: "top-center",
-              }
-            );
-            return;
-          }
-          setWegeredAmount((pre) => pre + amountRef.current);
-          currentBet++;
-          const currentBalance = balanceRef.current;
-          if (
-            currentBalance >= Number(startingBalance) + Number(stopProfit) &&
-            Number(stopProfit) > 0
-          ) {
-            stopAutoBet();
-          } else if (
-            currentBalance <= Number(startingBalance) - Number(stopLoss) &&
-            Number(stopLoss) > 0
-          ) {
-            stopAutoBet();
-          } else {
-            autoFunction();
-            timeoutRef.current.push(setTimeout(infiniteBetting, 2000));
-          }
-        };
-        infiniteBetting();
-      } else {
-        const startRegularBetting = () => {
-          if (balanceRef.current < amountRef.current) {
-            stopAutoBet();
-            toast.warn(
-              <div className="flex justify-center items-center py-4 flex-col gap-2">
-                <p>Insufficient Balance</p>
-                <button
-                  className="px-2 py-1 rounded-md bg-black text-gray-200"
-                  onClick={() => {
-                    const rechargeId =
-                      document.getElementById("recharge-button");
-                    if (rechargeId) {
-                      rechargeId.click();
-                    }
-                  }}
-                >
-                  Recharge Game Wallet
-                </button>
-              </div>,
-              {
-                position: "top-center",
-              }
-            );
-            return;
-          }
-          if (currentBet < totalBets) {
-            autoFunction();
-            currentBet++;
-            setWegeredAmount((pre) => pre + amountRef.current);
-            timeoutRef.current.push(setTimeout(startRegularBetting, 2000));
-          } else {
-            stopAutoBet();
-          }
-        };
-        startRegularBetting();
+    const placeBet = () => {
+      // Check for sufficient balance
+      if (balanceRef.current < amountRef.current) {
+        stopAutoBet();
+        toast.warn(
+          <div className="flex justify-center items-center py-4 flex-col gap-2">
+            <p>Insufficient Balance</p>
+            <button
+              className="px-2 py-1 rounded-md bg-black text-gray-200"
+              onClick={() => {
+                const rechargeId = document.getElementById("recharge-button");
+                if (rechargeId) rechargeId.click();
+              }}
+            >
+              Recharge Game Wallet
+            </button>
+          </div>,
+          { position: "top-center" }
+        );
+        return;
       }
+
+      // Update wagered amount and place bet
+      setWegeredAmount((prev) => prev + amountRef.current);
+      currentBet++;
+      autoFunction(); // Execute the bet
+      toast.success("Bet Placed. Game started", { position: "top-center" }); // Show success message after placing bet
+
+      // Check stop conditions
+      const currentBalance = balanceRef.current;
+      if (
+        (stopProfit > 0 &&
+          currentBalance >= Number(startingBalance) + Number(stopProfit)) ||
+        (stopLoss > 0 &&
+          currentBalance <= Number(startingBalance) - Number(stopLoss)) ||
+        (totalBets > 0 && currentBet >= totalBets)
+      ) {
+        stopAutoBet();
+        return;
+      }
+
+      // Schedule next bet
+      timeoutRef.current.push(setTimeout(placeBet, 2000));
     };
 
-    startBetting();
-     toast.success("Bet Placed. Game start", { position: "top-center" });
+    placeBet();
   };
 
   const stopAutoBet = () => {
@@ -354,7 +316,11 @@ export default function AutoMode({
                 disabled={isAutoBetStart}
                 key={index}
                 onClick={() => handleCardClick(item)}
-                className={`w-full h-16 flex justify-center items-center shadow-lg lg:h-28 rounded-xl ${  userSelectedIndex.includes(item.id) ? "bg-[#9000FF] border-b-4 border-[#7100C7]" : "bg-[#2f4553] border-b-4 border-[#213743]" }  `}
+                className={`w-full h-16 flex justify-center items-center shadow-lg lg:h-28 rounded-xl ${
+                  userSelectedIndex.includes(item.id)
+                    ? "bg-[#9000FF] border-b-4 border-[#7100C7]"
+                    : "bg-[#2f4553] border-b-4 border-[#213743]"
+                }  `}
               >
                 {isAllOpen ? (
                   diamndIndex.includes(item.id) ? (
@@ -416,8 +382,12 @@ export default function AutoMode({
       <ToastContainer />
       <div>
         <div className="flex justify-between dark:text-gray-200">
-          <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">Bet Amount</p>
-          <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">${Number(totlaBalance).toFixed(2)}</p>
+          <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">
+            Bet Amount
+          </p>
+          <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">
+            ${Number(totlaBalance).toFixed(2)}
+          </p>
         </div>
         <div className="flex relative items-center">
           <input

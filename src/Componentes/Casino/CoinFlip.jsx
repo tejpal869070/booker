@@ -209,7 +209,7 @@ export default function CoinFlip() {
                 </div>
               </div>
               <p className="mt-3 lg:mt-2 lg:text-xs text-gray-200 font-medium">
-                Bombs
+                Select
               </p>
               <div className="flex  mt-1 ">
                 <div className="flex  w-full justify-between">

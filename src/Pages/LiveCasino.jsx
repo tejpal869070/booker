@@ -8,6 +8,7 @@ import GameLoading from "../Componentes/GameLoading";
 import CoinFlip from "../Componentes/Casino/CoinFlip";
 import { getAllGames } from "../Controllers/User/GamesController"; 
 import ColorGame from "../Componentes/Casino/ColorGame";
+import CasinoLobby from "../Componentes/Casino/CasinoLobby";
 
 export default function LiveCasino() {
   const location = useLocation();
@@ -76,6 +77,8 @@ export default function LiveCasino() {
             gameData?.some((item) => item.game_name === "Coin Flip")
           ) {
             setGameComponent(<CoinFlip />);
+          } else if( paramsData?.game === "casino-lobby"){
+            setGameComponent(<CasinoLobby />);
           } else {
             setGameComponent(<Maintainance />);
           }
